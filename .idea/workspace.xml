@@ -6,10 +6,8 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4cd27686-f7f6-4b82-aeec-caa793474a25" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\out\production\ENumbers\ENumbers.apk" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\out\production\ENumbers\ENumbers.unaligned.apk" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/1.xml" afterPath="$PROJECT_DIR$/1.xml" />
+    <list default="true" id="4cd27686-f7f6-4b82-aeec-caa793474a25" name="Default" comment="parsing bugs fixing">
+      <change type="DELETED" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\1.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ENumbersData/src/main/java/CreateXmlFromHtml.java" afterPath="$PROJECT_DIR$/ENumbersData/src/main/java/CreateXmlFromHtml.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ENumbersData/src/main/java/ENumber.java" afterPath="$PROJECT_DIR$/ENumbersData/src/main/java/ENumber.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -54,23 +52,13 @@
           <file leaf-file-name="CreateXmlFromHtml.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/ENumbersData/src/main/java/CreateXmlFromHtml.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.37098846">
-                  <caret line="57" column="60" selection-start-line="57" selection-start-column="60" selection-end-line="57" selection-end-column="60" />
+                <state vertical-scroll-proportion="0.3736842">
+                  <caret line="68" column="13" selection-start-line="68" selection-start-column="13" selection-end-line="68" selection-end-column="13" />
                   <folding>
                     <element signature="imports" expanded="true" />
                     <element signature="method#getENumbersFromHtml#0;class#CreateXmlFromHtml#0" expanded="false" />
-                    <element signature="e#912#921#0" expanded="true" />
+                    <element signature="e#1180#1189#0" expanded="true" />
                   </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="1.xml" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/1.xml">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-                  <folding />
                 </state>
               </provider>
             </entry>
@@ -79,11 +67,21 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="1.xml" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/1.xml">
+          <file leaf-file-name="ENumber.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/ENumbersData/src/main/java/ENumber.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.06546855">
-                  <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="base.xml" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/base.xml">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="0" column="54" selection-start-line="0" selection-start-column="54" selection-end-line="0" selection-end-column="54" />
                   <folding />
                 </state>
               </provider>
@@ -120,9 +118,10 @@
         <option value="$PROJECT_DIR$/src/com/example/ENumbers/gfg.java" />
         <option value="$PROJECT_DIR$/src/com/example/ENumbers/HelloWorldActivity.java" />
         <option value="$PROJECT_DIR$/ENumbersData/pom.xml" />
-        <option value="$PROJECT_DIR$/ENumbersData/src/main/java/ENumber.java" />
         <option value="$PROJECT_DIR$/1.xml" />
         <option value="$PROJECT_DIR$/ENumbersData/src/main/java/CreateXmlFromHtml.java" />
+        <option value="$PROJECT_DIR$/ENumbersData/src/main/java/ENumber.java" />
+        <option value="$PROJECT_DIR$/base.xml" />
       </list>
     </option>
   </component>
@@ -582,7 +581,13 @@
       <option name="project" value="LOCAL" />
       <updated>1432824849782</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="parsing bugs fixing">
+      <created>1432909520492</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1432909520492</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -598,7 +603,7 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25520834" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24367385" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26148078" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -624,7 +629,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25520834" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25520834" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -636,7 +641,7 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5164011" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24367385" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15885417" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -658,7 +663,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add parsing" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add parsing" />
+    <MESSAGE value="parsing bugs fixing" />
+    <option name="LAST_COMMIT_MESSAGE" value="parsing bugs fixing" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -692,7 +698,7 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#getENumbersFromHtml#0;class#CreateXmlFromHtml#0" expanded="false" />
-            <element signature="e#912#921#0" expanded="true" />
+            <element signature="e#1180#1189#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -731,7 +737,7 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#getENumbersFromHtml#0;class#CreateXmlFromHtml#0" expanded="false" />
-            <element signature="e#912#921#0" expanded="true" />
+            <element signature="e#1180#1189#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -777,7 +783,7 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#getENumbersFromHtml#0;class#CreateXmlFromHtml#0" expanded="false" />
-            <element signature="e#912#921#0" expanded="true" />
+            <element signature="e#1180#1189#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -851,14 +857,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ENumbersData/src/main/java/ENumber.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.10911425">
-          <caret line="5" column="30" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ENumbersData/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.15275995">
@@ -867,22 +865,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/1.xml">
+    <entry file="file://$PROJECT_DIR$/ENumbersData/src/main/java/ENumber.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/base.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="54" selection-start-line="0" selection-start-column="54" selection-end-line="0" selection-end-column="54" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ENumbersData/src/main/java/CreateXmlFromHtml.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37098846">
-          <caret line="57" column="60" selection-start-line="57" selection-start-column="60" selection-end-line="57" selection-end-column="60" />
+        <state vertical-scroll-proportion="0.3736842">
+          <caret line="68" column="13" selection-start-line="68" selection-start-column="13" selection-end-line="68" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#getENumbersFromHtml#0;class#CreateXmlFromHtml#0" expanded="false" />
-            <element signature="e#912#921#0" expanded="true" />
+            <element signature="e#1180#1189#0" expanded="true" />
           </folding>
         </state>
       </provider>

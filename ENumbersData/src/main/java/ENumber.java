@@ -2,7 +2,6 @@
  * Created by y.belyaeva on 28.05.2015.
  */
 public class ENumber {
-    //TODO add get-sets?
     private String _code = "";
     private String _name = "";
     private String _purpose = "";
@@ -13,5 +12,21 @@ public class ENumber {
         _name = name;
         _purpose = purpose;
         _status = status;
+    }
+
+    public String get_code() {
+        return _code;
+    }
+
+    public String get_name() {
+        return _name;
+    }
+
+    public String get_purpose() {
+        return _purpose;
+    }
+
+    public String get_status() {
+        return _status;
     }
 }

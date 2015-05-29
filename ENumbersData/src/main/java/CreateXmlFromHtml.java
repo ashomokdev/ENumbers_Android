@@ -1,3 +1,4 @@
+import com.jcabi.immutable.ArrayMap;
 import org.apache.commons.io.FileUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -7,9 +8,19 @@ import org.xembly.Directives;
 import org.xembly.ImpossibleModificationException;
 import org.xembly.Xembler;
 
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
+
+import org.w3c.dom.DOMException;
+
+import org.w3c.dom.Node;
+
+import java.util.Map;
 
 /**
  * Created by y.belyaeva on 27.05.2015.
@@ -17,12 +28,11 @@ import java.util.List;
 public class CreateXmlFromHtml {
 
 
-    private static final String pathToXml = "1.xml";
+    private static final String pathToXml = "base.xml";
 
     public static void main(String[] args) {
         ArrayList<ENumber> list = getENumbersFromHtml("http://en.wikipedia.org/wiki/E_number#E400.E2.80.93E499_.28thickeners.2C_stabilizers.2C_emulsifiers.29");
         CreateXML(list);
-        //TODO create file with base struct and fill it
     }
 
     private static ArrayList<ENumber> getENumbersFromHtml(String URL) {
@@ -57,26 +67,44 @@ public class CreateXmlFromHtml {
 
     private static void CreateXML(ArrayList<ENumber> list) {
         try {
-            String text = new Xembler(
-                    new Directives()
-                            .add("eNumber")
-                            .add("code")
-                            .set("$140.00").up()
-                            .add("name")
-                            .set("Me")
-
-            ).xml();
-
             File xml = new File(pathToXml);
             if (!xml.exists()) {
                 xml.createNewFile();
             }
+            org.w3c.dom.Document dom = DocumentBuilderFactory.newInstance()
+                    .newDocumentBuilder().newDocument();
+            dom.appendChild(dom.createElement("root"));
 
-            FileUtils.writeStringToFile(xml, text);
+            for (ENumber elem : list) {
+                new Xembler(
+                        new Directives()
+                                .xpath("/root")
+                                .addIf("eNumbers")
+                                .add("eNumber")
+                                .add("code")
+                                .set(elem.get_code()).up()
+                                .add("name")
+                                .set(elem.get_name()).up()
+                                .add("purpose")
+                                .set(elem.get_purpose()).up()
+                                .add("status")
+                                .set(elem.get_status()).up()
+                ).apply(dom);
+            }
 
+            Transformer transformer = TransformerFactory.newInstance().newTransformer();
+            Result output = new StreamResult(new File(pathToXml));
+            Source input = new DOMSource(dom);
+            transformer.transform(input, output);
         } catch (ImpossibleModificationException ime) {
             ime.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (TransformerConfigurationException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
             e.printStackTrace();
         }
     }
