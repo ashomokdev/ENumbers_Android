@@ -3,9 +3,15 @@
  */
 public class ENumber {
     //TODO add get-sets?
-    private String code;
-    private String name;
-    private String purpose;
-    private String status;
+    private String _code = "";
+    private String _name = "";
+    private String _purpose = "";
+    private String _status = "";
 
+    public ENumber(String code, String name, String purpose, String status){
+        _code = code;
+        _name = name;
+        _purpose = purpose;
+        _status = status;
+    }
 }
