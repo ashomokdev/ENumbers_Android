@@ -1,5 +1,3 @@
-import com.jcabi.immutable.ArrayMap;
-import org.apache.commons.io.FileUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -15,12 +13,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.*;
 import java.util.ArrayList;
-
-import org.w3c.dom.DOMException;
-
-import org.w3c.dom.Node;
-
-import java.util.Map;
 
 /**
  * Created by y.belyaeva on 27.05.2015.
