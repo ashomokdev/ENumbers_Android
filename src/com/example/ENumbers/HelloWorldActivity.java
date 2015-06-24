@@ -18,6 +18,8 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 
 public class HelloWorldActivity extends Activity implements IGetInfoByENumber{
@@ -55,9 +57,38 @@ public class HelloWorldActivity extends Activity implements IGetInfoByENumber{
     }
 
     @Override
-    public String GetInfoByENumber(String ENumber) {
+    public String GetInfoByENumber(String ENumber) throws FileNotFoundException {
         //TODO return formated text with different colors for each piece of info
-        File fXmlFile = new File("base.xml");
+        File file = new File("base.xml");
+        if (!file.exists()) {
+            try {
+                throw new Exception("base.xml was not found");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        FileInputStream fis = new FileInputStream(file);
+        XMLStreamReader xmlr = xmlif.createFilteredReader(
+                xmlif.createXMLStreamReader(fis),
+                new MyStreamFilter());
+
+        int eventType = xmlr.getEventType();
+        printEventType(eventType);
+
+        while (xmlr.hasNext()) {
+            eventType = xmlr.next();
+            printEventType(eventType);
+            printName(xmlr,eventType);
+            printText(xmlr);
+
+            if (xmlr.isStartElement()) {
+                printAttributes(xmlr);
+            }
+            printPIData(xmlr);
+            System.out.println("-----------------------");
+        }
+
         return "";
     }
 
