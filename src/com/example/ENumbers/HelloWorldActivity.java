@@ -68,26 +68,26 @@ public class HelloWorldActivity extends Activity implements IGetInfoByENumber{
             }
         }
 
-        FileInputStream fis = new FileInputStream(file);
-        XMLStreamReader xmlr = xmlif.createFilteredReader(
-                xmlif.createXMLStreamReader(fis),
-                new MyStreamFilter());
-
-        int eventType = xmlr.getEventType();
-        printEventType(eventType);
-
-        while (xmlr.hasNext()) {
-            eventType = xmlr.next();
-            printEventType(eventType);
-            printName(xmlr,eventType);
-            printText(xmlr);
-
-            if (xmlr.isStartElement()) {
-                printAttributes(xmlr);
-            }
-            printPIData(xmlr);
-            System.out.println("-----------------------");
-        }
+//        FileInputStream fis = new FileInputStream(file);
+//        XMLStreamReader xmlr = xmlif.createFilteredReader(
+//                xmlif.createXMLStreamReader(fis),
+//                new MyStreamFilter());
+//
+//        int eventType = xmlr.getEventType();
+//        printEventType(eventType);
+//
+//        while (xmlr.hasNext()) {
+//            eventType = xmlr.next();
+//            printEventType(eventType);
+//            printName(xmlr,eventType);
+//            printText(xmlr);
+//
+//            if (xmlr.isStartElement()) {
+//                printAttributes(xmlr);
+//            }
+//            printPIData(xmlr);
+//            System.out.println("-----------------------");
+//        }
 
         return "";
     }
