@@ -20,6 +20,9 @@ import org.w3c.dom.Element;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+//import org.simpleframework;
+//
+//import org.joda.time.LocalTime;
 
 
 public class HelloWorldActivity extends Activity implements IGetInfoByENumber{
@@ -57,7 +60,7 @@ public class HelloWorldActivity extends Activity implements IGetInfoByENumber{
     }
 
     @Override
-    public String GetInfoByENumber(String ENumber) throws FileNotFoundException {
+    public String GetInfoByENumber(String ENumber) {
         //TODO return formated text with different colors for each piece of info
         File file = new File("base.xml");
         if (!file.exists()) {
@@ -67,6 +70,10 @@ public class HelloWorldActivity extends Activity implements IGetInfoByENumber{
                 e.printStackTrace();
             }
         }
+
+//        Serializer serializer = new Persister();
+//        File source = new File("example.xml");
+//        OptionalExample example = serializer.read(OptionalExample.class, source);
 
 //        FileInputStream fis = new FileInputStream(file);
 //        XMLStreamReader xmlr = xmlif.createFilteredReader(
@@ -91,6 +98,8 @@ public class HelloWorldActivity extends Activity implements IGetInfoByENumber{
 
         return "";
     }
+
+
 
 
 }
