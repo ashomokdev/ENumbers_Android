@@ -36,7 +36,12 @@ public class HelloWorldActivityTest extends ActivityInstrumentationTestCase2<Hel
 
     public void testExtractData() {
         IGetInfoByENumber instance = new HelloWorldActivity();
-        String recived = instance.GetInfoByENumber("E123");
+        String recived = null;
+        try {
+            recived = instance.GetInfoByENumber("E123");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         assertTrue(!recived.isEmpty());
     }
 

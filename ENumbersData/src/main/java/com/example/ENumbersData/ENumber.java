@@ -1,6 +1,8 @@
 /**
  * Created by y.belyaeva on 28.05.2015.
  */
+
+package com.example.ENumbersData;
 public class ENumber {
     private String _code = "";
     private String _name = "";
