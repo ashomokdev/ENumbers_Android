@@ -22,29 +22,26 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: com.example.ENumbers" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4cd27686-f7f6-4b82-aeec-caa793474a25" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/example/ENumbers/ENumber.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/example/ENumbers/ENumbersCollection.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/raw/base.xml" />
-      <change type="DELETED" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\out\production\ENumbers\ENumbers.apk" afterPath="" />
-      <change type="MOVED" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\ENumbersData\src\main\java\CreateXmlFromHtml.java" afterPath="$PROJECT_DIR$/ENumbersData/src/main/java/com/example/ENumbersData/CreateXmlFromHtml.java" />
-      <change type="MOVED" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\ENumbersData\src\main\java\ENumber.java" afterPath="$PROJECT_DIR$/ENumbersData/src/main/java/com/example/ENumbersData/ENumber.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/ENumbers-1.0.ap_" afterPath="$PROJECT_DIR$/target/ENumbers-1.0.ap_" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/ENumbers-1.0.apk" afterPath="$PROJECT_DIR$/target/ENumbers-1.0.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes.dex" afterPath="$PROJECT_DIR$/target/classes.dex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/tests/tests.apk" afterPath="$PROJECT_DIR$/out/production/tests/tests.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/tests/tests.unaligned.apk" afterPath="$PROJECT_DIR$/out/production/tests/tests.unaligned.apk" />
+    <list default="true" id="4cd27686-f7f6-4b82-aeec-caa793474a25" name="Default" comment="before maven deletion">
+      <change type="DELETED" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\.idea\libraries\Maven__com_jcabi_incubator_xembly_0_21_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\.idea\libraries\Maven__com_jcabi_jcabi_aspects_0_20_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\.idea\libraries\Maven__com_jcabi_jcabi_immutable_1_3.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\.idea\libraries\Maven__com_jcabi_jcabi_log_0_15_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\.idea\libraries\Maven__commons_io_commons_io_2_4.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\.idea\libraries\Maven__javax_validation_validation_api_1_1_0_Final.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\.idea\libraries\Maven__org_antlr_antlr_runtime_3_5_2.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\.idea\libraries\Maven__org_aspectj_aspectjrt_1_8_2.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\.idea\libraries\Maven__org_jsoup_jsoup_1_8_2.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\.idea\libraries\Maven__org_slf4j_slf4j_api_1_7_5.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\pom.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\target\ENumbers-1.0.ap_" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\target\ENumbers-1.0.apk" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\target\R.txt" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\target\classes.dex" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\target\generated-sources\r\com\example\ENumbers\BuildConfig.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\target\generated-sources\r\com\example\ENumbers\R.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\target\maven-archiver\pom.properties" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ENumbers.iml" afterPath="$PROJECT_DIR$/ENumbers.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ENumbersData/ENumbersData.iml" afterPath="$PROJECT_DIR$/ENumbersData/ENumbersData.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/ENumbers/HelloWorldActivity.java" afterPath="$PROJECT_DIR$/src/com/example/ENumbers/HelloWorldActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/src/com/example/ENumbers/HelloWorldActivityTest.java" afterPath="$PROJECT_DIR$/tests/src/com/example/ENumbers/HelloWorldActivityTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/ENumbers/IGetInfoByENumber.java" afterPath="$PROJECT_DIR$/src/com/example/ENumbers/IGetInfoByENumber.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/InfoForDevelopers.txt" afterPath="$PROJECT_DIR$/InfoForDevelopers.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ENumbersData/pom.xml" afterPath="$PROJECT_DIR$/ENumbersData/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ENumbers.iws" />
@@ -78,8 +75,8 @@
       <file leaf-file-name="HelloWorldActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/example/ENumbers/HelloWorldActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.064695">
-              <caret line="79" column="1" selection-start-line="79" selection-start-column="1" selection-end-line="79" selection-end-column="1" />
+            <state vertical-scroll-proportion="0.3329493">
+              <caret line="17" column="27" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1236#1689#0" expanded="true" />
@@ -148,30 +145,6 @@
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
-          <option name="myItemId" value="MainApp" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Dependencies" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$DependenciesNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="MainApp" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
           <option name="myItemId" value="ENumbersData" />
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
         </PATH_ELEMENT>
@@ -182,10 +155,32 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1448" />
+    <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1456" />
-    <option name="height" value="876" />
+    <option name="width" value="1936" />
+    <option name="height" value="1176" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>Java</id>
+          </State>
+          <State>
+            <id>Probable bugsJava</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>MagicConstant</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -298,6 +293,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="raw" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ENumbers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ENumbers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value=".idea" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -810,27 +819,33 @@
       <option name="project" value="LOCAL" />
       <updated>1435149196186</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="before maven deletion">
+      <created>1435932838027</created>
+      <option name="number" value="00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1435932838027</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1448" y="-8" width="1456" height="876" extended-state="6" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22294654" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21527778" sideWeight="0.25" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16026242" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26875" sideWeight="0.24665178" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3139644" sideWeight="0.50208336" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="6.9444446E-4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.023958333" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19868791" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28303656" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298969" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21527778" sideWeight="0.75" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26875" sideWeight="0.75334823" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1241,14 +1256,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.63811356">
-          <caret line="39" column="8" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/Program Files/Android/android-sdk/sources/android-22/android/view/View.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33238637">
@@ -1315,8 +1322,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/ENumbers/HelloWorldActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.064695">
-          <caret line="79" column="1" selection-start-line="79" selection-start-column="1" selection-end-line="79" selection-end-column="1" />
+        <state vertical-scroll-proportion="0.3329493">
+          <caret line="17" column="27" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1236#1689#0" expanded="true" />
