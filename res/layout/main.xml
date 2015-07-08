@@ -1,34 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="fill_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
               android:layout_height="fill_parent"
-              android:id="@+id/FrameLayoutID" android:weightSum="1" android:gravity="center">
-    <GridLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:layout_gravity="center" android:columnCount="7"
-            android:rowCount="7" android:id="@+id/GridLayoutID">
-        <EditText
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:ems="10"
-                android:id="@+id/inputE" android:layout_row="1" android:layout_column="1" android:text="E"
-                android:layout_gravity="center_horizontal"/>
-        <!--TODO may be use search character http://www.fileformat.info/info/unicode/char/1f50d/index.htm-->
-        <Button
-                android:layout_width="119dp"
-                android:layout_height="75dp"
-                android:text="Search"
-                android:id="@+id/button" android:layout_row="2" android:layout_column="1"
-                android:layout_gravity="center_horizontal"/>
-        <EditText
-                android:layout_width="264dp"
-                android:layout_height="360dp"
-                android:clickable="false"
-                android:cursorVisible="false"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:id="@+id/outputE" android:layout_row="3" android:layout_column="1"/>
-    </GridLayout>
-</FrameLayout>
+              android:layout_marginTop="10dp"
+              android:layout_marginBottom="10dp"
+              android:layout_marginLeft="10dp"
+              android:layout_marginRight="10dp">
+
+    <EditText
+            style="@style/CustomText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/detail_vertical_margin"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/inputE"
+            android:text="E"
+            android:layout_gravity="center_horizontal"/>
+    <!--TODO may be use search character http://www.fileformat.info/info/unicode/char/1f50d/index.htm-->
+    <Button
+            android:background="@drawable/red_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/detail_vertical_margin"
+            android:text="Search"
+            android:id="@+id/button"
+            android:layout_gravity="center_horizontal"
+            style="@style/button_text"/>
+
+    <TextView
+            style="@style/CustomText"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="@dimen/detail_vertical_margin"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:id="@+id/outputE"/>
+</LinearLayout>
 

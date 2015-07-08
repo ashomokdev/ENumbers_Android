@@ -8,13 +8,13 @@ import org.simpleframework.xml.Root;
  */
 @Root(name = "eNumber")
 public class ENumber {
-    @Element(name = "code", required=false)
+    @Element(name = "code", required = false)
     private String _code;
-    @Element(name = "name", required=false)
+    @Element(name = "name", required = false)
     private String _name;
-    @Element(name = "purpose", required=false)
+    @Element(name = "purpose", required = false)
     private String _purpose;
-    @Element(name = "status", required=false)
+    @Element(name = "status", required = false)
     private String _status;
 
     public String get_code() {
@@ -31,5 +31,10 @@ public class ENumber {
 
     public String get_status() {
         return _status;
+    }
+
+    @Override
+    public String toString() {
+        return "\ncode: " + _code + "\nname: " + _name + "\npurpose: " + _purpose + "\nstatus: " + _status;
     }
 }

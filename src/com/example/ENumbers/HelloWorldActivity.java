@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import android.widget.TextView;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 import org.xmlpull.v1.XmlPullParser;
@@ -18,9 +19,9 @@ import java.io.File;
 import java.io.InputStream;
 
 
-public class HelloWorldActivity extends Activity implements IGetInfoByENumber{
+public class HelloWorldActivity extends Activity implements IGetInfoByENumber {
     Button searchBtn;
-    EditText outputEditText;
+    TextView outputEditText;
     EditText inputEditText;
 
     /**
@@ -33,15 +34,15 @@ public class HelloWorldActivity extends Activity implements IGetInfoByENumber{
         inputEditText = (EditText) findViewById(R.id.inputE);
         String input = inputEditText.getText().toString();
         searchBtn = (Button) findViewById(R.id.button);
-        outputEditText = (EditText) findViewById(R.id.outputE);
+        outputEditText = (TextView) findViewById(R.id.outputE);
         outputEditText.setKeyListener(null); //to make EditText not editable
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                outputEditText.setText("this is me");
 
                 try {
-                    String result = GetInfoByENumber("123");
+                    ENumber result = GetInfoByENumber(inputEditText.getText().toString());
+                    outputEditText.setText(result.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -52,30 +53,26 @@ public class HelloWorldActivity extends Activity implements IGetInfoByENumber{
 
     //TODO make automatic copying the base.xml to the res/raw after updating.
     @Override
-    public String GetInfoByENumber(String ENumber) throws Exception {
-        //TODO return formated text with different colors for each piece of info
-
-       // XmlPullParser xpp  = this.getApplicationContext().getResources().getXml(R.raw.base);
-            InputStream inputStream = this.getApplicationContext().getResources().openRawResource(R.raw.base);
-//        String result = "";
-//        try(java.util.Scanner s = new java.util.Scanner(inputStream)) {
-//           result  =  s.useDelimiter("\\A").hasNext() ? s.next() : "";
-//        }
-//return result;
-
-
+    public ENumber GetInfoByENumber(String ENumber_input) throws Exception {
+        InputStream inputStream = this.getApplicationContext().getResources().openRawResource(R.raw.base);
         try {
-            //java.lang.NoClassDefFoundError: org/simpleframework/xml/core/Persister
             Serializer serializer = new Persister();
-            ENumbersCollection example = serializer.read(ENumbersCollection.class, inputStream);
-            System.out.println(example);
-            return example.toString();
-        }
-        catch (Exception e) {
-          System.out.println(e.getMessage());
-        }
+            ENumbersCollection eNumbersCollection = serializer.read(ENumbersCollection.class, inputStream);
+            for (ENumber eNumber : eNumbersCollection) {
+                if (eNumber.get_code().equals(ENumber_input) ) {
+                    return eNumber;
+                }
+            }
 
-        return "";
+        } catch (Exception e) {
+            //TODO
+        }
+        return null;
     }
 }
+
+//TODO
+//unable "E" deletion in the beginning of the string
+//close keyboard after Search btn pressing
+//
 
