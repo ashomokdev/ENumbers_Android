@@ -2,20 +2,17 @@ package com.example.ENumbers;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
 import android.widget.TextView;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
-import org.xmlpull.v1.XmlPullParser;
-
-import java.io.File;
 import java.io.InputStream;
 
 
@@ -40,13 +37,39 @@ public class HelloWorldActivity extends Activity implements IGetInfoByENumber {
             @Override
             public void onClick(View v) {
 
-                try {
-                    ENumber result = GetInfoByENumber(inputEditText.getText().toString());
+                if (v != null) {
+                    ENumber result = null;
+                    try {
+                        result = GetInfoByENumber(inputEditText.getText().toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     outputEditText.setText(result.toString());
-                } catch (Exception e) {
-                    e.printStackTrace();
+
+                    InputMethodManager imm = (InputMethodManager) getSystemService(
+                            Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 }
-                //Toast.makeText(getApplicationContext(), "Hello world", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        inputEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String startChar = getApplicationContext().getString(R.string.startChar);
+                if (charSequence.toString().startsWith(startChar)) {
+
+                } else {
+                    inputEditText.setText(startChar);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
             }
         });
     }
@@ -59,7 +82,7 @@ public class HelloWorldActivity extends Activity implements IGetInfoByENumber {
             Serializer serializer = new Persister();
             ENumbersCollection eNumbersCollection = serializer.read(ENumbersCollection.class, inputStream);
             for (ENumber eNumber : eNumbersCollection) {
-                if (eNumber.get_code().equals(ENumber_input) ) {
+                if (eNumber.get_code().equals(ENumber_input)) {
                     return eNumber;
                 }
             }
@@ -72,7 +95,6 @@ public class HelloWorldActivity extends Activity implements IGetInfoByENumber {
 }
 
 //TODO
-//unable "E" deletion in the beginning of the string
-//close keyboard after Search btn pressing
-//
+//2. design without search button
+//3. Add text position to its plase after E deletion
 

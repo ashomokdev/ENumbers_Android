@@ -28,7 +28,6 @@
             android:id="@+id/button"
             android:layout_gravity="center_horizontal"
             style="@style/button_text"/>
-
     <TextView
             style="@style/CustomText"
             android:layout_width="fill_parent"
