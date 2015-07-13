@@ -20,8 +20,7 @@ import java.util.ArrayList;
  */
 public class CreateXmlFromHtml {
 
-
-    private static final String pathToXml = "base.xml";
+    private static final String pathToXml = "res/raw/base.xml";
 
     public static void main(String[] args) {
         ArrayList<ENumber> list = getENumbersFromHtml("http://en.wikipedia.org/wiki/E_number#E400.E2.80.93E499_.28thickeners.2C_stabilizers.2C_emulsifiers.29");

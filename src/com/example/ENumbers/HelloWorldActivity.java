@@ -1,18 +1,17 @@
 package com.example.ENumbers;
-
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.text.*;
+import android.text.style.TextAppearanceSpan;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-
 import android.widget.TextView;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
+
 import java.io.InputStream;
 
 
@@ -29,26 +28,29 @@ public class HelloWorldActivity extends Activity implements IGetInfoByENumber {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         inputEditText = (EditText) findViewById(R.id.inputE);
-        String input = inputEditText.getText().toString();
         searchBtn = (Button) findViewById(R.id.button);
         outputEditText = (TextView) findViewById(R.id.outputE);
-        outputEditText.setKeyListener(null); //to make EditText not editable
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if (v != null) {
+                    outputEditText.setText("");
                     ENumber result = null;
                     try {
                         result = GetInfoByENumber(inputEditText.getText().toString());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    outputEditText.setText(result.toString());
+                    if (result == null) {
+                        outputEditText.setText(getApplicationContext().getString(R.string.notFoundMessage));
+                    } else {
+                        GetFormated(result, outputEditText);
 
-                    InputMethodManager imm = (InputMethodManager) getSystemService(
-                            Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                        InputMethodManager imm = (InputMethodManager) getSystemService(
+                                Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                    }
                 }
             }
         });
@@ -65,6 +67,7 @@ public class HelloWorldActivity extends Activity implements IGetInfoByENumber {
 
                 } else {
                     inputEditText.setText(startChar);
+                    inputEditText.setSelection(inputEditText.getText().length());
                 }
             }
 
@@ -74,7 +77,6 @@ public class HelloWorldActivity extends Activity implements IGetInfoByENumber {
         });
     }
 
-    //TODO make automatic copying the base.xml to the res/raw after updating.
     @Override
     public ENumber GetInfoByENumber(String ENumber_input) throws Exception {
         InputStream inputStream = this.getApplicationContext().getResources().openRawResource(R.raw.base);
@@ -92,9 +94,41 @@ public class HelloWorldActivity extends Activity implements IGetInfoByENumber {
         }
         return null;
     }
+
+    public static void GetFormated(ENumber input, TextView textView) {
+        Spannable eCode = new SpannableString(input.get_code() + "\n");
+        eCode.setSpan( new TextAppearanceSpan(textView.getContext(), R.style.ECode), 0, eCode.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        textView.append(eCode);
+
+        Spannable eName = new SpannableString(input.get_name() + "\n");
+        eName.setSpan(new TextAppearanceSpan(textView.getContext(), R.style.EName), 0, eName.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        textView.append((eName));
+
+        if (input.get_purpose() != null) {
+            Spannable ePurpose = new SpannableString(input.get_purpose() + "\n");
+            ePurpose.setSpan(new TextAppearanceSpan(textView.getContext(), R.style.EPurpose), 0, ePurpose.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            textView.append(ePurpose);
+        }
+
+        if (input.get_status() != null) {
+            Spannable eStatus = new SpannableString(input.get_status() + "\n");
+            eStatus.setSpan(new TextAppearanceSpan(textView.getContext(), R.style.EStatus), 0, eStatus.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            textView.append(eStatus);
+        }
+    }
 }
+
+
 
 //TODO
 //2. design without search button
-//3. Add text position to its plase after E deletion
+//4. New beautiful GU design
+//5. icons for different purposes
+//6. add more info about ENumbers //http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2011:295:0178:0204:EN:PDF //http://europa.eu/rapid/press-release_MEMO-11-783_en.htm?locale=en
+//7. Add languages support
+//10. Keyboard with numbers only
+//11. show few enumbers if they have deference in char at the end - for example E100a and E100b shod be shown to request E100
+//13. Reaction on press button Ready
+//14. Add inputting by voice http://developer.android.com/training/keyboard-input/style.html
+//15. Add inputting OCR
 

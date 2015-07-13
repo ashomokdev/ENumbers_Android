@@ -14,10 +14,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/detail_vertical_margin"
             android:inputType="number"
+            android:digits="1234567890"
+            android:maxLength="5"
             android:ems="10"
             android:id="@+id/inputE"
-            android:text="E"
-            android:layout_gravity="center_horizontal"/>
+            android:text="@string/startChar"
+            android:gravity="center_horizontal"
+            />
+
     <!--TODO may be use search character http://www.fileformat.info/info/unicode/char/1f50d/index.htm-->
     <Button
             android:background="@drawable/red_button"
@@ -25,8 +29,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/detail_vertical_margin"
             android:text="Search"
+            android:gravity="center_horizontal"
             android:id="@+id/button"
-            android:layout_gravity="center_horizontal"
             style="@style/button_text"/>
     <TextView
             style="@style/CustomText"
