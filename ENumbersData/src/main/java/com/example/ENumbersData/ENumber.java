@@ -4,31 +4,40 @@
 
 package com.example.ENumbersData;
 public class ENumber {
-    private String _code = "";
-    private String _name = "";
-    private String _purpose = "";
-    private String _status = "";
+    private String code = "";
+    private String name = "";
+    private String purpose = "";
+    private String status = "";
+    private String comment = "";
 
     public ENumber(String code, String name, String purpose, String status){
-        _code = code;
-        _name = name;
-        _purpose = purpose;
-        _status = status;
+        this.code = code;
+        this.name = name;
+        this.purpose = purpose;
+        this.status = status;
     }
 
-    public String get_code() {
-        return _code;
+    public String getCode() {
+        return code;
     }
 
-    public String get_name() {
-        return _name;
+    public String getName() {
+        return name;
     }
 
-    public String get_purpose() {
-        return _purpose;
+    public String getPurpose() {
+        return purpose;
     }
 
-    public String get_status() {
-        return _status;
+    public String getStatus() {
+        return status;
     }
+
+    public String getComment() {return comment;}
+
+    public void setComment(String _comment) {
+        this.comment = _comment;
+    }
+
+
 }

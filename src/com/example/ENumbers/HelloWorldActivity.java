@@ -84,7 +84,7 @@ public class HelloWorldActivity extends Activity implements IGetInfoByENumber {
             Serializer serializer = new Persister();
             ENumbersCollection eNumbersCollection = serializer.read(ENumbersCollection.class, inputStream);
             for (ENumber eNumber : eNumbersCollection) {
-                if (eNumber.get_code().equals(ENumber_input)) {
+                if (eNumber.getCode().equals(ENumber_input)) {
                     return eNumber;
                 }
             }
@@ -96,22 +96,22 @@ public class HelloWorldActivity extends Activity implements IGetInfoByENumber {
     }
 
     public static void GetFormated(ENumber input, TextView textView) {
-        Spannable eCode = new SpannableString(input.get_code() + "\n");
+        Spannable eCode = new SpannableString(input.getCode() + "\n");
         eCode.setSpan( new TextAppearanceSpan(textView.getContext(), R.style.ECode), 0, eCode.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         textView.append(eCode);
 
-        Spannable eName = new SpannableString(input.get_name() + "\n");
+        Spannable eName = new SpannableString(input.getName() + "\n");
         eName.setSpan(new TextAppearanceSpan(textView.getContext(), R.style.EName), 0, eName.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         textView.append((eName));
 
-        if (input.get_purpose() != null) {
-            Spannable ePurpose = new SpannableString(input.get_purpose() + "\n");
+        if (input.getPurpose() != null) {
+            Spannable ePurpose = new SpannableString(input.getPurpose() + "\n");
             ePurpose.setSpan(new TextAppearanceSpan(textView.getContext(), R.style.EPurpose), 0, ePurpose.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             textView.append(ePurpose);
         }
 
-        if (input.get_status() != null) {
-            Spannable eStatus = new SpannableString(input.get_status() + "\n");
+        if (input.getStatus() != null) {
+            Spannable eStatus = new SpannableString(input.getStatus() + "\n");
             eStatus.setSpan(new TextAppearanceSpan(textView.getContext(), R.style.EStatus), 0, eStatus.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             textView.append(eStatus);
         }
@@ -122,9 +122,16 @@ public class HelloWorldActivity extends Activity implements IGetInfoByENumber {
 
 //TODO
 //2. design without search button
-//4. New beautiful GU design
+//4. New beautiful GU design //http://androidniceties.tumblr.com/
+// https://www.google.com/design/spec/style/color.html#color-color-palette
 //5. icons for different purposes
-//6. add more info about ENumbers //http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2011:295:0178:0204:EN:PDF //http://europa.eu/rapid/press-release_MEMO-11-783_en.htm?locale=en
+//6. add more info about ENumbers
+// http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2011:295:0178:0204:EN:PDF
+// http://europa.eu/rapid/press-release_MEMO-11-783_en.htm?locale=en
+// http://www.healthy-eating-politics.com/food-additives.html
+// 1 priority  http://www.additivealert.com.au/search.php?start=0&end=10&count=298&process=next&flg=0
+// http://www.fda.gov/Food/IngredientsPackagingLabeling/FoodAdditivesIngredients/ucm091048.htm
+
 //7. Add languages support
 //10. Keyboard with numbers only
 //11. show few enumbers if they have deference in char at the end - for example E100a and E100b shod be shown to request E100

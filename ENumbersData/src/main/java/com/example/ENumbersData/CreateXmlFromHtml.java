@@ -1,8 +1,10 @@
 package com.example.ENumbersData;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.BeanUtils;
 import org.xembly.Directives;
 import org.xembly.ImpossibleModificationException;
 import org.xembly.Xembler;
@@ -12,8 +14,13 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import java.beans.PropertyDescriptor;
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 /**
  * Created by y.belyaeva on 27.05.2015.
@@ -21,24 +28,63 @@ import java.util.ArrayList;
 public class CreateXmlFromHtml {
 
     private static final String pathToXml = "res/raw/base.xml";
+    private static final String base_url = "http://en.wikipedia.org/wiki/E_number#E400.E2.80.93E499_.28thickeners.2C_stabilizers.2C_emulsifiers.29";
+    private static final String comments_url = "http://www.additivealert.com.au/search.php?start=0&end=10&count=298&process=next&flg=0";
 
     public static void main(String[] args) {
-        ArrayList<ENumber> list = getENumbersFromHtml("http://en.wikipedia.org/wiki/E_number#E400.E2.80.93E499_.28thickeners.2C_stabilizers.2C_emulsifiers.29");
+        ArrayList<ENumber> list = getENumbersFromHtml(base_url);
         CreateXML(list);
     }
 
-    private static ArrayList<ENumber> getENumbersFromHtml(String URL) {
+    private static ArrayList<ENumber> getENumbersFromHtml(String url) {
+        ArrayList<ENumber> data = createData(url);
+        return addComments(data, comments_url);
+    }
+
+    private static ArrayList<ENumber> addComments(ArrayList<ENumber> data, String url) {
+        try {
+            Document doc = Jsoup.connect(url).get();
+            Elements tables = doc.select("table.bg1"); //all tables with class bg1
+            for (Element table : tables) {
+                Elements info = table.select("tr.tablebg1"); //all tr with tablebg1 class
+                if (info.size() != 3) {
+                    throw new Exception("Wrond string was selected" + table.text() + "info size = " + info.size());//not interesting line
+                }
+                String code = "E" + info.get(0).select("td").get(1).text();
+                String comment = info.get(1).select("td").get(1).text();
+                Predicate<ENumber> codeEquals = (v) -> (v.getCode().equals(code));
+                Consumer<ENumber> addComment = (e) -> e.setComment(comment);
+                data.stream()
+                        .filter(codeEquals)
+                        .forEach(addComment);
+            }
+
+            try {
+                url = doc.select("td.textto").select("a[href]:matches(Next)").first().attr("abs:href"); //link to the next page
+                addComments(data, url);
+            } catch (NullPointerException e) {
+                //next link not found. Stop working.
+                return data;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    private static ArrayList<ENumber> createData(String url) {
         try {
             ArrayList<ENumber> result = new ArrayList<ENumber>();
-            Document doc = Jsoup.connect(URL).get();
+            Document doc = Jsoup.connect(url).get();
             Elements tables = doc.getElementsByTag("table"); //all tables
             for (Element table : tables) {
                 Elements eNumbers = table.select("tr:matches(^E[0-9])"); //<tr> tags, full text of which matches the regex. Another way - tr:matches(E[0-9]{3,4}\s)
                 for (Element eNumber : eNumbers) {
                     Elements info = eNumber.getElementsByTag("td");
                     if (info.size() != 4) {
-                        throw new Exception("Wrond string was selected" + eNumber.text() + "info size = " + info.size());
-
+                        throw new Exception("Wrond string was selected" + eNumber.text() + "info size = " + info.size());//not the line of table
                     }
                     String code = info.get(0).text();
                     String name = info.get(1).text();
@@ -57,7 +103,35 @@ public class CreateXmlFromHtml {
         return null;
     }
 
-    private static void CreateXML(ArrayList<ENumber> list) {
+//useless
+//    private static final Pattern END_OF_SENTENCE = Pattern.compile("\\. "); // A regex that matches a literal ". "
+//    private static ArrayList<ENumber> addComments(ArrayList<ENumber> data) {
+//        for (ENumber eNumber:data)
+//        {
+//            try {
+//                Document doc = Jsoup.connect(eNumber.get_url()).get();
+//                //TODO exclude references
+//
+//                    String textbody = doc.body().text();
+//
+//                for (Word word : Word.values())
+//                {
+//                    for (String sentence : END_OF_SENTENCE.split(textbody)) {
+//                        if (sentence.toLowerCase().contains(word.toString())) {
+//                            //TODO delete backspaces from start of the string
+//                            String k = sentence.replaceAll("\\[[0-9]+\\]", ""); //regex for deletion links to the source, for example "Approved in the EU.[18]" will be replased with "Approved in the EU."
+//                            String h = ""; //for debug purposes //useless
+//                        }
+//                    }
+//                }
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        return null;
+//    }
+
+    private static void CreateXML(ArrayList<ENumber> data) {
         try {
             File xml = new File(pathToXml);
             if (!xml.exists()) {
@@ -67,23 +141,44 @@ public class CreateXmlFromHtml {
                     .newDocumentBuilder().newDocument();
             dom.appendChild(dom.createElement("root"));
 
-            for (ENumber elem : list) {
-                new Xembler(
-                        new Directives()
-                                .xpath("/root")
-                                .addIf("eNumbers")
-                                .add("eNumber")
-                                .add("code")
-                                .set(elem.get_code()).up()
-                                .add("name")
-                                .set(elem.get_name()).up()
-                                .add("purpose")
-                                .set(elem.get_purpose()).up()
-                                .add("status")
-                                .set(elem.get_status()).up()
-                ).apply(dom);
+            for (ENumber elem : data) {
+                Directives directives = new Directives()
+                        .xpath("/root")
+                        .addIf("eNumbers")
+                        .add("eNumber");
+
+                PropertyDescriptor[] propertyDescriptors = BeanUtils.getPropertyDescriptors(data.get(0).getClass()); //without Spring: Introspector.getBeanInfo(data.get(0).getClass()).getPropertyDescriptors())
+                for (PropertyDescriptor pd : propertyDescriptors) {
+                    if (pd.getName().equals("class")) {
+                        //excludes  <class>class com.example.ENumbersData.ENumber</class> from base.xml
+                    } else {
+                        Method getter = pd.getReadMethod();
+                        directives.add(pd
+                                .getName())
+                                .set(String.valueOf(getter.invoke(elem)))
+                                .up();
+                    }
+                }
+                new Xembler(directives).apply(dom);
             }
 
+//before reflection was added.
+//            for (ENumber elem : data) {
+//                new Xembler(
+//                        new Directives()
+//                                .xpath("/root")
+//                                .addIf("eNumbers")
+//                                .add("eNumber")
+//                                .add("code")
+//                                .set(elem.getCode()).up()
+//                                .add("name")
+//                                .set(elem.getName()).up()
+//                                .add("purpose")
+//                                .set(elem.getPurpose()).up()
+//                                .add("status")
+//                                .set(elem.getStatus()).up()
+//                ).apply(dom);
+//            }
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             Result output = new StreamResult(new File(pathToXml));
             Source input = new DOMSource(dom);
@@ -97,6 +192,10 @@ public class CreateXmlFromHtml {
         } catch (TransformerConfigurationException e) {
             e.printStackTrace();
         } catch (TransformerException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
     }

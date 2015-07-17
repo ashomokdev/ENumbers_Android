@@ -9,35 +9,38 @@ import org.simpleframework.xml.Root;
 @Root(name = "eNumber")
 public class ENumber {
     @Element(name = "code", required = false)
-    private String _code;
+    private String code;
     @Element(name = "name", required = false)
-    private String _name;
+    private String name;
     @Element(name = "purpose", required = false)
-    private String _purpose;
+    private String purpose;
     @Element(name = "status", required = false)
-    private String _status;
+    private String status;
+    @Element(name = "comment", required = false)
+    private String comment;
 
 
-
-
-    public String get_code() {
-        return _code;
+    public String getComment() {
+        return comment;
+    }
+    public String getCode() {
+        return code;
     }
 
-    public String get_name() {
-        return _name;
+    public String getName() {
+        return name;
     }
 
-    public String get_purpose() {
-        return _purpose;
+    public String getPurpose() {
+        return purpose;
     }
 
-    public String get_status() {
-        return _status;
+    public String getStatus() {
+        return status;
     }
 
     @Override
     public String toString() {
-        return "\ncode: " + _code + "\nname: " + _name + "\npurpose: " + _purpose + "\nstatus: " + _status;
+        return "\ncode: " + code + "\nname: " + name + "\npurpose: " + purpose + "\nstatus: " + status;
     }
 }
