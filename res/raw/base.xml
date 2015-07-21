@@ -6,14 +6,14 @@
             <comment/>
             <name>Curcumin (from turmeric)</name>
             <purpose>Yellow-orange</purpose>
-            <status>Approved in the EU. Approved in the US.</status>
+            <status>Approved in the EU.</status>
         </eNumber>
         <eNumber>
             <code>E101</code>
             <comment/>
             <name>Riboflavin (Vitamin B2), formerly called lactoflavin</name>
             <purpose>Yellow-orange</purpose>
-            <status>Approved in the EU. Approved in the US.</status>
+            <status>Approved in the EU.</status>
         </eNumber>
         <eNumber>
             <code>E101a</code>
@@ -27,12 +27,12 @@
             <comment/>
             <name>Tartrazine (FD&amp;C Yellow 5)</name>
             <purpose>Lemon yellow</purpose>
-            <status>Approved in the EU. Approved in the US.</status>
+            <status>Approved in the EU.</status>
         </eNumber>
         <eNumber>
             <code>E103</code>
             <comment/>
-            <name>Alkannin[11]</name>
+            <name>Alkannin</name>
             <purpose>Red-brown</purpose>
             <status/>
         </eNumber>
@@ -41,7 +41,7 @@
             <comment/>
             <name>Quinoline Yellow WS</name>
             <purpose>Dull or greenish yellow</purpose>
-            <status>Approved in the EU. Undergoing a voluntary phase-out in the UK.[citation needed]</status>
+            <status>Approved in the EU.</status>
         </eNumber>
         <eNumber>
             <code>E105</code>
@@ -69,9 +69,7 @@
             <comment/>
             <name>Sunset Yellow FCF (Orange Yellow S, FD&amp;C Yellow 6)</name>
             <purpose>Yellow-orange</purpose>
-            <status>Approved in the EU. Banned in Norway. Products in the EU require warnings and its use is being
-                phased out.[citation needed] Approved in the US.
-            </status>
+            <status>Approved in the EU.</status>
         </eNumber>
         <eNumber>
             <code>E111</code>
@@ -85,7 +83,7 @@
             <comment/>
             <name>Cochineal, Carminic acid, Carmine (Natural Red 4)</name>
             <purpose>Crimson</purpose>
-            <status>Approved in the EU. Approved in the US.</status>
+            <status>Approved in the EU.</status>
         </eNumber>
         <eNumber>
             <code>E121</code>
@@ -99,9 +97,7 @@
             <comment/>
             <name>Carmoisine (azorubine)</name>
             <purpose>Red to maroon</purpose>
-            <status>Approved in the EU. Undergoing a voluntary phase-out in the UK. Currently banned in Canada, Japan,
-                Norway, USA .[citation needed] EU currently evaluating health risks.[citation needed]
-            </status>
+            <status>Approved in the EU.</status>
         </eNumber>
         <eNumber>
             <code>E123</code>
@@ -128,7 +124,7 @@
             <code>E126</code>
             <comment/>
             <name>Ponceau 6R</name>
-            <purpose>Red</purpose>
+            <purpose/>
             <status/>
         </eNumber>
         <eNumber>
@@ -138,7 +134,7 @@
             </comment>
             <name>Erythrosine (FD&amp;C Red 3)</name>
             <purpose>Red</purpose>
-            <status>Approved in the EU. Approved in the US.</status>
+            <status>Approved in the EU.</status>
         </eNumber>
         <eNumber>
             <code>E128</code>
@@ -154,9 +150,7 @@
             </comment>
             <name>Allura Red AC (FD&amp;C Red 40)</name>
             <purpose>Red</purpose>
-            <status>Approved in the EU. Banned in Switzerland[citation needed]. Undergoing a voluntary phase out in the
-                UK. Approved in the US.
-            </status>
+            <status>Approved in the EU.</status>
         </eNumber>
         <eNumber>
             <code>E130</code>
@@ -179,7 +173,7 @@
             </comment>
             <name>Indigo carmine (indigotine, FD&amp;C Blue 2)</name>
             <purpose>Indigo</purpose>
-            <status>Approved in the EU. Approved in the US.</status>
+            <status>Approved in the EU.</status>
         </eNumber>
         <eNumber>
             <code>E133</code>
@@ -188,7 +182,7 @@
             </comment>
             <name>Brilliant Blue FCF (FD&amp;C Blue 1)</name>
             <purpose>Reddish blue</purpose>
-            <status>Approved in the EU. Approved in the US.</status>
+            <status>Approved in the EU.</status>
         </eNumber>
         <eNumber>
             <code>E140</code>
@@ -204,7 +198,7 @@
                 complexes of chlorophyllins
             </name>
             <purpose>Green</purpose>
-            <status>Approved in the EU. Approved in the US.</status>
+            <status>Approved in the EU.</status>
         </eNumber>
         <eNumber>
             <code>E142</code>
@@ -227,7 +221,7 @@
             </comment>
             <name>Plain caramel</name>
             <purpose>Brown</purpose>
-            <status>Approved in the EU. Approved in the US.</status>
+            <status>Approved in the EU.</status>
         </eNumber>
         <eNumber>
             <code>E150b</code>
@@ -235,7 +229,7 @@
             </comment>
             <name>Caustic sulphite caramel</name>
             <purpose>Brown</purpose>
-            <status>Approved in the EU. Approved in the US.</status>
+            <status>Approved in the EU.</status>
         </eNumber>
         <eNumber>
             <code>E150c</code>
@@ -243,7 +237,7 @@
             </comment>
             <name>Ammonia caramel</name>
             <purpose>Brown</purpose>
-            <status>Approved in the EU. Approved in the US.</status>
+            <status>Approved in the EU.</status>
         </eNumber>
         <eNumber>
             <code>E150d</code>
@@ -306,28 +300,28 @@
             </comment>
             <name>Annatto, bixin, norbixin</name>
             <purpose>Orange</purpose>
-            <status>Approved in the EU. Approved in the US.</status>
+            <status>Approved in the EU.</status>
         </eNumber>
         <eNumber>
             <code>E160c</code>
             <comment>Little info available.</comment>
             <name>Paprika oleoresin, Capsanthin, capsorubin</name>
             <purpose>Red</purpose>
-            <status>Approved in the EU. Approved in the US.</status>
+            <status>Approved in the EU.</status>
         </eNumber>
         <eNumber>
             <code>E160d</code>
             <comment/>
             <name>Lycopene</name>
             <purpose>Bright to deep red</purpose>
-            <status>Approved in the EU. Approved in the US.</status>
+            <status>Approved in the EU.</status>
         </eNumber>
         <eNumber>
             <code>E160e</code>
             <comment/>
             <name>Beta-apo-8'-carotenal (C 30)</name>
             <purpose>Orange-red to yellow</purpose>
-            <status>Approved in the EU. Approved in the US.</status>
+            <status>Approved in the EU.</status>
         </eNumber>
         <eNumber>
             <code>E160f</code>
@@ -383,7 +377,7 @@
             <comment/>
             <name>Canthaxanthin</name>
             <purpose>Violet</purpose>
-            <status>Approved in the EU. Approved in the US.</status>
+            <status>Approved in the EU.</status>
         </eNumber>
         <eNumber>
             <code>E161h</code>
@@ -411,7 +405,7 @@
             <comment>Unsuitable for infants and children due to sodium nitrate content.</comment>
             <name>Beetroot Red, Betanin</name>
             <purpose>Red</purpose>
-            <status>Approved in the EU. Approved in the US.</status>
+            <status>Approved in the EU.</status>
         </eNumber>
         <eNumber>
             <code>E163</code>
@@ -424,7 +418,7 @@
             <code>E164</code>
             <comment/>
             <name>Saffron</name>
-            <purpose>Orange-red[colour?]</purpose>
+            <purpose>Orange-red</purpose>
             <status>Approved in the US.</status>
         </eNumber>
         <eNumber>
@@ -439,14 +433,14 @@
             <comment/>
             <name>Titanium dioxide</name>
             <purpose>White</purpose>
-            <status>Approved in the EU. Approved in the US.</status>
+            <status>Approved in the EU.</status>
         </eNumber>
         <eNumber>
             <code>E172</code>
             <comment>Possible kidney damage. Suspected neurotoxin. Blindness in dog studies.</comment>
             <name>Iron oxides and iron hydroxides</name>
             <purpose>Brown</purpose>
-            <status>Approved in the EU. Approved in the US for sausage casings.</status>
+            <status>Approved in the EU.</status>
         </eNumber>
         <eNumber>
             <code>E173</code>
@@ -1652,8 +1646,7 @@
             <comment/>
             <name>Konjac (i) Konjac gum (ii) Konjac glucomannane</name>
             <purpose>emulsifier</purpose>
-            <status>Approved in the EU. May not be used in confectionery owing to choking risk.[citation needed]
-            </status>
+            <status>Approved in the EU.</status>
         </eNumber>
         <eNumber>
             <code>E426</code>
@@ -3705,7 +3698,7 @@
         <eNumber>
             <code>E1521</code>
             <comment>Caused renal failure in some tests ; more info needed ; avoid it for now</comment>
-            <name>Polyethylene glycol 8000[24]</name>
+            <name>Polyethylene glycol 8000</name>
             <purpose/>
             <status>Approved in 2010</status>
         </eNumber>

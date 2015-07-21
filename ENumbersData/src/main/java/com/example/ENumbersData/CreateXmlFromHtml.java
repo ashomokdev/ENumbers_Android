@@ -1,5 +1,4 @@
 package com.example.ENumbersData;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -8,7 +7,6 @@ import org.springframework.beans.BeanUtils;
 import org.xembly.Directives;
 import org.xembly.ImpossibleModificationException;
 import org.xembly.Xembler;
-
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
@@ -27,6 +25,7 @@ import java.util.function.Predicate;
  */
 public class CreateXmlFromHtml {
 
+    //TODO check data if correct
     private static final String pathToXml = "res/raw/base.xml";
     private static final String base_url = "http://en.wikipedia.org/wiki/E_number#E400.E2.80.93E499_.28thickeners.2C_stabilizers.2C_emulsifiers.29";
     private static final String comments_url = "http://www.additivealert.com.au/search.php?start=0&end=10&count=298&process=next&flg=0";
@@ -40,6 +39,7 @@ public class CreateXmlFromHtml {
         ArrayList<ENumber> data = createData(url);
         return addComments(data, comments_url);
     }
+
 
     private static ArrayList<ENumber> addComments(ArrayList<ENumber> data, String url) {
         try {
@@ -83,13 +83,20 @@ public class CreateXmlFromHtml {
                 Elements eNumbers = table.select("tr:matches(^E[0-9])"); //<tr> tags, full text of which matches the regex. Another way - tr:matches(E[0-9]{3,4}\s)
                 for (Element eNumber : eNumbers) {
                     Elements info = eNumber.getElementsByTag("td");
-                    if (info.size() != 4) {
-                        throw new Exception("Wrond string was selected" + eNumber.text() + "info size = " + info.size());//not the line of table
+
+                    String code = "";
+                    String name = "";
+                    String purpose = "";
+                    String status = "";
+                    try {
+                        code = info.get(0).text().replaceAll("\\[[^>]*\\]", ""); //regex for deletion links - [any character that isn't >], for example "Approved in the EU.[18]" will be replased with "Approved in the EU."
+                        name = info.get(1).text().replaceAll("\\[[^>]*\\]", ""); //regex for deletion links - [any character that isn't >], for example "Approved in the EU.[18]" will be replased with "Approved in the EU."
+                        purpose = info.get(2).text().replaceAll("\\[[^>]*\\]", ""); //regex for deletion links - [any character that isn't >], for example "Approved in the EU.[18]" will be replased with "Approved in the EU."
+                        status = info.get(3).text().replaceAll("\\[[^>]*\\]", ""); //regex for deletion links - [any character that isn't >], for example "Approved in the EU.[18]" will be replased with "Approved in the EU."
+                    } catch (IndexOutOfBoundsException e) {
+                        e.printStackTrace();
+                        System.out.println("Issue with " + code);
                     }
-                    String code = info.get(0).text();
-                    String name = info.get(1).text();
-                    String purpose = info.get(2).text();
-                    String status = info.get(3).text().replaceAll("\\[[0-9]+\\]", ""); //regex for deletion links to the source, for example "Approved in the EU.[18]" will be replased with "Approved in the EU."
                     ENumber instance = new ENumber(code, name, purpose, status);
                     result.add(instance);
                 }
@@ -102,34 +109,6 @@ public class CreateXmlFromHtml {
         }
         return null;
     }
-
-//useless
-//    private static final Pattern END_OF_SENTENCE = Pattern.compile("\\. "); // A regex that matches a literal ". "
-//    private static ArrayList<ENumber> addComments(ArrayList<ENumber> data) {
-//        for (ENumber eNumber:data)
-//        {
-//            try {
-//                Document doc = Jsoup.connect(eNumber.get_url()).get();
-//                //TODO exclude references
-//
-//                    String textbody = doc.body().text();
-//
-//                for (Word word : Word.values())
-//                {
-//                    for (String sentence : END_OF_SENTENCE.split(textbody)) {
-//                        if (sentence.toLowerCase().contains(word.toString())) {
-//                            //TODO delete backspaces from start of the string
-//                            String k = sentence.replaceAll("\\[[0-9]+\\]", ""); //regex for deletion links to the source, for example "Approved in the EU.[18]" will be replased with "Approved in the EU."
-//                            String h = ""; //for debug purposes //useless
-//                        }
-//                    }
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        return null;
-//    }
 
     private static void CreateXML(ArrayList<ENumber> data) {
         try {
