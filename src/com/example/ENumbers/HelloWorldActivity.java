@@ -4,7 +4,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.*;
 import android.text.style.TextAppearanceSpan;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -75,6 +77,17 @@ public class HelloWorldActivity extends Activity implements IGetInfoByENumber {
             public void afterTextChanged(Editable editable) {
             }
         });
+
+        inputEditText.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    searchBtn.performClick();
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     @Override
@@ -118,26 +131,5 @@ public class HelloWorldActivity extends Activity implements IGetInfoByENumber {
     }
 }
 
-
-
-//TODO
-//2. design without search button
-//4. New beautiful GU design //http://androidniceties.tumblr.com/
-// https://www.google.com/design/spec/style/color.html#color-color-palette
-//5. icons for different purposes
-//6. add more info about ENumbers
-// http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2011:295:0178:0204:EN:PDF - difficult to recognize
-// http://europa.eu/rapid/press-release_MEMO-11-783_en.htm?locale=en - FAQ, not E Numbers
-// http://www.healthy-eating-politics.com/food-additives.html
-// 1 priority  http://www.additivealert.com.au/search.php?start=0&end=10&count=298&process=next&flg=0
-// http://www.fda.gov/Food/IngredientsPackagingLabeling/FoodAdditivesIngredients/ucm091048.htm
-
-//7. Add languages support
-//10. Keyboard with numbers only
-//11. show few enumbers if they have deference in char at the end - for example E100a and E100b shod be shown to request E100
-//13. Reaction on press button Ready
-//14. Add inputting by voice http://developer.android.com/training/keyboard-input/style.html
-//15. Add inputting OCR
-//16. Add banned and approved fields
 
 
