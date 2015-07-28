@@ -1,7 +1,6 @@
 package com.example.ENumbers;
 
 import android.test.ActivityInstrumentationTestCase2;
-import android.widget.TextView;
 import junit.framework.TestCase;
 import org.junit.Test;
 
@@ -15,13 +14,13 @@ import org.junit.Test;
  * -e class com.example.ENumbers.HelloWorldActivityTest \
  * com.example.ENumbers.tests/android.test.InstrumentationTestRunner
  */
-public class HelloWorldActivityTest extends ActivityInstrumentationTestCase2<HelloWorldActivity> {
+public class HelloWorldActivityTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
-   // private HelloWorldActivity helloWorldActivity;
+   // private MainActivity helloWorldActivity;
    // private TextView mFirstTestText;
 
     public HelloWorldActivityTest() {
-        super("com.example.ENumbers", HelloWorldActivity.class);
+        super("com.example.ENumbers", MainActivity.class);
     }
 
     @Test
@@ -35,7 +34,7 @@ public class HelloWorldActivityTest extends ActivityInstrumentationTestCase2<Hel
     }
 
     public void testExtractData() {
-        IGetInfoByENumber instance = new HelloWorldActivity();
+        IGetInfoByENumber instance = new MainActivity();
         String recived = null;
         try {
            // recived = instance.GetInfoByENumber("E123");

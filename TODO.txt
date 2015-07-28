@@ -8,6 +8,7 @@
 //14. Add inputting by voice http://developer.android.com/training/keyboard-input/style.html
 //15. Add inputting OCR
 //16. Add banned and approved fields
+//17. Bug - result deletes after changing screen orientation
 
 
 

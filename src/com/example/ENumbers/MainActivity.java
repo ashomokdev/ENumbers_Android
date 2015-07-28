@@ -17,7 +17,7 @@ import org.simpleframework.xml.core.Persister;
 import java.io.InputStream;
 
 
-public class HelloWorldActivity extends Activity implements IGetInfoByENumber {
+public class MainActivity extends Activity implements IGetInfoByENumber {
     Button searchBtn;
     TextView outputEditText;
     EditText inputEditText;

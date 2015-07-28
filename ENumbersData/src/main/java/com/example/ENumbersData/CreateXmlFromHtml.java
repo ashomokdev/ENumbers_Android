@@ -94,7 +94,6 @@ public class CreateXmlFromHtml {
                         purpose = info.get(2).text().replaceAll("\\[[^>]*\\]", ""); //regex for deletion links - [any character that isn't >], for example "Approved in the EU.[18]" will be replased with "Approved in the EU."
                         status = info.get(3).text().replaceAll("\\[[^>]*\\]", ""); //regex for deletion links - [any character that isn't >], for example "Approved in the EU.[18]" will be replased with "Approved in the EU."
                     } catch (IndexOutOfBoundsException e) {
-                        e.printStackTrace();
                         System.out.println("Issue with " + code);
                     }
                     ENumber instance = new ENumber(code, name, purpose, status);
