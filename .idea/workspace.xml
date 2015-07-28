@@ -23,13 +23,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4cd27686-f7f6-4b82-aeec-caa793474a25" name="Default" comment="before maven deletion">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable/mic.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable/mic_icon.png" />
-      <change type="MOVED" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\src\com\example\ENumbers\HelloWorldActivity.java" afterPath="$PROJECT_DIR$/src/com/example/ENumbers/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ENumbersData/src/main/java/com/example/ENumbersData/CreateXmlFromHtml.java" afterPath="$PROJECT_DIR$/ENumbersData/src/main/java/com/example/ENumbersData/CreateXmlFromHtml.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ENumbersData/ENumbersData.iml" afterPath="$PROJECT_DIR$/ENumbersData/ENumbersData.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/src/com/example/ENumbers/HelloWorldActivityTest.java" afterPath="$PROJECT_DIR$/tests/src/com/example/ENumbers/HelloWorldActivityTest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/example/ENumbers/ENumberListAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/list_row_layout.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/ENumbers.apk" afterPath="$PROJECT_DIR$/target/ENumbers.apk" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/ENumbers.unaligned.apk" afterPath="$PROJECT_DIR$/target/ENumbers.unaligned.apk" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/ENumbers/MainActivity.java" afterPath="$PROJECT_DIR$/src/com/example/ENumbers/MainActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TODO.txt" afterPath="$PROJECT_DIR$/TODO.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/main.xml" afterPath="$PROJECT_DIR$/res/layout/main.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -65,8 +63,8 @@
       <file leaf-file-name="main.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.22696929">
-              <caret line="10" column="46" selection-start-line="10" selection-start-column="46" selection-end-line="10" selection-end-column="46" />
+            <state vertical-scroll-proportion="0.34178907">
+              <caret line="58" column="13" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="13" />
               <folding>
                 <element signature="e#584#615#0" expanded="true" />
                 <element signature="e#1051#1082#0" expanded="true" />
@@ -74,6 +72,7 @@
                 <element signature="e#1610#1641#0" expanded="true" />
                 <element signature="e#2264#2295#0" expanded="true" />
                 <element signature="e#2640#2671#0" expanded="true" />
+                <element signature="e#3186#3217#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -82,15 +81,30 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="TODO.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TODO.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="11" column="53" selection-start-line="11" selection-start-column="53" selection-end-line="11" selection-end-column="53" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/example/ENumbers/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="36" column="41" selection-start-line="36" selection-start-column="41" selection-end-line="36" selection-end-column="41" />
+              <caret line="39" column="32" selection-start-line="39" selection-start-column="32" selection-end-line="39" selection-end-column="32" />
               <folding>
-                <element signature="e#2464#2517#0" expanded="true" />
-                <element signature="e#2942#3312#0" expanded="true" />
-                <element signature="e#3311#3312#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#1169#2465#0" expanded="true" />
+                <element signature="e#1744#1803#0" expanded="true" />
+                <element signature="e#1982#1991#0" expanded="true" />
+                <element signature="e#2464#2465#0" expanded="true" />
+                <element signature="e#2812#2865#0" expanded="true" />
+                <element signature="e#3290#3660#0" expanded="true" />
+                <element signature="e#3659#3660#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -105,6 +119,7 @@
         <option value="JUnit3 Test Class" />
         <option value="resourceFile" />
         <option value="valueResourceFile" />
+        <option value="layoutResourceFile_vertical" />
         <option value="Class" />
       </list>
     </option>
@@ -146,8 +161,11 @@
         <option value="$PROJECT_DIR$/ENumbersData/src/main/java/com/example/ENumbersData/CreateXmlFromHtml.java" />
         <option value="$PROJECT_DIR$/src/com/example/ENumbers/HelloWorldActivity.java" />
         <option value="$PROJECT_DIR$/htmlfile.html" />
-        <option value="$PROJECT_DIR$/src/com/example/ENumbers/MainActivity.java" />
         <option value="$PROJECT_DIR$/res/layout/main.xml" />
+        <option value="$PROJECT_DIR$/res/layout/list_row_layout.xml" />
+        <option value="$PROJECT_DIR$/src/com/example/ENumbers/ENumberListAdapter.java" />
+        <option value="$PROJECT_DIR$/src/com/example/ENumbers/MainActivity.java" />
+        <option value="$PROJECT_DIR$/TODO.txt" />
       </list>
     </option>
   </component>
@@ -253,10 +271,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="ENumbers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -1068,27 +1082,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/build.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="66" column="22" selection-start-line="66" selection-start-column="22" selection-end-line="66" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/Program Files/Android/android-sdk/sources/android-22/com/android/internal/os/RuntimeInit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="69" column="0" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/Program Files/Android/android-sdk/sources/android-22/android/test/InstrumentationTestCase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="222" column="0" selection-start-line="222" selection-start-column="0" selection-end-line="222" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/Program Files/Android/android-sdk/sources/android-22/android/view/ContextThemeWrapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
@@ -1411,22 +1404,56 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/ENumbers/ENumberListAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.63221157">
+          <caret line="55" column="69" selection-start-line="55" selection-start-column="69" selection-end-line="55" selection-end-column="69" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/list_row_layout.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30670103">
+          <caret line="14" column="14" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TODO.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="53" selection-start-line="11" selection-start-column="53" selection-end-line="11" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/ENumbers/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="41" selection-start-line="36" selection-start-column="41" selection-end-line="36" selection-end-column="41" />
+          <caret line="39" column="32" selection-start-line="39" selection-start-column="32" selection-end-line="39" selection-end-column="32" />
           <folding>
-            <element signature="e#2464#2517#0" expanded="true" />
-            <element signature="e#2942#3312#0" expanded="true" />
-            <element signature="e#3311#3312#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#1169#2465#0" expanded="true" />
+            <element signature="e#1744#1803#0" expanded="true" />
+            <element signature="e#1982#1991#0" expanded="true" />
+            <element signature="e#2464#2465#0" expanded="true" />
+            <element signature="e#2812#2865#0" expanded="true" />
+            <element signature="e#3290#3660#0" expanded="true" />
+            <element signature="e#3659#3660#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22696929">
-          <caret line="10" column="46" selection-start-line="10" selection-start-column="46" selection-end-line="10" selection-end-column="46" />
+        <state vertical-scroll-proportion="0.34178907">
+          <caret line="58" column="13" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="13" />
           <folding>
             <element signature="e#584#615#0" expanded="true" />
             <element signature="e#1051#1082#0" expanded="true" />
@@ -1434,6 +1461,7 @@
             <element signature="e#1610#1641#0" expanded="true" />
             <element signature="e#2264#2295#0" expanded="true" />
             <element signature="e#2640#2671#0" expanded="true" />
+            <element signature="e#3186#3217#0" expanded="true" />
           </folding>
         </state>
       </provider>

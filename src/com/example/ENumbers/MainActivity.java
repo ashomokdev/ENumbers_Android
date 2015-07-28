@@ -1,26 +1,27 @@
 package com.example.ENumbers;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.*;
-import android.text.style.TextAppearanceSpan;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.*;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 
 
 public class MainActivity extends Activity implements IGetInfoByENumber {
     Button searchBtn;
-    TextView outputEditText;
+    ListView listViewResult;
     EditText inputEditText;
+    TextView outputWarning;
+    ListView listView;
 
     /**
      * Called when the activity is first created.
@@ -30,14 +31,15 @@ public class MainActivity extends Activity implements IGetInfoByENumber {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         inputEditText = (EditText) findViewById(R.id.inputE);
+        listView = (ListView) findViewById(R.id.ENumberList);
         searchBtn = (Button) findViewById(R.id.button);
-        outputEditText = (TextView) findViewById(R.id.outputE);
+        outputWarning = (TextView) findViewById(R.id.warning);
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (v != null) {
-                    outputEditText.setText("");
+                    outputWarning.setText("");
+                    listView.setAdapter(null);
                     ENumber result = null;
                     try {
                         result = GetInfoByENumber(inputEditText.getText().toString());
@@ -45,9 +47,13 @@ public class MainActivity extends Activity implements IGetInfoByENumber {
                         e.printStackTrace();
                     }
                     if (result == null) {
-                        outputEditText.setText(getApplicationContext().getString(R.string.notFoundMessage));
+                        outputWarning.setText(getApplicationContext().getString(R.string.notFoundMessage));
                     } else {
-                        GetFormated(result, outputEditText);
+                        listViewResult = (ListView) findViewById(R.id.ENumberList);
+                        ArrayList<ENumber> data = new ArrayList<ENumber>();
+                        //TODO add all result
+                        data.add(result);
+                        listView.setAdapter(new ENumberListAdapter(v.getContext(), data));
 
                         InputMethodManager imm = (InputMethodManager) getSystemService(
                                 Context.INPUT_METHOD_SERVICE);
@@ -108,27 +114,27 @@ public class MainActivity extends Activity implements IGetInfoByENumber {
         return null;
     }
 
-    public static void GetFormated(ENumber input, TextView textView) {
-        Spannable eCode = new SpannableString(input.getCode() + "\n");
-        eCode.setSpan( new TextAppearanceSpan(textView.getContext(), R.style.ECode), 0, eCode.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        textView.append(eCode);
-
-        Spannable eName = new SpannableString(input.getName() + "\n");
-        eName.setSpan(new TextAppearanceSpan(textView.getContext(), R.style.EName), 0, eName.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        textView.append((eName));
-
-        if (input.getPurpose() != null) {
-            Spannable ePurpose = new SpannableString(input.getPurpose() + "\n");
-            ePurpose.setSpan(new TextAppearanceSpan(textView.getContext(), R.style.EPurpose), 0, ePurpose.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            textView.append(ePurpose);
-        }
-
-        if (input.getStatus() != null) {
-            Spannable eStatus = new SpannableString(input.getStatus() + "\n");
-            eStatus.setSpan(new TextAppearanceSpan(textView.getContext(), R.style.EStatus), 0, eStatus.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            textView.append(eStatus);
-        }
-    }
+//    public static void GetFormated(ENumber input, TextView textView) {
+//        Spannable eCode = new SpannableString(input.getCode() + "\n");
+//        eCode.setSpan(new TextAppearanceSpan(textView.getContext(), R.style.ECode), 0, eCode.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        textView.append(eCode);
+//
+//        Spannable eName = new SpannableString(input.getName() + "\n");
+//        eName.setSpan(new TextAppearanceSpan(textView.getContext(), R.style.EName), 0, eName.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        textView.append((eName));
+//
+//        if (input.getPurpose() != null) {
+//            Spannable ePurpose = new SpannableString(input.getPurpose() + "\n");
+//            ePurpose.setSpan(new TextAppearanceSpan(textView.getContext(), R.style.EPurpose), 0, ePurpose.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//            textView.append(ePurpose);
+//        }
+//
+//        if (input.getStatus() != null) {
+//            Spannable eStatus = new SpannableString(input.getStatus() + "\n");
+//            eStatus.setSpan(new TextAppearanceSpan(textView.getContext(), R.style.EStatus), 0, eStatus.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//            textView.append(eStatus);
+//        }
+//    }
 }
 
 
