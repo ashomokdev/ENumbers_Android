@@ -42,7 +42,9 @@ public class MainActivity extends Activity implements IGetInfoByENumber {
                     listView.setAdapter(null);
                     ENumber result = null;
                     try {
-                        result = GetInfoByENumber(inputEditText.getText().toString());
+                        if (inputEditText.getText().toString().length() >=3) {
+                            result = GetInfoByENumber(inputEditText.getText().toString());
+                        }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

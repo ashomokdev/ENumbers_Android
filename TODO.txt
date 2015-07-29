@@ -10,6 +10,7 @@
 //19 Changing ListView Selection Color http://javatechig.com/android/android-listview-tutorial
 //20 Delete divider if shows 1 pc E Number http://javatechig.com/android/android-listview-tutorial
 //21 Selection should contain mic_icon - now it don't
+//22 add full discription after clicking on https://www.youtube.com/watch?v=-tsxPa6PokY
 
 
 
