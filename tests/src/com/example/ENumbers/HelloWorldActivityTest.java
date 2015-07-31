@@ -1,4 +1,4 @@
-package com.example.ENumbers;
+package com.example.eNumbers;
 
 import android.test.ActivityInstrumentationTestCase2;
 import junit.framework.TestCase;
@@ -34,7 +34,7 @@ public class HelloWorldActivityTest extends ActivityInstrumentationTestCase2<Mai
     }
 
     public void testExtractData() {
-        IGetInfoByENumber instance = new MainActivity();
+        IGetterInfoByENumber instance = new MainActivity();
         String recived = null;
         try {
            // recived = instance.GetInfoByENumber("E123");

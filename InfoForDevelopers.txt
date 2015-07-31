@@ -6,3 +6,8 @@
       <pluginGroup>com.jayway.maven.plugins.android.generation2</pluginGroup>
   </pluginGroups>
 4. Если всё хорошо, открыть в ИДЕ мавен окно, добавить мавен проект, выбрав пом файл, и работать через мавен окно.
+
+
+P.S.
+1. Define the path variable ANDROID_HOME
+

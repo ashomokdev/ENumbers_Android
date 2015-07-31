@@ -1,20 +1,3 @@
-//4. New beautiful GU design //http://androidniceties.tumblr.com/
-// https://www.google.com/design/spec/style/color.html#color-color-palette
-//5. icons for different purposes
-//7. Add languages support
-//11. show few enumbers if they have deference in char at the end - for example E100a and E100b shod be shown to request E100
-//14. Add inputting by voice http://developer.android.com/training/keyboard-input/style.html https://www.youtube.com/watch?v=-tsxPa6PokY
-//15. Add inputting OCR
-// 18. Add more info in general
-//17. Bug - result deletes after changing screen orientation
-//19 Changing ListView Selection Color http://javatechig.com/android/android-listview-tutorial
-//20 Delete divider if shows 1 pc E Number http://javatechig.com/android/android-listview-tutorial
-//21 Selection should contain mic_icon - now it don't
-//22 add full discription after clicking on https://www.youtube.com/watch?v=-tsxPa6PokY
-
-
-
-
 NOT actual
 //6. add more info about ENumbers
 // http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2011:295:0178:0204:EN:PDF - difficult to recognize
@@ -24,4 +7,5 @@ NOT actual
 //2. design without search button
 //10. Keyboard with numbers only
 //16. Add banned and approved fields
+// android.support.v4. move to maven
 

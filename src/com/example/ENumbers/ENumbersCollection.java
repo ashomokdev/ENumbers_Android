@@ -1,9 +1,8 @@
-package com.example.ENumbers;
+package com.example.eNumbers;
 
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -11,7 +10,9 @@ import java.util.List;
  * Created by y.belyaeva on 25.06.2015.
  */
 @Root(name = "root")
-public class ENumbersCollection implements Iterable<ENumber> {
+public class ENumbersCollection
+        implements Iterable<ENumber> {
+
     @ElementList(name="eNumbers", required = true)
     private List<ENumber> list;
 
@@ -27,7 +28,9 @@ public class ENumbersCollection implements Iterable<ENumber> {
      */
     @Override
     public Iterator<ENumber> iterator() {
+
         Iterator<ENumber> iterator = list.iterator();
+
         return iterator;
     }
 }

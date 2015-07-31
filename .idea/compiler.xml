@@ -23,7 +23,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="ENumbersData" />
         <module name="еее" />
       </profile>
       <profile default="false" name="Annotation profile for ENumbers" enabled="true">
@@ -33,9 +32,16 @@
         <processorPath useClasspath="true" />
         <module name="ENumbers" />
       </profile>
+      <profile default="false" name="Annotation profile for ENumbersData" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="ENumbersData" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="ENumbers" target="1.6" />
+      <module name="ENumbers" target="1.8" />
       <module name="ENumbersData" target="1.8" />
     </bytecodeTargetLevel>
   </component>
