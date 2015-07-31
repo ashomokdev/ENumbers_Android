@@ -27,7 +27,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4cd27686-f7f6-4b82-aeec-caa793474a25" name="Default" comment="before maven deletion">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/example/eNumbers/IGetterInfoByENumber.java" />
       <change type="DELETED" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\.idea\libraries\Maven__com_google_android_android_2_2_1.xml" afterPath="" />
       <change type="DELETED" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\.idea\libraries\Maven__com_jcabi_incubator_xembly_0_21_1.xml" afterPath="" />
       <change type="DELETED" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\.idea\libraries\Maven__com_jcabi_jcabi_aspects_0_20_1.xml" afterPath="" />
@@ -51,26 +50,7 @@
       <change type="DELETED" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\.idea\libraries\Maven__org_springframework_spring_core_4_1_7_RELEASE.xml" afterPath="" />
       <change type="DELETED" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\.idea\libraries\Maven__xerces_xmlParserAPIs_2_6_2.xml" afterPath="" />
       <change type="DELETED" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\.idea\libraries\Maven__xpp3_xpp3_1_1_4c.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\src\com\example\eNumbers\IGetInfoByENumber.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/tests/tests.apk" afterPath="$PROJECT_DIR$/out/production/tests/tests.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/tests/tests.unaligned.apk" afterPath="$PROJECT_DIR$/out/production/tests/tests.unaligned.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\gen\com\example\eNumbers\BuildConfig.java" afterPath="$PROJECT_DIR$/gen/com/example/eNumbers/BuildConfig.java" />
-      <change type="MODIFICATION" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\src\com\example\eNumbers\ENumber.java" afterPath="$PROJECT_DIR$/src/com/example/eNumbers/ENumber.java" />
-      <change type="MODIFICATION" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\src\com\example\eNumbers\ENumberListAdapter.java" afterPath="$PROJECT_DIR$/src/com/example/eNumbers/ENumberListAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ENumbers.iml" afterPath="$PROJECT_DIR$/ENumbers.iml" />
-      <change type="MODIFICATION" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\src\com\example\eNumbers\ENumbersCollection.java" afterPath="$PROJECT_DIR$/src/com/example/eNumbers/ENumbersCollection.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ENumbersData/ENumbersData.iml" afterPath="$PROJECT_DIR$/ENumbersData/ENumbersData.iml" />
-      <change type="MODIFICATION" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\tests\src\com\example\eNumbers\HelloWorldActivityTest.java" afterPath="$PROJECT_DIR$/tests/src/com/example/eNumbers/HelloWorldActivityTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/InfoForDevelopers.txt" afterPath="$PROJECT_DIR$/InfoForDevelopers.txt" />
       <change type="MODIFICATION" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\src\com\example\eNumbers\MainActivity.java" afterPath="$PROJECT_DIR$/src/com/example/eNumbers/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\tests\gen\com\example\eNumbers\tests\Manifest.java" afterPath="$PROJECT_DIR$/tests/gen/com/example/eNumbers/tests/Manifest.java" />
-      <change type="MODIFICATION" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\gen\com\example\eNumbers\R.java" afterPath="$PROJECT_DIR$/gen/com/example/eNumbers/R.java" />
-      <change type="MODIFICATION" beforePath="C:\Users\y.belyaeva\IdeaProjects\ENumbers\tests\gen\com\example\eNumbers\tests\R.java" afterPath="$PROJECT_DIR$/tests/gen/com/example/eNumbers/tests/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TODO.txt" afterPath="$PROJECT_DIR$/TODO.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ENumbersData/pom.xml" afterPath="$PROJECT_DIR$/ENumbersData/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ENumbers.iws" />
@@ -104,12 +84,12 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/example/eNumbers/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33170733">
-              <caret line="108" column="64" selection-start-line="108" selection-start-column="64" selection-end-line="108" selection-end-column="64" />
+            <state vertical-scroll-proportion="0.30243903">
+              <caret line="69" column="0" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2285#2344#0" expanded="true" />
-                <element signature="e#3406#3459#0" expanded="true" />
+                <element signature="e#2274#2333#0" expanded="true" />
+                <element signature="e#3395#3448#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -936,7 +916,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -951,7 +931,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.0131209" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1625" sideWeight="0.7483381" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1625" sideWeight="0.7483381" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1011,11 +991,131 @@
           <properties />
           <option name="timeStamp" value="72" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/example/eNumbers/MainActivity.java</url>
+          <line>76</line>
+          <properties />
+          <option name="timeStamp" value="170" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/example/eNumbers/MainActivity.java</url>
+          <line>66</line>
+          <properties />
+          <option name="timeStamp" value="171" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/example/eNumbers/MainActivity.java</url>
+          <line>80</line>
+          <properties />
+          <option name="timeStamp" value="172" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/example/eNumbers/MainActivity.java</url>
+          <line>77</line>
+          <properties />
+          <option name="timeStamp" value="173" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/example/eNumbers/MainActivity.java</url>
+          <line>194</line>
+          <properties />
+          <option name="timeStamp" value="174" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/example/eNumbers/MainActivity.java</url>
+          <line>198</line>
+          <properties />
+          <option name="timeStamp" value="175" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/example/eNumbers/MainActivity.java</url>
+          <line>199</line>
+          <properties />
+          <option name="timeStamp" value="176" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/example/eNumbers/MainActivity.java</url>
+          <line>203</line>
+          <properties />
+          <option name="timeStamp" value="177" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/example/eNumbers/MainActivity.java</url>
+          <line>206</line>
+          <properties />
+          <option name="timeStamp" value="178" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/example/eNumbers/MainActivity.java</url>
+          <line>205</line>
+          <properties />
+          <option name="timeStamp" value="179" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/example/eNumbers/MainActivity.java</url>
+          <line>209</line>
+          <properties />
+          <option name="timeStamp" value="180" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/example/eNumbers/MainActivity.java</url>
+          <line>180</line>
+          <properties />
+          <option name="timeStamp" value="181" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/example/eNumbers/MainActivity.java</url>
+          <line>182</line>
+          <properties />
+          <option name="timeStamp" value="182" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/example/eNumbers/MainActivity.java</url>
+          <line>184</line>
+          <properties />
+          <option name="timeStamp" value="183" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/example/eNumbers/MainActivity.java</url>
+          <line>181</line>
+          <properties />
+          <option name="timeStamp" value="184" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/example/eNumbers/MainActivity.java</url>
+          <line>178</line>
+          <properties />
+          <option name="timeStamp" value="185" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/example/eNumbers/MainActivity.java</url>
+          <line>171</line>
+          <properties />
+          <option name="timeStamp" value="186" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/example/eNumbers/MainActivity.java</url>
+          <line>173</line>
+          <properties />
+          <option name="timeStamp" value="187" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/example/eNumbers/MainActivity.java</url>
+          <line>177</line>
+          <properties />
+          <option name="timeStamp" value="188" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/com/example/eNumbers/MainActivity.java</url>
+          <line>169</line>
+          <properties class="com.example.eNumbers.MainActivity" method="onActivityResult" />
+          <option name="timeStamp" value="189" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="170" />
+      <option name="time" value="190" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1029,8 +1129,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding>
-            <element signature="e#822#823#0" expanded="true" />
-            <element signature="e#846#847#0" expanded="true" />
+            <element signature="e#822#823#0" expanded="false" />
+            <element signature="e#846#847#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1236,6 +1336,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8051421">
           <caret line="35" column="36" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="36" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1283,6 +1384,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="788" column="0" selection-start-line="788" selection-start-column="0" selection-end-line="788" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1290,6 +1392,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="1718" column="0" selection-start-line="1718" selection-start-column="0" selection-end-line="1718" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1332,6 +1435,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.31129807">
           <caret line="18570" column="0" selection-start-line="18570" selection-start-column="0" selection-end-line="18570" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1355,7 +1459,7 @@
         <state vertical-scroll-proportion="0.48585367">
           <caret line="56" column="83" selection-start-line="56" selection-start-column="83" selection-end-line="56" selection-end-column="83" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1394,12 +1498,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/eNumbers/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33170733">
-          <caret line="108" column="64" selection-start-line="108" selection-start-column="64" selection-end-line="108" selection-end-column="64" />
+        <state vertical-scroll-proportion="0.30243903">
+          <caret line="69" column="0" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2285#2344#0" expanded="true" />
-            <element signature="e#3406#3459#0" expanded="true" />
+            <element signature="e#2274#2333#0" expanded="true" />
+            <element signature="e#3395#3448#0" expanded="true" />
           </folding>
         </state>
       </provider>

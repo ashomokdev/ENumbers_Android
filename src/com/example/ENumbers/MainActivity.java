@@ -64,7 +64,7 @@ public class MainActivity extends Activity implements IGetterInfoByENumber {
             @Override
             public void onClick(View v) {
 
-                if (Objects.nonNull(v)) {
+                if (v!=null) {
 
                     outputWarning.setText("");
 
