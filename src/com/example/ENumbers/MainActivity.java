@@ -63,18 +63,18 @@ public class MainActivity extends Activity implements IGetterInfoByENumber {
             @Override
             public void onClick(View v) {
 
-                if (v!=null) {
+                if (v != null) {
 
                     outputWarning.setText("");
 
                     listView.setAdapter(null);
 
                     ENumber result = null;
-
+                    String inputing = inputEditText.getText().toString();
                     try {
 
-                        if (inputEditText.getText().toString().length() >= 3) {
-                            result = GetInfoByENumber(inputEditText.getText().toString());
+                        if (inputing.length() >= 3) {
+                            result = GetInfoByENumber(inputing);
                         }
 
                     } catch (Exception e) {
@@ -120,7 +120,6 @@ public class MainActivity extends Activity implements IGetterInfoByENumber {
                 } else {
 
                     inputEditText.setText(startChar);
-
                     inputEditText.setSelection(inputEditText.getText().length());
                 }
             }
@@ -136,6 +135,8 @@ public class MainActivity extends Activity implements IGetterInfoByENumber {
 
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
 
+                    searchBtn.setPressed(true);
+                    searchBtn.invalidate();
                     searchBtn.performClick();
 
                     return true;
@@ -173,42 +174,67 @@ public class MainActivity extends Activity implements IGetterInfoByENumber {
             List<String> results = data.getStringArrayListExtra(
                     RecognizerIntent.EXTRA_RESULTS);
 
-            //TODO Fix bug here
+
+            inputEditText.setText(
+                    getApplicationContext().getString(R.string.startChar));
             String spokenText = results.get(0);
             inputEditText.append(spokenText);
 
             searchBtn.setPressed(true);
             searchBtn.invalidate();
             searchBtn.performClick();
-
-            Toast.makeText(getApplicationContext(), spokenText, Toast.LENGTH_LONG).show();
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
 
     @Override
-    public ENumber GetInfoByENumber(String ENumber_input) throws Exception {
+    public ENumber GetInfoByENumber(String eNumber_input) throws Exception {
 
-        //TODO check inputing before searching
-        InputStream inputStream = this.getApplicationContext().getResources().openRawResource(R.raw.base);
+        if (inputingIsValid(eNumber_input)) {
+            InputStream inputStream = this.getApplicationContext().getResources().openRawResource(R.raw.base);
 
-        try {
+            try {
+                Serializer serializer = new Persister();
+                ENumbersCollection eNumbersCollection = serializer.read(ENumbersCollection.class, inputStream);
 
-            Serializer serializer = new Persister();
-            ENumbersCollection eNumbersCollection = serializer.read(ENumbersCollection.class, inputStream);
+                for (ENumber eNumber : eNumbersCollection) {
 
-            for (ENumber eNumber : eNumbersCollection) {
+                    if (eNumber.getCode().equals(eNumber_input)) {
 
-                if (eNumber.getCode().equals(ENumber_input)) {
-
-                    return eNumber;
+                        return eNumber;
+                    }
                 }
+            } catch (Exception e) {
+                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
             }
-        } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
         return null;
+    }
+
+    private boolean inputingIsValid(String ENumber_input) {
+        if (ENumber_input.startsWith(getApplicationContext().getString(R.string.startChar))) {
+
+            if (ENumber_input.length() > 3 && ENumber_input.length() < 7) {
+                String numb_without_E = ENumber_input.substring(1);
+
+                if (tryParse(numb_without_E) != null) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
+    private Integer tryParse(Object obj) {
+        Integer retVal;
+        try {
+            retVal = Integer.parseInt((String) obj);
+        } catch (NumberFormatException nfe) {
+            retVal = null;
+        }
+        return retVal;
     }
 }
 
