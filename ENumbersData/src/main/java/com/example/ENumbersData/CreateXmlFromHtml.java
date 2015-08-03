@@ -28,7 +28,8 @@ public class CreateXmlFromHtml {
     //TODO check data if correct
     private static final String pathToXml = "res/raw/base.xml";
     private static final String base_url = "http://en.wikipedia.org/wiki/E_number#E400.E2.80.93E499_.28thickeners.2C_stabilizers.2C_emulsifiers.29";
-    private static final String comments_url = "http://www.additivealert.com.au/search.php?start=0&end=10&count=298&process=next&flg=0";
+    private static final String comments_url_1 = "http://www.additivealert.com.au/search.php?start=0&end=10&count=298&process=next&flg=0";
+    private static final String comments_url_2 = "http://nac.allergyforum.com/additives/colors100-181.htm";
 
     public static void main(String[] args) {
         ArrayList<ENumber> list = getENumbersFromHtml(base_url);
@@ -37,7 +38,7 @@ public class CreateXmlFromHtml {
 
     private static ArrayList<ENumber> getENumbersFromHtml(String url) {
         ArrayList<ENumber> data = createData(url);
-        return addComments(data, comments_url);
+        return addComments(data, comments_url_1);
     }
 
 
@@ -77,10 +78,14 @@ public class CreateXmlFromHtml {
     private static ArrayList<ENumber> createData(String url) {
         try {
             ArrayList<ENumber> result = new ArrayList<ENumber>();
+
             Document doc = Jsoup.connect(url).get();
+
             Elements tables = doc.getElementsByTag("table"); //all tables
+
             for (Element table : tables) {
                 Elements eNumbers = table.select("tr:matches(^E[0-9])"); //<tr> tags, full text of which matches the regex. Another way - tr:matches(E[0-9]{3,4}\s)
+
                 for (Element eNumber : eNumbers) {
                     Elements info = eNumber.getElementsByTag("td");
 
@@ -88,11 +93,19 @@ public class CreateXmlFromHtml {
                     String name = "";
                     String purpose = "";
                     String status = "";
+
                     try {
                         code = info.get(0).text().replaceAll("\\[[^>]*\\]", ""); //regex for deletion links - [any character that isn't >], for example "Approved in the EU.[18]" will be replased with "Approved in the EU."
                         name = info.get(1).text().replaceAll("\\[[^>]*\\]", ""); //regex for deletion links - [any character that isn't >], for example "Approved in the EU.[18]" will be replased with "Approved in the EU."
-                        purpose = info.get(2).text().replaceAll("\\[[^>]*\\]", ""); //regex for deletion links - [any character that isn't >], for example "Approved in the EU.[18]" will be replased with "Approved in the EU."
                         status = info.get(3).text().replaceAll("\\[[^>]*\\]", ""); //regex for deletion links - [any character that isn't >], for example "Approved in the EU.[18]" will be replased with "Approved in the EU."
+
+                        String add_text = "";
+                        if (code.matches("^E1[0-9][0-9][a-z]?"))
+                        {
+                            add_text = "Color ";
+                        }
+                        purpose = add_text + info.get(2).text().replaceAll("\\[[^>]*\\]", ""); //regex for deletion links - [any character that isn't >], for example "Approved in the EU.[18]" will be replased with "Approved in the EU."
+
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println("Issue with " + code);
                     }
