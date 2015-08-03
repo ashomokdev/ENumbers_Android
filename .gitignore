@@ -60,3 +60,4 @@ Config.cs
 #########
 .svn/
 .idea/workspace.xml
+.idea/libraries/Maven*
