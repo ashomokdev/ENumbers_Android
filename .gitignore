@@ -59,3 +59,4 @@ Config.cs
 # Other #
 #########
 .svn/
+.idea/workspace.xml
