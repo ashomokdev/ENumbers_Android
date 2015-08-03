@@ -70,7 +70,7 @@
                     <nativeLibrariesDirectory>${project.basedir}/src/main/native</nativeLibrariesDirectory>
                     <sdk>
                         <path>
-                            D:\Program Files\Android\android-sdk
+                            C:\Users\Iuliia\AppData\Local\Android\android-sdk
                         </path>
                         <platform>22</platform>
                     </sdk>

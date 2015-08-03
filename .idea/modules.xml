@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ENumbers.iml" filepath="$PROJECT_DIR$/ENumbers.iml" />
       <module fileurl="file://$PROJECT_DIR$/ENumbersData/ENumbersData.iml" filepath="$PROJECT_DIR$/ENumbersData/ENumbersData.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ENumbers_Android_Java_Maven.iml" filepath="$PROJECT_DIR$/ENumbers_Android_Java_Maven.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ENumbersData/src/test/test.iml" filepath="$PROJECT_DIR$/ENumbersData/src/test/test.iml" />
       <module fileurl="file://$PROJECT_DIR$/tests/tests.iml" filepath="$PROJECT_DIR$/tests/tests.iml" />
     </modules>
   </component>

@@ -24,7 +24,7 @@
             android:layout_toLeftOf = "@+id/mic_icon"
             android:layout_alignParentTop="true"
             android:inputType="number"
-            android:digits="1234567890"
+            android:digits="1234567890abcdefghijklmnopqrstuvwxyz"
             android:singleLine="true"
             android:imeOptions="actionDone"
             android:maxLength="5"
