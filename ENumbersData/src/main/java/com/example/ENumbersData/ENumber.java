@@ -36,7 +36,7 @@ public class ENumber {
     public String getComment() {return comment;}
 
     public void setComment(String _comment) {
-        this.comment = _comment;
+        this.comment += _comment;
     }
 
 

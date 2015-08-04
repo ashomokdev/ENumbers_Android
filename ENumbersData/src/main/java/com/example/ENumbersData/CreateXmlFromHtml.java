@@ -1,4 +1,5 @@
 package com.example.ENumbersData;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -7,6 +8,7 @@ import org.springframework.beans.BeanUtils;
 import org.xembly.Directives;
 import org.xembly.ImpossibleModificationException;
 import org.xembly.Xembler;
+
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
@@ -19,16 +21,18 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 
 /**
  * Created by y.belyaeva on 27.05.2015.
  */
 public class CreateXmlFromHtml {
 
-    //TODO check data if correct
+    private static Logger log = Logger.getLogger(CreateXmlFromHtml.class.getName());
+
     private static final String pathToXml = "res/raw/base.xml";
     private static final String base_url = "http://en.wikipedia.org/wiki/E_number#E400.E2.80.93E499_.28thickeners.2C_stabilizers.2C_emulsifiers.29";
-    private static final String comments_url_1 = "http://www.additivealert.com.au/search.php?start=0&end=10&count=298&process=next&flg=0";
+    private static final String comments_url_1 = "http://www.additivealert.com.au/search.php?start=10&end=20&count=298&process=previous&flg=0";
     private static final String comments_url_2 = "http://nac.allergyforum.com/additives/colors100-181.htm";
 
     public static void main(String[] args) {
@@ -38,11 +42,13 @@ public class CreateXmlFromHtml {
 
     private static ArrayList<ENumber> getENumbersFromHtml(String url) {
         ArrayList<ENumber> data = createData(url);
-        return addComments(data, comments_url_1);
+        data = addComments_for_url_1(data, comments_url_1);
+        data = addComments_for_url_2(data, comments_url_2);
+        return data;
     }
 
 
-    private static ArrayList<ENumber> addComments(ArrayList<ENumber> data, String url) {
+    private static ArrayList<ENumber> addComments_for_url_1(ArrayList<ENumber> data, String url) {
         try {
             Document doc = Jsoup.connect(url).get();
             Elements tables = doc.select("table.bg1"); //all tables with class bg1
@@ -62,10 +68,52 @@ public class CreateXmlFromHtml {
 
             try {
                 url = doc.select("td.textto").select("a[href]:matches(Next)").first().attr("abs:href"); //link to the next page
-                addComments(data, url);
+                addComments_for_url_1(data, url);
             } catch (NullPointerException e) {
                 //next link not found. Stop working.
                 return data;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+
+
+    private static ArrayList<ENumber> addComments_for_url_2(ArrayList<ENumber> data, String url) {
+        log.info("addComments_for_url_2 called");
+        try {
+            Document doc = Jsoup.connect(url).get();
+            Elements tables = doc.select("table"); //all tables
+
+            log.info("tables size = "+ tables.size());
+            for (Element table : tables) {
+                Elements info = table.select("td"); //all td
+
+                log.info("info size = "+ info.size() + "\n before while");
+                int i = 0;
+                while (i < info.size()) {
+
+                    String tdText = info.get(i).text();
+
+                    if (tdText.matches("^E[0-9]{3,5}")) {
+                        String code = tdText;
+                        String name = info.get(++i).text();
+                        String comments = info.get(++i).text();
+
+                        Predicate<ENumber> codeEquals = (v) -> (v.getCode().equals(code));
+                        Consumer<ENumber> addComment = (e) -> e.setComment(comments);
+                        data.stream()
+                                .filter(codeEquals)
+                                .forEach(addComment);
+
+                        log.info(code + " added");
+                    }
+                    i++;
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -84,7 +132,7 @@ public class CreateXmlFromHtml {
             Elements tables = doc.getElementsByTag("table"); //all tables
 
             for (Element table : tables) {
-                Elements eNumbers = table.select("tr:matches(^E[0-9])"); //<tr> tags, full text of which matches the regex. Another way - tr:matches(E[0-9]{3,4}\s)
+                Elements eNumbers = table.select("tr:matches(^E[0-9]{3,5})"); //<tr> tags, full text of which matches the regex. Another way - tr:matches(E[0-9]{3,4}\s)
 
                 for (Element eNumber : eNumbers) {
                     Elements info = eNumber.getElementsByTag("td");
@@ -100,14 +148,17 @@ public class CreateXmlFromHtml {
                         status = info.get(3).text().replaceAll("\\[[^>]*\\]", ""); //regex for deletion links - [any character that isn't >], for example "Approved in the EU.[18]" will be replased with "Approved in the EU."
 
                         String add_text = "";
-                        if (code.matches("^E1[0-9][0-9][a-z]?"))
+                        if (code.matches("^E1[0-9][0-9][a-z]?")) //if E100-E199 than Color
                         {
                             add_text = "Color ";
                         }
                         purpose = add_text + info.get(2).text().replaceAll("\\[[^>]*\\]", ""); //regex for deletion links - [any character that isn't >], for example "Approved in the EU.[18]" will be replased with "Approved in the EU."
 
                     } catch (IndexOutOfBoundsException e) {
-                        System.out.println("Issue with " + code);
+                        log.info(
+                                "createData Method, " +
+                                        "Issue with " +
+                                        code);
                     }
                     ENumber instance = new ENumber(code, name, purpose, status);
                     result.add(instance);
