@@ -84,13 +84,14 @@ public class CreateXmlFromHtml {
 
 
     private static ArrayList<ENumber> addComments_for_url_2(ArrayList<ENumber> data, String url) {
+        //TODO refactoring needed - get only one table
         log.info("addComments_for_url_2 called");
         try {
             Document doc = Jsoup.connect(url).get();
-            Elements tables = doc.select("table"); //all tables
+            Element table = doc.select("table:matches(^E[0-9]{3,5}?)").first(); //all tables, full text of which matches the regex.
 
-            log.info("tables size = "+ tables.size());
-            for (Element table : tables) {
+
+
                 Elements info = table.select("td"); //all td
 
                 log.info("info size = "+ info.size() + "\n before while");
@@ -114,7 +115,7 @@ public class CreateXmlFromHtml {
                     }
                     i++;
                 }
-            }
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -132,7 +133,7 @@ public class CreateXmlFromHtml {
             Elements tables = doc.getElementsByTag("table"); //all tables
 
             for (Element table : tables) {
-                Elements eNumbers = table.select("tr:matches(^E[0-9]{3,5})"); //<tr> tags, full text of which matches the regex. Another way - tr:matches(E[0-9]{3,4}\s)
+                Elements eNumbers = table.select("tr:matches(^E[0-9]{3,5})"); //<tr> tags, full text of which matches the regex.
 
                 for (Element eNumber : eNumbers) {
                     Elements info = eNumber.getElementsByTag("td");
