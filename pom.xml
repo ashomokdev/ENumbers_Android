@@ -47,13 +47,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>com.google.android</groupId>-->
-            <!--<artifactId>support-v4</artifactId>-->
-            <!--<version>22.2.1</version>-->
-            <!--<scope>system</scope>-->
-            <!--<systemPath>${ANDROID_HOME}/extras/android/support/v4/android-support-v4.jar</systemPath>-->
-        <!--</dependency>-->
     </dependencies>
 
     <build>
