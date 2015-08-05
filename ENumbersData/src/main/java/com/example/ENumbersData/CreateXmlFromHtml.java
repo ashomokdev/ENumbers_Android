@@ -82,39 +82,34 @@ public class CreateXmlFromHtml {
     }
 
 
-
     private static ArrayList<ENumber> addComments_for_url_2(ArrayList<ENumber> data, String url) {
-        //TODO refactoring needed - get only one table
-        log.info("addComments_for_url_2 called");
+        //TODO goto next links
         try {
             Document doc = Jsoup.connect(url).get();
-            Element table = doc.select("table:matches(^E[0-9]{3,5}?)").first(); //all tables, full text of which matches the regex.
+            Element table = doc.select("table:matches(E[0-9]{3,5})").first(); //all tables, full text of which matches the regex. More info http://jsoup.org/cookbook/extracting-data/selector-syntax
 
+            Elements info = table.select("td"); //all td
 
+            int i = 0;
+            while (i < info.size()) {
 
-                Elements info = table.select("td"); //all td
+                String tdText = info.get(i).text();
 
-                log.info("info size = "+ info.size() + "\n before while");
-                int i = 0;
-                while (i < info.size()) {
+                if (tdText.matches("^E[0-9]{3,5}")) {
+                    String code = tdText;
+                    String name = info.get(++i).text();
+                    String comments = info.get(++i).text();
 
-                    String tdText = info.get(i).text();
+                    Predicate<ENumber> codeEquals = (v) -> (v.getCode().equals(code));
+                    Consumer<ENumber> addComment = (e) -> e.setComment(comments);
+                    data.stream()
+                            .filter(codeEquals)
+                            .forEach(addComment);
 
-                    if (tdText.matches("^E[0-9]{3,5}")) {
-                        String code = tdText;
-                        String name = info.get(++i).text();
-                        String comments = info.get(++i).text();
-
-                        Predicate<ENumber> codeEquals = (v) -> (v.getCode().equals(code));
-                        Consumer<ENumber> addComment = (e) -> e.setComment(comments);
-                        data.stream()
-                                .filter(codeEquals)
-                                .forEach(addComment);
-
-                        log.info(code + " added");
-                    }
-                    i++;
+                    log.info(code + " added");
                 }
+                i++;
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
