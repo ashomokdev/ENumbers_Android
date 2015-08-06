@@ -19,6 +19,8 @@ import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -67,7 +69,7 @@ public class CreateXmlFromHtml {
             }
 
             try {
-                url = doc.select("td.textto").select("a[href]:matches(Next)").first().attr("abs:href"); //link to the next page
+                url = doc.select("td.textto").select("a[href]:matches(Next)").first().attr("abs:href"); //link to the next page, If you want to get an absolute URL, there is a attribute key prefix abs:
                 addComments_for_url_1(data, url);
             } catch (NullPointerException e) {
                 //next link not found. Stop working.
@@ -83,34 +85,46 @@ public class CreateXmlFromHtml {
 
 
     private static ArrayList<ENumber> addComments_for_url_2(ArrayList<ENumber> data, String url) {
-        //TODO goto next links
         try {
             Document doc = Jsoup.connect(url).get();
-            Element table = doc.select("table:matches(E[0-9]{3,5})").first(); //all tables, full text of which matches the regex. More info http://jsoup.org/cookbook/extracting-data/selector-syntax
 
-            Elements info = table.select("td"); //all td
+            //getting all pages
+            Elements a_hrefs = doc.select("a[href]:matches([0-9]+)"); // a with href, full text of which matches the regex Any number
 
-            int i = 0;
-            while (i < info.size()) {
+            Collection<String> a_hrefs_noDups = new HashSet<String>();
 
-                String tdText = info.get(i).text();
-
-                if (tdText.matches("^E[0-9]{3,5}")) {
-                    String code = tdText;
-                    String name = info.get(++i).text();
-                    String comments = info.get(++i).text();
-
-                    Predicate<ENumber> codeEquals = (v) -> (v.getCode().equals(code));
-                    Consumer<ENumber> addComment = (e) -> e.setComment(comments);
-                    data.stream()
-                            .filter(codeEquals)
-                            .forEach(addComment);
-
-                    log.info(code + " added");
-                }
-                i++;
+            for (Element a_href : a_hrefs) {
+                a_hrefs_noDups.add(a_href.attr("abs:href")); //If you want to get an absolute URL, there is a attribute key prefix abs:
             }
 
+            for (String a_href : a_hrefs_noDups) {
+
+                doc = Jsoup.connect(a_href).get();
+
+                Element table = doc.select("table:matches(E[0-9]{3,5})").first(); //table, full text of which matches the regex. More info http://jsoup.org/cookbook/extracting-data/selector-syntax
+
+                Elements info = table.select("td"); //all td
+
+                int i = 0;
+
+                while (i < info.size()) {
+
+                    String tdText = info.get(i).text();
+
+                    if (tdText.matches("^E[0-9]{3,5}")) {
+                        String code = tdText;
+                        String name = info.get(++i).text();
+                        String comments = info.get(++i).text();
+
+                        Predicate<ENumber> codeEquals = (v) -> (v.getCode().equals(code));
+                        Consumer<ENumber> addComment = (e) -> e.setComment(comments);
+                        data.stream()
+                                .filter(codeEquals)
+                                .forEach(addComment);
+                    }
+                    i++;
+                }
+            }
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -118,6 +132,38 @@ public class CreateXmlFromHtml {
         }
         return data;
     }
+
+//    private static ArrayList<ENumber> obtain_data_url_2(ArrayList<ENumber> data, String url) {
+//        try {
+//            Document doc = Jsoup.connect(url).get();
+//            Element table = doc.select("table:matches(E[0-9]{3,5})").first(); //table, full text of which matches the regex. More info http://jsoup.org/cookbook/extracting-data/selector-syntax
+//
+//            Elements info = table.select("td"); //all td
+//
+//            int i = 0;
+//            while (i < info.size()) {
+//
+//                String tdText = info.get(i).text();
+//
+//                if (tdText.matches("^E[0-9]{3,5}")) {
+//                    String code = tdText;
+//                    String name = info.get(++i).text();
+//                    String comments = info.get(++i).text();
+//
+//                    Predicate<ENumber> codeEquals = (v) -> (v.getCode().equals(code));
+//                    Consumer<ENumber> addComment = (e) -> e.setComment(comments);
+//                    data.stream()
+//                            .filter(codeEquals)
+//                            .forEach(addComment);
+//                }
+//                i++;
+//            }
+//        }
+//        catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return data;
+//    }
 
     private static ArrayList<ENumber> createData(String url) {
         try {
@@ -217,10 +263,17 @@ public class CreateXmlFromHtml {
 //                                .set(elem.getStatus()).up()
 //                ).apply(dom);
 //            }
+
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes"); //formatting
+            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
+
             Result output = new StreamResult(new File(pathToXml));
+
             Source input = new DOMSource(dom);
+
             transformer.transform(input, output);
+
         } catch (ImpossibleModificationException ime) {
             ime.printStackTrace();
         } catch (IOException e) {
