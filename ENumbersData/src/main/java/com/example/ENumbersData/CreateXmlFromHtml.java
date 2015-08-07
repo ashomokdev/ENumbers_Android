@@ -24,6 +24,8 @@ import java.util.HashSet;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by y.belyaeva on 27.05.2015.
@@ -34,8 +36,10 @@ public class CreateXmlFromHtml {
 
     private static final String pathToXml = "res/raw/base.xml";
     private static final String base_url = "http://en.wikipedia.org/wiki/E_number#E400.E2.80.93E499_.28thickeners.2C_stabilizers.2C_emulsifiers.29";
-    private static final String comments_url_1 = "http://www.additivealert.com.au/search.php?start=10&end=20&count=298&process=previous&flg=0";
-    private static final String comments_url_2 = "http://nac.allergyforum.com/additives/colors100-181.htm";
+    private static final String url_1 = "http://www.additivealert.com.au/search.php?start=10&end=20&count=298&process=previous&flg=0";
+    private static final String url_2 = "http://nac.allergyforum.com/additives/colors100-181.htm";
+    private static final String url3 = "http://apcpage.com/food/e100-e181.htm";
+
 
     public static void main(String[] args) {
         ArrayList<ENumber> list = getENumbersFromHtml(base_url);
@@ -44,47 +48,13 @@ public class CreateXmlFromHtml {
 
     private static ArrayList<ENumber> getENumbersFromHtml(String url) {
         ArrayList<ENumber> data = createData(url);
-        data = addComments_for_url_1(data, comments_url_1);
-        data = addComments_for_url_2(data, comments_url_2);
+        data = addAditionalInfoForURL1(data, url_1);
+        data = addAdditionalInfoForURL2or3(data, url_2);
+        data = addAdditionalInfoForURL2or3(data, url3);
         return data;
     }
 
-
-    private static ArrayList<ENumber> addComments_for_url_1(ArrayList<ENumber> data, String url) {
-        try {
-            Document doc = Jsoup.connect(url).get();
-            Elements tables = doc.select("table.bg1"); //all tables with class bg1
-            for (Element table : tables) {
-                Elements info = table.select("tr.tablebg1"); //all tr with tablebg1 class
-                if (info.size() != 3) {
-                    throw new Exception("Wrond string was selected" + table.text() + "info size = " + info.size());//not interesting line
-                }
-                String code = "E" + info.get(0).select("td").get(1).text();
-                String comment = info.get(1).select("td").get(1).text();
-                Predicate<ENumber> codeEquals = (v) -> (v.getCode().equals(code));
-                Consumer<ENumber> addComment = (e) -> e.setComment(comment);
-                data.stream()
-                        .filter(codeEquals)
-                        .forEach(addComment);
-            }
-
-            try {
-                url = doc.select("td.textto").select("a[href]:matches(Next)").first().attr("abs:href"); //link to the next page, If you want to get an absolute URL, there is a attribute key prefix abs:
-                addComments_for_url_1(data, url);
-            } catch (NullPointerException e) {
-                //next link not found. Stop working.
-                return data;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return data;
-    }
-
-
-    private static ArrayList<ENumber> addComments_for_url_2(ArrayList<ENumber> data, String url) {
+    private static ArrayList<ENumber> addAdditionalInfoForURL2or3(ArrayList<ENumber> data, String url) {
         try {
             Document doc = Jsoup.connect(url).get();
 
@@ -92,6 +62,7 @@ public class CreateXmlFromHtml {
             Elements a_hrefs = doc.select("a[href]:matches([0-9]+)"); // a with href, full text of which matches the regex Any number
 
             Collection<String> a_hrefs_noDups = new HashSet<String>();
+            a_hrefs_noDups.add(url);
 
             for (Element a_href : a_hrefs) {
                 a_hrefs_noDups.add(a_href.attr("abs:href")); //If you want to get an absolute URL, there is a attribute key prefix abs:
@@ -111,16 +82,30 @@ public class CreateXmlFromHtml {
 
                     String tdText = info.get(i).text();
 
-                    if (tdText.matches("^E[0-9]{3,5}")) {
-                        String code = tdText;
-                        String name = info.get(++i).text();
-                        String comments = info.get(++i).text();
+                    if (tdText.matches(".{0,5}E[0-9]{3,5}")) {
 
-                        Predicate<ENumber> codeEquals = (v) -> (v.getCode().equals(code));
-                        Consumer<ENumber> addComment = (e) -> e.setComment(comments);
-                        data.stream()
-                                .filter(codeEquals)
-                                .forEach(addComment);
+                        String codeText = tdText;
+
+                        Matcher matcher = Pattern.compile("E[0-9]{3,5}").
+                                matcher(codeText);
+
+                        if (matcher.find()) {
+                            try {
+                                String code = matcher.group(0);
+
+                                String name = info.get(++i).text();
+                                String comments = info.get(++i).text();
+
+                                Predicate<ENumber> codeEquals = (v) -> (v.getCode().equals(code));
+                                Consumer<ENumber> addComment = (e) -> e.AddAdditionalInfo(comments);
+                                data.stream()
+                                        .filter(codeEquals)
+                                        .forEach(addComment);
+                            } catch
+                                    (Exception e) {
+                                log.info(e.getMessage());
+                            }
+                        }
                     }
                     i++;
                 }
@@ -133,33 +118,85 @@ public class CreateXmlFromHtml {
         return data;
     }
 
-//    private static ArrayList<ENumber> obtain_data_url_2(ArrayList<ENumber> data, String url) {
+
+    private static ArrayList<ENumber> addAditionalInfoForURL1(ArrayList<ENumber> data, String url) {
+        try {
+            Document doc = Jsoup.connect(url).get();
+            Elements tables = doc.select("table.bg1"); //all tables with class bg1
+            for (Element table : tables) {
+                Elements info = table.select("tr.tablebg1"); //all tr with tablebg1 class
+                if (info.size() != 3) {
+                    throw new Exception("Wrond string was selected" + table.text() + "info size = " + info.size());//not interesting line
+                }
+                String code = "E" + info.get(0).select("td").get(1).text();
+                String comment = info.get(1).select("td").get(1).text();
+                Predicate<ENumber> codeEquals = (v) -> (v.getCode().equals(code));
+                Consumer<ENumber> addComment = (e) -> e.AddAdditionalInfo(comment);
+                data.stream()
+                        .filter(codeEquals)
+                        .forEach(addComment);
+            }
+
+            try {
+                url = doc.select("td.textto").select("a[href]:matches(Next)").first().attr("abs:href"); //link to the next page, If you want to get an absolute URL, there is a attribute key prefix abs:
+                addAditionalInfoForURL1(data, url);
+            } catch (NullPointerException e) {
+                //next link not found. Stop working.
+                return data;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+
+//    private static ArrayList<ENumber> addComments_for_url_2(ArrayList<ENumber> data, String url) {
 //        try {
 //            Document doc = Jsoup.connect(url).get();
-//            Element table = doc.select("table:matches(E[0-9]{3,5})").first(); //table, full text of which matches the regex. More info http://jsoup.org/cookbook/extracting-data/selector-syntax
 //
-//            Elements info = table.select("td"); //all td
+//            //getting all pages
+//            Elements a_hrefs = doc.select("a[href]:matches([0-9]+)"); // a with href, full text of which matches the regex Any number
 //
-//            int i = 0;
-//            while (i < info.size()) {
+//            Collection<String> a_hrefs_noDups = new HashSet<String>();
 //
-//                String tdText = info.get(i).text();
-//
-//                if (tdText.matches("^E[0-9]{3,5}")) {
-//                    String code = tdText;
-//                    String name = info.get(++i).text();
-//                    String comments = info.get(++i).text();
-//
-//                    Predicate<ENumber> codeEquals = (v) -> (v.getCode().equals(code));
-//                    Consumer<ENumber> addComment = (e) -> e.setComment(comments);
-//                    data.stream()
-//                            .filter(codeEquals)
-//                            .forEach(addComment);
-//                }
-//                i++;
+//            for (Element a_href : a_hrefs) {
+//                a_hrefs_noDups.add(a_href.attr("abs:href")); //If you want to get an absolute URL, there is a attribute key prefix abs:
 //            }
-//        }
-//        catch (IOException e) {
+//
+//            for (String a_href : a_hrefs_noDups) {
+//
+//                doc = Jsoup.connect(a_href).get();
+//
+//                Element table = doc.select("table:matches(E[0-9]{3,5})").first(); //table, full text of which matches the regex. More info http://jsoup.org/cookbook/extracting-data/selector-syntax
+//
+//                Elements info = table.select("td"); //all td
+//
+//                int i = 0;
+//
+//                while (i < info.size()) {
+//
+//                    String tdText = info.get(i).text();
+//
+//                    if (tdText.matches("^E[0-9]{3,5}")) {
+//                        String code = tdText;
+//                        String name = info.get(++i).text();
+//                        String comments = info.get(++i).text();
+//
+//                        Predicate<ENumber> codeEquals = (v) -> (v.getCode().equals(code));
+//                        Consumer<ENumber> addComment = (e) -> e.AddAdditionalInfo(comments);
+//                        data.stream()
+//                                .filter(codeEquals)
+//                                .forEach(addComment);
+//                    }
+//                    i++;
+//                }
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
 //        return data;

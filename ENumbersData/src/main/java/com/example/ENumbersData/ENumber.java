@@ -9,7 +9,7 @@ public class ENumber {
     private String name = "";
     private String purpose = "";
     private String status = "";
-    private String comment = "";
+    private String additionalInfo = "";
 
     public ENumber(String code, String name, String purpose, String status) {
         this.code = code;
@@ -34,30 +34,58 @@ public class ENumber {
         return status;
     }
 
-    public String getComment() {
-        return comment;
+    public String getAdditionalInfo() {
+        return additionalInfo;
     }
 
-    public void setComment(String _comment) {
-        if (_comment.equals(""))
+    //TODO rename to add_additional_info
+    public void AddAdditionalInfo(String info) {
+        if (info.equals(""))
         {
             return;
         }
 
-        if (_comment.endsWith(". ")) {
+        if (info.endsWith(". ")) {
             //ok
-        } else if (_comment.endsWith(".")) {
-            _comment += " ";
+        } else if (info.endsWith(".")) {
+            info += " ";
         } else {
-            _comment += ". ";
+            info += ". ";
         }
 
-        if (Character.isUpperCase(_comment.charAt(0))) {
+        if (Character.isUpperCase(info.charAt(0))) {
             //ok
         } else {
             //to capitalize the first letter of word in a string
-            _comment = _comment.substring(0, 1).toUpperCase() + _comment.substring(1);
+            info = info.substring(0, 1).toUpperCase() + info.substring(1);
         }
-        this.comment += _comment;
+        this.additionalInfo += info;
     }
+
+    //TODO
+    private void reformatAdditionalInfo()
+    {
+        extractTypicalProducts();
+        extractBadForChildrenItems(); //HACSG , ets
+        deleteDublicateInfo(); //colors ,  not permited, ets
+        addInfoInsteadSeeXXX(); //see 554 should be replaced by text
+    }
+
+    private void addInfoInsteadSeeXXX() {
+
+    }
+
+    private void deleteDublicateInfo() {
+
+    }
+
+    private void extractBadForChildrenItems() {
+    }
+
+    private void extractTypicalProducts() {
+    }
+
+
+
+
 }
