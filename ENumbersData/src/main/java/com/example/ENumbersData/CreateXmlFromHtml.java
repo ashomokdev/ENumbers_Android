@@ -48,9 +48,14 @@ public class CreateXmlFromHtml {
 
     private static ArrayList<ENumber> getENumbersFromHtml(String url) {
         ArrayList<ENumber> data = createData(url);
-        data = addAditionalInfoForURL1(data, url_1);
-        data = addAdditionalInfoForURL2or3(data, url_2);
-        data = addAdditionalInfoForURL2or3(data, url3);
+        addAditionalInfoForURL1(data, url_1);
+        addAdditionalInfoForURL2or3(data, url3);
+        addAdditionalInfoForURL2or3(data, url_2);
+
+        for (ENumber item : data)
+        {
+            item.reformatAdditionalInfo();
+        }
         return data;
     }
 
