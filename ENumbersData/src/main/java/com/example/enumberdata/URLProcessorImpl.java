@@ -1,4 +1,4 @@
-package com.example.ENumbersData;
+package com.example.enumberdata;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -15,12 +15,14 @@ import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.beans.PropertyDescriptor;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -28,38 +30,33 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by y.belyaeva on 27.05.2015.
+ * Created by Iuliia on 08.08.2015.
  */
-public class CreateXmlFromHtml {
-
-    private static Logger log = Logger.getLogger(CreateXmlFromHtml.class.getName());
+public class URLProcessorImpl implements  URLProcessor {
+    private  Logger log = Logger.getLogger(URLProcessorImpl.class.getName());
 
     private static final String pathToXml = "res/raw/base.xml";
-    private static final String base_url = "http://en.wikipedia.org/wiki/E_number#E400.E2.80.93E499_.28thickeners.2C_stabilizers.2C_emulsifiers.29";
-    private static final String url_1 = "http://www.additivealert.com.au/search.php?start=10&end=20&count=298&process=previous&flg=0";
-    private static final String url_2 = "http://nac.allergyforum.com/additives/colors100-181.htm";
-    private static final String url3 = "http://apcpage.com/food/e100-e181.htm";
+    private List<String> urlList;
+    private ENumberService enumberService;
 
-
-    public static void main(String[] args) {
-        ArrayList<ENumber> list = getENumbersFromHtml(base_url);
-        CreateXML(list);
+    public URLProcessorImpl(List<String> urlList) {
+        this.urlList = urlList;
+        enumberService = new ENumberServiceImpl();
     }
 
-    private static ArrayList<ENumber> getENumbersFromHtml(String url) {
-        ArrayList<ENumber> data = createData(url);
-        addAditionalInfoForURL1(data, url_1);
-        addAdditionalInfoForURL2or3(data, url3);
-        addAdditionalInfoForURL2or3(data, url_2);
+    public void init() {
+        ArrayList<ENumber> data = createData(urlList.get(0));
+        addAdditionalInfoForURL1(data, urlList.get(1));
+        addAdditionalInfoForURL2or3(data, urlList.get(3));
+        addAdditionalInfoForURL2or3(data, urlList.get(2));
+        
 
-        for (ENumber item : data)
-        {
-            item.reformatAdditionalInfo();
-        }
-        return data;
+        if (!data.isEmpty())
+            createXML(data);
+
     }
 
-    private static ArrayList<ENumber> addAdditionalInfoForURL2or3(ArrayList<ENumber> data, String url) {
+    private  ArrayList<ENumber> addAdditionalInfoForURL2or3(ArrayList<ENumber> data, String url) {
         try {
             Document doc = Jsoup.connect(url).get();
 
@@ -102,7 +99,7 @@ public class CreateXmlFromHtml {
                                 String comments = info.get(++i).text();
 
                                 Predicate<ENumber> codeEquals = (v) -> (v.getCode().equals(code));
-                                Consumer<ENumber> addComment = (e) -> e.AddAdditionalInfo(comments);
+                                Consumer<ENumber> addComment = (e) -> enumberService.addAdditionalInfo(e, comments);
                                 data.stream()
                                         .filter(codeEquals)
                                         .forEach(addComment);
@@ -124,7 +121,7 @@ public class CreateXmlFromHtml {
     }
 
 
-    private static ArrayList<ENumber> addAditionalInfoForURL1(ArrayList<ENumber> data, String url) {
+    private  ArrayList<ENumber> addAdditionalInfoForURL1(ArrayList<ENumber> data, String url) {
         try {
             Document doc = Jsoup.connect(url).get();
             Elements tables = doc.select("table.bg1"); //all tables with class bg1
@@ -136,7 +133,7 @@ public class CreateXmlFromHtml {
                 String code = "E" + info.get(0).select("td").get(1).text();
                 String comment = info.get(1).select("td").get(1).text();
                 Predicate<ENumber> codeEquals = (v) -> (v.getCode().equals(code));
-                Consumer<ENumber> addComment = (e) -> e.AddAdditionalInfo(comment);
+                Consumer<ENumber> addComment = (e) ->  enumberService.addAdditionalInfo(e, comment);;
                 data.stream()
                         .filter(codeEquals)
                         .forEach(addComment);
@@ -144,7 +141,7 @@ public class CreateXmlFromHtml {
 
             try {
                 url = doc.select("td.textto").select("a[href]:matches(Next)").first().attr("abs:href"); //link to the next page, If you want to get an absolute URL, there is a attribute key prefix abs:
-                addAditionalInfoForURL1(data, url);
+                addAdditionalInfoForURL1(data, url);
             } catch (NullPointerException e) {
                 //next link not found. Stop working.
                 return data;
@@ -158,7 +155,7 @@ public class CreateXmlFromHtml {
     }
 
 
-//    private static ArrayList<ENumber> addComments_for_url_2(ArrayList<ENumber> data, String url) {
+//    private  ArrayList<ENumber> addComments_for_url_2(ArrayList<ENumber> data, String url) {
 //        try {
 //            Document doc = Jsoup.connect(url).get();
 //
@@ -191,7 +188,7 @@ public class CreateXmlFromHtml {
 //                        String comments = info.get(++i).text();
 //
 //                        Predicate<ENumber> codeEquals = (v) -> (v.getCode().equals(code));
-//                        Consumer<ENumber> addComment = (e) -> e.AddAdditionalInfo(comments);
+//                        Consumer<ENumber> addComment = (e) -> e.addAdditionalInfo(comments);
 //                        data.stream()
 //                                .filter(codeEquals)
 //                                .forEach(addComment);
@@ -207,7 +204,7 @@ public class CreateXmlFromHtml {
 //        return data;
 //    }
 
-    private static ArrayList<ENumber> createData(String url) {
+    private  ArrayList<ENumber> createData(String url) {
         try {
             ArrayList<ENumber> result = new ArrayList<ENumber>();
 
@@ -257,7 +254,7 @@ public class CreateXmlFromHtml {
         return null;
     }
 
-    private static void CreateXML(ArrayList<ENumber> data) {
+    private void createXML(ArrayList<ENumber> data) {
         try {
             File xml = new File(pathToXml);
             if (!xml.exists()) {
@@ -332,4 +329,5 @@ public class CreateXmlFromHtml {
             e.printStackTrace();
         }
     }
+    
 }

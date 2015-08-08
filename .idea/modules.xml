@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ENumbersData/ENumbersData.iml" filepath="$PROJECT_DIR$/ENumbersData/ENumbersData.iml" />
       <module fileurl="file://$PROJECT_DIR$/ENumbers_Android_Java_Maven.iml" filepath="$PROJECT_DIR$/ENumbers_Android_Java_Maven.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ENumbersData/src/test/test.iml" filepath="$PROJECT_DIR$/ENumbersData/src/test/test.iml" />
     </modules>
   </component>
 </project>
