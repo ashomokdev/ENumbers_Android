@@ -14,20 +14,22 @@ public class URLProcessorTest extends TestNG {
 
     private URLProcessor urlProcessor;
 
-    @BeforeClass
-    public void init() {
-        urlProcessor = new URLProcessorImpl(Arrays.asList(
-                MainParser.base_url,
-                MainParser.url_1,
-                MainParser.url_2,
-                MainParser.url3));
-    }
+    //TODO nothing to test?
+//    @BeforeClass
+//    public void init() {
+//        urlProcessor = new URLProcessorImpl(Arrays.asList(
+//                MainParser.base_url,
+//                MainParser.url_1,
+//                MainParser.url_2,
+//                MainParser.url3));
+//    }
 
-    @Test
-    public void testInitURLProcessor() {
+//    @Test
+//    public void testInitURLProcessor() {
+//
+//        urlProcessor.init();
+//
+//    }
 
-        urlProcessor.init();
-
-    }
 
 }

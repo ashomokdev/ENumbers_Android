@@ -37,19 +37,21 @@ public class URLProcessorImpl implements  URLProcessor {
 
     private static final String pathToXml = "res/raw/base.xml";
     private List<String> urlList;
-    private ENumberService enumberService;
+    private ENumbersService enumberService;
 
     public URLProcessorImpl(List<String> urlList) {
         this.urlList = urlList;
-        enumberService = new ENumberServiceImpl();
     }
 
+    //TODO rewrite
     public void init() {
         ArrayList<ENumber> data = createData(urlList.get(0));
         addAdditionalInfoForURL1(data, urlList.get(1));
         addAdditionalInfoForURL2or3(data, urlList.get(3));
         addAdditionalInfoForURL2or3(data, urlList.get(2));
-        
+
+        enumberService = new ENumbersServiceImpl(data);
+        enumberService.reformatAdditionalInfo();
 
         if (!data.isEmpty())
             createXML(data);
@@ -96,10 +98,10 @@ public class URLProcessorImpl implements  URLProcessor {
                                 String code = matcher.group(0);
 
                                 String name = info.get(++i).text();
-                                String comments = info.get(++i).text();
+                                String comment = info.get(++i).text();
 
                                 Predicate<ENumber> codeEquals = (v) -> (v.getCode().equals(code));
-                                Consumer<ENumber> addComment = (e) -> enumberService.addAdditionalInfo(e, comments);
+                                Consumer<ENumber> addComment = (e) -> e.AddAdditionalInfo(comment);
                                 data.stream()
                                         .filter(codeEquals)
                                         .forEach(addComment);
@@ -133,7 +135,7 @@ public class URLProcessorImpl implements  URLProcessor {
                 String code = "E" + info.get(0).select("td").get(1).text();
                 String comment = info.get(1).select("td").get(1).text();
                 Predicate<ENumber> codeEquals = (v) -> (v.getCode().equals(code));
-                Consumer<ENumber> addComment = (e) ->  enumberService.addAdditionalInfo(e, comment);;
+                Consumer<ENumber> addComment = (e) ->  e.AddAdditionalInfo(comment);
                 data.stream()
                         .filter(codeEquals)
                         .forEach(addComment);

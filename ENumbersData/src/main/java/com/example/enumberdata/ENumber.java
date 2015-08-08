@@ -50,55 +50,45 @@ public class ENumber {
         return additionalInfo;
     }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
+    public void AddAdditionalInfo(String info) {
+        if (info.equals(""))
+        {
+            return;
+        }
+        else {
 
-    public void setName(String name) {
-        this.name = name;
-    }
+            if (info.endsWith(". ")) {
+                //ok
+            } else if (info.endsWith(".")) {
+                info += " ";
+            } else {
+                info += ". ";
+            }
 
-    public void setPurpose(String purpose) {
-        this.purpose = purpose;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public void setAdditionalInfo(String additionalInfo) {
-        this.additionalInfo = additionalInfo;
+            if (Character.isUpperCase(info.charAt(0))) {
+                //ok
+            } else {
+                //to capitalize the first letter of word in a string
+                info = info.substring(0, 1).toUpperCase() + info.substring(1);
+            }
+            this.additionalInfo += info;
+        }
     }
 
     public String getTypicalProducts() {
         return typicalProducts;
     }
 
-    public void setTypicalProducts(String typicalProducts) {
-        this.typicalProducts = typicalProducts;
-    }
 
     public String getApprovedIn() {
         return approvedIn;
-    }
-
-    public void setApprovedIn(String approvedIn) {
-        this.approvedIn = approvedIn;
     }
 
     public String getBannedIn() {
         return bannedIn;
     }
 
-    public void setBannedIn(String bannedIn) {
-        this.bannedIn = bannedIn;
-    }
-
     public Boolean getBadForChildren() {
         return badForChildren;
-    }
-
-    public void setBadForChildren(Boolean badForChildren) {
-        this.badForChildren = badForChildren;
     }
 }

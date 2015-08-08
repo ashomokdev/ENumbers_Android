@@ -7,54 +7,36 @@ import java.util.HashSet;
 /**
  * Created by Iuliia on 08.08.2015.
  */
-public class ENumberServiceImpl implements ENumberService {
+public class ENumbersServiceImpl implements ENumbersService {
 
-    public void addAdditionalInfo(ENumber  eNumber, String info) {
-        if (info.isEmpty())
-        {
-            return;
-        }
-        else {
+    private Collection<ENumber> data;
 
-            if (info.endsWith(". ")) {
-                //ok
-            } else if (info.endsWith(".")) {
-                info += " ";
-            } else {
-                info += ". ";
-            }
-
-            if (Character.isUpperCase(info.charAt(0))) {
-                //ok
-            } else {
-                //to capitalize the first letter of word in a string
-                info = info.substring(0, 1).toUpperCase() + info.substring(1);
-            }
-            eNumber.getAdditionalInfo().concat(info);
-        }
+    public ENumbersServiceImpl (Collection<ENumber> data)
+    {
+        this.data = data;
     }
 
-    //TODO
-    public void reformatAdditionalInfo(ENumber eNumber)
+    @Override
+    public void reformatAdditionalInfo()
     {
-        extractTypicalProducts(eNumber);
+        extractTypicalProducts();
+
+        //TODO
         extractBadForChildrenItems(); //HACSG , ets
         deleteDublicateInfo(); //colors ,  not permited, ets
         addInfoInsteadSeeXXX(); //see 554 should be replaced by text
     }
 
-    private void addInfoInsteadSeeXXX() {
+    @Override
+    public void extractTypicalProducts() {
 
+        for (ENumber item : data)
+        {
+            extractTypicalProducts(item);
+        }
     }
 
-    private void deleteDublicateInfo() {
-
-    }
-
-    private void extractBadForChildrenItems() {
-    }
-
-    private void extractTypicalProducts(ENumber  eNumber) {
+    public void extractTypicalProducts(ENumber  eNumber) {
         Collection<String> patterns = new HashSet<String>(Arrays.asList(
                 "Typical products include",
                 "Typical products are",
@@ -78,6 +60,19 @@ public class ENumberServiceImpl implements ENumberService {
             }
         }
     }
+    private void addInfoInsteadSeeXXX() {
+
+    }
+
+    private void deleteDublicateInfo() {
+
+    }
+
+    private void extractBadForChildrenItems() {
+    }
+
+
+
 
 
 }
