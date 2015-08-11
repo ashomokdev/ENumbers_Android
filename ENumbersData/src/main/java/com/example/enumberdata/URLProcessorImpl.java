@@ -53,8 +53,9 @@ public class URLProcessorImpl implements  URLProcessor {
         enumberService = new ENumbersServiceImpl(data);
         enumberService.reformatAdditionalInfo();
 
-        if (!data.isEmpty())
+        if (!data.isEmpty()) {
             createXML(data);
+        }
 
     }
 

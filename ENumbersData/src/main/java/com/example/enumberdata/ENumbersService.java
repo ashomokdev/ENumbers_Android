@@ -10,4 +10,6 @@ public interface ENumbersService {
     void reformatAdditionalInfo();
 
     void extractTypicalProducts();
+
+     void extractBannedApproved();
 }

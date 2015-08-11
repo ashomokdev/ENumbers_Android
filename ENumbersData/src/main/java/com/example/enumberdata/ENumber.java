@@ -17,6 +17,11 @@ public class ENumber {
     private String bannedIn;
     private Boolean badForChildren;
 
+
+    public void setBannedIn(String bannedIn) {
+        this.bannedIn = bannedIn;
+    }
+
     public ENumber(String code, String name, String purpose, String status) {
         this.code = code;
         this.name = name;
@@ -49,6 +54,16 @@ public class ENumber {
     public String getAdditionalInfo() {
         return additionalInfo;
     }
+
+
+    public void setTypicalProducts(String typicalProducts) {
+        this.typicalProducts = typicalProducts;
+    }
+
+    public void setAdditionalInfo(String additionalInfo) {
+        this.additionalInfo = additionalInfo;
+    }
+
 
     public void AddAdditionalInfo(String info) {
         if (info.equals(""))
