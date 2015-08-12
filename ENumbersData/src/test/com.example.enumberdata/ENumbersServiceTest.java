@@ -4,6 +4,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 /**
  * Created by Iuliia on 08.08.2015.
@@ -14,6 +15,7 @@ public class ENumbersServiceTest {
 
     private ArrayList<ENumber> eNumbers;
     private ENumbersServiceImpl eNumberService;
+    private Logger log = Logger.getLogger(ENumbersServiceTest.class.getName());
 
     @BeforeClass
     public void init() {
@@ -113,8 +115,8 @@ public class ENumbersServiceTest {
             {
                 assert (!item.getAdditionalInfo().contains(item.getTypicalProducts()));
             }
-//            System.out.println(item.getAdditionalInfo());
-//            System.out.println(item.getTypicalProducts());
+//            log.info(item.getAdditionalInfo());
+//            log.info(item.getTypicalProducts());
         }
     }
 
@@ -123,10 +125,12 @@ public class ENumbersServiceTest {
     {
         eNumberService.extractBannedApproved();
         for (ENumber item : eNumbers) {
-            assert (!item.getApprovedIn().isEmpty());
-            assert (!item.getApprovedIn().contains(item.getApprovedIn()));
-            System.out.println(item.getAdditionalInfo());
-            System.out.println(item.getTypicalProducts());
+            if (!item.getBannedIn().isEmpty());
+            {
+//                assert (!item.getAdditionalInfo().contains(item.getBannedIn()));
+            }
+            log.info(item.getAdditionalInfo());
+            log.info(item.getBannedIn());
         }
     }
 }

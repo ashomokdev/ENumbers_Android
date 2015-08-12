@@ -58,23 +58,51 @@ public class ENumbersServiceImpl implements ENumbersService {
                             indexPatternStart + pattern.length(), //after pattern
                             indexSubstringEnd); //before "."
 
-                    if (substring.length() > bannedIn.length()) {
+                    int allWordsAmount = getAllWordsCount(substring);
+                    int amountOfCountries = getAmountOfCapitalLetters(substring);
 
-                        bannedIn = substring;
-                        eNumber.setBannedIn(bannedIn);
+                    if (allWordsAmount > 0 &&
+                            50 < 100 * amountOfCountries / allWordsAmount) { //words with name of country more than 50%
+                        if (substring.length() > bannedIn.length())
+                        {
+
+                            bannedIn = substring;
+                            eNumber.setBannedIn(bannedIn);
+                        }
+
+                        String patternWithSubstring = eNumber.getAdditionalInfo().substring(
+                                indexPatternStart, //from pattern
+                                indexSubstringEnd + 1); //with "."
+
+                        //cut typical products from AdditionalInfo
+                        eNumber.setAdditionalInfo(eNumber.getAdditionalInfo().replace(patternWithSubstring, ""));
                     }
-
-                    String patternWithSubstring = eNumber.getAdditionalInfo().substring(
-                            indexPatternStart, //from pattern
-                            indexSubstringEnd + 1); //with "."
-
-                    //cut typical products from AdditionalInfo
-                    eNumber.setAdditionalInfo(eNumber.getAdditionalInfo().replace(patternWithSubstring, ""));
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private int getAllWordsCount(String substring) {
+        if (substring.isEmpty())
+            return 0;
+        return substring.split("\\W+").length;
+    }
+
+    private int getAmountOfCapitalLetters(String substring) {
+        int result = 0;
+        if (substring.isEmpty()) {
+            return 0;
+        } else {
+            String[] words = substring.split("\\W+");
+            for (String word : words) {
+                if (Character.isUpperCase(word.charAt(0))) {
+                    result++;
+                }
+            }
+        }
+        return result;
     }
 
     //TODO ??? add "used in"
