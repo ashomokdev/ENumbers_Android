@@ -73,6 +73,15 @@ public class ENumbersServiceTest {
                 " destroys vitamin B1, typical products are beer, soft drinks, dried fruit, juices, cordials, " +
                 "wine, vinegar, potato products. ");
 
+        ENumber eNumberE230 = new ENumber(
+                "E230",
+                "Biphenyl, diphenyl",
+                "preservative",
+                "Approved in the EU.");
+        eNumberE230.AddAdditionalInfo("An antifungal derivative of benzene, used to inhibit the growth of mould" +
+                " on citrus fruits. Typical products include oranges, lemons, grapefruits. Banned in Australia. " +
+                "Not permitted in Australia, can be used for agricultural purposes, typical products are citrus fruit. ");
+
         ENumber eNumberE332 = new ENumber(
                 "E332",
                 "Potassium citrates (i) Monopotassium citrate (ii) Potassium citrate (tripotassium citrate)",
@@ -97,12 +106,13 @@ public class ENumbersServiceTest {
                 " a possible carcinogen.� Typically used in flour products. Large quantities can cause nausea, vomiting," +
                 " diarrhoea, pain. Typical products are flour products. ");
 
-
-        eNumbers.add(eNumberE100);
-        eNumbers.add(eNumberE102);
-        eNumbers.add(eNumberE220);
-        eNumbers.add(eNumberE332);
-        eNumbers.add(eNumberE924);
+//
+//        eNumbers.add(eNumberE100);
+//        eNumbers.add(eNumberE102);
+//        eNumbers.add(eNumberE220);
+        eNumbers.add(eNumberE230);
+//        eNumbers.add(eNumberE332);
+//        eNumbers.add(eNumberE924);
         eNumberService = new ENumbersServiceImpl(eNumbers);
     }
 
@@ -128,9 +138,10 @@ public class ENumbersServiceTest {
             if (! item.getBannedIn().isEmpty())
             {
 
-               assert (!item.getAdditionalInfo().contains(item.getBannedIn()));
+               assert (!item.getAdditionalInfo().contains(item.getBannedIn())); //e230 exception
             }
-           // log.info(item.getCode() + "\n" + item.getAdditionalInfo()  + "\n" + item.getBannedIn());
+            log.info(item.getCode() + "\n" + item.getAdditionalInfo()  + "\n" + item.getBannedIn());
+            log.info(item.getCode() + "\n" + item.getStatus()  + "\n" + item.getApprovedIn());
         }
     }
 }

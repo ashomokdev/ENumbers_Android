@@ -47,7 +47,7 @@ public class ENumbersServiceImpl implements ENumbersService {
                     int indexSubstringEnd = eNumber.getAdditionalInfo().toLowerCase().indexOf(".", indexPatternStart);
 
                     if (indexPatternStart < 0 || indexSubstringEnd < 0) {
-                        throw new Exception("Wrong index, index < 0.");
+                        throw new Exception("Wrong index, index < 0."); //error here
                     }
 
                     if (indexPatternStart > indexSubstringEnd) {
@@ -162,7 +162,7 @@ public class ENumbersServiceImpl implements ENumbersService {
 
         for (ENumber item : data) {
             extractTypicalProducts(item);
-            log.info(item.getCode() + " TypicalProducts extracted");
+//            log.info(item.getCode() + " TypicalProducts extracted");
         }
     }
 
@@ -172,16 +172,69 @@ public class ENumbersServiceImpl implements ENumbersService {
         for (ENumber item : data) {
 
             extractBannedIn(item);
-            log.info(item.getCode() + " BannedIn extracted");
+//            log.info(item.getCode() + " BannedIn extracted");
 
             extractApprovedIn(item);
             log.info(item.getCode() + " ApprovedIn extracted");
         }
     }
 
-    private void extractApprovedIn(ENumber item) {
+    //TODO may be one method with extractBannedIn
+    private void extractApprovedIn(ENumber eNumber) {
 //1. extract from status
+        try {
+            Collection<String> patterns = new HashSet<String>(Arrays.asList(
+                    "approved in "
+            ));
 
+                for (String pattern : patterns) {
+                    String approvedIn = eNumber.getApprovedIn();
+                    while (eNumber.getStatus().toLowerCase().contains(pattern)) {
+
+                        int indexPatternStart = eNumber.getStatus().toLowerCase().indexOf(pattern);
+                        int indexSubstringEnd = eNumber.getStatus().toLowerCase().indexOf(".", indexPatternStart);
+
+                        if (indexPatternStart < 0 || indexSubstringEnd < 0) {
+                            throw new Exception("Wrong index, index < 0.");
+                        }
+
+                        if (indexPatternStart > indexSubstringEnd) {
+                            throw new Exception("Wrong index, indexPatternStart > indexSubstringEnd");
+                        }
+
+                        String substring = eNumber.getStatus().substring(
+                                indexPatternStart + pattern.length(), //after pattern
+                                indexSubstringEnd); //before "."
+
+                        int allWordsAmount = getAllWordsCount(substring);
+                        int amountOfCountries = getAmountOfCapitalLetters(substring);
+
+                        if (allWordsAmount > 0 &&
+                                30 < 100 * amountOfCountries / allWordsAmount) { //words with name of country more than 30%
+                            if (substring.length() > approvedIn.length())
+                            {
+
+                                approvedIn = substring;
+                                eNumber.setApprovedIn(approvedIn);
+                            }
+
+                            String patternWithSubstring = eNumber.getStatus().substring(
+                                    indexPatternStart, //from pattern
+                                    indexSubstringEnd + 1); //with "."
+
+                            //cut approvedIn info from Status
+                            eNumber.setStatus(eNumber.getStatus().replace(patternWithSubstring, ""));
+                        }
+                        else
+                        {
+                            //don't cut approvedIn info from Status
+                            break;
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
     }
 
 

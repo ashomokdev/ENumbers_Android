@@ -9,10 +9,20 @@ public class ENumber {
     private String code;
     private String name;
     private String purpose;
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     private String status;
 
     private String additionalInfo;
     private String typicalProducts;
+
+    public void setApprovedIn(String approvedIn) {
+        this.approvedIn = approvedIn;
+    }
+
     private String approvedIn;
     private String bannedIn;
     private Boolean badForChildren;
