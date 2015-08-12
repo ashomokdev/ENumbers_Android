@@ -50,15 +50,16 @@ App_Data/
 Uploads/
 !Example/
 
-# Privacy Policy of the Company #
-#################################
-Interop.FCEngine.dll
-FlexiCaptureProcessorsPool.cs
-Config.cs
+# IDE files #
+#############
+.idea/workspace.xml
+.idea/libraries/Maven*.xml
+.idea/compiler.xml
+.idea/modules.xml
+.idea/vcs.xml
 
 # Other #
 #########
 .svn/
-.idea/workspace.xml
-.idea/libraries/Maven*
 pom.xml
+
