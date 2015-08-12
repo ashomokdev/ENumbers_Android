@@ -81,8 +81,8 @@ public class ENumbersServiceTest {
         eNumberE332.AddAdditionalInfo("(i) Monopotassium citrate is the potassium salt of citric acid, E330, and is " +
                 "used as an antioxidant in food as well as to improve the effects of other antioxidants. It is also " +
                 "used as an acidity regulator and sequestrant. Typical products include gelatine products, jam, " +
-                "sweets, ice cream, carbonated beverages, milk powder, wine, processed cheeses.  (ii) Tripotassium " +
-                "citrate  is the potassium salt of citric acid, E330, and is used as an antioxidant in food as well " +
+                "sweets, ice cream, carbonated beverages, milk powder, wine, processed cheeses.ï¿½ (ii) Tripotassium " +
+                "citrateï¿½ is the potassium salt of citric acid, E330, and is used as an antioxidant in food as well " +
                 "as to improve the effects of other antioxidants. It is also used as an acidity regulator and " +
                 "sequestrant. Typical products include gelatine products, jam, sweets, ice cream, carbonated " +
                 "beverages, milk powder, wine, processed cheeses. No known adverse effects. ");
@@ -94,7 +94,7 @@ public class ENumbersServiceTest {
                 "Approved in the EU.");
         eNumberE924.AddAdditionalInfo("Large quantities can cause nausea, vomiting, diarrhoea, abdominal pain, kidney " +
                 "damage and failure. The WHO in 1993 said that this ingredient is no longer acceptable for use as it is" +
-                " a possible carcinogen.  Typically used in flour products. Large quantities can cause nausea, vomiting," +
+                " a possible carcinogen.ï¿½ Typically used in flour products. Large quantities can cause nausea, vomiting," +
                 " diarrhoea, pain. Typical products are flour products. ");
 
 
@@ -113,10 +113,10 @@ public class ENumbersServiceTest {
         for (ENumber item : eNumberService.getData()) {
             if (!item.getTypicalProducts().isEmpty())
             {
-                assert (!item.getAdditionalInfo().contains(item.getTypicalProducts()));
+
+               assert (!item.getAdditionalInfo().contains(item.getTypicalProducts()));
             }
-//            log.info(item.getAdditionalInfo());
-//            log.info(item.getTypicalProducts());
+            //log.info(item.getCode() + "\n" + item.getAdditionalInfo()  + "\n" + item.getTypicalProducts());
         }
     }
 
@@ -124,13 +124,13 @@ public class ENumbersServiceTest {
     public void testExtractBannedApproved()
     {
         eNumberService.extractBannedApproved();
-        for (ENumber item : eNumbers) {
-            if (!item.getBannedIn().isEmpty());
+        for (ENumber item : eNumberService.getData()) {
+            if (! item.getBannedIn().isEmpty())
             {
-//                assert (!item.getAdditionalInfo().contains(item.getBannedIn()));
+
+               assert (!item.getAdditionalInfo().contains(item.getBannedIn()));
             }
-            log.info(item.getAdditionalInfo());
-            log.info(item.getBannedIn());
+           // log.info(item.getCode() + "\n" + item.getAdditionalInfo()  + "\n" + item.getBannedIn());
         }
     }
 }

@@ -200,10 +200,10 @@
             <typicalProducts/>
         </eNumber>
         <eNumber>
-            <additionalInfo>Suspected carcinogen, linked to thyroid abnormality, brain dsyfunction, hyperactivity, light sensitivity.  FD&amp;C Red No:3; Coal tar dye; Polycyclic Aromatic Hydrocarbon. Artificial red colour used in cherries, strawberries and rhubarb, packet deserts, biscuits, cakes, spreads and pates, processed cooked meat, canned fruit, custard mix, sweets, bakery, snack foods; can cause sensitivity to light and learning difficulties; can increase thyroid hormone levels and lead to hyperthyroidism, was shown to cause thyroid cancer in rats in a study in 1990. Is also used in printing inks, as a biological stain, and for extraction-photometric determination of K, Cd, Pb, Mn, Zn, Ag. It also serves as an adsorption and fluorescent indicator, a dental plaque disclosing agent and a radiopaque medium. It has been suggested that erythrosine may affect thyroid activity due the presence of iodine in the molecule which may be released upon degradation, and that erythrosine may be carcinogenic. Used as an ingredient to kill maggot lava and flies.  Might increase thyroid hormone levels and lead to hyperthyroidism. Can cause sensitivity to light.  </additionalInfo>
+            <additionalInfo>Suspected carcinogen, linked to thyroid abnormality, brain dsyfunction, hyperactivity, light sensitivity.  FD&amp;C Red No:3; Coal tar dye; Polycyclic Aromatic Hydrocarbon. Artificial red colour used in cherries, strawberries and rhubarb, packet deserts, biscuits, cakes, spreads and pates, processed cooked meat, canned fruit, custard mix, sweets, bakery, snack foods; can cause sensitivity to light and learning difficulties; can increase thyroid hormone levels and lead to hyperthyroidism, was shown to cause thyroid cancer in rats in a study in 1990. Is also used in printing inks, as a biological stain, and for extraction-photometric determination of K, Cd, Pb, Mn, Zn, Ag. It also serves as an adsorption and fluorescent indicator, a dental plaque disclosing agent and a radiopaque medium. It has been suggested that erythrosine may affect thyroid activity due the presence of iodine in the molecule which may be released upon degradation, and that erythrosine may be carcinogenic. Used as an ingredient to kill maggot lava and flies. Banned in January 1990, but not recalled by the US FDA**;  Red color, the HACSG* recommends to avoid it. Might increase thyroid hormone levels and lead to hyperthyroidism. Can cause sensitivity to light.  </additionalInfo>
             <approvedIn/>
             <badForChildren>false</badForChildren>
-            <bannedIn>January 1990, but not recalled by the US FDA**;  Red color, the HACSG* recommends to avoid it</bannedIn>
+            <bannedIn>Norway</bannedIn>
             <code>E127</code>
             <name>Erythrosine (FD&amp;C Red 3)</name>
             <purpose>Color Red</purpose>
@@ -662,10 +662,10 @@
             <typicalProducts>fish and meat pastes, packet desserts, soups</typicalProducts>
         </eNumber>
         <eNumber>
-            <additionalInfo>New to standards, previously   Aluminium is a naturally occurring element, present in a normal healthy diet. It is used in food as a metallic surface coating. There is evidence that aluminium accumulation in body cells could be toxic and linked to Parkinson-type diseases, or that skeletal deformations could occur. Pure aluminium is a silvery-white metal that is capable of taking a high polish, has high thermal and electrical conductivity, has excellent corrosion resistance, is non-magnetic, malleable and ductile. It is the most commonly occurring metal in the earth's crust (8.3% by weight), and as well as being used in the food industry, is also used in the construction and aerospace industries, in aerosol cans and foil. Production of Al metal involves the following: (i) extraction, purification and dehydration of bauxite; (ii) the electrolysis of Al2O3 dissolved in molten cryolite.   Not currently listed for use in Australia. Avoid it. Suspect of being a neurotoxic hazard and been linked to osteoporosis.  </additionalInfo>
+            <additionalInfo>New to standards, previously  Banned in other countries. Aluminium is a naturally occurring element, present in a normal healthy diet. It is used in food as a metallic surface coating. There is evidence that aluminium accumulation in body cells could be toxic and linked to Parkinson-type diseases, or that skeletal deformations could occur. Pure aluminium is a silvery-white metal that is capable of taking a high polish, has high thermal and electrical conductivity, has excellent corrosion resistance, is non-magnetic, malleable and ductile. It is the most commonly occurring metal in the earth's crust (8.3% by weight), and as well as being used in the food industry, is also used in the construction and aerospace industries, in aerosol cans and foil. Production of Al metal involves the following: (i) extraction, purification and dehydration of bauxite; (ii) the electrolysis of Al2O3 dissolved in molten cryolite.   Not currently listed for use in Australia. Avoid it. Suspect of being a neurotoxic hazard and been linked to osteoporosis.  </additionalInfo>
             <approvedIn/>
             <badForChildren>false</badForChildren>
-            <bannedIn>other countries</bannedIn>
+            <bannedIn>Australia</bannedIn>
             <code>E173</code>
             <name>Aluminium</name>
             <purpose>Color Silver to grey</purpose>
@@ -673,10 +673,10 @@
             <typicalProducts>sugar coated flour confectionery, silver coated tablets</typicalProducts>
         </eNumber>
         <eNumber>
-            <additionalInfo>New to standards, previously   Silver is used in food to give a metallic surface colour. However prolonged consumption may lead to argyria, a blue-grey skin. The greatest source of silver now is as a by product in the manufacture of non-ferrous metals such as Cu, Pb, Zn. Silver is usually obtained from crushed silver bearing ore. The actual method of recovery from the ore depends on which metal is predominant in the ore but normally ends by electrolysis using one of two techniques, either the Moebius or Thum Balbach systems. Silver is used extensively in the photographic industry, as well as in silverware and jewellery, electrically, for silvering mirrors and in batteries.   Long regular use can lead to blue-grey skin (this is not dangerous). Avoid it.  </additionalInfo>
+            <additionalInfo>New to standards, previously  Banned in other countries. Silver is used in food to give a metallic surface colour. However prolonged consumption may lead to argyria, a blue-grey skin. The greatest source of silver now is as a by product in the manufacture of non-ferrous metals such as Cu, Pb, Zn. Silver is usually obtained from crushed silver bearing ore. The actual method of recovery from the ore depends on which metal is predominant in the ore but normally ends by electrolysis using one of two techniques, either the Moebius or Thum Balbach systems. Silver is used extensively in the photographic industry, as well as in silverware and jewellery, electrically, for silvering mirrors and in batteries.  Not permitted in Australia prior to 1992. Long regular use can lead to blue-grey skin (this is not dangerous). Avoid it. Not permitted in Australia. </additionalInfo>
             <approvedIn/>
             <badForChildren>false</badForChildren>
-            <bannedIn>Australia prior to 1992</bannedIn>
+            <bannedIn>Australia</bannedIn>
             <code>E174</code>
             <name>Silver</name>
             <purpose>Color Silver</purpose>
@@ -684,10 +684,10 @@
             <typicalProducts>sugar coated flour confectionery</typicalProducts>
         </eNumber>
         <eNumber>
-            <additionalInfo>New to standards, previously   Gold is used in food to give a metallic surface colour which is very unreactive, however it is also very expensive. Gold is produced by crushing gold-containing rock, the grains of gold are then extracted either by the cyanide process or by amalgamation with mercury. Gold is used to settle international debts, but other uses include manufacture of jewellery, in dentistry, the electronics industry and in the aerospace industry.  Not listed for use in Australia. Avoid it.  </additionalInfo>
+            <additionalInfo>New to standards, previously  Banned in other countries. Gold is used in food to give a metallic surface colour which is very unreactive, however it is also very expensive. Gold is produced by crushing gold-containing rock, the grains of gold are then extracted either by the cyanide process or by amalgamation with mercury. Gold is used to settle international debts, but other uses include manufacture of jewellery, in dentistry, the electronics industry and in the aerospace industry.  Not listed for use in Australia. Avoid it.  </additionalInfo>
             <approvedIn/>
             <badForChildren>false</badForChildren>
-            <bannedIn>other countries</bannedIn>
+            <bannedIn>Australia</bannedIn>
             <code>E175</code>
             <name>Gold</name>
             <purpose>Color Gold</purpose>
@@ -1025,10 +1025,10 @@
             <typicalProducts>oranges, lemons, grapefruits, other citrus fruits</typicalProducts>
         </eNumber>
         <eNumber>
-            <additionalInfo>Thiabendazole is used as a preservative in food, but it is also a fungicide and used in the veterinary profession. Can be used for agricultural purposes,  Also used as a medical treatment for some conditions, resulting in 30% of patients suffering from anorexia, nausea, vomiting and vertigo.   </additionalInfo>
+            <additionalInfo>Thiabendazole is used as a preservative in food, but it is also a fungicide and used in the veterinary profession. Can be used for agricultural purposes,  Also used as a medical treatment for some conditions, resulting in 30% of patients suffering from anorexia, nausea, vomiting and vertigo.  Not permitted in Australia, can be used for agricultural purposes, typical products arecitrus fruits, apples, pears, potatoes, bananas, mushrooms, meat, milk. </additionalInfo>
             <approvedIn/>
             <badForChildren>false</badForChildren>
-            <bannedIn>Australia, can be used for agricultural purposes, typical products arecitrus fruits, apples, pears, potatoes, bananas, mushrooms, meat, milk</bannedIn>
+            <bannedIn>Australia</bannedIn>
             <code>E233</code>
             <name>Thiabendazole</name>
             <purpose>preservative</purpose>
@@ -1124,10 +1124,10 @@
             <typicalProducts/>
         </eNumber>
         <eNumber>
-            <additionalInfo>Behavioural problems, asthma, breathing difficulties, headaches, dizziness, possible carcinogen. Prohibited in foods for infants and young children. Potassium nitrite is the potassium salt of nitrous acid and is used as a curing agent and preservative in meat. Excessive ingestion may result in such high concentrations of nitrites in the bloodstream that reduced concentrations of oxygen are carried by haemoglobin in red blood cells, resulting in shortness of breath, dizziness and headaches. Nitrites may also form nitrosamines in the stomach, thought to be carcinogenic agents. Potassium nitrite inhibits the growth of bacteria responsible for botulism, retards development of rancidity, and preserves flavours. Less than 10% of nitrate (nitrite) intake is from cured meats, with the rest coming from mainly root vegetables.   Other names: nitrous acid potassium salt. Not permitted in foods for young children, may cause dizzynesss, headaches, difficult breathing,potential carcinogen,  </additionalInfo>
+            <additionalInfo>Behavioural problems, asthma, breathing difficulties, headaches, dizziness, possible carcinogen. Prohibited in foods for infants and young children. Potassium nitrite is the potassium salt of nitrous acid and is used as a curing agent and preservative in meat. Excessive ingestion may result in such high concentrations of nitrites in the bloodstream that reduced concentrations of oxygen are carried by haemoglobin in red blood cells, resulting in shortness of breath, dizziness and headaches. Nitrites may also form nitrosamines in the stomach, thought to be carcinogenic agents. Potassium nitrite inhibits the growth of bacteria responsible for botulism, retards development of rancidity, and preserves flavours. Less than 10% of nitrate (nitrite) intake is from cured meats, with the rest coming from mainly root vegetables.  Not permitted in foods for infant and young children. Other names: nitrous acid potassium salt. Not permitted in foods for young children, may cause dizzynesss, headaches, difficult breathing,potential carcinogen,  </additionalInfo>
             <approvedIn/>
             <badForChildren>false</badForChildren>
-            <bannedIn>foods for infant and young children</bannedIn>
+            <bannedIn/>
             <code>E249</code>
             <name>Potassium nitrite</name>
             <purpose>preservative</purpose>
@@ -1465,10 +1465,10 @@
             <typicalProducts>synthetically vitamin enriched foods, processed meat products</typicalProducts>
         </eNumber>
         <eNumber>
-            <additionalInfo>Suspected carcinogen, asthmatics and aspirin sensitive people should avoid, liver damage, skin irritiations. Prohibited in food for infants and young children as linked to blood disorder. Used to prevent rancidity in oily substances; derived from nutgalls; may cause gastric or skin irritation, gallates are  It is used as an antioxidant in food, often with BHT (E321) and BHA (E320), although it has limited use as it is unstable at high temperatures. Not permitted in foods for infants and young children, may cause gastric or skin irritation,  </additionalInfo>
+            <additionalInfo>Suspected carcinogen, asthmatics and aspirin sensitive people should avoid, liver damage, skin irritiations. Prohibited in food for infants and young children as linked to blood disorder. Used to prevent rancidity in oily substances; derived from nutgalls; may cause gastric or skin irritation, gallates are not permitted in foods for infants and small children because of their known tendency to cause the blood disorder, methemoglobinemia; used in oils, margarine, lard and salad dressings, sometimes used in packaging. It is used as an antioxidant in food, often with BHT (E321) and BHA (E320), although it has limited use as it is unstable at high temperatures. Not permitted in foods for infants and young children, may cause gastric or skin irritation,  </additionalInfo>
             <approvedIn/>
             <badForChildren>false</badForChildren>
-            <bannedIn>foods for infants and small children because of their known tendency to cause the blood disorder, methemoglobinemia; used in oils, margarine, lard and salad dressings, sometimes used in packaging</bannedIn>
+            <bannedIn/>
             <code>E310</code>
             <name>Propyl gallate</name>
             <purpose>antioxidant</purpose>
@@ -1575,10 +1575,10 @@
             <typicalProducts>dairy blend edible fats and oils, margarine, dripping, salad dressing, lipsticks</typicalProducts>
         </eNumber>
         <eNumber>
-            <additionalInfo>Serious concerns about carcinogenic and estrogenic effects, asthmatics and aspirin sensitive people should avoid, causes metabolic changes and accumulates in body fat.  It is widely used as an antioxidant and preservative, and is prepared from p-methoxyphenol and isobutene. BHA can be used in baked products as it is stable at high temperatures, it is mainly used to prevent rancidity in fats and oils.  Other names: tert-butyl-4-hydroxyanisole, tert-butyl-4-methoxyphenol, BOA, (1,1-dimethylethyl)-4-methoxyphenol. The HACSG* recommends to avoid it.   </additionalInfo>
+            <additionalInfo>Serious concerns about carcinogenic and estrogenic effects, asthmatics and aspirin sensitive people should avoid, causes metabolic changes and accumulates in body fat. Banned in Japan in 1958 -Not permitted in foods for infants and young children. Petroleum derivative, BHA is a synthetic analogue of vitamin E and operates by reducing oxygen radicals and interrupting the propagation of oxidation processes. It is widely used as an antioxidant and preservative, and is prepared from p-methoxyphenol and isobutene. BHA can be used in baked products as it is stable at high temperatures, it is mainly used to prevent rancidity in fats and oils.  Other names: tert-butyl-4-hydroxyanisole, tert-butyl-4-methoxyphenol, BOA, (1,1-dimethylethyl)-4-methoxyphenol. The HACSG* recommends to avoid it. Not permitted in foods for infants or young children.  </additionalInfo>
             <approvedIn/>
             <badForChildren>false</badForChildren>
-            <bannedIn>Japan in 1958 - Petroleum derivative, BHA is a synthetic analogue of vitamin E and operates by reducing oxygen radicals and interrupting the propagation of oxidation processes</bannedIn>
+            <bannedIn/>
             <code>E320</code>
             <name>Butylated hydroxyanisole (BHA)</name>
             <purpose>antioxidant</purpose>
@@ -1586,10 +1586,10 @@
             <typicalProducts>biscuits, cakes, fats and oils, cereals, pastry and pastry products, sweets, edible oils, chewing gum, fats, margarine, nuts, instant potato products, polyethylene food wraps; not permitted in infant foods, can provoke an allergic reaction in some people, may trigger hyperactivity and other intolerances; serious concerns over carcinogenicity and estrogenic effects, in large doses caused tumours in lab animals, banned in Japan in 1958, official committees of experts recommended that it be banned in the UK, however due to industry pressure it was not banned, McDonald's eliminated BHT from their US products by 1986</typicalProducts>
         </eNumber>
         <eNumber>
-            <additionalInfo>Suspected carcinogen, asthmatics and aspirin sensitive people should avoid, skin irritation. Prohibited in foods for infants and young children. Petroleum derivative; BHT is a synthetic analogue of vitamin E and operates by reducing oxygen radicals and interrupting the propagation of oxidation processes. It is widely used as an antioxidant and preservative, and is prepared from p-cresol and isobutylene. It is one of the most commonly used antioxidants for food oils and fats and is much cheaper than BHA although it has more limited applications due to instability at high temperatures. There is evidence that BHT causes cell division. see 320. Other names: 2,6-di-tert-butyl-4-methylphenol, 2,6-bis(1,1-dimethylethyl)-4-methylphenol. The HACSG* recommend to avoid it.   </additionalInfo>
+            <additionalInfo>Suspected carcinogen, asthmatics and aspirin sensitive people should avoid, skin irritation. Prohibited in foods for infants and young children. Petroleum derivative; BHT is a synthetic analogue of vitamin E and operates by reducing oxygen radicals and interrupting the propagation of oxidation processes. It is widely used as an antioxidant and preservative, and is prepared from p-cresol and isobutylene. It is one of the most commonly used antioxidants for food oils and fats and is much cheaper than BHA although it has more limited applications due to instability at high temperatures. There is evidence that BHT causes cell division. see 320. Other names: 2,6-di-tert-butyl-4-methylphenol, 2,6-bis(1,1-dimethylethyl)-4-methylphenol. The HACSG* recommend to avoid it. Not permitted in foods for infants or young children.  </additionalInfo>
             <approvedIn/>
             <badForChildren>false</badForChildren>
-            <bannedIn>foods for infants or young children</bannedIn>
+            <bannedIn/>
             <code>E321</code>
             <name>Butylated hydroxytoluene (BHT)</name>
             <purpose>antioxidant</purpose>
@@ -1773,10 +1773,10 @@
             <typicalProducts>meat and cheese products, jams, margarine</typicalProducts>
         </eNumber>
         <eNumber>
-            <additionalInfo>Neurotoxicity, eye and skin irritant,large doses can lead to adicosis and hypocalcaemia. Orthophosphoric acid can only be obtained pure in the crystalline state and slowly undergoes dehydration to diphosphoric acid. Crystalline phosphoric acid has a hydrogen-bonded layer structure in which each molecule is attached to 6 others. Impure phosphoric acid has its main application in fertilisers, and also in the synthesis of pure phosphoric acid. In turn pure phosphoric acid is used in food, detergents, pharmaceuticals and metal treatment (e.g. pickling, cleaning, rust-proofing, polishing). Car bodies and electrical appliances are all protected against rust and blistering by the presence of a phosphatised undercoat. Phosphoric acid is used in the production of activated carbon, and may be used in soft drinks to give a sour taste. "Thermal" phosphoric acid is made by oxidation of phosphorus in the presence of water vapour whilst "wet" acid is made by treating rock phosphate with sulphuric acid. Phosphoric acid is added to food to enhance the antioxidant effects of other compounds present, and also as an acidity regulator.  Too much in diet leads to loss of calcium in bones and onset of osteoporosis.  In fizzy drinks it allows more carbon dioxide concentration without bottle burst.  Soft drinks, beer, cheese products, snacks, and most processed foods. Other names: orthophosphoric acid. Phosphoric acid is  Phosphoric acid is a highly acidic ingredient in cola drinks, used to offset the extreme sweetness. The way the kidneys excrete it is by bonding it with calcium taken from the bones, which can then leave the bones porous and brittle, and increase the risk of osteoporosis. A study, published in the Archives of Paediatric and Adolescent Medicine in 2000, showed that athletic teenage girls who consume cola drinks have been found to have five times the risk of bone fractures of those athletic girls who do not consume cola drinks. Acceptable Daily Intake: Up to 70 mg/kg body weight. Phosphoric acid and phosphates can normally be consumed by all religious groups, vegans and vegetarians. Although animal bones are mainly made up of phosphates, commercial phosphate is not made from bones. No known adverse effects. </additionalInfo>
+            <additionalInfo>Neurotoxicity, eye and skin irritant,large doses can lead to adicosis and hypocalcaemia. Orthophosphoric acid can only be obtained pure in the crystalline state and slowly undergoes dehydration to diphosphoric acid. Crystalline phosphoric acid has a hydrogen-bonded layer structure in which each molecule is attached to 6 others. Impure phosphoric acid has its main application in fertilisers, and also in the synthesis of pure phosphoric acid. In turn pure phosphoric acid is used in food, detergents, pharmaceuticals and metal treatment (e.g. pickling, cleaning, rust-proofing, polishing). Car bodies and electrical appliances are all protected against rust and blistering by the presence of a phosphatised undercoat. Phosphoric acid is used in the production of activated carbon, and may be used in soft drinks to give a sour taste. "Thermal" phosphoric acid is made by oxidation of phosphorus in the presence of water vapour whilst "wet" acid is made by treating rock phosphate with sulphuric acid. Phosphoric acid is added to food to enhance the antioxidant effects of other compounds present, and also as an acidity regulator.  Too much in diet leads to loss of calcium in bones and onset of osteoporosis.  In fizzy drinks it allows more carbon dioxide concentration without bottle burst.  Soft drinks, beer, cheese products, snacks, and most processed foods. Other names: orthophosphoric acid. Phosphoric acid is banned in organic food and drinks. Phosphoric acid is a highly acidic ingredient in cola drinks, used to offset the extreme sweetness. The way the kidneys excrete it is by bonding it with calcium taken from the bones, which can then leave the bones porous and brittle, and increase the risk of osteoporosis. A study, published in the Archives of Paediatric and Adolescent Medicine in 2000, showed that athletic teenage girls who consume cola drinks have been found to have five times the risk of bone fractures of those athletic girls who do not consume cola drinks. Acceptable Daily Intake: Up to 70 mg/kg body weight. Phosphoric acid and phosphates can normally be consumed by all religious groups, vegans and vegetarians. Although animal bones are mainly made up of phosphates, commercial phosphate is not made from bones. No known adverse effects. </additionalInfo>
             <approvedIn/>
             <badForChildren>false</badForChildren>
-            <bannedIn>organic food and drinks</bannedIn>
+            <bannedIn/>
             <code>E338</code>
             <name>Orthophosphoric acid</name>
             <purpose>acid</purpose>
@@ -2081,10 +2081,10 @@
             <typicalProducts/>
         </eNumber>
         <eNumber>
-            <additionalInfo>Muscle cramps , kidney damage, gastrointestinal problems,  Synthetic flavour, texture retainer, anti-gushing agent in beer, preservative, sequestrant and colour promoter. Causes mineral imbalance. Known enzyme and blood coagulant inhibitor. Gastrointestinal disturbances, blood in urine, kidney damage and muscle cramps are side effects.  Avoid it.  Watch for imported goods. Canned soft drink, tinned white potatoes, salad dressings, egg products, oleomargarine, potato salad, lima beans, mushrooms, pecan pie filling, sandwich spreads.  </additionalInfo>
+            <additionalInfo>Muscle cramps , kidney damage, gastrointestinal problems, banned in some countries. Synthetic flavour, texture retainer, anti-gushing agent in beer, preservative, sequestrant and colour promoter. Causes mineral imbalance. Known enzyme and blood coagulant inhibitor. Gastrointestinal disturbances, blood in urine, kidney damage and muscle cramps are side effects. Banned in Australia. Avoid it.  Watch for imported goods. Canned soft drink, tinned white potatoes, salad dressings, egg products, oleomargarine, potato salad, lima beans, mushrooms, pecan pie filling, sandwich spreads.  </additionalInfo>
             <approvedIn/>
             <badForChildren>false</badForChildren>
-            <bannedIn>some countries</bannedIn>
+            <bannedIn>Australia</bannedIn>
             <code>E385</code>
             <name>Calcium disodium ethylene diamine tetraacetate, (Calcium disodium EDTA)</name>
             <purpose>sequestrant</purpose>
@@ -2411,10 +2411,10 @@
             <typicalProducts/>
         </eNumber>
         <eNumber>
-            <additionalInfo>Not suitable for diabetics, infants and young children, liver toxicity, gastrointestinal upsets. Prohibited in foods for infants and young children. Artificial sweetener and humectant; derived from glucose, either obtained from berries of the Sorbus aucuparia tree or synthesised; used in confectionary, dried fruit, pastries, low calorie foods, pharmaceutical syrups and ophthalmic preparations and is the seventh most widely used preservative in cosmetics;   Four pieces of low-joule chewing gum can make a child seriously ill. Not recommended for diabetics or people with fructose intolerance.   </additionalInfo>
+            <additionalInfo>Not suitable for diabetics, infants and young children, liver toxicity, gastrointestinal upsets. Prohibited in foods for infants and young children. Artificial sweetener and humectant; derived from glucose, either obtained from berries of the Sorbus aucuparia tree or synthesised; used in confectionary, dried fruit, pastries, low calorie foods, pharmaceutical syrups and ophthalmic preparations and is the seventh most widely used preservative in cosmetics; not permitted in foods for infants and young children, can cause gastric disturbance.  Four pieces of low-joule chewing gum can make a child seriously ill. Not recommended for diabetics or people with fructose intolerance. Not permitted in foods for infants and young children, can cause gastric disturbance.  </additionalInfo>
             <approvedIn/>
             <badForChildren>false</badForChildren>
-            <bannedIn>foods for infants and young children, can cause gastric disturbance</bannedIn>
+            <bannedIn/>
             <code>E420</code>
             <name>Sorbitol (i) Sorbitol (ii) Sorbitol syrup (emulsifier) (sweetener)</name>
             <purpose>humectant</purpose>
@@ -2422,10 +2422,10 @@
             <typicalProducts>dried fruits, confectionary, pastries, low caorie foods</typicalProducts>
         </eNumber>
         <eNumber>
-            <additionalInfo>Not for diabetics, infants and young children, or those with kidney / liver impairment. Linked to hyperactivity, kidney damage. On NIH Hazards list. Artificial sweetener and humectant; derived from seaweed or the manna ash tree, but manufactured commercially by hydrogenation of invert sugar (glucose and fructose), monosaccharides and sucrose. Possible allergen,  Possible allergen, may cause nausea, vomiting, diarrhoea.  </additionalInfo>
+            <additionalInfo>Not for diabetics, infants and young children, or those with kidney / liver impairment. Linked to hyperactivity, kidney damage. On NIH Hazards list. Artificial sweetener and humectant; derived from seaweed or the manna ash tree, but manufactured commercially by hydrogenation of invert sugar (glucose and fructose), monosaccharides and sucrose. Possible allergen, not permitted in infant foods due to its ability to cause diarrhoea and kidney dysfunction, also may cause nausea, vomiting;  Other Names: 1,2,3,4,5,6-hexanehexol, mannite, manna sugar. Possible allergen, may cause nausea, vomiting, diarrhoea.  </additionalInfo>
             <approvedIn/>
             <badForChildren>false</badForChildren>
-            <bannedIn>infant foods due to its ability to cause diarrhoea and kidney dysfunction, also may cause nausea, vomiting;  Other Names: 1,2,3,4,5,6-hexanehexol, mannite, manna sugar</bannedIn>
+            <bannedIn/>
             <code>E421</code>
             <name>Mannitol (anti-caking agent)</name>
             <purpose>sweetener</purpose>
@@ -2697,10 +2697,10 @@
             <typicalProducts/>
         </eNumber>
         <eNumber>
-            <additionalInfo>Most sources regard as safe although  Crystalline or powdered form of walls of plant cells. Anti-caking agent and base for tablets; no adverse effects known, non-nutritive. Cellulose is non soluble, but can be fermented in the large intestine. Large concentrations can cause intestinal problems, such as bloating, constipation and diarrhoea. Due to this fact, it can not be used in weaning foods. No adverse effects known. </additionalInfo>
+            <additionalInfo>Most sources regard as safe although banned in UK in baby food only. Crystalline or powdered form of walls of plant cells. Anti-caking agent and base for tablets; no adverse effects known, non-nutritive. Cellulose is non soluble, but can be fermented in the large intestine. Large concentrations can cause intestinal problems, such as bloating, constipation and diarrhoea. Due to this fact, it can not be used in weaning foods. No adverse effects known. </additionalInfo>
             <approvedIn/>
             <badForChildren>false</badForChildren>
-            <bannedIn>UK in baby food only</bannedIn>
+            <bannedIn/>
             <code>E460</code>
             <name>Cellulose (i) Microcrystalline cellulose (ii) Powdered cellulose</name>
             <purpose>emulsifier</purpose>
@@ -3456,10 +3456,10 @@
             <typicalProducts/>
         </eNumber>
         <eNumber>
-            <additionalInfo>Mineral salt (caustic) used in cocoa products, cheese products, jam black olives.  Avoid it.  </additionalInfo>
+            <additionalInfo>Mineral salt (caustic) used in cocoa products, cheese products, jam black olives. Banned in Australia, check imported foods. Avoid it.  </additionalInfo>
             <approvedIn/>
             <badForChildren>false</badForChildren>
-            <bannedIn>Australia, check imported foods</bannedIn>
+            <bannedIn>Australia</bannedIn>
             <code>E525</code>
             <name>Potassium hydroxide</name>
             <purpose>acidity regulator</purpose>
@@ -3984,10 +3984,10 @@
             <typicalProducts/>
         </eNumber>
         <eNumber>
-            <additionalInfo>Asthma, hyperactivity, depression, mood changes, sleeplessness, nausea, migraine,linked to infertility, teratogen, convulsions, abdominal discomfort. See text re other hidden sources of MSG. Can be an allergen,  Commercially prepared from molasses by bacterial fermentation. Added to any savoury processed protein food. In cigarettes and animal food. In over 10,000 foods in USA. Flavour enhancer derived from the fermentation of molasses, salt substitute; adverse effects appear in some asthmatic people, should not be permitted in foods for infants and young children as it could damage the nervous system.  To be avoided. It could kill nerve cells, resulting in diseases such as Huntington's, Alzheimer's and Parkinson's. Pregnant women, children, hypoglycaemic, elderly and those with heart disease are at risk from reactions. Can be an allergen,  </additionalInfo>
+            <additionalInfo>Asthma, hyperactivity, depression, mood changes, sleeplessness, nausea, migraine,linked to infertility, teratogen, convulsions, abdominal discomfort. See text re other hidden sources of MSG. Can be an allergen, not permitted in foods for infants and young children Sodium salt from glutamic acid (E620), a natural amino acid (building block of protein). Commercially prepared from molasses by bacterial fermentation. Added to any savoury processed protein food. In cigarettes and animal food. In over 10,000 foods in USA. Flavour enhancer derived from the fermentation of molasses, salt substitute; adverse effects appear in some asthmatic people, should not be permitted in foods for infants and young children as it could damage the nervous system.  To be avoided. It could kill nerve cells, resulting in diseases such as Huntington's, Alzheimer's and Parkinson's. Pregnant women, children, hypoglycaemic, elderly and those with heart disease are at risk from reactions. Can be an allergen, not permitted in foods for infants and young children. </additionalInfo>
             <approvedIn/>
             <badForChildren>false</badForChildren>
-            <bannedIn>foods for infants and young children Sodium salt from glutamic acid (E620), a natural amino acid (building block of protein)</bannedIn>
+            <bannedIn/>
             <code>E621</code>
             <name>Monosodium glutamate (MSG)</name>
             <purpose>flavour enhancer</purpose>
@@ -4050,10 +4050,10 @@
             <typicalProducts/>
         </eNumber>
         <eNumber>
-            <additionalInfo>Asthmatics and aspirin sensitive people should avoid, linked to hyperactivity, gout sufferers avoid. Prohibited in foods for infants and young children.  Isolated from sardines or yeast extract;  Persons with gout, hyperactivity, asthmatics and aspirin sensitive's should avoid it. It is found in instant noodles, potato chips and snacks, savoury rice, tinned vegetables, cured meats, packet soup.  </additionalInfo>
+            <additionalInfo>Asthmatics and aspirin sensitive people should avoid, linked to hyperactivity, gout sufferers avoid. Prohibited in foods for infants and young children. Not permitted in foods for infants and young children Flavour enhancer. Isolated from sardines or yeast extract; not permitted in foods for infants and young children. Persons with gout, hyperactivity, asthmatics and aspirin sensitive's should avoid it. It is found in instant noodles, potato chips and snacks, savoury rice, tinned vegetables, cured meats, packet soup. Not permitted in foods for infants and young children. </additionalInfo>
             <approvedIn/>
             <badForChildren>false</badForChildren>
-            <bannedIn>foods for infants and young children Flavour enhancer</bannedIn>
+            <bannedIn/>
             <code>E627</code>
             <name>Disodium guanylate, sodium guanylate</name>
             <purpose>flavour enhancer</purpose>
@@ -4094,10 +4094,10 @@
             <typicalProducts/>
         </eNumber>
         <eNumber>
-            <additionalInfo>May trigger gout symptoms, varied reactions reported. Prohibited in foods for infants and young children. Not recommended for asthmatics.  It is found in instant noodles, potato chips and snacks, savoury rice, tinned vegetables, cured meats, packet soup. Asthmatic people should avoid inosinates. As inosinates are metabolised to purines, they should be avoided by people suffering from gout. Frequently contains MSG(621).  </additionalInfo>
+            <additionalInfo>May trigger gout symptoms, varied reactions reported. Prohibited in foods for infants and young children. Not recommended for asthmatics. Not permitted in foods for infants and young children May be prepared from meat or sardines; Gout sufferers avoid. It is found in instant noodles, potato chips and snacks, savoury rice, tinned vegetables, cured meats, packet soup. Asthmatic people should avoid inosinates. As inosinates are metabolised to purines, they should be avoided by people suffering from gout. Frequently contains MSG(621). Not permitted in foods for infants and young children. </additionalInfo>
             <approvedIn/>
             <badForChildren>false</badForChildren>
-            <bannedIn>foods for infants and young children May be prepared from meat or sardines; Gout sufferers avoid</bannedIn>
+            <bannedIn/>
             <code>E631</code>
             <name>Disodium inosinate</name>
             <purpose>flavour enhancer</purpose>
@@ -4138,10 +4138,10 @@
             <typicalProducts/>
         </eNumber>
         <eNumber>
-            <additionalInfo>Can cause terrible itchy skin rashes, hyperactivity, sleeplessness, mood changes, many varied ill effects reported. Asthmatics should avoid. Made from 627 and 631.  Check imported foods. May be associated with itchy skin rashes up to 30 hours after ingestion; rashes may vary from mild to dramatic; the reaction is dose-related and cumulative, some individuals are more sensitive than others; typical foods include flavoured chips, instant noodles and party pies. Avoid it, especially gout sufferers, asthmatics and aspirin sensitive people.  Flavour enhancer. Guanylates and inosinates do not have the specific umami taste but strongly enhance many other flavours, thereby reducing the amounts of salt or other flavour enhancers needed in a product. Used in many products. Mainly used in low sodium/salt products. Acceptable daily intake (ADI): None determined. Guanylates and inosinates may not be used in products intended for children under 12 weeks. Asthmatic people should avoid guanylates and inosinates. As guanylates and inosinates are metabolised to purines, they should be avoided by people suffering from gout. However, the concentrations used are generally so low that no effects are to be expected.  </additionalInfo>
+            <additionalInfo>Can cause terrible itchy skin rashes, hyperactivity, sleeplessness, mood changes, many varied ill effects reported.Banned in some other countries -very common in Aust foods. Asthmatics should avoid. Made from 627 and 631.  Check imported foods. May be associated with itchy skin rashes up to 30 hours after ingestion; rashes may vary from mild to dramatic; the reaction is dose-related and cumulative, some individuals are more sensitive than others; typical foods include flavoured chips, instant noodles and party pies. Avoid it, especially gout sufferers, asthmatics and aspirin sensitive people. Banned in Australia Mixture of calcium salts of guanylic (E626) and inosinic acid (E630). Flavour enhancer. Guanylates and inosinates do not have the specific umami taste but strongly enhance many other flavours, thereby reducing the amounts of salt or other flavour enhancers needed in a product. Used in many products. Mainly used in low sodium/salt products. Acceptable daily intake (ADI): None determined. Guanylates and inosinates may not be used in products intended for children under 12 weeks. Asthmatic people should avoid guanylates and inosinates. As guanylates and inosinates are metabolised to purines, they should be avoided by people suffering from gout. However, the concentrations used are generally so low that no effects are to be expected.  </additionalInfo>
             <approvedIn/>
             <badForChildren>false</badForChildren>
-            <bannedIn>Australia Mixture of calcium salts of guanylic (E626) and inosinic acid (E630)</bannedIn>
+            <bannedIn>Australia</bannedIn>
             <code>E635</code>
             <name>Disodium 5'-ribonucleotides</name>
             <purpose>flavour enhancer</purpose>
@@ -4897,10 +4897,10 @@
             <typicalProducts/>
         </eNumber>
         <eNumber>
-            <additionalInfo>Suspected carcinogen, animal tests caused testicular damage and embryo damage in rats.  Calcium &amp; sodium cyclamate, artificial sweetener; known to cause migraines and other reactions, can be carcinogenic, caused damage to rats testicles and mouse embryos in tests.  AVOID IT!. Possible carcinogen,  </additionalInfo>
+            <additionalInfo>Suspected carcinogen, animal tests caused testicular damage and embryo damage in rats. Banned in UK and USA in 1970 but still permitted in Australia. Calcium &amp; sodium cyclamate, artificial sweetener; known to cause migraines and other reactions, can be carcinogenic, caused damage to rats testicles and mouse embryos in tests. Banned in the US and UK due its links with cancer. AVOID IT!. Possible carcinogen,  </additionalInfo>
             <approvedIn/>
             <badForChildren>false</badForChildren>
-            <bannedIn>UK and USA in 1970 but still permitted in Australia</bannedIn>
+            <bannedIn>the USA and UK</bannedIn>
             <code>E952</code>
             <name>Cyclamic acid and its sodium and calcium salts, also known as Cyclamate</name>
             <purpose>sweetener</purpose>
@@ -4908,10 +4908,10 @@
             <typicalProducts/>
         </eNumber>
         <eNumber>
-            <additionalInfo>Sugar substitute and humectant. Suitable for diabetics as it does not have a significant affect on blood glucose or serum insulin levels. Can cause softer than normal stool and intestinal gas.    Not listed for use in Australia. </additionalInfo>
+            <additionalInfo>Sugar substitute and humectant. Suitable for diabetics as it does not have a significant affect on blood glucose or serum insulin levels. Can cause softer than normal stool and intestinal gas.  Not permitted in infant foods.  Not listed for use in Australia. </additionalInfo>
             <approvedIn/>
             <badForChildren>false</badForChildren>
-            <bannedIn>infant foods</bannedIn>
+            <bannedIn/>
             <code>E953</code>
             <name>Isomalt, Isomaltitol</name>
             <purpose>sweetener</purpose>
@@ -4919,10 +4919,10 @@
             <typicalProducts/>
         </eNumber>
         <eNumber>
-            <additionalInfo>Known carcinogen especially linked to bladder and reproductive cancers.  Calcium &amp; sodium saccharin; artificial sweetener derived from toluene (a known carcinogen). Not listed in Australia by number until 1992.  It interferes with normal blood coagulation, blood sugar levels and digestive function.   Banned as food additive in Malaysia and Zimbabwe.  Banned as a beverage additive in Fiji, Israel, Peru, and Taiwan. Not too bad in small amounts, I think. </additionalInfo>
+            <additionalInfo>Known carcinogen especially linked to bladder and reproductive cancers. Banned in US in 1977 but reinstated with strict labelling provisions. Calcium &amp; sodium saccharin; artificial sweetener derived from toluene (a known carcinogen). Not listed in Australia by number until 1992. Banned in 1977 in the US, but reinstated subject to strict labelling stating: "Use of this product may be hazardous to your health, this product contains saccharin which has been determined to cause cancer in laboratory animals". It interferes with normal blood coagulation, blood sugar levels and digestive function. Banned in France, Germany, Hungary, Portugal, Spain.  Banned as food additive in Malaysia and Zimbabwe.  Banned as a beverage additive in Fiji, Israel, Peru, and Taiwan. Not too bad in small amounts, I think. </additionalInfo>
             <approvedIn/>
             <badForChildren>false</badForChildren>
-            <bannedIn>1977 in the US, but reinstated subject to strict labelling stating: "Use of this product may be hazardous to your health, this product contains saccharin which has been determined to cause cancer in laboratory animals"</bannedIn>
+            <bannedIn/>
             <code>E954</code>
             <name>Saccharin and its sodium, potassium and calcium salts</name>
             <purpose>sweetener</purpose>
@@ -5062,10 +5062,10 @@
             <typicalProducts/>
         </eNumber>
         <eNumber>
-            <additionalInfo>Quillaia extract is a purified extract of the outer cambium layer of Quillaia Saponaria Molina, or Quillay Bark. The Quillaia tree is native to Peru and Chile, and cultivated in Northern Hindustan. Quillaia bark infusion has good foam capabilities due to the presence of saponin, a non-poisonous, white powder. Saponin is a glucoside which will yield quillaic acid and quillaia-sapotoxin upon decomposure. The latter products are both poisonous irritants, however it is the sapotoxin which foams upon shaking. Quillaic acid is also known as 3,16-dihydroxy-23-oxo-12-oleanen-28-oic acid. Used in the production of foam on non-alcoholic beverages. Use is  Used medically as a stimulating expectorant. </additionalInfo>
+            <additionalInfo>Quillaia extract is a purified extract of the outer cambium layer of Quillaia Saponaria Molina, or Quillay Bark. The Quillaia tree is native to Peru and Chile, and cultivated in Northern Hindustan. Quillaia bark infusion has good foam capabilities due to the presence of saponin, a non-poisonous, white powder. Saponin is a glucoside which will yield quillaic acid and quillaia-sapotoxin upon decomposure. The latter products are both poisonous irritants, however it is the sapotoxin which foams upon shaking. Quillaic acid is also known as 3,16-dihydroxy-23-oxo-12-oleanen-28-oic acid. Used in the production of foam on non-alcoholic beverages. Use is banned in a number of countries. Used medically as a stimulating expectorant. </additionalInfo>
             <approvedIn/>
             <badForChildren>false</badForChildren>
-            <bannedIn>a number of countries</bannedIn>
+            <bannedIn/>
             <code>E999</code>
             <name>Quillaia extract</name>
             <purpose>foaming agent</purpose>
@@ -5524,10 +5524,10 @@
             <typicalProducts/>
         </eNumber>
         <eNumber>
-            <additionalInfo>Alcohol.  Suspected neurotoxic hazard, danger to persons with candida and allergies.  In ice creams, dessert sauces, apple cider, stews and casseroles, tomatoes and rock melon. Alcohol. </additionalInfo>
+            <additionalInfo>Alcohol. Not permitted in foods in Australia, but used in cough medicines, perfumes, mouth wash, antiseptic, hairspray as an additive carrier not listed except in alcoholic drinks. Suspected neurotoxic hazard, danger to persons with candida and allergies.  In ice creams, dessert sauces, apple cider, stews and casseroles, tomatoes and rock melon. Alcohol. </additionalInfo>
             <approvedIn/>
             <badForChildren>false</badForChildren>
-            <bannedIn>foods in Australia, but used in cough medicines, perfumes, mouth wash, antiseptic, hairspray as an additive carrier not listed except in alcoholic drinks</bannedIn>
+            <bannedIn/>
             <code>E1510</code>
             <name>Ethanol</name>
             <purpose/>

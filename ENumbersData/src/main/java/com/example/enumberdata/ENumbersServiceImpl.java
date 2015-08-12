@@ -32,7 +32,7 @@ public class ENumbersServiceImpl implements ENumbersService {
 //        addInfoInsteadSeeXXX(); //see 554 should be replaced by text
     }
 
-    public void extractBannedApproved(ENumber eNumber) {
+    public void extractBannedIn(ENumber eNumber) {
         Collection<String> patternsBanned = new HashSet<String>(Arrays.asList(
                 "banned in ",
                 "not permitted in ",
@@ -62,7 +62,7 @@ public class ENumbersServiceImpl implements ENumbersService {
                     int amountOfCountries = getAmountOfCapitalLetters(substring);
 
                     if (allWordsAmount > 0 &&
-                            50 < 100 * amountOfCountries / allWordsAmount) { //words with name of country more than 50%
+                            30 < 100 * amountOfCountries / allWordsAmount) { //words with name of country more than 30%
                         if (substring.length() > bannedIn.length())
                         {
 
@@ -74,8 +74,13 @@ public class ENumbersServiceImpl implements ENumbersService {
                                 indexPatternStart, //from pattern
                                 indexSubstringEnd + 1); //with "."
 
-                        //cut typical products from AdditionalInfo
+                        //cut bannedin info from AdditionalInfo
                         eNumber.setAdditionalInfo(eNumber.getAdditionalInfo().replace(patternWithSubstring, ""));
+                    }
+                    else
+                    {
+                        //don't cut bannedin info from AdditionalInfo
+                        break;
                     }
                 }
             }
@@ -157,7 +162,7 @@ public class ENumbersServiceImpl implements ENumbersService {
 
         for (ENumber item : data) {
             extractTypicalProducts(item);
-//            log.info(item.getCode() + "TypicalProducts extracted");
+            log.info(item.getCode() + " TypicalProducts extracted");
         }
     }
 
@@ -165,8 +170,18 @@ public class ENumbersServiceImpl implements ENumbersService {
     public void extractBannedApproved() {
 
         for (ENumber item : data) {
-            extractBannedApproved(item);
+
+            extractBannedIn(item);
+            log.info(item.getCode() + " BannedIn extracted");
+
+            extractApprovedIn(item);
+            log.info(item.getCode() + " ApprovedIn extracted");
         }
+    }
+
+    private void extractApprovedIn(ENumber item) {
+//1. extract from status
+
     }
 
 
