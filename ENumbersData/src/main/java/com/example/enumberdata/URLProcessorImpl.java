@@ -43,12 +43,11 @@ public class URLProcessorImpl implements  URLProcessor {
         this.urlList = urlList;
     }
 
-    //TODO rewrite
     public void init() {
         ArrayList<ENumber> data = createData(urlList.get(0));
         addAdditionalInfoForURL1(data, urlList.get(1));
-        addAdditionalInfoForURL2or3(data, urlList.get(3));
         addAdditionalInfoForURL2or3(data, urlList.get(2));
+        addAdditionalInfoForURL2or3(data, urlList.get(3));
 
         enumberService = new ENumbersServiceImpl(data);
         enumberService.reformatAdditionalInfo();
@@ -56,7 +55,6 @@ public class URLProcessorImpl implements  URLProcessor {
         if (!data.isEmpty()) {
             createXML(data);
         }
-
     }
 
     private  ArrayList<ENumber> addAdditionalInfoForURL2or3(ArrayList<ENumber> data, String url) {

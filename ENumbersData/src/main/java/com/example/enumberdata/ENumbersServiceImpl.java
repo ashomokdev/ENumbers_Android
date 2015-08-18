@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Iuliia on 08.08.2015.
@@ -25,92 +27,24 @@ public class ENumbersServiceImpl implements ENumbersService {
     public void reformatAdditionalInfo() {
         extractTypicalProducts();
         extractBannedApproved();
-//
-//        //TODO
-//        extractBadForChildrenItems(); //HACSG , ets
-//        deleteDublicateInfo(); //colors ,  not permited, ets
-//        addInfoInsteadSeeXXX(); //see 554 should be replaced by text
+        deleteDuplicateInfo();
+        extractBadForChildrenItems();
+        extractAvoidItItems();
+        orderPunctuation();
+
+        //todo
+        //add level of dangereous hight, medium, save, unknown, delete avoid it
     }
 
-    public void extractBannedIn(ENumber eNumber) {
-        Collection<String> patternsBanned = new HashSet<String>(Arrays.asList(
-                "banned in ",
-                "not permitted in ",
-                "not registered for use in "
-        ));
-        try {
-            for (String pattern : patternsBanned) {
-                String bannedIn = eNumber.getBannedIn();
-                while (eNumber.getAdditionalInfo().toLowerCase().contains(pattern)) {
+    @Override
+    public void extractTypicalProducts() {
 
-                    int indexPatternStart = eNumber.getAdditionalInfo().toLowerCase().indexOf(pattern);
-                    int indexSubstringEnd = eNumber.getAdditionalInfo().toLowerCase().indexOf(".", indexPatternStart);
-
-                    if (indexPatternStart < 0 || indexSubstringEnd < 0) {
-                        throw new Exception("Wrong index, index < 0."); //error here
-                    }
-
-                    if (indexPatternStart > indexSubstringEnd) {
-                        throw new Exception("Wrong index, indexPatternStart > indexSubstringEnd");
-                    }
-
-                    String substring = eNumber.getAdditionalInfo().substring(
-                            indexPatternStart + pattern.length(), //after pattern
-                            indexSubstringEnd); //before "."
-
-                    int allWordsAmount = getAllWordsCount(substring);
-                    int amountOfCountries = getAmountOfCapitalLetters(substring);
-
-                    if (allWordsAmount > 0 &&
-                            30 < 100 * amountOfCountries / allWordsAmount) { //words with name of country more than 30%
-                        if (substring.length() > bannedIn.length())
-                        {
-
-                            bannedIn = substring;
-                            eNumber.setBannedIn(bannedIn);
-                        }
-
-                        String patternWithSubstring = eNumber.getAdditionalInfo().substring(
-                                indexPatternStart, //from pattern
-                                indexSubstringEnd + 1); //with "."
-
-                        //cut bannedin info from AdditionalInfo
-                        eNumber.setAdditionalInfo(eNumber.getAdditionalInfo().replace(patternWithSubstring, ""));
-                    }
-                    else
-                    {
-                        //don't cut bannedin info from AdditionalInfo
-                        break;
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        for (ENumber item : data) {
+            extractTypicalProducts(item);
+//            log.info(item.getCode() + " TypicalProducts extracted");
         }
     }
 
-    private int getAllWordsCount(String substring) {
-        if (substring.isEmpty())
-            return 0;
-        return substring.split("\\W+").length;
-    }
-
-    private int getAmountOfCapitalLetters(String substring) {
-        int result = 0;
-        if (substring.isEmpty()) {
-            return 0;
-        } else {
-            String[] words = substring.split("\\W+");
-            for (String word : words) {
-                if (Character.isUpperCase(word.charAt(0))) {
-                    result++;
-                }
-            }
-        }
-        return result;
-    }
-
-    //TODO ??? add "used in"
     public void extractTypicalProducts(ENumber eNumber) {
         try {
             Collection<String> patterns = new HashSet<String>(Arrays.asList(
@@ -140,7 +74,7 @@ public class ENumbersServiceImpl implements ENumbersService {
 
                     if (substring.length() > typicalProducts.length()) {
 
-                        typicalProducts = substring;
+                        typicalProducts = Character.toUpperCase(substring.charAt(0)) + substring.substring(1);
                         eNumber.setTypicalProducts(typicalProducts);
                     }
 
@@ -149,20 +83,11 @@ public class ENumbersServiceImpl implements ENumbersService {
                             indexSubstringEnd + 1); //with "."
 
                     //cut typical products from AdditionalInfo
-                    eNumber.setAdditionalInfo(eNumber.getAdditionalInfo().replace(patternWithSubstring, ""));
+                    eNumber.setAdditionalInfo(eNumber.getAdditionalInfo().replace(patternWithSubstring, "."));
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void extractTypicalProducts() {
-
-        for (ENumber item : data) {
-            extractTypicalProducts(item);
-//            log.info(item.getCode() + " TypicalProducts extracted");
         }
     }
 
@@ -175,79 +100,240 @@ public class ENumbersServiceImpl implements ENumbersService {
 //            log.info(item.getCode() + " BannedIn extracted");
 
             extractApprovedIn(item);
-            log.info(item.getCode() + " ApprovedIn extracted");
+//            log.info(item.getCode() + " ApprovedIn extracted");
         }
     }
 
-    //TODO may be one method with extractBannedIn
+    public void extractBannedIn(ENumber eNumber) {
+        Collection<String> patternsBanned = new HashSet<String>(Arrays.asList(
+                "banned in ",
+                "not permitted in ",
+                "not registered for use in ",
+                "not permitted in "
+        ));
+        try {
+            for (String pattern : patternsBanned) {
+                String bannedIn = eNumber.getBannedIn();
+                while (eNumber.getAdditionalInfo().toLowerCase().contains(pattern)) {
+
+                    int indexPatternStart = eNumber.getAdditionalInfo().toLowerCase().indexOf(pattern);
+                    int indexSubstringEnd = eNumber.getAdditionalInfo().toLowerCase().indexOf(".", indexPatternStart);
+
+                    if (indexPatternStart < 0 || indexSubstringEnd < 0) {
+                        throw new Exception("Wrong index, index < 0."); //error here
+                    }
+
+                    if (indexPatternStart > indexSubstringEnd) {
+                        throw new Exception("Wrong index, indexPatternStart > indexSubstringEnd");
+                    }
+
+                    String substring = eNumber.getAdditionalInfo().substring(
+                            indexPatternStart + pattern.length(), //after pattern
+                            indexSubstringEnd); //before "."
+
+                    int allWordsAmount = getAllWordsCount(substring);
+                    int amountOfCountries = getAmountOfCapitalLetters(substring);
+
+                    if (allWordsAmount > 0 &&
+                            30 < 100 * amountOfCountries / allWordsAmount) { //words with name of country more than 30%
+                        if (substring.length() > bannedIn.length()) {
+
+                            bannedIn = substring;
+                            eNumber.setBannedIn(bannedIn);
+                        }
+
+                        String patternWithSubstring = eNumber.getAdditionalInfo().substring(
+                                indexPatternStart, //from pattern
+                                indexSubstringEnd + 1); //with "."
+
+                        //cut bannedin info from AdditionalInfo
+                        eNumber.setAdditionalInfo(eNumber.getAdditionalInfo().replace(patternWithSubstring, "."));
+                    } else {
+                        //don't cut bannedin info from AdditionalInfo
+                        break;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //TODO may be one universal method with extractBannedIn see http://tutorials.jenkov.com/java-reflection/fields.html
     private void extractApprovedIn(ENumber eNumber) {
-//1. extract from status
+//extract from status
         try {
             Collection<String> patterns = new HashSet<String>(Arrays.asList(
                     "approved in "
             ));
 
-                for (String pattern : patterns) {
-                    String approvedIn = eNumber.getApprovedIn();
-                    while (eNumber.getStatus().toLowerCase().contains(pattern)) {
+            for (String pattern : patterns) {
+                String approvedIn = eNumber.getApprovedIn();
+                while (eNumber.getStatus().toLowerCase().contains(pattern)) {
 
-                        int indexPatternStart = eNumber.getStatus().toLowerCase().indexOf(pattern);
-                        int indexSubstringEnd = eNumber.getStatus().toLowerCase().indexOf(".", indexPatternStart);
+                    int indexPatternStart = eNumber.getStatus().toLowerCase().indexOf(pattern);
+                    int indexSubstringEnd = eNumber.getStatus().toLowerCase().indexOf(".", indexPatternStart);
 
-                        if (indexPatternStart < 0 || indexSubstringEnd < 0) {
-                            throw new Exception("Wrong index, index < 0.");
+                    if (indexPatternStart < 0 || indexSubstringEnd < 0) {
+                        throw new Exception("Wrong index, index < 0. for " + eNumber.getCode() + " with status = " + eNumber.getStatus());
+                    }
+
+                    if (indexPatternStart > indexSubstringEnd) {
+                        throw new Exception("Wrong index, indexPatternStart > indexSubstringEnd");
+                    }
+
+                    String substring = eNumber.getStatus().substring(
+                            indexPatternStart + pattern.length(), //after pattern
+                            indexSubstringEnd); //before "."
+
+                    int allWordsAmount = getAllWordsCount(substring);
+                    int amountOfCountries = getAmountOfCapitalLetters(substring);
+
+                    if (allWordsAmount > 0 &&
+                            30 < 100 * amountOfCountries / allWordsAmount) { //words with name of country more than 30%
+                        if (substring.length() > approvedIn.length()) {
+
+                            String patternThe = "[Tt]he "; //"the EU" will be "EU"
+                            approvedIn = Pattern.compile(patternThe).matcher(substring).replaceAll("");
+                            eNumber.setApprovedIn(approvedIn);
                         }
 
-                        if (indexPatternStart > indexSubstringEnd) {
-                            throw new Exception("Wrong index, indexPatternStart > indexSubstringEnd");
-                        }
+                        String patternWithSubstring = eNumber.getStatus().substring(
+                                indexPatternStart, //from pattern
+                                indexSubstringEnd + 1); //with "."
 
-                        String substring = eNumber.getStatus().substring(
-                                indexPatternStart + pattern.length(), //after pattern
-                                indexSubstringEnd); //before "."
-
-                        int allWordsAmount = getAllWordsCount(substring);
-                        int amountOfCountries = getAmountOfCapitalLetters(substring);
-
-                        if (allWordsAmount > 0 &&
-                                30 < 100 * amountOfCountries / allWordsAmount) { //words with name of country more than 30%
-                            if (substring.length() > approvedIn.length())
-                            {
-
-                                approvedIn = substring;
-                                eNumber.setApprovedIn(approvedIn);
-                            }
-
-                            String patternWithSubstring = eNumber.getStatus().substring(
-                                    indexPatternStart, //from pattern
-                                    indexSubstringEnd + 1); //with "."
-
-                            //cut approvedIn info from Status
-                            eNumber.setStatus(eNumber.getStatus().replace(patternWithSubstring, ""));
-                        }
-                        else
-                        {
-                            //don't cut approvedIn info from Status
-                            break;
-                        }
+                        //cut approvedIn info from Status
+                        eNumber.setStatus(eNumber.getStatus().replace(patternWithSubstring, "."));
+                    } else {
+                        //don't cut approvedIn info from Status
+                        break;
                     }
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
+        } catch (Exception e) {
+            log.info(e.getMessage());
+        }
     }
 
+    private void deleteDuplicateInfo() {
+        for (ENumber item : data) {
 
-    private void addInfoInsteadSeeXXX() {
-        //  , "Typical products see" //TODO
+            deleteDuplicateInfo(item);
+        }
     }
 
-    private void deleteDublicateInfo() {
+    private void deleteDuplicateInfo(ENumber eNumber) {
+        Collection<String> patterns = new HashSet<String>(Arrays.asList(
+                "[a-zA-Z]+\\s+colou*r,\\s",  //delete info about color
+                "[Ss]ee [^.]*[.?!]"  //delete see Exxx
+        ));
+        for (String pattern : patterns) {
 
+            eNumber.setAdditionalInfo(
+                    Pattern.compile(pattern).matcher(eNumber.getAdditionalInfo()).replaceAll("."));
+        }
+
+        String patternNotKnownEffects = "[Nn]o known adverse effects";
+        eNumber.setAdditionalInfo(
+                Pattern.compile(patternNotKnownEffects).matcher(eNumber.getAdditionalInfo()).replaceFirst("."));
     }
 
     private void extractBadForChildrenItems() {
+        for (ENumber item : data) {
+
+            extractBadForChildrenItems(item);
+        }
     }
 
+    private void extractBadForChildrenItems(ENumber eNumber) {
 
+        //delete info "the HACSG* recommends to avoid it" and set badForChildren = true;
+        String regex = "[tT]he HACSG\\* recommends to avoid it";
+
+        if (Pattern.compile(regex).matcher(eNumber.getAdditionalInfo()).find()) {
+            eNumber.setAdditionalInfo(
+                    Pattern.compile(regex).matcher(eNumber.getAdditionalInfo()).replaceAll("."));
+            eNumber.setBadForChildren(true);
+        }
+    }
+
+    private void extractAvoidItItems() {
+        for (ENumber item : data) {
+
+            extractAvoidItItems(item);
+        }
+    }
+
+    private void extractAvoidItItems(ENumber eNumber) {
+        //delete info "avoid it" and set avoidIt = true;
+        String regex = "[Aa]void it";
+
+        if (Pattern.compile(regex).matcher(eNumber.getAdditionalInfo()).find()) {
+            eNumber.setAdditionalInfo(
+                    Pattern.compile("[\\.,].{0,20}[Aa]void it").matcher(eNumber.getAdditionalInfo()).replaceAll("."));
+            eNumber.setAvoidIt(true);
+        }
+    }
+
+    private void orderPunctuation() {
+        for (ENumber item : data) {
+
+            orderPunctuation(item);
+        }
+    }
+
+    private void orderPunctuation(ENumber eNumber) {
+
+        String patternChars = "[^\\w]+\\.";  //any chars with . at the end, example !!!.
+        eNumber.setAdditionalInfo(
+                Pattern.compile(patternChars).matcher(eNumber.getAdditionalInfo()).replaceAll("."));
+
+        String patternSpaces = "[\\s]{2,}";  //two or more spaces
+        eNumber.setAdditionalInfo(
+                Pattern.compile(patternSpaces).matcher(eNumber.getAdditionalInfo()).replaceAll(" "));
+
+        String dotInTheStart = "^\\.[\\s]*";
+        eNumber.setStatus(
+                Pattern.compile(dotInTheStart).matcher(eNumber.getStatus()).replaceAll(""));
+
+        eNumber.setAdditionalInfo(
+                Pattern.compile(dotInTheStart).matcher(eNumber.getAdditionalInfo()).replaceAll(""));
+
+        String notEnglishChars = "[^\\x00-\\x7F]+";
+        eNumber.setAdditionalInfo(
+                Pattern.compile(notEnglishChars).matcher(eNumber.getAdditionalInfo()).replaceAll(""));
+
+        String spaceBeforePunctuation = "[\\s]+,";
+        eNumber.setAdditionalInfo(
+                Pattern.compile(spaceBeforePunctuation).matcher(eNumber.getAdditionalInfo()).replaceAll(","));
+
+        String spaceBeforePunctuation2 = "[\\s]+;";
+        eNumber.setAdditionalInfo(
+                Pattern.compile(spaceBeforePunctuation2).matcher(eNumber.getAdditionalInfo()).replaceAll(";"));
+
+        String spaceAtTheEndOfString = "[\\s]$";
+        eNumber.setAdditionalInfo(
+                Pattern.compile(spaceAtTheEndOfString).matcher(eNumber.getAdditionalInfo()).replaceAll(""));
+    }
+
+    private int getAllWordsCount(String substring) {
+        if (substring.isEmpty())
+            return 0;
+        return substring.split("\\W+").length;
+    }
+
+    private int getAmountOfCapitalLetters(String substring) {
+        int result = 0;
+        if (substring.isEmpty()) {
+            return 0;
+        } else {
+            String[] words = substring.split("\\W+");
+            for (String word : words) {
+                if (Character.isUpperCase(word.charAt(0))) {
+                    result++;
+                }
+            }
+        }
+        return result;
+    }
 }
