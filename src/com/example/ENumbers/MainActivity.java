@@ -206,7 +206,7 @@ public class MainActivity extends Activity implements IGetterInfoByENumber {
                     }
                 }
             } catch (Exception e) {
-                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show(); //error here
             }
         }
         return null;
