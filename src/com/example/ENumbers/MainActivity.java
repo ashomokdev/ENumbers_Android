@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends Activity implements IGetterInfoByENumber {
+public class MainActivity extends AppCompatActivity implements IGetterInfoByENumber {
 
     private static final int SPEECH_REQUEST_CODE = 0;
 
@@ -198,7 +199,6 @@ public class MainActivity extends Activity implements IGetterInfoByENumber {
         return super.onCreateOptionsMenu(menu);
     }
 
-
     @Override
     public ENumber GetInfoByENumber(String eNumber_input) throws Exception {
 
@@ -236,7 +236,6 @@ public class MainActivity extends Activity implements IGetterInfoByENumber {
         }
         return false;
     }
-
 
     private Integer tryParse(Object obj) {
         Integer retVal;

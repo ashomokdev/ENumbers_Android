@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ENumbersData/ENumbersData.iml" filepath="$PROJECT_DIR$/ENumbersData/ENumbersData.iml" />
       <module fileurl="file://$PROJECT_DIR$/ENumbers_Android_Java_Maven.iml" filepath="$PROJECT_DIR$/ENumbers_Android_Java_Maven.iml" />
+      <module fileurl="file://$USER_HOME$/AppData/Local/Android/android-sdk/extras/android/support/v7/appcompat/android-support-v7-appcompat.iml" filepath="$USER_HOME$/AppData/Local/Android/android-sdk/extras/android/support/v7/appcompat/android-support-v7-appcompat.iml" />
     </modules>
   </component>
 </project>

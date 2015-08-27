@@ -53,4 +53,11 @@
         <item name="android:typeface">monospace</item>
     </style>
 
+    <style name="MyApp11" parent="Theme.AppCompat.Light">
+    </style>
+    <style name="MyApp113" parent="@style/Theme.AppCompat.Light">
+    </style>
+    <style name="Theme.AppCompat.Light.MyApp">
+    </style>
+
 </resources>
