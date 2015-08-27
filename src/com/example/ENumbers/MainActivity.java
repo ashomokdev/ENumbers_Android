@@ -1,6 +1,5 @@
 package com.example.eNumbers;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -53,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements IGetterInfoByENum
         setContentView(R.layout.main);
 
         inputEditText = (EditText) findViewById(R.id.inputE);
+        inputEditText.setSelection(inputEditText.getText().length()); //starts type after "E"
 
         listView = (ListView) findViewById(R.id.ENumberList);
 
@@ -123,8 +123,8 @@ public class MainActivity extends AppCompatActivity implements IGetterInfoByENum
                 } else {
 
                     inputEditText.setText(startChar);
-                    inputEditText.setSelection(inputEditText.getText().length());
                 }
+                inputEditText.setSelection(inputEditText.getText().length());
             }
 
             @Override
