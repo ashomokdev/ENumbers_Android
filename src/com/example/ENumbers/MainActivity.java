@@ -4,10 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -33,15 +30,11 @@ public class MainActivity extends AppCompatActivity implements IGetterInfoByENum
 
     private ImageButton voiceInputBtn;
 
-    private ListView listViewResult;
-
     private EditText inputEditText;
 
     private TextView outputWarning;
 
     private ListView listView;
-
-    private Intent intent;
 
     /**
      * Called when the activity is first created.
@@ -52,6 +45,9 @@ public class MainActivity extends AppCompatActivity implements IGetterInfoByENum
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.main);
+
+//        Intent intent = new Intent(this, RightMenuActivity.class);
+//        startActivity(intent);
 
         inputEditText = (EditText) findViewById(R.id.inputE);
         inputEditText.setSelection(inputEditText.getText().length()); //starts type after "E"
@@ -90,9 +86,6 @@ public class MainActivity extends AppCompatActivity implements IGetterInfoByENum
 
                         outputWarning.setText(getApplicationContext().getString(R.string.notFoundMessage));
                     } else {
-
-                        listViewResult = (ListView) findViewById(R.id.ENumberList);
-
                         List<ENumber> data = new ArrayList<ENumber>();
 
                         //TODO add all result
@@ -108,8 +101,6 @@ public class MainActivity extends AppCompatActivity implements IGetterInfoByENum
                 }
             }
         });
-
-        Intent intent = new Intent(this, RightMenuActivity.class);
 
         inputEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -166,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements IGetterInfoByENum
 
     public void displaySpeechRecognizer() {
 
-        intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
 
