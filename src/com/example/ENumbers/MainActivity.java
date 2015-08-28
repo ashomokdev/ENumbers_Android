@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -35,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements IGetterInfoByENum
     private TextView outputWarning;
 
     private ListView listView;
+
+    private ActionBarDrawerToggle toggle;
 
     /**
      * Called when the activity is first created.
@@ -152,7 +157,25 @@ public class MainActivity extends AppCompatActivity implements IGetterInfoByENum
             }
         });
 
+        //Right menu settings
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
+
+        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        toggle = new ActionBarDrawerToggle(
+                this,
+                drawerLayout,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
+        toggle.setDrawerIndicatorEnabled(true);
+        drawerLayout.setDrawerListener(toggle);
+
+        ListView lv_navigation_drawer = (ListView) findViewById(R.id.lv_navigation_drawer);
+        lv_navigation_drawer.setAdapter(new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,
+                new String[]{"Screen 1", "Screen 2", "Screen 3"}));
     }
 
     public void displaySpeechRecognizer() {
