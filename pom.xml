@@ -47,6 +47,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -63,9 +64,9 @@
                     <nativeLibrariesDirectory>${project.basedir}/src/main/native</nativeLibrariesDirectory>
                     <sdk>
                         <path>
-                            C:\Users\Iuliia\AppData\Local\Android\android-sdk
+                            C:\Users\rado\AppData\Local\Android\android-sdk
                         </path>
-                        <platform>22</platform>
+                        <platform>23</platform>
                     </sdk>
                     <undeployBeforeDeploy>true</undeployBeforeDeploy>
                 </configuration>

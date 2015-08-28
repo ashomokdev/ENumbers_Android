@@ -1,10 +1,12 @@
 package com.example.eNumbers;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -22,24 +24,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends Activity implements IGetterInfoByENumber {
+public class MainActivity extends AppCompatActivity implements IGetterInfoByENumber {
 
     private static final int SPEECH_REQUEST_CODE = 0;
 
-    Button searchBtn;
+    private Button searchBtn;
 
-    ImageButton voiceInputBtn;
+    private ImageButton voiceInputBtn;
 
-    ListView listViewResult;
+    private ListView listViewResult;
 
-    EditText inputEditText;
+    private EditText inputEditText;
 
-    TextView outputWarning;
+    private TextView outputWarning;
 
-    ListView listView;
+    private ListView listView;
 
-    Intent intent;
+    private Intent intent;
 
+    private String[] mScreenTitles;
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerList;
+
+    private ActionBarDrawerToggle mDrawerToggle;
+    private CharSequence mDrawerTitle;
+    private CharSequence mTitle;
 
     /**
      * Called when the activity is first created.
@@ -156,6 +165,51 @@ public class MainActivity extends Activity implements IGetterInfoByENumber {
                 displaySpeechRecognizer();
             }
         });
+
+//        mTitle = mDrawerTitle = getTitle();
+//        mScreenTitles = getResources().getStringArray(R.array.screen_array);
+//        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+//
+//        // Set the adapter for the list view
+//        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
+//                R.layout.drawer_list_item, mScreenTitles));
+//        // Set the list's click listener
+//        mDrawerList.setOnItemClickListener(new ListView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                mDrawerList.setItemChecked(i, true);
+//                setTitle("......");
+//
+//                String text= "menu click... should be implemented";
+//                Toast.makeText(MainActivity.this, text, Toast.LENGTH_LONG).show();
+//                mDrawerLayout.closeDrawer(mDrawerList);
+//            }
+//        });
+//
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setHomeButtonEnabled(true);
+//
+//        mDrawerToggle = new ActionBarDrawerToggle(
+//                this, /* host Activity */
+//                mDrawerLayout, /* DrawerLayout object */
+//                R.drawable.ic_menu_black_24dp, /* nav drawer icon to replace 'Up' caret */
+//                R.string.drawer_open, /* "open drawer" description */
+//                R.string.drawer_close /* "close drawer" description */
+//        ) {
+//
+//            /** Called when a drawer has settled in a completely closed state. */
+//            public void onDrawerClosed(View view) {
+//                getSupportActionBar().setTitle(mTitle);
+//                supportInvalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+//            }
+//
+//            /** Called when a drawer has settled in a completely open state. */
+//            public void onDrawerOpened(View drawerView) {
+//                getSupportActionBar().setTitle(mDrawerTitle);
+//                supportInvalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+//            }
+//        };
     }
 
     public void displaySpeechRecognizer() {
@@ -198,7 +252,6 @@ public class MainActivity extends Activity implements IGetterInfoByENumber {
         return super.onCreateOptionsMenu(menu);
     }
 
-
     @Override
     public ENumber GetInfoByENumber(String eNumber_input) throws Exception {
 
@@ -236,7 +289,6 @@ public class MainActivity extends Activity implements IGetterInfoByENumber {
         }
         return false;
     }
-
 
     private Integer tryParse(Object obj) {
         Integer retVal;
