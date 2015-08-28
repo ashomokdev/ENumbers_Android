@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
-import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -61,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements IGetterInfoByENum
         setContentView(R.layout.main);
 
         inputEditText = (EditText) findViewById(R.id.inputE);
+        inputEditText.setSelection(inputEditText.getText().length()); //starts type after "E"
 
         listView = (ListView) findViewById(R.id.ENumberList);
 
@@ -131,8 +130,8 @@ public class MainActivity extends AppCompatActivity implements IGetterInfoByENum
                 } else {
 
                     inputEditText.setText(startChar);
-                    inputEditText.setSelection(inputEditText.getText().length());
                 }
+                inputEditText.setSelection(inputEditText.getText().length());
             }
 
             @Override
