@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -39,14 +42,6 @@ public class MainActivity extends AppCompatActivity implements IGetterInfoByENum
     private ListView listView;
 
     private Intent intent;
-
-    private String[] mScreenTitles;
-    private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
-
-    private ActionBarDrawerToggle mDrawerToggle;
-    private CharSequence mDrawerTitle;
-    private CharSequence mTitle;
 
     /**
      * Called when the activity is first created.
@@ -114,6 +109,7 @@ public class MainActivity extends AppCompatActivity implements IGetterInfoByENum
             }
         });
 
+        Intent intent = new Intent(this, RightMenuActivity.class);
 
         inputEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -165,50 +161,7 @@ public class MainActivity extends AppCompatActivity implements IGetterInfoByENum
             }
         });
 
-//        mTitle = mDrawerTitle = getTitle();
-//        mScreenTitles = getResources().getStringArray(R.array.screen_array);
-//        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        mDrawerList = (ListView) findViewById(R.id.left_drawer);
-//
-//        // Set the adapter for the list view
-//        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-//                R.layout.drawer_list_item, mScreenTitles));
-//        // Set the list's click listener
-//        mDrawerList.setOnItemClickListener(new ListView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                mDrawerList.setItemChecked(i, true);
-//                setTitle("......");
-//
-//                String text= "menu click... should be implemented";
-//                Toast.makeText(MainActivity.this, text, Toast.LENGTH_LONG).show();
-//                mDrawerLayout.closeDrawer(mDrawerList);
-//            }
-//        });
-//
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setHomeButtonEnabled(true);
-//
-//        mDrawerToggle = new ActionBarDrawerToggle(
-//                this, /* host Activity */
-//                mDrawerLayout, /* DrawerLayout object */
-//                R.drawable.ic_menu_black_24dp, /* nav drawer icon to replace 'Up' caret */
-//                R.string.drawer_open, /* "open drawer" description */
-//                R.string.drawer_close /* "close drawer" description */
-//        ) {
-//
-//            /** Called when a drawer has settled in a completely closed state. */
-//            public void onDrawerClosed(View view) {
-//                getSupportActionBar().setTitle(mTitle);
-//                supportInvalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-//            }
-//
-//            /** Called when a drawer has settled in a completely open state. */
-//            public void onDrawerOpened(View drawerView) {
-//                getSupportActionBar().setTitle(mDrawerTitle);
-//                supportInvalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-//            }
-//        };
+
     }
 
     public void displaySpeechRecognizer() {
