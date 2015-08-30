@@ -20,20 +20,21 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
 
-        <fragment android:name="com.example.eNumbers.MainFragment"
-                  android:id="@+id/titles"
-                  android:layout_weight="1"
-                  android:layout_width="0px"
-                  android:layout_height="match_parent"
-                tools:layout="@layout/start_fragment"/>
+        <!--<fragment android:name="com.example.eNumbers.MainFragment"-->
+                  <!--android:id="@+id/titles"-->
+                  <!--android:layout_width="fill_parent"-->
+                  <!--android:layout_height="fill_parent"-->
+                  <!--android:layout_marginLeft="10dp"-->
+                  <!--android:layout_marginRight="10dp"-->
+                <!--tools:layout="@layout/start_fragment"/>-->
 
         <!--a FrameLayout to contain the main content (populated by a Fragment at runtime)-->
-        <!--<FrameLayout-->
-                <!--android:id="@+id/content_frame"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--/>-->
-        <!--a ListView for the navigation drawer-->
+        <FrameLayout
+                android:id="@+id/content_frame"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+        a ListView for the navigation drawer
         <ListView
                 android:id="@+id/lv_navigation_drawer"
                 android:layout_width="240dp"

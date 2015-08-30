@@ -2,6 +2,7 @@ package com.example.eNumbers;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -21,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
 
     private CharSequence mTitle;
 
+    private String[] mMenuArray;
+
     /**
      * Called when the activity is first created.
      */
@@ -31,13 +34,12 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.start_activity_layout);
 
-        //alternative way to run Fragment
-//        Fragment fragment = new MainFragment();
-//
-//        FragmentManager fragmentManager = getFragmentManager();
-//        fragmentManager.beginTransaction()
-//                .replace(R.id.content_frame, fragment)
-//                .commit();
+        Fragment fragment = new MainFragment();
+
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.content_frame, fragment)
+                .commit();
 
         //Right menu settings
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -76,11 +78,12 @@ public class MainActivity extends AppCompatActivity {
             // Set the drawer toggle as the DrawerListener
             mDrawerLayout.setDrawerListener(toggle);
 
+            mMenuArray =  getResources().getStringArray(R.array.main_menu_array);
             mDrawerList = (ListView) findViewById(R.id.lv_navigation_drawer);
             mDrawerList.setAdapter(new ArrayAdapter<String>(
                     this,
                     android.R.layout.simple_list_item_1,
-                    new String[]{"Screen 1", "Screen 2", "Screen 3"}));
+                    mMenuArray));
 
             mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
         } catch (Exception e) {
@@ -103,38 +106,30 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onItemClick(AdapterView parent, View view, int position, long id) {
 
-            //TODO
-//            selectItem(position);
+            selectItem(position);
 
             // Highlight the selected item, update the title, and close the drawer
             // update selected item and title, then close the drawer
             mDrawerList.setItemChecked(position, true);
-
-            String text = "menu click... should be implemented";
-            Toast.makeText(MainActivity.this, text, Toast.LENGTH_LONG).show();
             mDrawerLayout.closeDrawer(mDrawerList);
-
         }
     }
 
     private void selectItem(int position) {
-        //TODo rewrire
-        // Create a new fragment and specify the planet to show based on position
-//        Fragment fragment = new PlanetFragment();
+            //TODo rewrire
+            // Create a new fragment and specify the planet to show based on position
+            Fragment fragment = new AboutFragment();
 //        Bundle args = new Bundle();
 //        args.putInt(PlanetFragment.ARG_PLANET_NUMBER, position);
 //        fragment.setArguments(args);
-//
-//        // Insert the fragment by replacing any existing fragment
-//        FragmentManager fragmentManager = getFragmentManager();
-//        fragmentManager.beginTransaction()
-//                .replace(R.id.content_frame, fragment)
-//                .commit();
-//
-//        // Highlight the selected item, update the title, and close the drawer
-//        mDrawerList.setItemChecked(position, true);
-//        setTitle(mPlanetTitles[position]);
-//        mDrawerLayout.closeDrawer(mDrawerList);
+
+            // Insert the fragment by replacing any existing fragment
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction
+                    .replace(R.id.content_frame, fragment);
+
+            transaction.addToBackStack(null); //This code may or may not be needed based on whether you want to allow the user to press the 'back' button to go back
+            transaction.commit();
     }
 
     @Override
@@ -168,6 +163,14 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount() > 0 ){
+            getFragmentManager().popBackStack();
+        } else {
+            super.onBackPressed();
+        }
+    }
 }
 
 
