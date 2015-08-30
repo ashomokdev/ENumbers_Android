@@ -1,45 +1,25 @@
 package com.example.eNumbers;
 
-import android.content.Context;
-import android.content.Intent;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.content.res.Configuration;
 import android.os.Bundle;
-import android.speech.RecognizerIntent;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
+import android.view.*;
 import android.widget.*;
-import org.simpleframework.xml.Serializer;
-import org.simpleframework.xml.core.Persister;
 
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-
-
-public class MainActivity extends AppCompatActivity implements IGetterInfoByENumber {
-
-    private static final int SPEECH_REQUEST_CODE = 0;
-
-    private Button searchBtn;
-
-    private ImageButton voiceInputBtn;
-
-    private EditText inputEditText;
-
-    private TextView outputWarning;
-
-    private ListView listView;
+public class MainActivity extends AppCompatActivity {
 
     private ActionBarDrawerToggle toggle;
+
+    private ListView mDrawerList;
+
+    private DrawerLayout mDrawerLayout;
+
+    private CharSequence mTitle;
 
     /**
      * Called when the activity is first created.
@@ -49,164 +29,63 @@ public class MainActivity extends AppCompatActivity implements IGetterInfoByENum
 
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.main);
+        setContentView(R.layout.start_activity_layout);
 
-//        Intent intent = new Intent(this, RightMenuActivity.class);
-//        startActivity(intent);
-
-        inputEditText = (EditText) findViewById(R.id.inputE);
-        inputEditText.setSelection(inputEditText.getText().length()); //starts type after "E"
-
-        listView = (ListView) findViewById(R.id.ENumberList);
-
-        outputWarning = (TextView) findViewById(R.id.warning);
-
-        searchBtn = (Button) findViewById(R.id.button);
-
-        voiceInputBtn = (ImageButton) findViewById(R.id.mic_icon);
-
-        searchBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (v != null) {
-
-                    outputWarning.setText("");
-
-                    listView.setAdapter(null);
-
-                    ENumber result = null;
-                    String inputing = inputEditText.getText().toString();
-                    try {
-
-                        if (inputing.length() >= 3) {
-                            result = GetInfoByENumber(inputing);
-                        }
-
-                    } catch (Exception e) {
-                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-
-                    if (result == null) {
-
-                        outputWarning.setText(getApplicationContext().getString(R.string.notFoundMessage));
-                    } else {
-                        List<ENumber> data = new ArrayList<ENumber>();
-
-                        //TODO add all result
-                        data.add(result);
-
-                        listView.setAdapter(new ENumberListAdapter(v.getContext(), data));
-
-                        //to hide the soft keyboard
-                        InputMethodManager imm = (InputMethodManager) getSystemService(
-                                Context.INPUT_METHOD_SERVICE);
-                        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                    }
-                }
-            }
-        });
-
-        inputEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                String startChar = getApplicationContext().getString(R.string.startChar);
-
-                if (charSequence.toString().startsWith(startChar)) {
-
-                } else {
-
-                    inputEditText.setText(startChar);
-                }
-                inputEditText.setSelection(inputEditText.getText().length());
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-            }
-        });
-
-        inputEditText.setOnEditorActionListener(new EditText.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-
-                    searchBtn.setPressed(true);
-                    searchBtn.invalidate();
-                    searchBtn.performClick();
-
-                    return true;
-                }
-
-                return false;
-            }
-        });
-
-        voiceInputBtn.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-
-                displaySpeechRecognizer();
-            }
-        });
+        //alternative way to run Fragment
+//        Fragment fragment = new MainFragment();
+//
+//        FragmentManager fragmentManager = getFragmentManager();
+//        fragmentManager.beginTransaction()
+//                .replace(R.id.content_frame, fragment)
+//                .commit();
 
         //Right menu settings
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        try {
+            mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+            toggle = new ActionBarDrawerToggle(
+                    this,
+                    mDrawerLayout,
+                    toolbar,
+                    R.string.navigation_drawer_open,
+                    R.string.navigation_drawer_close) {
+                /**
+                 * Called when a drawer has settled in a completely closed state.
+                 */
+                public void onDrawerClosed(View view) {
+                    super.onDrawerClosed(view);
+                    invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                }
 
-        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        toggle = new ActionBarDrawerToggle(
-                this,
-                drawerLayout,
-                R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close);
-        toggle.setDrawerIndicatorEnabled(true);
-        drawerLayout.setDrawerListener(toggle);
+                /**
+                 * Called when a drawer has settled in a completely open state.
+                 */
+                public void onDrawerOpened(View drawerView) {
+                    super.onDrawerOpened(drawerView);
+                    invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                }
+            };
 
-        ListView lv_navigation_drawer = (ListView) findViewById(R.id.lv_navigation_drawer);
-        lv_navigation_drawer.setAdapter(new ArrayAdapter<String>(
-                this,
-                android.R.layout.simple_list_item_1,
-                new String[]{"Screen 1", "Screen 2", "Screen 3"}));
-    }
+            toggle.setDrawerIndicatorEnabled(true);
 
-    public void displaySpeechRecognizer() {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
 
-        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+            // Set the drawer toggle as the DrawerListener
+            mDrawerLayout.setDrawerListener(toggle);
 
-        // Start the activity, the intent will be populated with the speech text
-        startActivityForResult(intent, SPEECH_REQUEST_CODE);
-    }
+            mDrawerList = (ListView) findViewById(R.id.lv_navigation_drawer);
+            mDrawerList.setAdapter(new ArrayAdapter<String>(
+                    this,
+                    android.R.layout.simple_list_item_1,
+                    new String[]{"Screen 1", "Screen 2", "Screen 3"}));
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode,
-                                    Intent data) {
-        if (requestCode == SPEECH_REQUEST_CODE && resultCode == RESULT_OK) {
-
-            List<String> results = data.getStringArrayListExtra(
-                    RecognizerIntent.EXTRA_RESULTS);
-
-
-            inputEditText.setText(
-                    getApplicationContext().getString(R.string.startChar));
-            String spokenText = results.get(0);
-            inputEditText.append(spokenText);
-
-            searchBtn.setPressed(true);
-            searchBtn.invalidate();
-            searchBtn.performClick();
+            mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
     //TODO
@@ -218,53 +97,77 @@ public class MainActivity extends AppCompatActivity implements IGetterInfoByENum
         return super.onCreateOptionsMenu(menu);
     }
 
+
+    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+
+        @Override
+        public void onItemClick(AdapterView parent, View view, int position, long id) {
+
+            //TODO
+//            selectItem(position);
+
+            // Highlight the selected item, update the title, and close the drawer
+            // update selected item and title, then close the drawer
+            mDrawerList.setItemChecked(position, true);
+
+            String text = "menu click... should be implemented";
+            Toast.makeText(MainActivity.this, text, Toast.LENGTH_LONG).show();
+            mDrawerLayout.closeDrawer(mDrawerList);
+
+        }
+    }
+
+    private void selectItem(int position) {
+        //TODo rewrire
+        // Create a new fragment and specify the planet to show based on position
+//        Fragment fragment = new PlanetFragment();
+//        Bundle args = new Bundle();
+//        args.putInt(PlanetFragment.ARG_PLANET_NUMBER, position);
+//        fragment.setArguments(args);
+//
+//        // Insert the fragment by replacing any existing fragment
+//        FragmentManager fragmentManager = getFragmentManager();
+//        fragmentManager.beginTransaction()
+//                .replace(R.id.content_frame, fragment)
+//                .commit();
+//
+//        // Highlight the selected item, update the title, and close the drawer
+//        mDrawerList.setItemChecked(position, true);
+//        setTitle(mPlanetTitles[position]);
+//        mDrawerLayout.closeDrawer(mDrawerList);
+    }
+
     @Override
-    public ENumber GetInfoByENumber(String eNumber_input) throws Exception {
-
-        if (inputingIsValid(eNumber_input)) {
-            InputStream inputStream = this.getApplicationContext().getResources().openRawResource(R.raw.base);
-
-            try {
-                Serializer serializer = new Persister();
-                ENumbersCollection eNumbersCollection = serializer.read(ENumbersCollection.class, inputStream);
-
-                for (ENumber eNumber : eNumbersCollection) {
-
-                    if (eNumber.getCode().equals(eNumber_input)) {
-
-                        return eNumber;
-                    }
-                }
-            } catch (Exception e) {
-                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show(); //error here
-            }
-        }
-        return null;
+    public void setTitle(CharSequence title) {
+        mTitle = title;
+        getSupportActionBar().setTitle(mTitle);
     }
 
-    private boolean inputingIsValid(String ENumber_input) {
-        if (ENumber_input.startsWith(getApplicationContext().getString(R.string.startChar))) {
-
-            if (ENumber_input.length() > 3 && ENumber_input.length() < 7) {
-                String numb_without_E = ENumber_input.substring(1);
-
-                if (tryParse(numb_without_E) != null) {
-                    return true;
-                }
-            }
-        }
-        return false;
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        toggle.syncState();
     }
 
-    private Integer tryParse(Object obj) {
-        Integer retVal;
-        try {
-            retVal = Integer.parseInt((String) obj);
-        } catch (NumberFormatException nfe) {
-            retVal = null;
-        }
-        return retVal;
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        toggle.onConfigurationChanged(newConfig);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Pass the event to ActionBarDrawerToggle, if it returns
+        // true, then it has handled the app icon touch event
+        if (toggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        // Handle your other action bar items...
+
+        return super.onOptionsItemSelected(item);
+    }
+
 }
 
 
