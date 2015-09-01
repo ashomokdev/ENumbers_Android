@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
             // Set the drawer toggle as the DrawerListener
             mDrawerLayout.setDrawerListener(toggle);
 
-            mMenuArray =  getResources().getStringArray(R.array.main_menu_array);
+            mMenuArray = getResources().getStringArray(R.array.main_menu_array);
             mDrawerList = (ListView) findViewById(R.id.lv_navigation_drawer);
             mDrawerList.setAdapter(new ArrayAdapter<String>(
                     this,
@@ -116,20 +116,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void selectItem(int position) {
-            //TODo rewrire
-            // Create a new fragment and specify the planet to show based on position
-            Fragment fragment = new AboutFragment();
+        switch (position) {
+            case 0:
+                break;
+            case 1:
+                //About
+                Fragment fragment = new AboutFragment();
 //        Bundle args = new Bundle();
 //        args.putInt(PlanetFragment.ARG_PLANET_NUMBER, position);
 //        fragment.setArguments(args);
 
-            // Insert the fragment by replacing any existing fragment
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction
-                    .replace(R.id.content_frame, fragment);
+                // Insert the fragment by replacing any existing fragment
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction
+                        .replace(R.id.content_frame, fragment);
 
-            transaction.addToBackStack(null); //This code may or may not be needed based on whether you want to allow the user to press the 'back' button to go back
-            transaction.commit();
+                transaction.addToBackStack(null); //This code may or may not be needed based on whether you want to allow the user to press the 'back' button to go back
+                transaction.commit();
+                break;
+            default:
+
+                break;
+        }
     }
 
     @Override
@@ -165,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (getFragmentManager().getBackStackEntryCount() > 0 ){
+        if (getFragmentManager().getBackStackEntryCount() > 0) {
             getFragmentManager().popBackStack();
         } else {
             super.onBackPressed();
