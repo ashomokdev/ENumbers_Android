@@ -1,17 +1,16 @@
 package com.example.eNumbers;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.view.GestureDetectorCompat;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.*;
 import android.widget.TextView;
 
 /**
  * Created by Iuliia on 30.08.2015.
  */
-public class AboutActivity extends Activity  {
+public class AboutActivity extends AppCompatActivity {
     private GestureDetectorCompat mDetector;
 
     private TextView mTextView_appName;
@@ -19,35 +18,34 @@ public class AboutActivity extends Activity  {
     private TextView mTextView_version;
 
 
-
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.about_fragment);
+        setContentView(R.layout.about_layout);
 
         mDetector = new GestureDetectorCompat(this, new MyGestureListener());
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_about_layout);
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            mTextView_appName = (TextView) findViewById(R.id.appName);
+            mTextView_appName.setText(R.string.appName);
 
-        mTextView_appName = (TextView) findViewById(R.id.appName);
-        mTextView_appName.setText(R.string.appName);
+            mTextView_developer = (TextView) findViewById(R.id.developer);
+            mTextView_developer.setText(R.string.developer);
 
-        mTextView_developer = (TextView) findViewById(R.id.developer);
-        mTextView_developer.setText(R.string.developer);
-
-        mTextView_version = (TextView) findViewById(R.id.version);
-        mTextView_version.setText(R.string.version);
+            mTextView_version = (TextView) findViewById(R.id.version);
+            mTextView_version.setText(R.string.version);
     }
 
     @Override
-    public  void onPause()
-    {
+    public void onPause() {
         super.onPause();
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event){
+    public boolean onTouchEvent(MotionEvent event) {
         this.mDetector.onTouchEvent(event);
         return super.onTouchEvent(event);
     }
