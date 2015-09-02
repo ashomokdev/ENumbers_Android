@@ -73,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
 
             toggle.setDrawerIndicatorEnabled(true);
 
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);
 
             // Set the drawer toggle as the DrawerListener
@@ -124,18 +123,6 @@ public class MainActivity extends AppCompatActivity {
                 //About
                 Intent intent = new Intent(this, AboutActivity.class);
                 startActivity(intent);
-//                Fragment fragment = new AboutFragment();
-////        Bundle args = new Bundle();
-////        args.putInt(PlanetFragment.ARG_PLANET_NUMBER, position);
-////        fragment.setArguments(args);
-//
-//                // Insert the fragment by replacing any existing fragment
-//                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-//                transaction
-//                        .replace(R.id.content_frame, fragment);
-//
-//                transaction.addToBackStack(null); //This code may or may not be needed based on whether you want to allow the user to press the 'back' button to go back
-//                transaction.commit();
                 break;
             default:
 
