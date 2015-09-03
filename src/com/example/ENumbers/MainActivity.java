@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private CharSequence mTitle;
 
     private String[]  mMenuArray;
-
+    
     /**
      * Called when the activity is first created.
      */
@@ -100,46 +100,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-
-    private class DrawerItemClickListener implements ListView.OnItemClickListener {
-
-        @Override
-        public void onItemClick(AdapterView parent, View view, int position, long id) {
-
-            selectItem(position);
-
-            // Highlight the selected item, update the title, and close the drawer
-            // update selected item and title, then close the drawer
-            mDrawerList.setItemChecked(position, true);
-            mDrawerLayout.closeDrawer(mDrawerList);
-        }
-    }
-
-    private void selectItem(int position) {
-        switch (position) {
-            case 0:
-                //leave feedback
-                leaveFeedback();
-                break;
-            case 1:
-                //About
-                Intent intent = new Intent(this, AboutActivity.class);
-                startActivity(intent);
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void leaveFeedback() {
-        //TODO rewrite url
-        String appPackageName= getPackageName();
-     //   Intent marketIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName));
-        Intent marketIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.google.android.gm"));
-        marketIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET|Intent.FLAG_ACTIVITY_MULTIPLE_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(marketIntent);
-    }
-
     @Override
     public void setTitle(CharSequence title) {
         mTitle = title;
@@ -177,6 +137,45 @@ public class MainActivity extends AppCompatActivity {
             getFragmentManager().popBackStack();
         } else {
             super.onBackPressed();
+        }
+    }
+
+    private void selectItem(int position) {
+        switch (position) {
+            case 0:
+                //leave feedback
+                leaveFeedback();
+                break;
+            case 1:
+                //About
+                Intent intent = new Intent(this, AboutActivity.class);
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void leaveFeedback() {
+        //TODO rewrite url
+        String appPackageName= getPackageName();
+        //   Intent marketIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName));
+        Intent marketIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.google.android.gm"));
+        marketIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET|Intent.FLAG_ACTIVITY_MULTIPLE_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(marketIntent);
+    }
+
+    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+
+        @Override
+        public void onItemClick(AdapterView parent, View view, int position, long id) {
+
+            selectItem(position);
+
+            // Highlight the selected item, update the title, and close the drawer
+            // update selected item and title, then close the drawer
+            mDrawerList.setItemChecked(position, true);
+            mDrawerLayout.closeDrawer(mDrawerList);
         }
     }
 }

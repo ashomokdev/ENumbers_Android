@@ -29,11 +29,19 @@ public class MainFragment extends Fragment {
 
     private ImageButton voiceInputBtn;
 
+    private ImageButton closeBtn;
+
     private EditText inputEditText;
 
     private TextView outputWarning;
 
     private ListView listView;
+
+    private List<ENumber> data;
+
+    private String startChar;
+
+    private boolean allDataMode;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,10 +57,9 @@ public class MainFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState)
-    {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        startChar = getString(R.string.startChar);
         inputEditText = (EditText) view.findViewById(R.id.inputE);
         inputEditText.setSelection(inputEditText.getText().length()); //starts type after "E"
 
@@ -62,7 +69,9 @@ public class MainFragment extends Fragment {
 
         searchBtn = (Button) view.findViewById(R.id.button);
 
-        voiceInputBtn = (ImageButton) view.findViewById(R.id.mic_icon);
+        voiceInputBtn = (ImageButton) view.findViewById(R.id.ic_mic);
+
+        closeBtn = (ImageButton) view.findViewById(R.id.ic_close);
 
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,33 +83,39 @@ public class MainFragment extends Fragment {
 
                     listView.setAdapter(null);
 
+                    data = new ArrayList<ENumber>();
+
                     ENumber result = null;
                     String inputing = inputEditText.getText().toString();
 
-                        if (inputing.length() >= 3) {
-                            try {
-                                result = GetInfoByENumber(inputing);
-                            } catch (Exception e) {
-                                Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-                            }
-
-                            if (result == null) {
-
-                                outputWarning.setText(getActivity().getApplicationContext().getString(R.string.notFoundMessage));
-                            } else {
-                                List<ENumber> data = new ArrayList<ENumber>();
-
-                                //TODO add all result
-                                data.add(result);
-
-                                listView.setAdapter(new ENumberListAdapter(v.getContext(), data));
-
-                                //to hide the soft keyboard
-                                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
-                                        Context.INPUT_METHOD_SERVICE);
-                                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                            }
+                    if (inputing.length() >= 3) {
+                        try {
+                            result = GetInfoByENumber(inputing);
+                        } catch (Exception e) {
+                            Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                         }
+
+                        if (result == null) {
+
+                            outputWarning.setText(getActivity().getApplicationContext().getString(R.string.notFoundMessage));
+                        } else {
+
+                            //TODO add all result
+                            data.add(result);
+
+                            listView.setAdapter(new ENumberListAdapter(v.getContext(), data));
+
+                            //to hide the soft keyboard
+                            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
+                                    Context.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                        }
+                    }
+                    else if(inputing.contentEquals(startChar))
+                    {
+                        //empty enter
+                        showAllData(v);
+                    }
                 }
             }
         });
@@ -113,7 +128,7 @@ public class MainFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                String startChar = getActivity().getApplicationContext().getString(R.string.startChar);
+
 
                 if (charSequence.toString().startsWith(startChar)) {
 
@@ -157,27 +172,26 @@ public class MainFragment extends Fragment {
                 displaySpeechRecognizer();
             }
         });
-    }
 
-    @Override
-    public  void onPause()
-    {
-        super.onPause();
-    }
+        closeBtn.setOnClickListener(new View.OnClickListener() {
 
-    public void displaySpeechRecognizer() {
+            @Override
+            public void onClick(View view) {
 
-        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+                inputEditText.setText("");
 
-        // Start the activity, the intent will be populated with the speech text
-        startActivityForResult(intent, SPEECH_REQUEST_CODE);
+                outputWarning.setText("");
+
+                listView.setAdapter(null);
+
+                showAllData(view);
+            }
+        });
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode,
-                                    Intent data) {
+                                 Intent data) {
         if (requestCode == SPEECH_REQUEST_CODE && resultCode == getActivity().RESULT_OK) {
 
             List<String> results = data.getStringArrayListExtra(
@@ -194,6 +208,21 @@ public class MainFragment extends Fragment {
             searchBtn.performClick();
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    public void displaySpeechRecognizer() {
+
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+
+        // Start the activity, the intent will be populated with the speech text
+        startActivityForResult(intent, SPEECH_REQUEST_CODE);
     }
 
     public ENumber GetInfoByENumber(String eNumber_input) throws Exception {
@@ -241,6 +270,25 @@ public class MainFragment extends Fragment {
             retVal = null;
         }
         return retVal;
+    }
+
+    //TODO implement loader instead
+    private void showAllData(View v) {
+        if (! allDataMode) {
+            data = new ArrayList<ENumber>();
+            int eNumb = 100;
+            while (eNumb < 105) {
+                try {
+                    ENumber result = GetInfoByENumber("E" + eNumb);
+                    eNumb++;
+                    data.add(result);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            listView.setAdapter(new ENumberListAdapter(v.getContext(), data));
+            allDataMode = true;
+        }
     }
 }
 

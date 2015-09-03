@@ -37,21 +37,37 @@
             android:gravity="center"
             android:background="@android:color/transparent"/>
 
-    <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleType="fitCenter"
-            android:padding="10dp"
-            android:layout_marginBottom="3dp"
-            android:layout_marginLeft="2dp"
-            android:layout_marginTop="0dp"
-            android:layout_alignBottom="@+id/inputE"
-            android:layout_alignTop="@+id/inputE"
-            android:layout_alignRight="@+id/inputE"
-            android:id="@+id/mic_icon"
-            android:src="@drawable/mic_google"
-            android:background="@null"
-            />
+        <LinearLayout  android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:scaleType="fitCenter"
+                         android:padding="7dp"
+                         android:layout_alignBottom="@+id/inputE"
+                         android:layout_alignTop="@+id/inputE"
+                         android:layout_alignRight="@+id/inputE"
+                       android:orientation="horizontal">
+
+        <ImageButton
+                android:layout_marginTop="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ic_close"
+                android:src="@drawable/ic_close_black_24dp"
+                android:background="@null"
+                android:scaleType="fitCenter"
+                android:layout_marginLeft="10dp"
+                />
+
+        <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ic_mic"
+                android:src="@drawable/ic_mic_none_black_36dp"
+                android:background="@null"
+                android:scaleType="fitCenter"
+                android:layout_marginLeft="10dp"
+                />
+        </LinearLayout>
+
 
     <Button
             android:background="@drawable/red_button"
