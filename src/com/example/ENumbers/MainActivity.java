@@ -1,28 +1,17 @@
 package com.example.eNumbers;
 
-import android.annotation.TargetApi;
-import android.app.ApplicationErrorReport;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.view.MotionEventCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.*;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 

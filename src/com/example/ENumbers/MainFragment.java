@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
-import android.support.v4.view.MotionEventCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.*;
@@ -38,7 +37,7 @@ public class MainFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        
+
         super.onCreate(savedInstanceState);
     }
 
@@ -196,7 +195,6 @@ public class MainFragment extends Fragment {
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
-
 
     public ENumber GetInfoByENumber(String eNumber_input) throws Exception {
 
