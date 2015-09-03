@@ -5,12 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.support.v4.view.MotionEventCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
@@ -40,7 +38,7 @@ public class MainFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
+        
         super.onCreate(savedInstanceState);
     }
 
@@ -79,32 +77,31 @@ public class MainFragment extends Fragment {
 
                     ENumber result = null;
                     String inputing = inputEditText.getText().toString();
-                    try {
 
                         if (inputing.length() >= 3) {
-                            result = GetInfoByENumber(inputing);
+                            try {
+                                result = GetInfoByENumber(inputing);
+                            } catch (Exception e) {
+                                Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+
+                            if (result == null) {
+
+                                outputWarning.setText(getActivity().getApplicationContext().getString(R.string.notFoundMessage));
+                            } else {
+                                List<ENumber> data = new ArrayList<ENumber>();
+
+                                //TODO add all result
+                                data.add(result);
+
+                                listView.setAdapter(new ENumberListAdapter(v.getContext(), data));
+
+                                //to hide the soft keyboard
+                                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
+                                        Context.INPUT_METHOD_SERVICE);
+                                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                            }
                         }
-
-                    } catch (Exception e) {
-                        Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-
-                    if (result == null) {
-
-                        outputWarning.setText(getActivity().getApplicationContext().getString(R.string.notFoundMessage));
-                    } else {
-                        List<ENumber> data = new ArrayList<ENumber>();
-
-                        //TODO add all result
-                        data.add(result);
-
-                        listView.setAdapter(new ENumberListAdapter(v.getContext(), data));
-
-                        //to hide the soft keyboard
-                        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
-                                Context.INPUT_METHOD_SERVICE);
-                        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                    }
                 }
             }
         });
@@ -139,9 +136,12 @@ public class MainFragment extends Fragment {
 
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
 
-                    searchBtn.setPressed(true);
-                    searchBtn.invalidate();
                     searchBtn.performClick();
+
+                    //to hide the soft keyboard
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
+                            Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(textView.getWindowToken(), 0);
 
                     return true;
                 }
@@ -196,6 +196,7 @@ public class MainFragment extends Fragment {
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+
 
     public ENumber GetInfoByENumber(String eNumber_input) throws Exception {
 

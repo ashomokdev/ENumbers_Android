@@ -9,11 +9,16 @@
                  >
         <activity android:name="com.example.eNumbers.MainActivity"
                   android:label="@string/appName"
+                  android:configChanges="keyboardHidden|orientation|screenSize"
                   android:theme="@style/Theme.AppCompat.Light.NoActionBar"
                 >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.APP_ERROR" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name=".AboutActivity"

@@ -39,6 +39,21 @@ public class AboutActivity extends AppCompatActivity {
         mTextView_version.setText(R.string.version);
     }
 
+    //TODO click email
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item){
+//        switch (item.getItemId()){
+//            case R.id.sendEmail:
+//                Intent Email = new Intent(Intent.ACTION_SEND);
+//                Email.setType("text/email");
+//                Email.putExtra(Intent.EXTRA_EMAIL, new String[] { "admin@hotmail.com" });
+//                Email.putExtra(Intent.EXTRA_SUBJECT, "Feedback");
+//                Email.putExtra(Intent.EXTRA_TEXT, "Dear ...," + "");
+//                startActivity(Intent.createChooser(Email, "Send Feedback:"));
+//                return true;
+//        }
+//    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
