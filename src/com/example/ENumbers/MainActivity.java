@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private CharSequence mTitle;
 
     private String[]  mMenuArray;
-    
+
     /**
      * Called when the activity is first created.
      */

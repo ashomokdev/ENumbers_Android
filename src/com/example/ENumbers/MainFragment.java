@@ -41,8 +41,6 @@ public class MainFragment extends Fragment {
 
     private String startChar;
 
-    private boolean allDataMode;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -110,11 +108,11 @@ public class MainFragment extends Fragment {
                                     Context.INPUT_METHOD_SERVICE);
                             imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                         }
-                    }
-                    else if(inputing.contentEquals(startChar))
-                    {
+                    } else if (inputing.contentEquals(startChar)) {
                         //empty enter
                         showAllData(v);
+                    } else {
+                        outputWarning.setText(getActivity().getApplicationContext().getString(R.string.notFoundMessage));
                     }
                 }
             }
@@ -127,8 +125,6 @@ public class MainFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-
 
                 if (charSequence.toString().startsWith(startChar)) {
 
@@ -274,21 +270,18 @@ public class MainFragment extends Fragment {
 
     //TODO implement loader instead
     private void showAllData(View v) {
-        if (! allDataMode) {
-            data = new ArrayList<ENumber>();
-            int eNumb = 100;
-            while (eNumb < 105) {
-                try {
-                    ENumber result = GetInfoByENumber("E" + eNumb);
-                    eNumb++;
-                    data.add(result);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        data = new ArrayList<ENumber>();
+        int eNumb = 100;
+        while (eNumb < 105) {
+            try {
+                ENumber result = GetInfoByENumber("E" + eNumb);
+                eNumb++;
+                data.add(result);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            listView.setAdapter(new ENumberListAdapter(v.getContext(), data));
-            allDataMode = true;
         }
+        listView.setAdapter(new ENumberListAdapter(v.getContext(), data));
     }
 }
 

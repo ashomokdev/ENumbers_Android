@@ -6,7 +6,9 @@ package com.example.enumberdata;
 
 public class ENumber {
 
+    private enum DangerLevel { safe, medium, hight, notKnown }
 
+    private DangerLevel dangerLevel;
     private String code;
     private String name;
     private String purpose;
