@@ -11,10 +11,7 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "Enumbers")
 public class ENumber {
 
-    @DatabaseField(generatedId = true)
-    private int Id;
-
-    @DatabaseField(canBeNull = false)
+    @DatabaseField(id = true, canBeNull = false)
     private String code;
 
     @DatabaseField(canBeNull = false)
@@ -117,7 +114,9 @@ public class ENumber {
         return avoidIt;
     }
 
-
+    public ENumber() {
+        // ORMLite needs a no-arg constructor
+    }
     public ENumber(String code, String name, String purpose, String status) {
         this.code = code;
         this.name = name;

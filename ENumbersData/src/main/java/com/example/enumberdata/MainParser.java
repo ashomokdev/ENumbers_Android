@@ -16,6 +16,4 @@ public class MainParser {
         new URLProcessorImpl(Arrays.asList(base_url, url_1, url_2, url3))
                 .init();
     }
-
-
 }

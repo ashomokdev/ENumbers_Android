@@ -1,5 +1,10 @@
 package com.example.enumberdata;
 
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.DaoManager;
+import com.j256.ormlite.jdbc.JdbcConnectionSource;
+import com.j256.ormlite.support.ConnectionSource;
+import com.j256.ormlite.table.TableUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -19,6 +24,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -53,13 +59,19 @@ public class URLProcessorImpl implements  URLProcessor {
         enumberService.reformatAdditionalInfo();
 
         if (!data.isEmpty()) {
-            fillSQLiteDB();
-         //   createXML(data);
+            //createXML(data); //deprecated
+            fillSQLiteDB(data);
         }
     }
 
-    private void fillSQLiteDB() {
+    private void fillSQLiteDB(ArrayList<ENumber> data) {
 
+        DBService dbService = new DBServiceImpl();
+        dbService.createDB();
+        for(ENumber item:data) {
+            dbService.insert(item);
+        }
+        dbService.closeConnection();
     }
 
     private  ArrayList<ENumber> addAdditionalInfoForURL2or3(ArrayList<ENumber> data, String url) {
