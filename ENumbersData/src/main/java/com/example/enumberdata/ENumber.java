@@ -4,23 +4,49 @@
 
 package com.example.enumberdata;
 
+import com.j256.ormlite.field.DataType;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+@DatabaseTable(tableName = "Enumbers")
 public class ENumber {
 
-    private enum DangerLevel { safe, medium, hight, notKnown }
+    @DatabaseField(generatedId = true)
+    private int Id;
 
-    private DangerLevel dangerLevel;
+    @DatabaseField(canBeNull = false)
     private String code;
+
+    @DatabaseField(canBeNull = false)
     private String name;
+
+    @DatabaseField
     private String purpose;
 
+    @DatabaseField
     private String status;
+
+    @DatabaseField
     private String additionalInfo;
+
+    @DatabaseField
     private String typicalProducts;
+
+    @DatabaseField
     private String approvedIn;
+
+    @DatabaseField
     private String bannedIn;
+
+    @DatabaseField
     private boolean badForChildren;
+
+    @DatabaseField
+    private DangerLevel dangerLevel;
+
     private boolean avoidIt;
 
+    private enum DangerLevel { safe, medium, hight, notKnown }
 
     public void setApprovedIn(String approvedIn) {
         this.approvedIn = approvedIn;

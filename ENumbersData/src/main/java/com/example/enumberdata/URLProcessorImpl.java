@@ -53,8 +53,13 @@ public class URLProcessorImpl implements  URLProcessor {
         enumberService.reformatAdditionalInfo();
 
         if (!data.isEmpty()) {
-            createXML(data);
+            fillSQLiteDB();
+         //   createXML(data);
         }
+    }
+
+    private void fillSQLiteDB() {
+
     }
 
     private  ArrayList<ENumber> addAdditionalInfoForURL2or3(ArrayList<ENumber> data, String url) {
