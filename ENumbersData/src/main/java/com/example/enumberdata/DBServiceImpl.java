@@ -19,7 +19,7 @@ public class DBServiceImpl implements DBService {
     @Override
     public void createDB() {
         try {
-            String databaseUrl = "jdbc:sqlite:C:\\Users\\Iuliia\\IdeaProjects\\ENumbers_Android_Java_Maven\\Enumbers.db";
+            String databaseUrl = "jdbc:sqlite:C:\\Users\\Iuliia\\IdeaProjects\\ENumbers_Android_Java_Maven\\assets\\databases\\Enumbers.db";
             // create a connection source to our database
             connectionSource = new JdbcConnectionSource(databaseUrl);
 

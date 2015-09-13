@@ -1,12 +1,17 @@
 package com.example.eNumbers;
 
 import android.app.Fragment;
+import android.app.LoaderManager;
 import android.content.Context;
+import android.content.CursorLoader;
 import android.content.Intent;
+import android.content.Loader;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.*;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -21,7 +26,7 @@ import java.util.List;
 /**
  * Created by Iuliia on 29.08.2015.
  */
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final int SPEECH_REQUEST_CODE = 0;
 
@@ -41,9 +46,12 @@ public class MainFragment extends Fragment {
 
     private String startChar;
 
+    private ENumbersSQLiteAssetHelper db;
+
+    SimpleCursorAdapter scAdapter;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
     }
 
@@ -55,135 +63,173 @@ public class MainFragment extends Fragment {
     }
 
     @Override
+    public void onActivityCreated (Bundle savedInstanceState)
+    {
+        try {
+            super.onActivityCreated(savedInstanceState);
+
+            // Prepare the loader
+            db = new ENumbersSQLiteAssetHelper(getActivity());
+
+            // create Loader for data reading
+            getLoaderManager().initLoader(0, null, this);
+        }
+            catch (Exception e) {
+                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        startChar = getString(R.string.startChar);
-        inputEditText = (EditText) view.findViewById(R.id.inputE);
-        inputEditText.setSelection(inputEditText.getText().length()); //starts type after "E"
+        try {
+            super.onActivityCreated(savedInstanceState);
+            startChar = getString(R.string.startChar);
+            inputEditText = (EditText) view.findViewById(R.id.inputE);
+            inputEditText.setSelection(inputEditText.getText().length()); //starts type after "E"
 
-        listView = (ListView) view.findViewById(R.id.ENumberList);
+            //listView = (ListView) view.findViewById(R.id.ENumberList);
 
-        outputWarning = (TextView) view.findViewById(R.id.warning);
+            outputWarning = (TextView) view.findViewById(R.id.warning);
 
-        searchBtn = (Button) view.findViewById(R.id.button);
+            searchBtn = (Button) view.findViewById(R.id.button);
 
-        voiceInputBtn = (ImageButton) view.findViewById(R.id.ic_mic);
+            voiceInputBtn = (ImageButton) view.findViewById(R.id.ic_mic);
 
-        closeBtn = (ImageButton) view.findViewById(R.id.ic_close);
+            closeBtn = (ImageButton) view.findViewById(R.id.ic_close);
 
-        searchBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            searchBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                if (v != null) {
+                    if (v != null) {
+
+                        outputWarning.setText("");
+
+                        listView.setAdapter(null);
+
+                        data = new ArrayList<ENumber>();
+
+                        ENumber result = null;
+                        String inputing = inputEditText.getText().toString();
+
+                        if (inputing.length() >= 3) {
+                            try {
+                                result = GetInfoByENumber(inputing);
+                            } catch (Exception e) {
+                                Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+
+                            if (result == null) {
+
+                                outputWarning.setText(getActivity().getApplicationContext().getString(R.string.notFoundMessage));
+                            } else {
+
+                                //TODO add all result
+                                data.add(result);
+
+                                //listView.setAdapter(new ENumberListAdapter(v.getContext(), data));
+
+                                //to hide the soft keyboard
+                                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
+                                        Context.INPUT_METHOD_SERVICE);
+                                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                            }
+                        } else if (inputing.contentEquals(startChar)) {
+                            //empty enter
+                            showAllData(v);
+                        } else {
+                            outputWarning.setText(getActivity().getApplicationContext().getString(R.string.notFoundMessage));
+                        }
+                    }
+                }
+            });
+
+            inputEditText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    if (charSequence.toString().startsWith(startChar)) {
+
+                    } else {
+
+                        inputEditText.setText(startChar);
+                    }
+                    inputEditText.setSelection(inputEditText.getText().length());
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+                }
+            });
+
+            inputEditText.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+
+                    if (actionId == EditorInfo.IME_ACTION_DONE) {
+
+                        searchBtn.performClick();
+
+                        //to hide the soft keyboard
+                        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
+                                Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(textView.getWindowToken(), 0);
+
+                        return true;
+                    }
+
+                    return false;
+                }
+            });
+
+            voiceInputBtn.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View view) {
+
+                    displaySpeechRecognizer();
+                }
+            });
+
+            closeBtn.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View view) {
+
+                    inputEditText.setText("");
 
                     outputWarning.setText("");
 
                     listView.setAdapter(null);
 
-                    data = new ArrayList<ENumber>();
-
-                    ENumber result = null;
-                    String inputing = inputEditText.getText().toString();
-
-                    if (inputing.length() >= 3) {
-                        try {
-                            result = GetInfoByENumber(inputing);
-                        } catch (Exception e) {
-                            Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-                        }
-
-                        if (result == null) {
-
-                            outputWarning.setText(getActivity().getApplicationContext().getString(R.string.notFoundMessage));
-                        } else {
-
-                            //TODO add all result
-                            data.add(result);
-
-                            listView.setAdapter(new ENumberListAdapter(v.getContext(), data));
-
-                            //to hide the soft keyboard
-                            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
-                                    Context.INPUT_METHOD_SERVICE);
-                            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                        }
-                    } else if (inputing.contentEquals(startChar)) {
-                        //empty enter
-                        showAllData(v);
-                    } else {
-                        outputWarning.setText(getActivity().getApplicationContext().getString(R.string.notFoundMessage));
-                    }
+                    showAllData(view);
                 }
-            }
-        });
+            });
 
-        inputEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
+            String[] from = new String[]
+                    {ENumbersSQLiteAssetHelper.COLUMN_NAME_CODE,
+                    ENumbersSQLiteAssetHelper.COLUMN_NAME_NAME,
+                    ENumbersSQLiteAssetHelper.COLUMN_NAME_PURPOSE,
+                    ENumbersSQLiteAssetHelper.COLUMN_NAME_STATUS};
+            int[] to = new int[]
+                    {R.id.ECode,
+                    R.id.EName,
+                    R.id.EPurpose,
+                    R.id.EStatus};
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                if (charSequence.toString().startsWith(startChar)) {
-
-                } else {
-
-                    inputEditText.setText(startChar);
-                }
-                inputEditText.setSelection(inputEditText.getText().length());
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-            }
-        });
-
-        inputEditText.setOnEditorActionListener(new EditText.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-
-                    searchBtn.performClick();
-
-                    //to hide the soft keyboard
-                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
-                            Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(textView.getWindowToken(), 0);
-
-                    return true;
-                }
-
-                return false;
-            }
-        });
-
-        voiceInputBtn.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-
-                displaySpeechRecognizer();
-            }
-        });
-
-        closeBtn.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-
-                inputEditText.setText("");
-
-                outputWarning.setText("");
-
-                listView.setAdapter(null);
-
-                showAllData(view);
-            }
-        });
+            scAdapter = new SimpleCursorAdapter(getActivity(), R.layout.list_row_layout, null, from, to, 0);
+            listView = (ListView) view.findViewById(R.id.ENumberList);
+            listView.setAdapter(scAdapter);
+        }
+        catch (Exception e) {
+            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode,
@@ -203,7 +249,6 @@ public class MainFragment extends Fragment {
             searchBtn.invalidate();
             searchBtn.performClick();
         }
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -270,18 +315,74 @@ public class MainFragment extends Fragment {
 
     //TODO implement loader instead
     private void showAllData(View v) {
-        data = new ArrayList<ENumber>();
-        int eNumb = 100;
-        while (eNumb < 105) {
-            try {
-                ENumber result = GetInfoByENumber("E" + eNumb);
-                eNumb++;
-                data.add(result);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+//        data = new ArrayList<ENumber>();
+//        int eNumb = 100;
+//        while (eNumb < 105) {
+//            try {
+//                ENumber result = GetInfoByENumber("E" + eNumb);
+//                eNumb++;
+//                data.add(result);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+
+        getLoaderManager().getLoader(0).forceLoad();
+        //listView.setAdapter(new ENumberListAdapter(v.getContext(), ));
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+        return new ENCursorLoader(getActivity(), db);
+    }
+
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        try {
+            scAdapter.swapCursor(cursor);
         }
-        listView.setAdapter(new ENumberListAdapter(v.getContext(), data));
+        catch (Exception e)
+        {
+            Log.e(this.getClass().getCanonicalName(), e.getMessage() + e.getStackTrace().toString());
+            //Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
+    }
+
+
+    static class ENCursorLoader extends CursorLoader {
+
+        private ENumbersSQLiteAssetHelper db;
+
+        public ENCursorLoader(Context context, ENumbersSQLiteAssetHelper db) {
+            super(context);
+            this.db = db;
+        }
+
+        @Override
+        public Cursor loadInBackground() {
+            try {
+                Cursor cursor  = db.selectAllData();
+                return cursor;
+            }
+            catch (Exception e)
+            {
+                Log.e(this.getClass().getCanonicalName(), e.getMessage() + Log.getStackTraceString(e));
+            }
+            return null;
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+     //   eNumbers.close();
+        db.close();
     }
 }
 

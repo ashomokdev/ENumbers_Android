@@ -1,23 +1,33 @@
 package com.example.eNumbers;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CursorAdapter;
 import android.widget.TextView;
 import java.util.List;
 
 /**
  * Created by y.belyaeva on 28.07.2015.
  */
-public class ENumberListAdapter extends BaseAdapter {
+public class ENumberListAdapter extends CursorAdapter {
 
     private List<ENumber> listData;
 
     private LayoutInflater layoutInflater;
 
+    // Default constructor
+    public ENumberListAdapter(Context context, Cursor cursor, int flags) {
+        super(context, cursor, flags);
+        layoutInflater = (LayoutInflater) context.getSystemService(
+                Context.LAYOUT_INFLATER_SERVICE);
+    }
+
     public ENumberListAdapter(Context aContext, List<ENumber> listData) {
+        super(aContext, null, false);
 
         this.listData = listData;
 
@@ -68,6 +78,19 @@ public class ENumberListAdapter extends BaseAdapter {
         holder.EStatusView.setText(listData.get(position).getStatus());
 
         return convertView;
+    }
+
+    @Override
+    public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
+        // R.layout.list_row_layout is your xml layout for each row
+        return layoutInflater.inflate(R.layout.list_row_layout, viewGroup, false);
+    }
+
+    @Override
+    public void bindView(View view, Context context, Cursor cursor) {
+        TextView textViewTitle = (TextView) view.findViewById(R.id.ECode);
+        String title = cursor.getString( cursor.getColumnIndex( "code" ) );
+        textViewTitle.setText(title);
     }
 
     static class ViewHolder {

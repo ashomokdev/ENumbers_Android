@@ -11,7 +11,10 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "Enumbers")
 public class ENumber {
 
-    @DatabaseField(id = true, canBeNull = false)
+    @DatabaseField(generatedId = true, columnName = "_id")
+    int id;
+
+    @DatabaseField(canBeNull = false)
     private String code;
 
     @DatabaseField(canBeNull = false)
