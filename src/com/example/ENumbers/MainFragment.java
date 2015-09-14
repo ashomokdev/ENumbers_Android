@@ -1,6 +1,5 @@
 package com.example.eNumbers;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.Context;
@@ -43,8 +42,6 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
 
     private ListView listView;
 
-    private List<ENumber> data;
-
     private String startChar;
 
     private ENumbersSQLiteAssetHelper db;
@@ -64,9 +61,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
     }
 
     @Override
-    public void onActivityCreated (Bundle savedInstanceState)
-    {
-        try {
+    public void onActivityCreated(Bundle savedInstanceState) {
             super.onActivityCreated(savedInstanceState);
 
             // Prepare the loader
@@ -74,10 +69,6 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
 
             // create Loader for data reading
             getLoaderManager().initLoader(0, null, this);
-        }
-            catch (Exception e) {
-                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
-            }
     }
 
     @Override
@@ -87,8 +78,6 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
             startChar = getString(R.string.startChar);
             inputEditText = (EditText) view.findViewById(R.id.inputE);
             inputEditText.setSelection(inputEditText.getText().length()); //starts type after "E"
-
-            //listView = (ListView) view.findViewById(R.id.ENumberList);
 
             outputWarning = (TextView) view.findViewById(R.id.warning);
 
@@ -106,39 +95,23 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
 
                         outputWarning.setText("");
 
-                        listView.setAdapter(null);
-
-                        data = new ArrayList<ENumber>();
-
-                        ENumber result = null;
                         String inputing = inputEditText.getText().toString();
 
                         if (inputing.length() >= 3) {
-                            try {
-                                result = GetInfoByENumber(inputing);
-                            } catch (Exception e) {
-                                Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-                            }
 
-                            if (result == null) {
+                            GetInfoByENumber(inputing);
 
-                                outputWarning.setText(getActivity().getApplicationContext().getString(R.string.notFoundMessage));
-                            } else {
-
-                                //TODO add all result
-                                data.add(result);
-
-                                //listView.setAdapter(new ENumberListAdapter(v.getContext(), data));
-
-                                //to hide the soft keyboard
-                                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
-                                        Context.INPUT_METHOD_SERVICE);
-                                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                            }
+//
+//                                //to hide the soft keyboard
+//                                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
+//                                        Context.INPUT_METHOD_SERVICE);
+//                                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+//
                         } else if (inputing.contentEquals(startChar)) {
                             //empty enter
                             showAllData(v);
                         } else {
+                            listView.setAdapter(null);
                             outputWarning.setText(getActivity().getApplicationContext().getString(R.string.notFoundMessage));
                         }
                     }
@@ -205,28 +178,38 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
 
                     outputWarning.setText("");
 
-                    listView.setAdapter(null);
-
                     showAllData(view);
                 }
             });
 
             String[] from = new String[]
                     {ENumbersSQLiteAssetHelper.COLUMN_NAME_CODE,
-                    ENumbersSQLiteAssetHelper.COLUMN_NAME_NAME,
-                    ENumbersSQLiteAssetHelper.COLUMN_NAME_PURPOSE,
-                    ENumbersSQLiteAssetHelper.COLUMN_NAME_STATUS};
+                            ENumbersSQLiteAssetHelper.COLUMN_NAME_NAME,
+                            ENumbersSQLiteAssetHelper.COLUMN_NAME_PURPOSE,
+                            ENumbersSQLiteAssetHelper.COLUMN_NAME_STATUS};
             int[] to = new int[]
                     {R.id.ECode,
-                    R.id.EName,
-                    R.id.EPurpose,
-                    R.id.EStatus};
+                            R.id.EName,
+                            R.id.EPurpose,
+                            R.id.EStatus};
 
             scAdapter = new SimpleCursorAdapter(getActivity(), R.layout.list_row_layout, null, from, to, 0);
             listView = (ListView) view.findViewById(R.id.ENumberList);
             listView.setAdapter(scAdapter);
+
+        } catch (Exception e) {
+            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
-        catch (Exception e) {
+    }
+
+    private void GetInfoByENumber(String inputing) {
+        try {
+            Bundle b = new Bundle();
+            b.putStringArray("codes", new String[]{inputing});
+
+            getLoaderManager().restartLoader(0, b, this);
+
+        } catch (Exception e) {
             Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
@@ -267,7 +250,8 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         startActivityForResult(intent, SPEECH_REQUEST_CODE);
     }
 
-    public ENumber GetInfoByENumber(String eNumber_input) throws Exception {
+    //deprecated
+    public ENumber GetInfoByENumberFromXML(String eNumber_input) throws Exception {
 
         if (inputingIsValid(eNumber_input)) {
             InputStream inputStream = getActivity().getApplicationContext().getResources().openRawResource(R.raw.base);
@@ -314,22 +298,8 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         return retVal;
     }
 
-    //TODO implement loader instead
     private void showAllData(View v) {
-//        data = new ArrayList<ENumber>();
-//        int eNumb = 100;
-//        while (eNumb < 105) {
-//            try {
-//                ENumber result = GetInfoByENumber("E" + eNumb);
-//                eNumb++;
-//                data.add(result);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
-
-        getLoaderManager().getLoader(0).forceLoad();
-        //listView.setAdapter(new ENumberListAdapter(v.getContext(), ));
+        getLoaderManager().restartLoader(0, null, this);
     }
 
     @Override
@@ -341,10 +311,15 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         try {
-            scAdapter.changeCursor(cursor);
-        }
-        catch (Exception e)
-        {
+            if (cursor.getCount() < 1) {
+                listView.setAdapter(null);
+                outputWarning.setText(getActivity().getApplicationContext().getString(R.string.notFoundMessage));
+            } else {
+                listView.setAdapter(scAdapter);
+                scAdapter.changeCursor(cursor);
+            }
+
+        } catch (Exception e) {
             Log.e(this.getClass().getCanonicalName(), e.getMessage() + e.getStackTrace().toString());
             Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
@@ -355,59 +330,9 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         scAdapter.changeCursor(null);
     }
 
-//    // Creating Bundle object
-//    46
-//    Bundle b = new Bundle();
-//    47
-//
-//            48
-//            // Storing data into bundle
-//            49
-//            b.putString("fullname", fullname);
-//    50
-//            b.putLong("phoneNumber", phone);
-//    51
-//            b.putDouble("age", ageDouble);
-//    52
-//            b.putBoolean("married", isMarried);
-
-
-
-    static class ENCursorLoader extends CursorLoader {
-
-        private ENumbersSQLiteAssetHelper db;
-
-        private String[] codes;
-
-        public ENCursorLoader(Context context, ENumbersSQLiteAssetHelper db) {
-            super(context);
-            this.db = db;
-        }
-
-        public ENCursorLoader(Context context, ENumbersSQLiteAssetHelper db, Bundle bundle) {
-            super(context);
-            this.db = db;
-            codes = bundle.getStringArray("codes");
-        } 
-
-        @Override
-        public Cursor loadInBackground() {
-            try {
-                Cursor cursor  = db.selectAllData();
-                return cursor;
-            }
-            catch (Exception e)
-            {
-                Log.e(this.getClass().getCanonicalName(), e.getMessage() + Log.getStackTraceString(e));
-            }
-            return null;
-        }
-    }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
-     //   eNumbers.close();
         db.close();
     }
 }

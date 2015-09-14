@@ -55,7 +55,7 @@ public class ENumbersSQLiteAssetHelper extends SQLiteAssetHelper {
     }
 
     //TODO close connection after method?
-    public Cursor selectRowByCode(String code) {
+    public Cursor selectRowsByCodes(String[] codes) {
         try {
             SQLiteDatabase db = getReadableDatabase();
             SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
@@ -65,7 +65,7 @@ public class ENumbersSQLiteAssetHelper extends SQLiteAssetHelper {
 
             qb.setTables(sqlTables);
 
-            Cursor c = qb.query(db, sqlSelect, COLUMN_NAME_CODE+"=?", new String[]{code},
+            Cursor c = qb.query(db, sqlSelect, COLUMN_NAME_CODE+"=?", codes,
                     null, null, null);
 
             c.moveToFirst();
