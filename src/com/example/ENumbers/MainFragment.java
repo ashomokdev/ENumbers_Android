@@ -1,5 +1,6 @@
 package com.example.eNumbers;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.Context;
@@ -333,36 +334,61 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        return new ENCursorLoader(getActivity(), db);
+        return new ENCursorLoader(getActivity(), db, bundle);
     }
 
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         try {
-            scAdapter.swapCursor(cursor);
+            scAdapter.changeCursor(cursor);
         }
         catch (Exception e)
         {
             Log.e(this.getClass().getCanonicalName(), e.getMessage() + e.getStackTrace().toString());
-            //Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-
+        scAdapter.changeCursor(null);
     }
+
+//    // Creating Bundle object
+//    46
+//    Bundle b = new Bundle();
+//    47
+//
+//            48
+//            // Storing data into bundle
+//            49
+//            b.putString("fullname", fullname);
+//    50
+//            b.putLong("phoneNumber", phone);
+//    51
+//            b.putDouble("age", ageDouble);
+//    52
+//            b.putBoolean("married", isMarried);
+
 
 
     static class ENCursorLoader extends CursorLoader {
 
         private ENumbersSQLiteAssetHelper db;
 
+        private String[] codes;
+
         public ENCursorLoader(Context context, ENumbersSQLiteAssetHelper db) {
             super(context);
             this.db = db;
         }
+
+        public ENCursorLoader(Context context, ENumbersSQLiteAssetHelper db, Bundle bundle) {
+            super(context);
+            this.db = db;
+            codes = bundle.getStringArray("codes");
+        } 
 
         @Override
         public Cursor loadInBackground() {

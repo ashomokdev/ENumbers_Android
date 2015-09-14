@@ -52,6 +52,27 @@ public class ENumbersSQLiteAssetHelper extends SQLiteAssetHelper {
             Log.e(this.getClass().getCanonicalName(), e.getMessage() + e.getStackTrace().toString());
         }
         return null;
+    }
 
+    //TODO close connection after method?
+    public Cursor selectRowByCode(String code) {
+        try {
+            SQLiteDatabase db = getReadableDatabase();
+            SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+
+            String[] sqlSelect = {COLUMN_NAME_ID, COLUMN_NAME_CODE, COLUMN_NAME_NAME, COLUMN_NAME_PURPOSE, COLUMN_NAME_STATUS};
+            String sqlTables = "Enumbers";
+
+            qb.setTables(sqlTables);
+
+            Cursor c = qb.query(db, sqlSelect, COLUMN_NAME_CODE+"=?", new String[]{code},
+                    null, null, null);
+
+            c.moveToFirst();
+            return c;
+        } catch (Exception e) {
+            Log.e(this.getClass().getCanonicalName(), e.getMessage() + e.getStackTrace().toString());
+        }
+        return null;
     }
 }
