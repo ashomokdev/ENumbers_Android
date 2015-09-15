@@ -30,5 +30,13 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="com.example.eNumbers.MainActivity" />
         </activity>
+        <activity android:name=".ENDetailsActivity"
+                  android:label="Details"
+                  android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+                  android:parentActivityName="com.example.eNumbers.MainActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.example.eNumbers.MainActivity" />
+        </activity>
     </application>
 </manifest>

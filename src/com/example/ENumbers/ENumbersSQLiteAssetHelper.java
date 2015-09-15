@@ -23,9 +23,8 @@ public class ENumbersSQLiteAssetHelper extends SQLiteAssetHelper {
     public static final String COLUMN_NAME_STATUS = "status";
     public static final String COLUMN_NAME_ADDITIONAL_INFO = "additionalInfo";
     public static final String COLUMN_NAME_APPROVED_IN = "approvedIn";
-    //  public static final String COLUMN_NAME_AVOID_IT = "avoidIt"; //reduntant
-    public static final String COLUMN_NAME_BAD_FOR_CHILDREN = "badForChildren";
     public static final String COLUMN_NAME_BANNED_IN = "bannedIn";
+    public static final String COLUMN_NAME_BAD_FOR_CHILDREN = "badForChildren";
     public static final String COLUMN_NAME_TYPICAL_PRODUCTS = "typicalProducts";
     public static final String COLUMN_NAME_DANGER_LEVEL = "dangerLevel";
 

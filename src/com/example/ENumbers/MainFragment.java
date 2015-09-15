@@ -16,12 +16,17 @@ import android.view.*;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Iuliia on 29.08.2015.
@@ -197,6 +202,9 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
             listView = (ListView) view.findViewById(R.id.ENumberList);
             listView.setAdapter(scAdapter);
 
+
+
+
         } catch (Exception e) {
             Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
@@ -317,9 +325,28 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
             } else {
                 listView.setAdapter(scAdapter);
                 scAdapter.changeCursor(cursor);
-            }
 
-        } catch (Exception e) {
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View arg1, int position, long arg3) {
+
+                        //TODO
+                        Cursor cursor = (Cursor) parent.getAdapter().getItem(position);
+                        EN enumb = new EN(cursor);
+
+                        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+                        String flat = gson.toJson(enumb);
+
+                        Intent intent = new Intent(getActivity(), ENDetailsActivity.class);
+
+                        intent.putExtra("objectKey", flat);
+                        startActivity(intent);
+                    }
+                });
+            }
+        }
+        catch (Exception e) {
             Log.e(this.getClass().getCanonicalName(), e.getMessage() + e.getStackTrace().toString());
             Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
         }

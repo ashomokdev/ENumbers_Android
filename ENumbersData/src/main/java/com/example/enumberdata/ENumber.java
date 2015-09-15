@@ -52,10 +52,6 @@ public class ENumber {
         this.approvedIn = approvedIn;
     }
 
-    public void setBadForChildren(Boolean badForChildren) {
-        this.badForChildren = badForChildren;
-    }
-
     public void setBannedIn(String bannedIn) {
         this.bannedIn = bannedIn;
     }
@@ -76,6 +72,25 @@ public class ENumber {
         this.avoidIt = avoidIt;
     }
 
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPurpose(String purpose) {
+        this.purpose = purpose;
+    }
+
+    public void setBadForChildren(boolean badForChildren) {
+        this.badForChildren = badForChildren;
+    }
+
+    public void setDangerLevel(DangerLevel dangerLevel) {
+        this.dangerLevel = dangerLevel;
+    }
 
     public String getCode() {
         return code;

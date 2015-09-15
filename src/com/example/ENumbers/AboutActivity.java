@@ -28,7 +28,6 @@ public class AboutActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
         mTextView_appName = (TextView) findViewById(R.id.appName);
         mTextView_appName.setText(R.string.appName);
 
