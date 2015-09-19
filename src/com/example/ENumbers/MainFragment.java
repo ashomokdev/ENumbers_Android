@@ -18,8 +18,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.simpleframework.xml.Serializer;
-import org.simpleframework.xml.core.Persister;
 
 import java.io.InputStream;
 import java.io.Serializable;
@@ -256,44 +254,6 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
 
         // Start the activity, the intent will be populated with the speech text
         startActivityForResult(intent, SPEECH_REQUEST_CODE);
-    }
-
-    //deprecated
-    public ENumber GetInfoByENumberFromXML(String eNumber_input) throws Exception {
-
-        if (inputingIsValid(eNumber_input)) {
-            InputStream inputStream = getActivity().getApplicationContext().getResources().openRawResource(R.raw.base);
-
-            try {
-                Serializer serializer = new Persister();
-                ENumbersCollection eNumbersCollection = serializer.read(ENumbersCollection.class, inputStream);
-
-                for (ENumber eNumber : eNumbersCollection) {
-
-                    if (eNumber.getCode().equals(eNumber_input)) {
-
-                        return eNumber;
-                    }
-                }
-            } catch (Exception e) {
-                Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        }
-        return null;
-    }
-
-    private boolean inputingIsValid(String ENumber_input) {
-        if (ENumber_input.startsWith(getActivity().getApplicationContext().getString(R.string.startChar))) {
-
-            if (ENumber_input.length() > 3 && ENumber_input.length() < 7) {
-                String numb_without_E = ENumber_input.substring(1);
-
-                if (tryParse(numb_without_E) != null) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     private Integer tryParse(Object obj) {

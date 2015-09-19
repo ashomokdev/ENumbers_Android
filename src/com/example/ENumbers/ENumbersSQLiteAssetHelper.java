@@ -63,9 +63,15 @@ public class ENumbersSQLiteAssetHelper extends SQLiteAssetHelper {
             String sqlTables = "Enumbers";
 
             qb.setTables(sqlTables);
+//            qb.appendWhere(COLUMN_NAME_CODE + "="
+//                    + codes);
+
+//            Cursor c = qb.query(db, sqlSelect, COLUMN_NAME_CODE+" GLOB '\\d{3,4}'", null,
+//                    null, null, null);
 
             Cursor c = qb.query(db, sqlSelect, COLUMN_NAME_CODE+"=?", codes,
                     null, null, null);
+
 
             c.moveToFirst();
             return c;
@@ -74,4 +80,5 @@ public class ENumbersSQLiteAssetHelper extends SQLiteAssetHelper {
         }
         return null;
     }
+
 }

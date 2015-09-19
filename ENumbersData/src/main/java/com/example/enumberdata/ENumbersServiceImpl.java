@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -31,9 +30,35 @@ public class ENumbersServiceImpl implements ENumbersService {
         extractBadForChildrenItems();
         extractAvoidItItems();
         orderPunctuation();
+        addDangerLevel();
+    }
 
-        //todo
-        //add level of dangereous hight, medium, save, unknown, delete avoid it
+    private void addDangerLevel() {
+        for (ENumber item : data) {
+            addDangerLevel(item);
+        }
+    }
+
+    private void addDangerLevel(ENumber item) {
+        if (item.getAvoidIt() ||
+                (item.getBannedIn().length() > 0 && item.getApprovedIn().length() == 0 ))
+        {
+            item.setDangerLevel(ENumber.DangerLevel.hight);
+        }
+        else if (item.getBadForChildren())
+        {
+            item.setDangerLevel(ENumber.DangerLevel.medium);
+        }
+        else if(item.getBannedIn().length() == 0 && item.getApprovedIn().length() > 0)
+        {
+            item.setDangerLevel(ENumber.DangerLevel.safe);
+        }
+
+        else
+        {
+            item.setDangerLevel(ENumber.DangerLevel.unknown);
+        }
+
     }
 
     @Override

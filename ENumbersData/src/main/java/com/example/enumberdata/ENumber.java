@@ -46,7 +46,7 @@ public class ENumber {
 
     private boolean avoidIt;
 
-    private enum DangerLevel { safe, medium, hight, notKnown }
+    public enum DangerLevel { safe, medium, hight, unknown}
 
     public void setApprovedIn(String approvedIn) {
         this.approvedIn = approvedIn;
