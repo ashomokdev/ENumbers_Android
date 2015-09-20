@@ -1,8 +1,6 @@
 package com.example.eNumbers.test;
 
-import android.test.AndroidTestCase;
 import android.test.IsolatedContext;
-import android.test.RenamingDelegatingContext;
 import android.test.mock.MockContentResolver;
 import com.example.eNumbers.ENumbersSQLiteAssetHelper;
 import com.example.eNumbers.MainActivity;
@@ -32,29 +30,9 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         IsolatedContext _openHelperContext = new IsolatedContext(new MockContentResolver(), getActivity());
 
         ENumbersSQLiteAssetHelper helper = new ENumbersSQLiteAssetHelper(_openHelperContext);
-        Assert.assertTrue(helper.selectRowsByCodes(new String[]{"E100"}).getCount() > 0);
+
+        Assert.assertTrue(helper.selectRowsByCodes(new String[]{"E100"}).getCount() == 1);
+
+        Assert.assertTrue(helper.selectRowsByCodes(new String[]{"E100", "E123"}).getCount() == 2);
     }
 }
-
-//public class DatabaseTest extends AndroidTestCase {
-//    private ENumbersSQLiteAssetHelper db;
-//
-//    @Override
-//    public void setUp() throws Exception {
-//        super.setUp();
-//        IsolatedContext context = new IsolatedContext(new MockContentResolver(), getActivity());
-//        db = new ENumbersSQLiteAssetHelper(context);
-//
-//    }
-//
-//    public void testPreConditions() {
-//        db.selectRowsByCodes();
-//    }
-//
-//
-//    //According to Zainodis annotation only for legacy and not valid with gradle>1.1:
-//    //@Test
-//    public void testAddEntry(){
-//        // Here i have my new database wich is not connected to the standard database of the App
-//    }
-//}
