@@ -199,10 +199,6 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
             scAdapter = new SimpleCursorAdapter(getActivity(), R.layout.list_row_layout, null, from, to, 0);
             listView = (ListView) view.findViewById(R.id.ENumberList);
             listView.setAdapter(scAdapter);
-
-
-
-
         } catch (Exception e) {
             Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
         }

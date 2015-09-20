@@ -20,7 +20,6 @@ public class AboutActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.about_layout);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar_about_layout);
@@ -37,6 +36,7 @@ public class AboutActivity extends AppCompatActivity {
         mTextView_version = (TextView) findViewById(R.id.version);
         mTextView_version.setText(R.string.version);
     }
+
 
     //TODO click email
 //    @Override

@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //Right menu settings
+        //Left menu settings
         try {
             mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
             toggle = new ActionBarDrawerToggle(
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                  */
                 public void onDrawerClosed(View view) {
                     super.onDrawerClosed(view);
-                    invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                   // invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu() ruduntant?
                 }
 
                 /**
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                  */
                 public void onDrawerOpened(View drawerView) {
                     super.onDrawerOpened(drawerView);
-                    invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                    //invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()  ruduntant?
                 }
             };
 
@@ -93,14 +93,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //TODO
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu items for use in the action bar
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_activity_actions, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
+
 
     @Override
     public void setTitle(CharSequence title) {
@@ -119,18 +112,6 @@ public class MainActivity extends AppCompatActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         toggle.onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Pass the event to ActionBarDrawerToggle, if it returns
-        // true, then it has handled the app icon touch event
-        if (toggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        // Handle your other action bar items...
-
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
