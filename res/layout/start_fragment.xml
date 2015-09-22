@@ -3,105 +3,121 @@
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-        android:id="@+id/start_fragment_frame_layout">
-
-
+                android:id="@+id/start_fragment_frame_layout">
     <View
             android:layout_width="fill_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="@dimen/detail_vertical_margin"
             android:layout_alignParentTop="true"
-            android:background="#FFFFFF"
+            android:background="@color/blue"
             android:singleLine="true"
             android:clickable="true"
             android:focusable="true"
             android:id="@+id/viewInput"
             />
-    <!--This inspection highlights unallowed XML tags in Android resource files and AndroidManifest.xml-->
-    <EditText
-            style="@style/CustomText"
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="@dimen/detail_vertical_margin"
-            android:layout_alignParentTop="true"
-            android:inputType="number"
-            android:digits="1234567890abcdefghijklmnopqrstuvwxyz"
-            android:singleLine="true"
-            android:imeOptions="actionDone"
-            android:maxLength="5"
-            android:ems="10"
-            android:id="@+id/inputE"
-            android:text="@string/startChar"
-            android:gravity="center"
-            android:background="@android:color/transparent"/>
 
-        <LinearLayout  android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:scaleType="fitCenter"
-                         android:padding="7dp"
-                         android:layout_alignBottom="@+id/inputE"
-                         android:layout_alignTop="@+id/inputE"
-                         android:layout_alignRight="@+id/inputE"
-                       android:orientation="horizontal">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:id="@+id/start_fragment_frame_layout">
 
-        <ImageButton
-                android:layout_marginTop="4dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/ic_close"
-                android:src="@drawable/ic_close_black_24dp"
-                android:background="@null"
-                android:scaleType="fitCenter"
-                android:layout_marginLeft="10dp"
-                />
+        <RelativeLayout android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:scaleType="fitCenter"
+                      android:orientation="horizontal"
+                      android:id="@+id/toolbarLinearLayout">
+        <!--This inspection highlights unallowed XML tags in Android resource files and AndroidManifest.xml-->
+        <EditText
+                style="@style/CustomText"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_alignParentTop="true"
+                android:textColor="@color/white"
+                android:inputType="number"
+                android:digits="1234567890abcdefghijklmnopqrstuvwxyz"
+                android:singleLine="true"
+                android:imeOptions="actionDone"
+                android:maxLength="5"
+                android:textSize="25sp"
+                android:id="@+id/inputE"
+                android:text="@string/startChar"
+                android:textCursorDrawable="@drawable/cursorcolor"
+                android:layout_marginLeft="@dimen/detail_vertical_margin"
+                android:background="@drawable/apptheme_textfield_default_holo_light"/>
 
-        <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/ic_mic"
-                android:src="@drawable/ic_mic_none_black_36dp"
-                android:background="@null"
-                android:scaleType="fitCenter"
-                android:layout_marginLeft="10dp"
-                />
+        <LinearLayout android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:scaleType="fitCenter"
+                      android:padding="7dp"
+                      android:layout_alignBottom="@+id/inputE"
+                      android:layout_alignTop="@+id/inputE"
+                      android:layout_alignRight="@+id/inputE"
+                      android:orientation="horizontal"
+                      >
+
+            <ImageButton
+                    android:layout_marginTop="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ic_close"
+                    android:src="@drawable/ic_close_white_24dp"
+                    android:background="@null"
+                    android:scaleType="fitCenter"
+                    android:layout_marginLeft="10dp"
+                    />
+
+            <ImageButton
+                    android:layout_marginTop="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ic_mic"
+                    android:src="@drawable/ic_mic_white_24dp"
+                    android:background="@null"
+                    android:scaleType="fitCenter"
+                    android:layout_marginLeft="10dp"
+                    />
         </LinearLayout>
 
+        <ImageButton
+                android:background="@drawable/ic_send_red"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/inputE"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="@dimen/detail_vertical_margin"
+                android:layout_marginRight="@dimen/right_bottom_margin"
+                android:layout_marginLeft="@dimen/right_bottom_margin"
+                android:id="@+id/button"
 
-    <Button
-            android:background="@drawable/red_button"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/detail_vertical_margin"
-            android:layout_below="@id/inputE"
-            android:text="Search"
-            android:gravity="center_horizontal"
-            android:id="@+id/button"
-            style="@style/button_text"/>
-    <ListView
-            style="@style/CustomText"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginTop="@dimen/detail_vertical_margin"
-            android:layout_below="@id/button"
-            android:clickable="false"
-            android:cursorVisible="false"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:id="@+id/ENumberList"
-            android:dividerHeight="1dp"
-            />
-    <TextView
-            style="@style/CustomText"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginTop="@dimen/detail_vertical_margin"
-            android:layout_below="@id/button"
-            android:clickable="false"
-            android:cursorVisible="false"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:id="@+id/warning"
-            />
+                />
+        </RelativeLayout>
+
+        <ListView
+                style="@style/CustomText"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="@dimen/detail_vertical_margin"
+                android:layout_below="@id/toolbarLinearLayout"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:id="@+id/ENumberList"
+                android:dividerHeight="1dp"
+                />
+        <TextView
+                style="@style/CustomText"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="@dimen/detail_vertical_margin"
+                android:layout_below="@id/toolbarLinearLayout"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:id="@+id/warning"
+                />
+    </RelativeLayout>
 </RelativeLayout>

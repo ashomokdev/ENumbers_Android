@@ -5,13 +5,13 @@
           android:versionName="1.0">
     <uses-sdk android:minSdkVersion="19"/>
     <application android:label="@string/appName"
-                 android:icon="@drawable/icon"
+                 android:icon="@drawable/ic_launcher"
                  >
         <activity android:name="com.example.eNumbers.MainActivity"
                   android:label="@string/appName"
                   android:exported="true"
                   android:configChanges="keyboardHidden|orientation|screenSize"
-                  android:theme="@style/Theme.AppCompat.NoActionBar"
+                  android:theme="@style/Theme.AppCompat.Light.NoActionBar"
                 >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

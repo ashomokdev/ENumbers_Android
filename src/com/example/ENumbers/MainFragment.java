@@ -33,7 +33,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
 
     private static final int SPEECH_REQUEST_CODE = 0;
 
-    private Button searchBtn;
+    private ImageButton searchBtn;
 
     private ImageButton voiceInputBtn;
 
@@ -84,7 +84,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
 
             outputWarning = (TextView) view.findViewById(R.id.warning);
 
-            searchBtn = (Button) view.findViewById(R.id.button);
+            searchBtn = (ImageButton) view.findViewById(R.id.button);
 
             voiceInputBtn = (ImageButton) view.findViewById(R.id.ic_mic);
 
