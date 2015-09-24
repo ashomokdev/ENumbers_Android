@@ -28,7 +28,7 @@
     </style>
 
     <style name="EName">
-        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:fontFamily">sans-serif-regular</item>
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/black85</item>
@@ -54,6 +54,20 @@
     <style name="Widget.MyApp.Toolbar.Solid" parent="Widget.AppCompat.ActionBar">
         <item name="android:textColorPrimary">@color/white</item>
     </style>
+
+    <style name="ECode_Big" parent="ECode">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="Label">
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/red</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="BasicTextTitle" parent="EName"></style>
 
 
 </resources>

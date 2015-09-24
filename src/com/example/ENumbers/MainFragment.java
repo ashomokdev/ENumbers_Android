@@ -285,8 +285,8 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
                     @Override
                     public void onItemClick(AdapterView<?> parent, View arg1, int position, long arg3) {
 
-                        //TODO
                         Cursor cursor = (Cursor) parent.getAdapter().getItem(position);
+
                         EN enumb = new EN(cursor);
 
                         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();

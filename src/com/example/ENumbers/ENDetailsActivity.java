@@ -17,9 +17,18 @@ import com.google.gson.Gson;
 public class ENDetailsActivity  extends AppCompatActivity {
 
     private EN complexJavaObjEN;
+
     private Toolbar toolbar;
     private TextView mTextView_ecode;
     private TextView mTextView_ename;
+    private TextView mTextView_epurpose;
+    private TextView mTextView_status;
+    private TextView mTextView_additional_info;
+    private TextView mTextView_approved_in;
+    private TextView mTextView_banned_in;
+    private TextView mTextView_typical_products;
+    private TextView mTextView_danger_level;
+    private TextView mTextView_bad_for_children;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,8 +56,8 @@ public class ENDetailsActivity  extends AppCompatActivity {
             mTextView_ecode = (TextView) findViewById(R.id.eCodeFull);
             mTextView_ecode.setText(complexJavaObjEN.getCode());
 
-            mTextView_ename = (TextView) findViewById(R.id.eNameFull);
-            mTextView_ename.setText(complexJavaObjEN.getName());
+//            mTextView_ename = (TextView) findViewById(R.id.eNameFull);
+//            mTextView_ename.setText(complexJavaObjEN.getName());
         }
         catch (Exception e) {
             Log.e(this.getClass().getCanonicalName(), e.getMessage() + e.getStackTrace().toString());

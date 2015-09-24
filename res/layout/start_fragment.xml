@@ -19,8 +19,8 @@
                     android:orientation="vertical"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="@dimen/layout_margin"
+                    android:layout_marginRight="@dimen/layout_margin"
                     android:id="@+id/start_fragment_frame_layout">
 
         <RelativeLayout android:layout_width="wrap_content"

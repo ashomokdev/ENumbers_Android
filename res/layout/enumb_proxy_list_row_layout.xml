@@ -6,12 +6,16 @@
                 android:id="@+id/start_fragment_frame_layout"
               android:duplicateParentState="true">
 
-    <com.example.eNumbers.ENumbFlag
-            android:id="@+id/imageViewFlag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/flagcolor"
-            android:duplicateParentState="true"/>
+    <!--<com.example.eNumbers.ENumbFlag-->
+            <!--android:id="@+id/imageViewFlag"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:src="@drawable/flagcolor"-->
+            <!--android:duplicateParentState="true"/>-->
+
+    <include android:id="@+id/enumbFlag_enumb_proxy_list_row_layout"
+             layout="@layout/enumb_flag"
+             />
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="fill_parent"

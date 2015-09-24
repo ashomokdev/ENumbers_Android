@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name = "detail_vertical_margin">4dp</dimen >
-    <dimen name="right_bottom_margin"> 15dp</dimen>
+    <dimen name="right_bottom_margin">15dp</dimen>
+    <dimen name="layout_margin">10dp</dimen>
 </resources>
