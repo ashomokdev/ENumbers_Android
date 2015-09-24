@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/start_fragment_frame_layout"
+              android:duplicateParentState="true">
+
+    <com.example.eNumbers.ENumbFlag
+            android:id="@+id/imageViewFlag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/flagcolor"
+            android:duplicateParentState="true"/>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:duplicateParentState="true">
+
+    <TextView
+            android:id="@+id/ECode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:typeface="sans"
+            android:text="default ECode"
+            style="@style/ECode"
+            />
+
+    <TextView
+            android:id="@+id/EName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/EName"
+            android:text="default EName"
+            />
+
+    <TextView
+            android:id="@+id/EPurpose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/EName"
+            style="@style/EPurpose"
+            android:text="default EPurpose"
+            />
+
+</LinearLayout>
+</LinearLayout>
+

@@ -3,7 +3,6 @@ package com.example.eNumbers;
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.Context;
-import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
@@ -19,12 +18,7 @@ import android.widget.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.io.InputStream;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Iuliia on 29.08.2015.
@@ -49,7 +43,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
 
     private ENumbersSQLiteAssetHelper db;
 
-    SimpleCursorAdapter scAdapter;
+    ENumberListAdapter scAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -194,11 +188,12 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
                     {R.id.ECode,
                             R.id.EName,
                             R.id.EPurpose,
-                            R.id.EStatus};
+                            };
 
-            scAdapter = new SimpleCursorAdapter(getActivity(), R.layout.list_row_layout, null, from, to, 0);
+            //scAdapter = new SimpleCursorAdapter(getActivity(), R.layout.enumb_proxy_list_row_layout, null, from, to, 0);
             listView = (ListView) view.findViewById(R.id.ENumberList);
             listView.setAdapter(scAdapter);
+
         } catch (Exception e) {
             Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
@@ -279,6 +274,9 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
                 listView.setAdapter(null);
                 outputWarning.setText(getActivity().getApplicationContext().getString(R.string.notFoundMessage));
             } else {
+
+                scAdapter = new ENumberListAdapter(getActivity(),  cursor, 0);
+
                 listView.setAdapter(scAdapter);
                 scAdapter.changeCursor(cursor);
 

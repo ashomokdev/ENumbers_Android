@@ -11,6 +11,10 @@
 
     <item name="dark_blue" type="color">#303F9F</item>
 
-    <item name="white" type="color"> #FFFFFF</item>
+    <item name="white" type="color">#FFFFFF</item>
+
+    <item name="black" type="color">#000000</item>
+
+    <item name="black85" type="color">#D9000000</item>
 
 </resources>

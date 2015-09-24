@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.text.TextUtils;
 import android.util.Log;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
+
 import java.util.Collections;
 
 /**
@@ -29,6 +30,21 @@ public class ENumbersSQLiteAssetHelper extends SQLiteAssetHelper {
     public static final String COLUMN_NAME_TYPICAL_PRODUCTS = "typicalProducts";
     public static final String COLUMN_NAME_DANGER_LEVEL = "dangerLevel";
 
+    private static String[] sqlSelect = {
+            COLUMN_NAME_ID,
+            COLUMN_NAME_CODE,
+            COLUMN_NAME_NAME,
+            COLUMN_NAME_PURPOSE,
+            COLUMN_NAME_STATUS,
+            COLUMN_NAME_ADDITIONAL_INFO,
+            COLUMN_NAME_APPROVED_IN,
+            COLUMN_NAME_BANNED_IN,
+            COLUMN_NAME_BAD_FOR_CHILDREN,
+            COLUMN_NAME_TYPICAL_PRODUCTS,
+            COLUMN_NAME_DANGER_LEVEL};
+
+    private static String sqlTable = "Enumbers";
+
     public ENumbersSQLiteAssetHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -38,10 +54,7 @@ public class ENumbersSQLiteAssetHelper extends SQLiteAssetHelper {
             SQLiteDatabase db = getReadableDatabase();
             SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 
-            String[] sqlSelect = {COLUMN_NAME_ID, COLUMN_NAME_CODE, COLUMN_NAME_NAME, COLUMN_NAME_PURPOSE, COLUMN_NAME_STATUS};
-            String sqlTables = "Enumbers";
-
-            qb.setTables(sqlTables);
+            qb.setTables(sqlTable);
 
             Cursor c = qb.query(db, sqlSelect, null, null,
                     null, null, null);
@@ -55,25 +68,22 @@ public class ENumbersSQLiteAssetHelper extends SQLiteAssetHelper {
     }
 
     //TODO close connection after method?
-        public Cursor selectRowsByCodes(String[] codes) {
-            try {
-                SQLiteDatabase db = getReadableDatabase();
-                SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+    public Cursor selectRowsByCodes(String[] codes) {
+        try {
+            SQLiteDatabase db = getReadableDatabase();
+            SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 
-                String[] sqlSelect = {COLUMN_NAME_ID, COLUMN_NAME_CODE, COLUMN_NAME_NAME, COLUMN_NAME_PURPOSE, COLUMN_NAME_STATUS};
-                String sqlTables = "Enumbers";
+            qb.setTables(sqlTable);
 
-                qb.setTables(sqlTables);
-
-                Cursor c = qb.query(db, sqlSelect, COLUMN_NAME_CODE+" IN (" +
-                                TextUtils.join(",", Collections.nCopies(codes.length, "?")) +
-                                ")", codes,
-                        null, null, null); //from http://stackoverflow.com/questions/7418849/android-sqlite-in-clause-and-placeholders
-                c.moveToFirst();
-                return c;
-            } catch (Exception e) {
-                Log.e(this.getClass().getCanonicalName(), e.getMessage() + e.getStackTrace().toString());
-            }
-            return null;
+            Cursor c = qb.query(db, sqlSelect, COLUMN_NAME_CODE + " IN (" +
+                            TextUtils.join(",", Collections.nCopies(codes.length, "?")) +
+                            ")", codes,
+                    null, null, null); //from http://stackoverflow.com/questions/7418849/android-sqlite-in-clause-and-placeholders
+            c.moveToFirst();
+            return c;
+        } catch (Exception e) {
+            Log.e(this.getClass().getCanonicalName(), e.getMessage() + e.getStackTrace().toString());
         }
+        return null;
+    }
 }

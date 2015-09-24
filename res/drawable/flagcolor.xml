@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:attrs="http://schemas.android.com/apk/res/com.example.eNumbers"
+        >
+    <item
+            attrs:state_red="true"
+            android:drawable="@drawable/flag_red" />
+    <item
+            attrs:state_yellow="true"
+            android:drawable="@drawable/flag_yellow" />
+    <item
+            attrs:state_green="true"
+            android:drawable="@drawable/flag_green" />
+    <item
+            attrs:state_grey="true"
+            android:drawable="@drawable/flag_grey" />
+    <item
+            attrs:state_grey="false"
+            attrs:state_red="false"
+            attrs:state_green="false"
+            attrs:state_yellow="false"
+            android:drawable="@drawable/flag_grey" />
+</selector>

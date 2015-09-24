@@ -94,8 +94,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-
     @Override
     public void setTitle(CharSequence title) {
         mTitle = title;
