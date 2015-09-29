@@ -71,7 +71,6 @@ public class ENumberListAdapter extends CursorAdapter {
             ename.setText(name);
             epurpose.setText(purpose);
 
-
             switch (dangerLevel) {
                 case "safe":
                     flag.setmIsGreen(true);
