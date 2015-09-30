@@ -76,12 +76,6 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
             inputEditText = (EditText) view.findViewById(R.id.inputE);
             inputEditText.setSelection(inputEditText.getText().length()); //starts type after "E"
 
-            // Check if no view has focus:
-            if (view != null) {
-                InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-            }
-
             outputWarning = (TextView) view.findViewById(R.id.warning);
 
             searchBtn = (ImageButton) view.findViewById(R.id.button);
@@ -103,7 +97,6 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
                         if (inputing.length() >= 3) {
 
                             GetInfoByENumber(inputing);
-
 
                                 //to hide the soft keyboard
                                 InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
@@ -185,18 +178,6 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
                 }
             });
 
-            String[] from = new String[]
-                    {ENumbersSQLiteAssetHelper.COLUMN_NAME_CODE,
-                            ENumbersSQLiteAssetHelper.COLUMN_NAME_NAME,
-                            ENumbersSQLiteAssetHelper.COLUMN_NAME_PURPOSE,
-                            ENumbersSQLiteAssetHelper.COLUMN_NAME_STATUS};
-            int[] to = new int[]
-                    {R.id.ECode,
-                            R.id.EName,
-                            R.id.EPurpose,
-                            };
-
-            //scAdapter = new SimpleCursorAdapter(getActivity(), R.layout.enumb_proxy_list_row_layout, null, from, to, 0);
             listView = (ListView) view.findViewById(R.id.ENumberList);
             listView.setAdapter(scAdapter);
 
@@ -253,17 +234,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         startActivityForResult(intent, SPEECH_REQUEST_CODE);
     }
 
-    private Integer tryParse(Object obj) {
-        Integer retVal;
-        try {
-            retVal = Integer.parseInt((String) obj);
-        } catch (NumberFormatException nfe) {
-            retVal = null;
-        }
-        return retVal;
-    }
-
-    private void showAllData(View v) {
+    private void showAllData(View view) {
         getLoaderManager().restartLoader(0, null, this);
     }
 

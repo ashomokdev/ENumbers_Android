@@ -13,11 +13,13 @@
     <ScrollView
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent"
+            >
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                       android:orientation="vertical"
                       android:layout_width="fill_parent"
-                      android:layout_height="wrap_content"
+                      android:layout_height="fill_parent"
+                      android:layout_gravity="fill"
                       android:layout_marginTop="@dimen/layout_margin"
                       android:layout_marginBottom="@dimen/layout_margin"
                       android:layout_marginLeft="@dimen/layout_margin"
@@ -200,7 +202,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/details_layout_eadditional_info_layout"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_marginBottom="20dp">
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

@@ -119,7 +119,7 @@ public class ENDetailsActivity extends AppCompatActivity {
                 findViewById(R.id.forbidden_for_children_flag_layout).setVisibility(View.GONE);
             }
 
-            flag = (ENumbFlag) findViewById(R.id.enumbFlag_enumb_proxy_list_row_layout);
+            flag = (ENumbFlag) findViewById(R.id.enumbFlag_details_layout);
             String dangerLevel = complexJavaObjEN.getDangerLevel();
             mTextView_danger_level = (TextView) findViewById(R.id.eDangerLevelFull);
             switch (dangerLevel) {

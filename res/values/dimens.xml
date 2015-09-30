@@ -4,6 +4,6 @@
     <dimen name="right_bottom_margin">15dp</dimen>
     <dimen name="layout_margin">10dp</dimen>
     <dimen name = "label_vertical_margin">20dp</dimen >
-    <dimen name = "flag_margin">10dp</dimen >
+    <dimen name = "flag_margin">5dp</dimen >
 
 </resources>
