@@ -89,6 +89,38 @@ public class EN implements Serializable {
     @Expose
     private String purpose;
 
+    public String getPurpose() {
+        return purpose;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public String getAdditionalInfo() {
+        return additionalInfo;
+    }
+
+    public String getTypicalProducts() {
+        return typicalProducts;
+    }
+
+    public String getApprovedIn() {
+        return approvedIn;
+    }
+
+    public String getBannedIn() {
+        return bannedIn;
+    }
+
+    public String getBadForChildren() {
+        return badForChildren;
+    }
+
+    public String getDangerLevel() {
+        return dangerLevel;
+    }
+
     @Expose
     private String status;
 

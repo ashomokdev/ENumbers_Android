@@ -45,7 +45,6 @@ public class ENumberListAdapter extends CursorAdapter {
             flag.setmIsRed(false);
             flag.setmIsGrey(false);
 
-          //  Log.e(this.getClass().getCanonicalName(), );
             // Extract properties from cursor
             String code = cursor.getString(cursor.getColumnIndexOrThrow("code"));
 

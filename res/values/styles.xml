@@ -55,8 +55,12 @@
         <item name="android:textColorPrimary">@color/white</item>
     </style>
 
-    <style name="ECode_Big" parent="ECode">
-        <item name="android:textSize">24sp</item>
+    <style name="ECode_Big">
+        <item name="android:textSize">34sp</item>
+        <item name="android:textColor">@color/black85</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="Label">
@@ -65,9 +69,19 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/red</item>
         <item name="android:textSize">12sp</item>
+        <item name="android:layout_marginTop">@dimen/label_vertical_margin</item>
+        <item name="android:clickable">false</item>
+        <item name="android:cursorVisible">false</item>
+        <item name="android:focusable">false</item>
+        <item name="android:focusableInTouchMode">false</item>
     </style>
 
     <style name="BasicTextTitle" parent="EName"></style>
+
+    <style name="TextForFlags" parent="EName">
+        <item name="android:textSize">14sp</item>
+    </style>
+
 
 
 </resources>

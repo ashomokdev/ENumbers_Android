@@ -76,6 +76,12 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
             inputEditText = (EditText) view.findViewById(R.id.inputE);
             inputEditText.setSelection(inputEditText.getText().length()); //starts type after "E"
 
+            // Check if no view has focus:
+            if (view != null) {
+                InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+
             outputWarning = (TextView) view.findViewById(R.id.warning);
 
             searchBtn = (ImageButton) view.findViewById(R.id.button);
@@ -98,12 +104,12 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
 
                             GetInfoByENumber(inputing);
 
-//
-//                                //to hide the soft keyboard
-//                                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
-//                                        Context.INPUT_METHOD_SERVICE);
-//                                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-//
+
+                                //to hide the soft keyboard
+                                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
+                                        Context.INPUT_METHOD_SERVICE);
+                                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+
                         } else if (inputing.contentEquals(startChar)) {
                             //empty enter
                             showAllData(v);

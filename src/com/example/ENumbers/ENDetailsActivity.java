@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.gson.Gson;
@@ -14,7 +15,7 @@ import com.google.gson.Gson;
 /**
  * Created by Iuliia on 14.09.2015.
  */
-public class ENDetailsActivity  extends AppCompatActivity {
+public class ENDetailsActivity extends AppCompatActivity {
 
     private EN complexJavaObjEN;
 
@@ -27,8 +28,8 @@ public class ENDetailsActivity  extends AppCompatActivity {
     private TextView mTextView_approved_in;
     private TextView mTextView_banned_in;
     private TextView mTextView_typical_products;
+    private ENumbFlag flag;
     private TextView mTextView_danger_level;
-    private TextView mTextView_bad_for_children;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,7 @@ public class ENDetailsActivity  extends AppCompatActivity {
             if (extras != null) {
                 String jsonString = extras.getString("objectKey");
 
-                if(jsonString!=null){
+                if (jsonString != null) {
                     Gson gson = new Gson();
                     complexJavaObjEN = gson.fromJson(jsonString, EN.class);
                 }
@@ -52,14 +53,99 @@ public class ENDetailsActivity  extends AppCompatActivity {
 
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
             mTextView_ecode = (TextView) findViewById(R.id.eCodeFull);
             mTextView_ecode.setText(complexJavaObjEN.getCode());
 
-//            mTextView_ename = (TextView) findViewById(R.id.eNameFull);
-//            mTextView_ename.setText(complexJavaObjEN.getName());
-        }
-        catch (Exception e) {
+            String name = complexJavaObjEN.getName();
+            if (name.length() > 0) {
+                mTextView_ename = (TextView) findViewById(R.id.eNameFull);
+                mTextView_ename.setText(name);
+            } else {
+                findViewById(R.id.details_layout_ename_layout).setVisibility(View.GONE);
+            }
+
+            String purpose = complexJavaObjEN.getPurpose();
+            if (purpose.length() > 0) {
+                mTextView_epurpose = (TextView) findViewById(R.id.ePurposeFull);
+                mTextView_epurpose.setText(purpose);
+            } else {
+                findViewById(R.id.details_layout_epurpose_layout).setVisibility(View.GONE);
+            }
+
+            String status = complexJavaObjEN.getStatus();
+            if (status.length() > 0) {
+                mTextView_status = (TextView) findViewById(R.id.eStatusFull);
+                mTextView_status.setText(status);
+            } else {
+                findViewById(R.id.details_layout_estatus_layout).setVisibility(View.GONE);
+            }
+
+            String additional_info = complexJavaObjEN.getAdditionalInfo();
+            if (additional_info.length() > 0) {
+                mTextView_additional_info = (TextView) findViewById(R.id.additional_infoFull);
+                mTextView_additional_info.setText(additional_info);
+            } else {
+                findViewById(R.id.details_layout_eadditional_info_layout).setVisibility(View.GONE);
+            }
+
+            String approved_in = complexJavaObjEN.getApprovedIn();
+            if (approved_in.length() > 0) {
+                mTextView_approved_in = (TextView) findViewById(R.id.eapproved_inFull);
+                mTextView_approved_in.setText(approved_in);
+            } else {
+                findViewById(R.id.details_layout_eapproved_in_layout).setVisibility(View.GONE);
+            }
+
+            String banned_in = complexJavaObjEN.getBannedIn();
+            if (banned_in.length() > 0) {
+                mTextView_banned_in = (TextView) findViewById(R.id.ebanned_inFull);
+                mTextView_banned_in.setText(banned_in);
+            } else {
+                findViewById(R.id.details_layout_ebanned_in_layout).setVisibility(View.GONE);
+            }
+
+            String typical_products = complexJavaObjEN.getTypicalProducts();
+            if (typical_products.length() > 0) {
+                mTextView_typical_products = (TextView) findViewById(R.id.etypical_productsFull);
+                mTextView_typical_products.setText(typical_products);
+            } else {
+                findViewById(R.id.details_layout_etypical_products_layout).setVisibility(View.GONE);
+            }
+
+            Boolean is_bad_for_children = complexJavaObjEN.getBadForChildren().equals("0") ? false : true;
+            if (is_bad_for_children) {
+                //visible by default
+            } else {
+                findViewById(R.id.forbidden_for_children_flag_layout).setVisibility(View.GONE);
+            }
+
+            flag = (ENumbFlag) findViewById(R.id.enumbFlag_enumb_proxy_list_row_layout);
+            String dangerLevel = complexJavaObjEN.getDangerLevel();
+            mTextView_danger_level = (TextView) findViewById(R.id.eDangerLevelFull);
+            switch (dangerLevel) {
+                case "safe":
+                    flag.setmIsGreen(true);
+                    mTextView_danger_level.setText("safe");
+                    break;
+                case "medium":
+                    mTextView_danger_level.setText("use with caution");
+                    flag.setmIsYellow(true);
+                    break;
+                case "hight":
+                    mTextView_danger_level.setText("unsafe");
+                    flag.setmIsRed(true);
+                    break;
+                case "unknown":
+                    mTextView_danger_level.setText("unknown");
+                    flag.setmIsGrey(true);
+                    break;
+                default:
+                    mTextView_danger_level.setText("unknown");
+                    flag.setmIsGrey(true);
+                    break;
+            }
+
+        } catch (Exception e) {
             Log.e(this.getClass().getCanonicalName(), e.getMessage() + e.getStackTrace().toString());
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
@@ -76,7 +162,7 @@ public class ENDetailsActivity  extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-        //TODO
+    //TODO menu for sharing
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 //        // Inflate the menu items for use in the action bar
