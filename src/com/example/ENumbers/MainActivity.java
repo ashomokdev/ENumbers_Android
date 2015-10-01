@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
             mDrawerList = (ListView) findViewById(R.id.lv_navigation_drawer);
             mDrawerList.setAdapter(new ArrayAdapter<String>(
                     this,
-                    android.R.layout.simple_list_item_1,
+                    R.layout.drawer_list_item,
                     mMenuArray));
 
             mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
@@ -157,7 +157,8 @@ public class MainActivity extends AppCompatActivity {
             // Highlight the selected item, update the title, and close the drawer
             // update selected item and title, then close the drawer
             mDrawerList.setItemChecked(position, true);
-            mDrawerLayout.closeDrawer(mDrawerList);
+            LinearLayout linearLayout = (LinearLayout) findViewById(R.id.start_activity_layout_linear);
+            mDrawerLayout.closeDrawer(linearLayout);
         }
     }
 }

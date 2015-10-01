@@ -75,7 +75,7 @@
                             android:layout_width="fill_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:text="Forbidden for children"
+                            android:text="forbidden for children"
                             style="@style/TextForFlags"
                             />
                 </LinearLayout>

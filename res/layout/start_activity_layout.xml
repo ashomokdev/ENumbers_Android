@@ -6,15 +6,27 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <include android:id="@+id/toolbar"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             layout="@layout/toolbar"/>
 
     <android.support.v4.widget.DrawerLayout
             android:id="@+id/drawer_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            >
+
+        <!-- Your normal content view -->
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            <!-- We use a Toolbar so that our drawer can be displayed
+                 in front of the action bar -->
+            <include android:id="@+id/toolbar"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     layout="@layout/toolbar"
+                    />
+            <!-- The rest of your content view -->
 
         <!--<fragment android:name="com.example.eNumbers.MainFragment"-->
         <!--android:id="@+id/titles"-->
@@ -29,16 +41,34 @@
                 android:id="@+id/content_frame"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_below="@+id/toolbar"
                 />
-        <!--a ListView for the navigation drawer-->
-        <ListView
-                android:id="@+id/lv_navigation_drawer"
+        </RelativeLayout>
+
+        <LinearLayout
+                android:layout_gravity="start"
                 android:layout_width="240dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="start"
-                android:choiceMode="singleChoice"
-                android:divider="@android:color/transparent"
-                android:dividerHeight="0dp"
-                android:background="#ff765ce8"/>
+                android:orientation="vertical"
+                android:id="@+id/start_activity_layout_linear"
+                >
+            <ImageView
+                    android:layout_width="240dp"
+                    android:layout_height="150dp"
+                    android:src="@drawable/menu_img_copy"
+                    android:id="@+id/image_menu"
+                    android:layout_gravity="start"/>
+            <!--a ListView for the navigation drawer-->
+            <ListView
+                    android:id="@+id/lv_navigation_drawer"
+                    android:layout_width="240dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="start"
+                    android:choiceMode="singleChoice"
+                    android:divider="@android:color/transparent"
+                    android:dividerHeight="0dp"
+                    android:background="@color/light_blue"
+                    android:layout_below="@+id/image_menu"/>
+        </LinearLayout>
     </android.support.v4.widget.DrawerLayout>
 </LinearLayout>
