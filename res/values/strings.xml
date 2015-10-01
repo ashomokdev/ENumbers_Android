@@ -12,7 +12,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="appName">ENumbers</string>
-    <string name="developer">by Iuliia Ashomok\nbieliaievays@gmail.com</string>
+    <string name="developer">by Iuliia Ashomok</string>
+    <string name="email">bieliaievays@gmail.com</string>
     <string name="version">version 1.0.0</string>
 
 </resources>

@@ -47,14 +47,27 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:id="@+id/email"
+                android:typeface="sans"
+                style="@style/CustomText"
+                android:layout_below="@id/developer"
+                />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:clickable="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:id="@+id/version"
                 android:typeface="sans"
                 style="@style/CustomText"
-                android:layout_below="@id/developer"
+                android:layout_below="@id/email"
                 />
+
+
 
     </LinearLayout>
 </LinearLayout>

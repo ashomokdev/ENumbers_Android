@@ -10,5 +10,4 @@
         attrs:state_yellow="false"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:attrs="http://schemas.android.com/apk/res/com.example.eNumbers"
-        android:paddingRight="@dimen/flag_margin"
-        android:paddingTop="@dimen/flag_margin"/>
+     android:padding="@dimen/flag_margin"/>

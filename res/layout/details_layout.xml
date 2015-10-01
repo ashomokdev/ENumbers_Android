@@ -52,9 +52,9 @@
                     <TextView
                             android:id="@+id/eDangerLevelFull"
                             android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
+                            android:layout_height="match_parent"
                             android:gravity="center"
-                            android:text="unsave"
+                            android:text="unsafe"
                             style="@style/TextForFlags"
                             />
                 </LinearLayout>
@@ -73,7 +73,7 @@
                     <TextView
                             android:id="@+id/eForbddenForChildrenFull"
                             android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
+                            android:layout_height="match_parent"
                             android:gravity="center"
                             android:text="Forbidden for children"
                             style="@style/TextForFlags"
@@ -97,7 +97,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="default EName"
-                        style="@style/BasicTextTitle"
+                        style="@style/BasicText"
                         />
             </LinearLayout>
             <LinearLayout
@@ -116,7 +116,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="default banned_in"
-                        style="@style/BasicTextTitle"
+                        style="@style/BasicText"
                         />
             </LinearLayout>
             <LinearLayout
@@ -135,7 +135,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="default approved_in"
-                        style="@style/BasicTextTitle"
+                        style="@style/BasicText"
                         />
             </LinearLayout>
 
@@ -155,7 +155,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="default EPurpose"
-                        style="@style/BasicTextTitle"
+                        style="@style/BasicText"
                         />
             </LinearLayout>
 
@@ -175,7 +175,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="default eStatus"
-                        style="@style/BasicTextTitle"
+                        style="@style/BasicText"
                         />
             </LinearLayout>
 
@@ -196,7 +196,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="default typical_products"
-                        style="@style/BasicTextTitle"
+                        style="@style/BasicText"
                         />
             </LinearLayout>
             <LinearLayout
@@ -216,7 +216,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="default additional_info"
-                        style="@style/BasicTextTitle"
+                        style="@style/BasicTextSmaller"
                         />
             </LinearLayout>
         </LinearLayout>
