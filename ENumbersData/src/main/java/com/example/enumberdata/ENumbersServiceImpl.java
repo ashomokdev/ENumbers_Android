@@ -31,6 +31,31 @@ public class ENumbersServiceImpl implements ENumbersService {
         extractAvoidItItems();
         orderPunctuation();
         addDangerLevel();
+        refreshBadForChildren();
+    }
+
+    private void refreshBadForChildren() {
+        for (ENumber item : data) {
+            refreshBadForChildren(item);
+        }
+    }
+
+    private void refreshBadForChildren(ENumber item) {
+        ENumber.DangerLevel dangerLevel = item.getDangerLevel();
+        switch (dangerLevel) {
+            case safe:
+                break;
+            case medium:
+                item.setBadForChildren(true);
+                break;
+            case hight:
+                item.setBadForChildren(true);
+                break;
+            case unknown:
+                break;
+            default:
+                break;
+        }
     }
 
     private void addDangerLevel() {
@@ -41,21 +66,13 @@ public class ENumbersServiceImpl implements ENumbersService {
 
     private void addDangerLevel(ENumber item) {
         if (item.getAvoidIt() ||
-                (item.getBannedIn().length() > 0 && item.getApprovedIn().length() == 0 ))
-        {
+                (item.getBannedIn().length() > 0 && item.getApprovedIn().length() == 0)) {
             item.setDangerLevel(ENumber.DangerLevel.hight);
-        }
-        else if (item.getBadForChildren())
-        {
+        } else if (item.getBadForChildren() || item.getBannedIn().length() > item.getApprovedIn().length()) {
             item.setDangerLevel(ENumber.DangerLevel.medium);
-        }
-        else if(item.getBannedIn().length() == 0 && item.getApprovedIn().length() > 0)
-        {
+        } else if (item.getBannedIn().length() == 0 && item.getApprovedIn().length() > 0) {
             item.setDangerLevel(ENumber.DangerLevel.safe);
-        }
-
-        else
-        {
+        } else {
             item.setDangerLevel(ENumber.DangerLevel.unknown);
         }
 

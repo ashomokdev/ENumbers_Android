@@ -41,6 +41,10 @@ public class ENumber {
     @DatabaseField
     private boolean badForChildren;
 
+    public DangerLevel getDangerLevel() {
+        return dangerLevel;
+    }
+
     @DatabaseField
     private DangerLevel dangerLevel;
 

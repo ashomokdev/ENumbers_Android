@@ -68,6 +68,7 @@
                             android:layout_height="wrap_content"
                             android:src="@drawable/flag_forbidden_for_children"
                             android:padding="@dimen/flag_margin"
+                            android:paddingTop="@dimen/flag_margin"
                             android:gravity="center"/>
                     <TextView
                             android:id="@+id/eForbddenForChildrenFull"

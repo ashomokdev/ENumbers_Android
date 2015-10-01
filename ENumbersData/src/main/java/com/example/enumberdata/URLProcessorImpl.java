@@ -1,10 +1,5 @@
 package com.example.enumberdata;
 
-import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.dao.DaoManager;
-import com.j256.ormlite.jdbc.JdbcConnectionSource;
-import com.j256.ormlite.support.ConnectionSource;
-import com.j256.ormlite.table.TableUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -21,25 +16,29 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.beans.PropertyDescriptor;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.poi.hpsf.HPSFException;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+
 /**
  * Created by Iuliia on 08.08.2015.
  */
-public class URLProcessorImpl implements  URLProcessor {
-    private  Logger log = Logger.getLogger(URLProcessorImpl.class.getName());
+public class URLProcessorImpl implements URLProcessor {
+    private Logger log = Logger.getLogger(URLProcessorImpl.class.getName());
 
     private static final String pathToXml = "res/raw/base.xml";
     private List<String> urlList;
@@ -60,21 +59,101 @@ public class URLProcessorImpl implements  URLProcessor {
 
         if (!data.isEmpty()) {
             //createXML(data); //deprecated
-            fillSQLiteDB(data);
+            //fillSQLiteDB(data); //deprecated
+            fillExcel(data);
         }
+    }
+
+    private void fillExcel(ArrayList<ENumber> data) {
+        ArrayList headers = new ArrayList();
+
+        ArrayList collector = new ArrayList();
+
+        File file = new File("data.xls");
+
+        PropertyDescriptor[] propertyDescriptors = BeanUtils.getPropertyDescriptors(data.get(0).getClass()); //without Spring: Introspector.getBeanInfo(data.get(0).getClass()).getPropertyDescriptors())
+        ArrayList<Method> getters = new ArrayList<Method>();
+        for (PropertyDescriptor pd : propertyDescriptors) {
+            if (pd.getName().equals("class")) {
+                //excludes  <class>class com.example.ENumbersData.ENumber</class> from excel shit
+            } else {
+                Method getter = pd.getReadMethod();
+                getters.add(getter);
+                headers.add(pd
+                        .getName());
+            }
+        }
+        try {
+            for (int i = 0; i < data.size(); i++) {
+                ArrayList cells = new ArrayList();
+                for (Method getter : getters) {
+                    cells.add(String.valueOf(getter.invoke(data.get(i))));
+                }
+                collector.add(cells);
+            }
+
+            exportToExcel("Test", headers, collector, file);
+        } catch (HPSFException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void exportToExcel(String sheetName, ArrayList headers,
+                                     ArrayList data, File outputFile) throws HPSFException {
+        HSSFWorkbook wb = new HSSFWorkbook();
+        HSSFSheet sheet = wb.createSheet(sheetName);
+
+        int rowIdx = 0;
+        short cellIdx = 0;
+
+        // Header
+        HSSFRow hssfHeader = sheet.createRow(rowIdx);
+        HSSFCellStyle cellStyle = wb.createCellStyle();
+        cellStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+        for (Iterator cells = headers.iterator(); cells.hasNext(); ) {
+            HSSFCell hssfCell = hssfHeader.createCell(cellIdx++);
+            hssfCell.setCellStyle(cellStyle);
+            hssfCell.setCellValue((String) cells.next());
+        }
+        // Data
+        rowIdx = 1;
+        for (Iterator rows = data.iterator(); rows.hasNext(); ) {
+            ArrayList row = (ArrayList) rows.next();
+            HSSFRow hssfRow = sheet.createRow(rowIdx++);
+            cellIdx = 0;
+            for (Iterator cells = row.iterator(); cells.hasNext(); ) {
+                HSSFCell hssfCell = hssfRow.createCell(cellIdx++);
+                hssfCell.setCellValue((String) cells.next());
+            }
+        }
+
+        wb.setSheetName(0, sheetName);
+        try {
+            FileOutputStream outs = new FileOutputStream(outputFile);
+            wb.write(outs);
+            outs.close();
+        } catch (IOException e) {
+            throw new HPSFException(e.getMessage());
+        }
+
     }
 
     private void fillSQLiteDB(ArrayList<ENumber> data) {
 
         DBService dbService = new DBServiceImpl();
         dbService.createDB();
-        for(ENumber item:data) {
+        for (ENumber item : data) {
             dbService.insert(item);
         }
         dbService.closeConnection();
     }
 
-    private  ArrayList<ENumber> addAdditionalInfoForURL2or3(ArrayList<ENumber> data, String url) {
+    private ArrayList<ENumber> addAdditionalInfoForURL2or3(ArrayList<ENumber> data, String url) {
         try {
             Document doc = Jsoup.connect(url).get();
 
@@ -139,7 +218,7 @@ public class URLProcessorImpl implements  URLProcessor {
     }
 
 
-    private  ArrayList<ENumber> addAdditionalInfoForURL1(ArrayList<ENumber> data, String url) {
+    private ArrayList<ENumber> addAdditionalInfoForURL1(ArrayList<ENumber> data, String url) {
         try {
             Document doc = Jsoup.connect(url).get();
             Elements tables = doc.select("table.bg1"); //all tables with class bg1
@@ -151,7 +230,7 @@ public class URLProcessorImpl implements  URLProcessor {
                 String code = "E" + info.get(0).select("td").get(1).text();
                 String comment = info.get(1).select("td").get(1).text();
                 Predicate<ENumber> codeEquals = (v) -> (v.getCode().equals(code));
-                Consumer<ENumber> addComment = (e) ->  e.AddAdditionalInfo(comment);
+                Consumer<ENumber> addComment = (e) -> e.AddAdditionalInfo(comment);
                 data.stream()
                         .filter(codeEquals)
                         .forEach(addComment);
@@ -222,7 +301,7 @@ public class URLProcessorImpl implements  URLProcessor {
 //        return data;
 //    }
 
-    private  ArrayList<ENumber> createData(String url) {
+    private ArrayList<ENumber> createData(String url) {
         try {
             ArrayList<ENumber> result = new ArrayList<ENumber>();
 
@@ -347,5 +426,5 @@ public class URLProcessorImpl implements  URLProcessor {
             e.printStackTrace();
         }
     }
-    
+
 }

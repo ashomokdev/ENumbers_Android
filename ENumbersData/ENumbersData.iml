@@ -38,5 +38,7 @@
     <orderEntry type="library" name="Maven: com.j256.ormlite:ormlite-jdbc:4.47" level="project" />
     <orderEntry type="library" name="Maven: com.j256.ormlite:ormlite-core:4.47" level="project" />
     <orderEntry type="library" name="Maven: org.xerial:sqlite-jdbc:3.8.11.1" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.poi:poi:3.13" level="project" />
+    <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.9" level="project" />
   </component>
 </module>

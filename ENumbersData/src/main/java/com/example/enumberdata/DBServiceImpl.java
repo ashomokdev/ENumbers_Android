@@ -23,10 +23,8 @@ public class DBServiceImpl implements DBService {
             // create a connection source to our database
             connectionSource = new JdbcConnectionSource(databaseUrl);
 
-            // instantiate the DAO to handle Account with String id
             eNumbersDao = DaoManager.createDao(connectionSource, ENumber.class);
 
-            // if you need to create the 'accounts' table make this call
             TableUtils.createTableIfNotExists(connectionSource, ENumber.class);
 
             TableUtils.clearTable(connectionSource, ENumber.class);
