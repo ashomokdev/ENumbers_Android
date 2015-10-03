@@ -39,7 +39,7 @@ public class ENumber {
     private String bannedIn;
 
     @DatabaseField
-    private boolean badForChildren;
+    private Boolean badForChildren;
 
     public DangerLevel getDangerLevel() {
         return dangerLevel;
@@ -48,7 +48,7 @@ public class ENumber {
     @DatabaseField
     private DangerLevel dangerLevel;
 
-    private boolean avoidIt;
+    private Boolean avoidIt;
 
     public enum DangerLevel { safe, medium, hight, unknown}
 
@@ -132,7 +132,7 @@ public class ENumber {
         return badForChildren;
     }
 
-    public boolean getAvoidIt() {
+    public Boolean getAvoidIt() {
         return avoidIt;
     }
 

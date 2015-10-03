@@ -143,16 +143,6 @@ public class URLProcessorImpl implements URLProcessor {
 
     }
 
-    private void fillSQLiteDB(ArrayList<ENumber> data) {
-
-        DBService dbService = new DBServiceImpl();
-        dbService.createDB();
-        for (ENumber item : data) {
-            dbService.insert(item);
-        }
-        dbService.closeConnection();
-    }
-
     private ArrayList<ENumber> addAdditionalInfoForURL2or3(ArrayList<ENumber> data, String url) {
         try {
             Document doc = Jsoup.connect(url).get();
