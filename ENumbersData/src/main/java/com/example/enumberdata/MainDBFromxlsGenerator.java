@@ -1,6 +1,5 @@
 package com.example.enumberdata;
 
-import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -73,7 +72,13 @@ public class MainDBFromxlsGenerator {
 
                         Object obj = GetObjFromString(row.getCell((short) i).getRichStringCellValue().getString());
 
-                        setters.get(i).invoke(datarow, type.cast(obj));
+                        try {
+                            setters.get(i).invoke(datarow, type.cast(GetObjFromString(row.getCell((short) i).getRichStringCellValue().getString())));
+                        }
+                        catch (ClassCastException e)
+                        {
+                            setters.get(i).invoke(datarow, ENumber.DangerLevel.valueOf(GetObjFromString(row.getCell((short) i).getRichStringCellValue().getString())));
+                        }
                     }
                     result.add((datarow));
                 }
@@ -85,27 +90,27 @@ public class MainDBFromxlsGenerator {
         return null;
     }
 
-    public static Object GetObjFromString(String value) {
+    @SuppressWarnings("unchecked")
+    public static <T> T GetObjFromString(String value) {
         try {
-            //boolean field
+            //Boolean field
             if (value.toLowerCase().equals("true") || value.toLowerCase().equals("false")) {
-                return Boolean.parseBoolean(value);
+                return (T) Boolean.valueOf(value);
             }
 
             //enum field
-            Object[] enumValues = ENumber.DangerLevel.class.getEnumConstants();
+            ENumber.DangerLevel[] enumValues = ENumber.DangerLevel.values();
             for (int i = 0; i < enumValues.length; i++) {
                 if (value.equals(enumValues[i])) {
-                    return ENumber.DangerLevel.valueOf(value);
+                   return(T) enumValues[i];
                 }
             }
 
-            return value;
+            return (T) value;
 
 
         } catch (Exception e) {
             return null; // There was some error, so return null.
         }
     }
-
 }
