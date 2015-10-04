@@ -16,7 +16,7 @@ import java.util.Collections;
 public class ENumbersSQLiteAssetHelper extends SQLiteAssetHelper {
 
     private static final String DATABASE_NAME = "Enumbers.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     public static final String COLUMN_NAME_ID = "0 _id"; //It is returning the value of 0 with the column name _id (it's using column name alias). You can return a column that doesn't exist in your table this way.
     public static final String COLUMN_NAME_CODE = "code";
@@ -47,6 +47,7 @@ public class ENumbersSQLiteAssetHelper extends SQLiteAssetHelper {
 
     public ENumbersSQLiteAssetHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        setForcedUpgrade();
     }
 
     public Cursor selectAllData() {
