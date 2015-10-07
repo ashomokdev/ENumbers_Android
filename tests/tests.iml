@@ -38,5 +38,6 @@
     <orderEntry type="library" name="Maven: com.google.android:android-test:2.2.1" level="project" />
     <orderEntry type="library" name="Maven: junit:junit:3.8.2" level="project" />
     <orderEntry type="library" name="Maven: com.readystatesoftware.sqliteasset:sqliteassethelper:2.0.1" level="project" />
+    <orderEntry type="module" module-name="ENumbers" />
   </component>
 </module>

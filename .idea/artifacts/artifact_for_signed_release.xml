@@ -1,0 +1,15 @@
+<component name="ArtifactManager">
+  <artifact type="apk" name="artifact_for_signed_release">
+    <output-path>$PROJECT_DIR$/out/artifacts/artifact_for_signed_release</output-path>
+    <properties id="android-properties">
+      <options>
+        <option name="keyAlias" value="julia1991" />
+        <option name="keyPassword" value="anVsaWExOTkx" />
+        <option name="keyStorePassword" value="anVsaWExOTkx" />
+        <option name="keyStoreUrl" value="file://$USER_HOME$/Documents/keystore.jks" />
+        <option name="signingMode" value="RELEASE_SIGNED" />
+      </options>
+    </properties>
+    <root id="archive" name="artifact_for_signed_release.apk" />
+  </artifact>
+</component>

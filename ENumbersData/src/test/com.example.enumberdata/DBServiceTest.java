@@ -1,4 +1,4 @@
-package com.example.enumberdata;
+package com.ashomok.enumberdata;
 
 import org.testng.TestNG;
 import org.testng.annotations.Test;
