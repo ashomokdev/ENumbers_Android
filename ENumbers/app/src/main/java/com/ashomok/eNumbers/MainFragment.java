@@ -15,8 +15,6 @@ import android.view.*;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.util.List;
 
@@ -266,12 +264,9 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
 
                         EN enumb = new EN(cursor);
 
-                        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-                        String flat = gson.toJson(enumb);
-
                         Intent intent = new Intent(getActivity(), ENDetailsActivity.class);
 
-                        intent.putExtra("objectKey", flat);
+                        intent.putExtra("en", enumb);
                         startActivity(intent);
                     }
                 });

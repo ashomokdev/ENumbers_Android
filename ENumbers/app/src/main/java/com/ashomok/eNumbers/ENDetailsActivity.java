@@ -9,14 +9,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.google.gson.Gson;
 
 /**
  * Created by Iuliia on 14.09.2015.
  */
 public class ENDetailsActivity extends AppCompatActivity {
 
-    private EN complexJavaObjEN;
+    private EN en;
 
     private Toolbar toolbar;
     private TextView mTextView_ecode;
@@ -37,12 +36,7 @@ public class ENDetailsActivity extends AppCompatActivity {
 
             Bundle extras = getIntent().getExtras();
             if (extras != null) {
-                String jsonString = extras.getString("objectKey");
-
-                if (jsonString != null) {
-                    Gson gson = new Gson();
-                    complexJavaObjEN = gson.fromJson(jsonString, EN.class);
-                }
+                en = (EN)getIntent().getSerializableExtra("en");
             }
 
             setContentView(R.layout.details_layout);
@@ -53,9 +47,9 @@ public class ENDetailsActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
             mTextView_ecode = (TextView) findViewById(R.id.eCodeFull);
-            mTextView_ecode.setText(complexJavaObjEN.getCode());
+            mTextView_ecode.setText(en.getCode());
 
-            String name = complexJavaObjEN.getName();
+            String name = en.getName();
             if (name.length() > 0) {
                 mTextView_ename = (TextView) findViewById(R.id.eNameFull);
                 mTextView_ename.setText(name);
@@ -63,7 +57,7 @@ public class ENDetailsActivity extends AppCompatActivity {
                 findViewById(R.id.details_layout_ename_layout).setVisibility(View.GONE);
             }
 
-            String purpose = complexJavaObjEN.getPurpose();
+            String purpose = en.getPurpose();
             if (purpose.length() > 0) {
                 mTextView_epurpose = (TextView) findViewById(R.id.ePurposeFull);
                 mTextView_epurpose.setText(purpose);
@@ -71,7 +65,7 @@ public class ENDetailsActivity extends AppCompatActivity {
                 findViewById(R.id.details_layout_epurpose_layout).setVisibility(View.GONE);
             }
 
-            String status = complexJavaObjEN.getStatus();
+            String status = en.getStatus();
             if (status.length() > 0) {
                 mTextView_status = (TextView) findViewById(R.id.eStatusFull);
                 mTextView_status.setText(status);
@@ -79,7 +73,7 @@ public class ENDetailsActivity extends AppCompatActivity {
                 findViewById(R.id.details_layout_estatus_layout).setVisibility(View.GONE);
             }
 
-            String additional_info = complexJavaObjEN.getAdditionalInfo();
+            String additional_info = en.getAdditionalInfo();
             if (additional_info.length() > 0) {
                 mTextView_additional_info = (TextView) findViewById(R.id.additional_infoFull);
                 mTextView_additional_info.setText(additional_info);
@@ -87,7 +81,7 @@ public class ENDetailsActivity extends AppCompatActivity {
                 findViewById(R.id.details_layout_eadditional_info_layout).setVisibility(View.GONE);
             }
 
-            String approved_in = complexJavaObjEN.getApprovedIn();
+            String approved_in = en.getApprovedIn();
             if (approved_in.length() > 0) {
                 mTextView_approved_in = (TextView) findViewById(R.id.eapproved_inFull);
                 mTextView_approved_in.setText(approved_in);
@@ -95,7 +89,7 @@ public class ENDetailsActivity extends AppCompatActivity {
                 findViewById(R.id.details_layout_eapproved_in_layout).setVisibility(View.GONE);
             }
 
-            String banned_in = complexJavaObjEN.getBannedIn();
+            String banned_in = en.getBannedIn();
             if (banned_in.length() > 0) {
                 mTextView_banned_in = (TextView) findViewById(R.id.ebanned_inFull);
                 mTextView_banned_in.setText(banned_in);
@@ -103,7 +97,7 @@ public class ENDetailsActivity extends AppCompatActivity {
                 findViewById(R.id.details_layout_ebanned_in_layout).setVisibility(View.GONE);
             }
 
-            String typical_products = complexJavaObjEN.getTypicalProducts();
+            String typical_products = en.getTypicalProducts();
             if (typical_products.length() > 0) {
                 mTextView_typical_products = (TextView) findViewById(R.id.etypical_productsFull);
                 mTextView_typical_products.setText(typical_products);
@@ -111,7 +105,7 @@ public class ENDetailsActivity extends AppCompatActivity {
                 findViewById(R.id.details_layout_etypical_products_layout).setVisibility(View.GONE);
             }
 
-            Boolean is_bad_for_children = complexJavaObjEN.getBadForChildren().equals("0") ? false : true;
+            Boolean is_bad_for_children = en.getBadForChildren().equals("0") ? false : true;
             if (is_bad_for_children) {
                 //visible by default
             } else {
@@ -119,7 +113,7 @@ public class ENDetailsActivity extends AppCompatActivity {
             }
 
             flag = (ENumbFlag) findViewById(R.id.enumbFlag_details_layout);
-            String dangerLevel = complexJavaObjEN.getDangerLevel();
+            String dangerLevel = en.getDangerLevel();
             mTextView_danger_level = (TextView) findViewById(R.id.eDangerLevelFull);
             switch (dangerLevel) {
                 case "safe":

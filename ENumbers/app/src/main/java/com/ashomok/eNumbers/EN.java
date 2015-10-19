@@ -2,7 +2,6 @@ package com.ashomok.eNumbers;
 
 import android.database.Cursor;
 import android.util.Log;
-import com.google.gson.annotations.Expose;
 
 import java.io.Serializable;
 
@@ -81,13 +80,10 @@ public class EN implements Serializable {
 
     private int id;
 
-    @Expose
     private String code;
 
-    @Expose
     private String name;
 
-    @Expose
     private String purpose;
 
     public String getPurpose() {
@@ -122,24 +118,17 @@ public class EN implements Serializable {
         return dangerLevel;
     }
 
-    @Expose
     private String status;
 
-    @Expose
     private String additionalInfo;
 
-    @Expose
     private String typicalProducts;
 
-    @Expose
     private String approvedIn;
 
-    @Expose
     private String bannedIn;
 
-    @Expose
     private String badForChildren;
 
-    @Expose
     private String dangerLevel;
 }
