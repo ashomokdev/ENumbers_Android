@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\Iuliia\.gradle\caches\modules-2\files-2.1\com.readystatesoftware.sqliteasset\sqliteassethelper\2.0.1\d5f02e4a4d65ec0fbb339f2e4228723d1540bb9f\sqliteassethelper-2.0.1.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="d5f02e4a4d65ec0fbb339f2e4228723d1540bb9f">
+        <dex dex="C:\Users\Iuliia\AndroidStudioProjects\ENumbers\app\build\intermediates\pre-dexed\debug\sqliteassethelper-2.0.1-dcb04a326ddb5e0459841c70673a1a9495494b17.jar" />
+    </item>
+    <item
+        jar="C:\Users\Iuliia\AppData\Local\Android\android-sdk\extras\android\m2repository\com\android\support\support-annotations\23.0.1\support-annotations-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
+        <dex dex="C:\Users\Iuliia\AndroidStudioProjects\ENumbers\app\build\intermediates\pre-dexed\debug\support-annotations-23.0.1-48fa09d3da03af1e6ebf77448a94c5b8b4f4773a.jar" />
+    </item>
+    <item
+        jar="C:\Users\Iuliia\IdeaProjects\ENumbers_Android_Java_Maven\ENumbers\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\libs\internal_impl-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="C:\Users\Iuliia\IdeaProjects\ENumbers_Android_Java_Maven\ENumbers\app\build\intermediates\pre-dexed\debug\internal_impl-23.0.1-b57b6ffcc44e519be3105ddfec2e00563b6fb3c0.jar" />
+    </item>
+    <item
+        jar="C:\Users\Iuliia\IdeaProjects\ENumbers_Android_Java_Maven\ENumbers\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="C:\Users\Iuliia\IdeaProjects\ENumbers_Android_Java_Maven\ENumbers\app\build\intermediates\pre-dexed\debug\classes-d232677a466dac857e3dafac1f98f4254de4aead.jar" />
+    </item>
+    <item
+        jar="C:\Users\Iuliia\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.3.1\ecb6e1f8e4b0e84c4b886c2f14a1500caf309757\gson-2.3.1.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
+        <dex dex="C:\Users\Iuliia\AndroidStudioProjects\ENumbers\app\build\intermediates\pre-dexed\debug\gson-2.3.1-684cadfa3e140d5082ab33b19a0d68c16f38bee5.jar" />
+    </item>
+    <item
+        jar="C:\Users\Iuliia\AndroidStudioProjects\ENumbers\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="C:\Users\Iuliia\AndroidStudioProjects\ENumbers\app\build\intermediates\pre-dexed\debug\classes-ce4277aa49fdae9fb00d331fa91e5999f48221a2.jar" />
+    </item>
+    <item
+        jar="C:\Users\Iuliia\IdeaProjects\ENumbers_Android_Java_Maven\ENumbers\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="C:\Users\Iuliia\IdeaProjects\ENumbers_Android_Java_Maven\ENumbers\app\build\intermediates\pre-dexed\debug\classes-93724d9e8e060c87534d885c370efbe2a2716927.jar" />
+    </item>
+    <item
+        jar="C:\Users\Iuliia\AndroidStudioProjects\ENumbers\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="C:\Users\Iuliia\AndroidStudioProjects\ENumbers\app\build\intermediates\pre-dexed\debug\classes-d4a816e9ab661782cce74cc8ec32d5bbbd2f606b.jar" />
+    </item>
+    <item
+        jar="C:\Users\Iuliia\AndroidStudioProjects\ENumbers\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\libs\internal_impl-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="C:\Users\Iuliia\AndroidStudioProjects\ENumbers\app\build\intermediates\pre-dexed\debug\internal_impl-23.0.1-49a6d439896118b25e2812c2d7724ee4c373e18e.jar" />
+    </item>
+
+</items>
