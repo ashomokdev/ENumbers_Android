@@ -13,6 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.*;
 import android.widget.*;
 
+import com.googlecode.tesseract.android.TessBaseAPI;
+
 public class MainActivity extends AppCompatActivity {
 
     private ActionBarDrawerToggle toggle;

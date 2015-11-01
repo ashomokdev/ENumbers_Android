@@ -16,6 +16,8 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 
+import com.googlecode.tesseract.android.TessBaseAPI;
+
 import java.util.List;
 
 /**
@@ -85,6 +87,14 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
             searchBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+                    try {
+                        TessBaseAPI baseApi = new TessBaseAPI();
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
 
                     if (v != null) {
 
