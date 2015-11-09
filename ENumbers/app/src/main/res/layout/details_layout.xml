@@ -4,7 +4,7 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
-              android:id="@+id/start_fragment_frame_layout">
+              android:id="@+id/frame_layout">
 
     <include android:id="@+id/toolbar_details_layout"
              android:layout_width="match_parent"
@@ -66,7 +66,7 @@
                             android:layout_marginLeft="10dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@mipmap/flag_forbidden_for_children"
+                            android:src="@drawable/flag_forbidden_for_children"
                             android:padding="@dimen/flag_margin"
                             android:paddingTop="@dimen/flag_margin"
                             android:gravity="center"/>

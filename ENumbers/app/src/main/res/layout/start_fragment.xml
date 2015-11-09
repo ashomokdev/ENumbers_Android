@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:orientation="vertical"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/start_fragment_frame_layout1">
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/start_fragment_frame_layout1">
     <View
             android:layout_width="fill_parent"
             android:layout_height="50dp"
@@ -21,7 +21,7 @@
                     android:layout_height="fill_parent"
                     android:layout_marginLeft="@dimen/layout_margin"
                     android:layout_marginRight="@dimen/layout_margin"
-                    android:id="@+id/start_fragment_frame_layout">
+                    android:id="@+id/frame_layout">
 
         <RelativeLayout android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/ic_close"
-                    android:src="@mipmap/ic_close_white_24dp"
+                    android:src="@drawable/ic_close_white_24dp"
                     android:background="@null"
                     android:scaleType="fitCenter"
                     android:layout_marginLeft="10dp"
@@ -73,7 +73,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/ic_mic"
-                    android:src="@mipmap/ic_mic_white_24dp"
+                    android:src="@drawable/ic_mic_white_24dp"
                     android:background="@null"
                     android:scaleType="fitCenter"
                     android:layout_marginLeft="10dp"
@@ -81,7 +81,7 @@
         </LinearLayout>
 
         <ImageButton
-                android:background="@mipmap/ic_send_red"
+                android:background="@drawable/ic_send_red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/inputE"
@@ -120,4 +120,14 @@
                 android:id="@+id/warning"
                 />
     </RelativeLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:src="@drawable/camera"
+       />
 </RelativeLayout>
