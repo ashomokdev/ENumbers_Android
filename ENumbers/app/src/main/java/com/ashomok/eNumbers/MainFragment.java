@@ -26,24 +26,13 @@ import java.util.List;
 public class MainFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final int SPEECH_REQUEST_CODE = 0;
-
-    private ImageButton searchBtn;
-
+    private ENumberListAdapter scAdapter;
     private ImageButton voiceInputBtn;
-
     private ImageButton closeBtn;
-
     private EditText inputEditText;
-
-    private TextView outputWarning;
-
     private ListView listView;
-
     private String startChar;
-
     private ENumbersSQLiteAssetHelper db;
-
-    ENumberListAdapter scAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,14 +48,15 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-            super.onActivityCreated(savedInstanceState);
+        super.onActivityCreated(savedInstanceState);
 
-            // Prepare the loader
-            db = new ENumbersSQLiteAssetHelper(getActivity());
+        // Prepare the loader
+        db = new ENumbersSQLiteAssetHelper(getActivity());
 
-            // create Loader for data reading
-            getLoaderManager().initLoader(0, null, this);
+        // create Loader for data reading
+        getLoaderManager().initLoader(0, null, this);
     }
+
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -76,55 +66,52 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
             inputEditText = (EditText) view.findViewById(R.id.inputE);
             inputEditText.setSelection(inputEditText.getText().length()); //starts type after "E"
 
-            outputWarning = (TextView) view.findViewById(R.id.warning);
-
-            searchBtn = (ImageButton) view.findViewById(R.id.button);
-
             voiceInputBtn = (ImageButton) view.findViewById(R.id.ic_mic);
 
             closeBtn = (ImageButton) view.findViewById(R.id.ic_close);
 
-            searchBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    try {
-                        TessBaseAPI baseApi = new TessBaseAPI();
-                    }
-                    catch (Exception e)
-                    {
-
-                    }
-
-                    if (v != null) {
-
-                        outputWarning.setText("");
-
-                        String inputing = inputEditText.getText().toString();
-
-                        if (inputing.length() >= 3) {
-
-                            GetInfoByENumber(inputing);
-
-                                //to hide the soft keyboard
-                                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
-                                        Context.INPUT_METHOD_SERVICE);
-                                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-
-                        } else if (inputing.contentEquals(startChar)) {
-                            //empty enter
-                            showAllData(v);
-                        } else {
-                            listView.setAdapter(null);
-                            outputWarning.setText(getActivity().getApplicationContext().getString(R.string.notFoundMessage));
-                        }
-                    }
-                }
-            });
+//            searchBtn.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//
+////                    try {
+////                        TessBaseAPI baseApi = new TessBaseAPI();
+////                    }
+////                    catch (Exception e)
+////                    {
+////
+////                    }
+//
+//                    if (v != null) {
+//
+//                        outputWarning.setText("");
+//
+//                        String inputing = inputEditText.getText().toString();
+//
+//                        if (inputing.length() >= 3) {
+//
+//                            GetInfoByENumber(inputing);
+//
+//                                //to hide the soft keyboard
+//                                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
+//                                        Context.INPUT_METHOD_SERVICE);
+//                                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+//
+//                        } else if (inputing.contentEquals(startChar)) {
+//                            //empty enter
+//                            showAllData(v);
+//                        } else {
+//                            listView.setAdapter(null);
+//                            outputWarning.setText(getActivity().getApplicationContext().getString(R.string.notFoundMessage));
+//                        }
+//                    }
+//                }
+//            });
 
             inputEditText.addTextChangedListener(new TextWatcher() {
                 @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
                 }
 
                 @Override
@@ -140,8 +127,10 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
                 }
 
                 @Override
-                public void afterTextChanged(Editable editable) {
+                public void afterTextChanged(Editable s) {
+
                 }
+
             });
 
             inputEditText.setOnEditorActionListener(new EditText.OnEditorActionListener() {
@@ -150,7 +139,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
 
                     if (actionId == EditorInfo.IME_ACTION_DONE) {
 
-                        searchBtn.performClick();
+                        GetInfoByENumber(textView.getText().toString());
 
                         //to hide the soft keyboard
                         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
@@ -180,13 +169,15 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
 
                     inputEditText.setText("");
 
-                    outputWarning.setText("");
-
                     showAllData(view);
                 }
             });
 
             listView = (ListView) view.findViewById(R.id.ENumberList);
+
+            TextView outputWarning = (TextView) view.findViewById(R.id.warning);
+            listView.setEmptyView(outputWarning);
+
             listView.setAdapter(scAdapter);
 
         } catch (Exception e) {
@@ -194,10 +185,12 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         }
     }
 
+
     private void GetInfoByENumber(String inputing) {
+        //TODO give checkings before
+        Bundle b = new Bundle();
+        b.putStringArray("codes", new String[]{inputing});
         try {
-            Bundle b = new Bundle();
-            b.putStringArray("codes", new String[]{inputing});
 
             getLoaderManager().restartLoader(0, b, this);
 
@@ -210,6 +203,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
     @Override
     public void onActivityResult(int requestCode, int resultCode,
                                  Intent data) {
+        //voice inputing method
         if (requestCode == SPEECH_REQUEST_CODE && resultCode == getActivity().RESULT_OK) {
 
             List<String> results = data.getStringArrayListExtra(
@@ -218,12 +212,11 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
 
             inputEditText.setText(
                     getActivity().getApplicationContext().getString(R.string.startChar));
+
             String spokenText = results.get(0);
             inputEditText.append(spokenText);
 
-            searchBtn.setPressed(true);
-            searchBtn.invalidate();
-            searchBtn.performClick();
+            GetInfoByENumber(inputEditText.getText().toString());
         }
     }
 
@@ -255,12 +248,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         try {
-            if (cursor.getCount() < 1) {
-                listView.setAdapter(null);
-                outputWarning.setText(getActivity().getApplicationContext().getString(R.string.notFoundMessage));
-            } else {
-
-                scAdapter = new ENumberListAdapter(getActivity(),  cursor, 0);
+                scAdapter = new ENumberListAdapter(getActivity(), cursor, 0);
 
                 listView.setAdapter(scAdapter);
                 scAdapter.changeCursor(cursor);
@@ -280,9 +268,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
                         startActivity(intent);
                     }
                 });
-            }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             Log.e(this.getClass().getCanonicalName(), e.getMessage() + e.getStackTrace().toString());
             Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
