@@ -2,11 +2,32 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Iuliia\IdeaProjects\ENumbers_Android_Java_Maven\ENumbers\app\build\intermediates\exploded-aar\ENumbers.libs\tess-two\unspecified\jars\classes.jar"
+        jar="C:\Users\Iuliia\IdeaProjects\ENumbers_Android_Java_Maven\ENumbers\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.0"
-        sha1="14495da23f64c4f935048f01dee33e74d7d70407">
-        <dex dex="C:\Users\Iuliia\IdeaProjects\ENumbers_Android_Java_Maven\ENumbers\app\build\intermediates\pre-dexed\debug\classes-ea4d947f1f61932ff62479ba2dc96c1f6a46f94c.jar" />
+        sha1="57ae0d750ff83f0c738d21720224ac7ea866a094">
+        <dex dex="C:\Users\Iuliia\IdeaProjects\ENumbers_Android_Java_Maven\ENumbers\app\build\intermediates\pre-dexed\debug\classes-04dfeeecccf7aaa2bfb4b046ee4025363e6783e5.jar" />
+    </item>
+    <item
+        jar="C:\Users\Iuliia\.gradle\caches\modules-2\files-2.1\com.readystatesoftware.sqliteasset\sqliteassethelper\2.0.1\d5f02e4a4d65ec0fbb339f2e4228723d1540bb9f\sqliteassethelper-2.0.1.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="d5f02e4a4d65ec0fbb339f2e4228723d1540bb9f">
+        <dex dex="C:\Users\Iuliia\IdeaProjects\ENumbers_Android_Java_Maven\ENumbers\app\build\intermediates\pre-dexed\debug\sqliteassethelper-2.0.1-dcb04a326ddb5e0459841c70673a1a9495494b17.jar" />
+    </item>
+    <item
+        jar="C:\Users\Iuliia\IdeaProjects\ENumbers_Android_Java_Maven\ENumbers\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="3f151e49c316a5ab2c065969a3b3b55ef9b393fc">
+        <dex dex="C:\Users\Iuliia\IdeaProjects\ENumbers_Android_Java_Maven\ENumbers\app\build\intermediates\pre-dexed\debug\classes-dcbd6057a6f0e3d1ee5cf19ce8a296521819423f.jar" />
+    </item>
+    <item
+        jar="C:\Users\Iuliia\IdeaProjects\ENumbers_Android_Java_Maven\ENumbers\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\jars\libs\internal_impl-23.1.0.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="8716243bf04bae8d6c9ca94d27b9a9be7236f0a3">
+        <dex dex="C:\Users\Iuliia\IdeaProjects\ENumbers_Android_Java_Maven\ENumbers\app\build\intermediates\pre-dexed\debug\internal_impl-23.1.0-3f07d4c86fe73cb4eecc30960e1679f6f23d8b0b.jar" />
     </item>
     <item
         jar="C:\Users\Iuliia\IdeaProjects\ENumbers_Android_Java_Maven\ENumbers\app\build\intermediates\exploded-aar\com.android.support\design\23.1.0\jars\classes.jar"
@@ -23,20 +44,6 @@
         <dex dex="C:\Users\Iuliia\IdeaProjects\ENumbers_Android_Java_Maven\ENumbers\app\build\intermediates\pre-dexed\debug\support-annotations-23.1.0-71b1d94ae9e98c43eee2dcc8c29cbca4a613d51e.jar" />
     </item>
     <item
-        jar="C:\Users\Iuliia\IdeaProjects\ENumbers_Android_Java_Maven\ENumbers\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="57ae0d750ff83f0c738d21720224ac7ea866a094">
-        <dex dex="C:\Users\Iuliia\IdeaProjects\ENumbers_Android_Java_Maven\ENumbers\app\build\intermediates\pre-dexed\debug\classes-04dfeeecccf7aaa2bfb4b046ee4025363e6783e5.jar" />
-    </item>
-    <item
-        jar="C:\Users\Iuliia\IdeaProjects\ENumbers_Android_Java_Maven\ENumbers\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\jars\libs\internal_impl-23.1.0.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="8716243bf04bae8d6c9ca94d27b9a9be7236f0a3">
-        <dex dex="C:\Users\Iuliia\IdeaProjects\ENumbers_Android_Java_Maven\ENumbers\app\build\intermediates\pre-dexed\debug\internal_impl-23.1.0-3f07d4c86fe73cb4eecc30960e1679f6f23d8b0b.jar" />
-    </item>
-    <item
         jar="C:\Users\Iuliia\IdeaProjects\ENumbers_Android_Java_Maven\ENumbers\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.0"
@@ -44,18 +51,11 @@
         <dex dex="C:\Users\Iuliia\IdeaProjects\ENumbers_Android_Java_Maven\ENumbers\app\build\intermediates\pre-dexed\debug\classes-662b7fa717cf55f4e3a70cbc8e19cd6b217058a8.jar" />
     </item>
     <item
-        jar="C:\Users\Iuliia\.gradle\caches\modules-2\files-2.1\com.readystatesoftware.sqliteasset\sqliteassethelper\2.0.1\d5f02e4a4d65ec0fbb339f2e4228723d1540bb9f\sqliteassethelper-2.0.1.jar"
+        jar="C:\Users\Iuliia\IdeaProjects\ENumbers_Android_Java_Maven\ENumbers\app\build\intermediates\exploded-aar\ENumbers.libs\tess-two\unspecified\jars\classes.jar"
         jumboMode="false"
         revision="23.0.0"
-        sha1="d5f02e4a4d65ec0fbb339f2e4228723d1540bb9f">
-        <dex dex="C:\Users\Iuliia\IdeaProjects\ENumbers_Android_Java_Maven\ENumbers\app\build\intermediates\pre-dexed\debug\sqliteassethelper-2.0.1-dcb04a326ddb5e0459841c70673a1a9495494b17.jar" />
-    </item>
-    <item
-        jar="C:\Users\Iuliia\IdeaProjects\ENumbers_Android_Java_Maven\ENumbers\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="3f151e49c316a5ab2c065969a3b3b55ef9b393fc">
-        <dex dex="C:\Users\Iuliia\IdeaProjects\ENumbers_Android_Java_Maven\ENumbers\app\build\intermediates\pre-dexed\debug\classes-dcbd6057a6f0e3d1ee5cf19ce8a296521819423f.jar" />
+        sha1="4158cab3aff3a9871c72ba6155067f7400329464">
+        <dex dex="C:\Users\Iuliia\IdeaProjects\ENumbers_Android_Java_Maven\ENumbers\app\build\intermediates\pre-dexed\debug\classes-ea4d947f1f61932ff62479ba2dc96c1f6a46f94c.jar" />
     </item>
 
 </items>

@@ -4,6 +4,9 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.test.IsolatedContext;
 import android.test.mock.MockContentResolver;
 
+import com.ashomok.eNumbers.activities.MainActivity;
+import com.ashomok.eNumbers.sql.ENumbersSQLiteAssetHelper;
+
 import junit.framework.Assert;
 
 /**

@@ -4,7 +4,6 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-
     <android.support.v4.widget.DrawerLayout
             android:id="@+id/drawer_layout"
             android:layout_width="match_parent"
@@ -25,14 +24,6 @@
                      layout="@layout/toolbar"
                     />
             <!-- The rest of your content view -->
-
-        <!--<fragment android:name="com.example.eNumbers.MainFragment"-->
-        <!--android:id="@+id/titles"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="fill_parent"-->
-        <!--android:layout_marginLeft="10dp"-->
-        <!--android:layout_marginRight="10dp"-->
-        <!--tools:layout="@layout/start_fragment"/>-->
 
         <!--a FrameLayout to contain the main content (populated by a Fragment at runtime)-->
         <FrameLayout

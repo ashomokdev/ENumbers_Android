@@ -7,7 +7,7 @@
     <application android:label="@string/appName"
                  android:icon="@mipmap/ic_launcher"
                  >
-        <activity android:name="com.ashomok.eNumbers.MainActivity"
+        <activity android:name=".activities.MainActivity"
                   android:label="@string/appName"
                   android:exported="true"
                   android:windowSoftInputMode="stateHidden"
@@ -23,21 +23,21 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="com.ashomok.eNumbers.AboutActivity"
+        <activity android:name=".activities.AboutActivity"
             android:label="About"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:parentActivityName="com.ashomok.eNumbers.MainActivity">
+            android:parentActivityName=".activities.MainActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.ashomok.eNumbers.MainActivity" />
+                    android:value=".activities.MainActivity" />
         </activity>
-        <activity android:name="com.ashomok.eNumbers.ENDetailsActivity"
+        <activity android:name=".activities.ENDetailsActivity"
                   android:label="Details"
                   android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-                  android:parentActivityName="com.ashomok.eNumbers.MainActivity">
+                  android:parentActivityName=".activities.MainActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.ashomok.eNumbers.MainActivity" />
+                    android:value=".activities.MainActivity" />
         </activity>
     </application>
 </manifest>
