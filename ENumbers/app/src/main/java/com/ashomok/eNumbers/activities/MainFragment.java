@@ -76,73 +76,23 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
     public void onViewCreated(View view, Bundle savedInstanceState) {
         try {
             super.onActivityCreated(savedInstanceState);
+
             startChar = getString(R.string.startChar);
+
             inputEditText = (EditText) view.findViewById(R.id.inputE);
+
             inputEditText.setSelection(inputEditText.getText().length()); //starts type after "E"
 
-            voiceInputBtn = (ImageButton) view.findViewById(R.id.ic_mic);
+            inputEditText.addTextChangedListener(new StartCharKeeper());
 
-            closeBtn = (ImageButton) view.findViewById(R.id.ic_close);
+            inputEditText.setOnEditorActionListener(new BtnDoneHandler());
+
 
             fab = (FloatingActionButton) view.findViewById(R.id.fab);
 
-            fab.setOnClickListener(new View.OnClickListener(){
+            fab.setOnClickListener(new FabClickHandler());
 
-                @Override
-                public void onClick(View v) {
-                    try {
-                        startCameraActivity();
-                    }
-                    catch (Exception e)
-                    {
-                    }
-                }
-            });
-
-            inputEditText.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                    if (charSequence.toString().startsWith(startChar)) {
-
-                    } else {
-
-                        inputEditText.setText(startChar);
-                    }
-                    inputEditText.setSelection(inputEditText.getText().length());
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-
-                }
-
-            });
-
-            inputEditText.setOnEditorActionListener(new EditText.OnEditorActionListener() {
-                @Override
-                public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-
-                    if (actionId == EditorInfo.IME_ACTION_DONE) {
-
-                        GetInfoByENumber(textView.getText().toString());
-
-                        //to hide the soft keyboard
-                        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
-                                Context.INPUT_METHOD_SERVICE);
-                        imm.hideSoftInputFromWindow(textView.getWindowToken(), 0);
-
-                        return true;
-                    }
-
-                    return false;
-                }
-            });
+            voiceInputBtn = (ImageButton) view.findViewById(R.id.ic_mic);
 
             voiceInputBtn.setOnClickListener(new View.OnClickListener() {
 
@@ -152,6 +102,8 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
                     displaySpeechRecognizer();
                 }
             });
+
+            closeBtn = (ImageButton) view.findViewById(R.id.ic_close);
 
             closeBtn.setOnClickListener(new View.OnClickListener() {
 
@@ -164,9 +116,11 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
                 }
             });
 
-            listView = (ListView) view.findViewById(R.id.ENumberList);
 
             outputWarning = (TextView) view.findViewById(R.id.warning);
+
+            listView = (ListView) view.findViewById(R.id.ENumberList);
+
             listView.setEmptyView(outputWarning);
 
             listView.setAdapter(scAdapter);
@@ -176,6 +130,60 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         }
     }
 
+    private class FabClickHandler implements View.OnClickListener
+    {
+        @Override
+        public void onClick(View v) {
+            try {
+                startCameraActivity();
+            }
+            catch (Exception e)
+            {
+            }
+        }
+    }
+
+    private class BtnDoneHandler implements EditText.OnEditorActionListener
+    {
+        @Override
+        public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+
+                GetInfoByENumber(textView.getText().toString());
+
+                //to hide the soft keyboard
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
+                        Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(textView.getWindowToken(), 0);
+
+                return true;
+            }
+
+            return false;
+        }
+    }
+
+    private class StartCharKeeper implements TextWatcher
+    {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            if (charSequence.toString().startsWith(startChar)) {
+
+            } else {
+
+                inputEditText.setText(startChar);
+            }
+            inputEditText.setSelection(inputEditText.getText().length());
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {}
+    }
 
     protected void startCameraActivity() {
         try {
