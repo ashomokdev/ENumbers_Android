@@ -91,7 +91,6 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
                 @Override
                 public void onClick(View v) {
                     try {
-
                         startCameraActivity();
                     }
                     catch (Exception e)
@@ -177,6 +176,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         }
     }
 
+
     protected void startCameraActivity() {
         try {
             String IMGS_PATH = Environment.getExternalStorageDirectory().toString() + "/ENumbers/imgs";
@@ -237,37 +237,43 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         //voice inputing
         if (requestCode == SPEECH_REQUEST_CODE && resultCode == getActivity().RESULT_OK) {
 
-            List<String> results = data.getStringArrayListExtra(
-                    RecognizerIntent.EXTRA_RESULTS);
-
-
-            inputEditText.setText(
-                    getActivity().getApplicationContext().getString(R.string.startChar));
-
-            String spokenText = results.get(0);
-            inputEditText.append(spokenText);
-
-            GetInfoByENumber(inputEditText.getText().toString());
+            onVoiceInputResult(data);
         }
 
         //making photo
         if (requestCode == CAMERA_REQUEST_CODE && resultCode == getActivity().RESULT_OK)
         {
-            long startTime = System.nanoTime();
-            OCREngine ocrEngine = new OCREngine();
-            String result = ocrEngine.RetrieveText(getActivity().getApplicationContext(),
-                    img_path);
-            long endTime = System.nanoTime();
-            scAdapter.changeCursor(null);
-            outputWarning.setText(result);
-            Toast.makeText(getActivity(), String.valueOf(endTime/1000000), Toast.LENGTH_LONG).show();
+            onPhotoInputResult();
         }
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
+
+    private void onPhotoInputResult() {
+        long startTime = System.nanoTime();
+        OCREngine ocrEngine = new OCREngine();
+        String result = ocrEngine.RetrieveText(getActivity().getApplicationContext(),
+                img_path);
+        long endTime = System.nanoTime();
+        scAdapter.changeCursor(null);
+        outputWarning.setText(result);
+        Toast.makeText(getActivity(), String.valueOf(endTime / 1000000), Toast.LENGTH_LONG).show();
     }
+
+
+    private void onVoiceInputResult(Intent data) {
+        List<String> results = data.getStringArrayListExtra(
+                RecognizerIntent.EXTRA_RESULTS);
+
+
+        inputEditText.setText(
+                getActivity().getApplicationContext().getString(R.string.startChar));
+
+        String spokenText = results.get(0);
+        inputEditText.append(spokenText);
+
+        GetInfoByENumber(inputEditText.getText().toString());
+    }
+
 
     public void displaySpeechRecognizer() {
 
@@ -279,9 +285,11 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         startActivityForResult(intent, SPEECH_REQUEST_CODE);
     }
 
+
     private void showAllData(View view) {
         getLoaderManager().restartLoader(0, null, this);
     }
+
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
@@ -322,6 +330,13 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
     public void onLoaderReset(Loader<Cursor> loader) {
         scAdapter.changeCursor(null);
     }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
 
     @Override
     public void onDestroy() {
