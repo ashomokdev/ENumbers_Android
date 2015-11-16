@@ -34,7 +34,7 @@ import java.util.List;
 public class MainFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final int SPEECH_REQUEST_CODE = 0;
-    private static final int CAMERA_REQUEST_CODE = 1;
+    private static final int PHOTO_REQUEST_CODE = 1;
     private String img_path;
     private ENumberListAdapter scAdapter;
     private ImageButton voiceInputBtn;
@@ -130,60 +130,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         }
     }
 
-    private class FabClickHandler implements View.OnClickListener
-    {
-        @Override
-        public void onClick(View v) {
-            try {
-                startCameraActivity();
-            }
-            catch (Exception e)
-            {
-            }
-        }
-    }
 
-    private class BtnDoneHandler implements EditText.OnEditorActionListener
-    {
-        @Override
-        public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-
-                GetInfoByENumber(textView.getText().toString());
-
-                //to hide the soft keyboard
-                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
-                        Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(textView.getWindowToken(), 0);
-
-                return true;
-            }
-
-            return false;
-        }
-    }
-
-    private class StartCharKeeper implements TextWatcher
-    {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-        @Override
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            if (charSequence.toString().startsWith(startChar)) {
-
-            } else {
-
-                inputEditText.setText(startChar);
-            }
-            inputEditText.setSelection(inputEditText.getText().length());
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {}
-    }
 
     protected void startCameraActivity() {
         try {
@@ -199,7 +146,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
 
             if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-                startActivityForResult(takePictureIntent, CAMERA_REQUEST_CODE);
+                startActivityForResult(takePictureIntent, PHOTO_REQUEST_CODE);
             }
         }
         catch (Exception e)
@@ -222,7 +169,6 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
                     Log.v(TAG, "Created directory " + path + " on sdcard");
                 }
             }
-
 
 
     private void GetInfoByENumber(String inputing) {
@@ -249,7 +195,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         }
 
         //making photo
-        if (requestCode == CAMERA_REQUEST_CODE && resultCode == getActivity().RESULT_OK)
+        if (requestCode == PHOTO_REQUEST_CODE && resultCode == getActivity().RESULT_OK)
         {
             onPhotoInputResult();
         }
@@ -257,14 +203,14 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
 
 
     private void onPhotoInputResult() {
-        long startTime = System.nanoTime();
+
         OCREngine ocrEngine = new OCREngine();
+
         String result = ocrEngine.RetrieveText(getActivity().getApplicationContext(),
                 img_path);
-        long endTime = System.nanoTime();
+
         scAdapter.changeCursor(null);
         outputWarning.setText(result);
-        Toast.makeText(getActivity(), String.valueOf(endTime / 1000000), Toast.LENGTH_LONG).show();
     }
 
 
@@ -350,6 +296,61 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
     public void onDestroy() {
         super.onDestroy();
         db.close();
+    }
+
+    private class FabClickHandler implements View.OnClickListener
+    {
+        @Override
+        public void onClick(View v) {
+            try {
+                startCameraActivity();
+            }
+            catch (Exception e)
+            {
+            }
+        }
+    }
+
+    private class BtnDoneHandler implements EditText.OnEditorActionListener
+    {
+        @Override
+        public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+
+                GetInfoByENumber(textView.getText().toString());
+
+                //to hide the soft keyboard
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
+                        Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(textView.getWindowToken(), 0);
+
+                return true;
+            }
+
+            return false;
+        }
+    }
+
+    private class StartCharKeeper implements TextWatcher
+    {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            if (charSequence.toString().startsWith(startChar)) {
+
+            } else {
+
+                inputEditText.setText(startChar);
+            }
+            inputEditText.setSelection(inputEditText.getText().length());
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {}
     }
 }
 

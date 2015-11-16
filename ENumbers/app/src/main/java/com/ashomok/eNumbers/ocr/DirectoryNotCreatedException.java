@@ -3,13 +3,13 @@ package com.ashomok.eNumbers.ocr;
 /**
  * Created by Iuliia on 11.11.2015.
  */
-class FolderNotCreatedException extends Exception {
+class DirectoryNotCreatedException extends Exception {
 
-    public FolderNotCreatedException() {
+    public DirectoryNotCreatedException() {
         // TODO Auto-generated constructor stub
     }
 
-    public FolderNotCreatedException(String detailMessage) {
+    public DirectoryNotCreatedException(String detailMessage) {
         super(detailMessage);
     }
 

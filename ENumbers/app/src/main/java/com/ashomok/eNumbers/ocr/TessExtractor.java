@@ -38,14 +38,14 @@ public class TessExtractor {
 			if(baseApi == null){
 				Log.e(TAG, "TessBaseAPI is null... TessFactory not returning tess object...");
 			}
-		} catch (FolderNotCreatedException ee){
+		} catch (DirectoryNotCreatedException ee){
 			Log.e(TAG, ee.getMessage());
 		}
 		
 		System.out.println("in ocr function");
 		baseApi.init(TessFactory.DATA_PATH, TessFactory.lang);
 
-//        //For example if we want to only detect numbers
+        //For example if we want to only detect numbers
 //        baseApi.setVariable(TessBaseAPI.VAR_CHAR_WHITELIST, "E1234567890");
 //        baseApi.setVariable(TessBaseAPI.VAR_CHAR_BLACKLIST, "!@#$%^&*()_+=-qwertyuiop[]}{POIU" +
 //                "YTRWQasdASDfghFGHjklJKLl;L:'\"\\|~`xcvXCVbnmBNM,./<>?");
