@@ -302,12 +302,8 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
     {
         @Override
         public void onClick(View v) {
-            try {
+
                 startCameraActivity();
-            }
-            catch (Exception e)
-            {
-            }
         }
     }
 

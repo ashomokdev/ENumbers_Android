@@ -15,13 +15,11 @@ public class TessExtractor {
 	private TessFactory tessFactory;
 	private TessBaseAPI baseApi;
 	private String extractedText;
-	private Context activityContext;
 	
 	public TessExtractor(Context c, Bitmap photo) {
 		this.photo = photo;
 		extractedText = "";
 		tessFactory = new TessFactory(c);
-		activityContext = c;
 	}
 	
 	public String getText(){
