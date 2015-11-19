@@ -17,15 +17,18 @@ class TessFactory {
 
     public static final String lang = "eng";
 
-    public static final String DATA_PATH = Environment.getExternalStorageDirectory().toString() + "/ENumbers/";
-    public static final String DATA_DIR = "tessdata";
+    public static final String ASSETS_PATH = Environment.getExternalStorageDirectory().toString() + "/ENumbers/";
+    public static final String TESSDATA = "tessdata";
+
+    public static final String CONFIGS = "configs";
+    public static final String TESSCONFIGS = "tessconfigs";
 
     public static final String TAG = "TessFactory";
 
-    private Context context;
+    private AssetManager context;
     private TessBaseAPI tessBaseApi;
 
-    public TessFactory(Context context) {
+    public TessFactory(AssetManager context) {
         this.context = context;
     }
 
@@ -46,26 +49,38 @@ class TessFactory {
     private void initTessdata() throws TesseractNotInitializedException,
             DirectoryNotCreatedException {
 
-        //create folders for tessdata files
         prepareDirectories(
-                new String[]{DATA_PATH + DATA_DIR});
+                new String[]{
+                        ASSETS_PATH + TESSDATA
+                });
 
-        copyFiles();
+        copyFiles(TESSDATA);
+
+        //create folders for tessdata files
+//        prepareDirectories(
+//                new String[]{
+//                        ASSETS_PATH + TESSDATA,
+//                        ASSETS_PATH + TESSDATA + "/" + CONFIGS,
+//                        ASSETS_PATH + TESSDATA + "/" + TESSCONFIGS
+//                });
+
+//        copyFiles(TESSDATA + "/" + CONFIGS);
+//        copyFiles(TESSDATA + "/" + TESSCONFIGS);
     }
 
-    private void copyFiles() throws TesseractNotInitializedException {
+    private void copyFiles(String source) throws TesseractNotInitializedException {
         try {
-            AssetManager assetManager = context.getAssets();
-            String fileList[] = assetManager.list(DATA_DIR);
+
+            String fileList[] = context.list(source);
 
             for (String fileName : fileList) {
 
                 // open file within the assets folder
                 // if it is not already there copy it to the sdcard
-                String pathToDataFile = DATA_PATH + DATA_DIR + "/" + fileName;
+                String pathToDataFile = ASSETS_PATH + source + "/" + fileName;
                 if (!(new File(pathToDataFile)).exists()) {
 
-                    InputStream in = assetManager.open(DATA_DIR + "/" + fileName);
+                    InputStream in = context.open(source + "/" + fileName);
 
                     OutputStream out = new FileOutputStream(pathToDataFile);
 

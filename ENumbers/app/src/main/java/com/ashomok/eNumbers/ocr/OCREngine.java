@@ -1,6 +1,7 @@
 package com.ashomok.eNumbers.ocr;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -18,31 +19,31 @@ public class OCREngine {
 
     private static final String TAG = "OCREngine.java";
 
-    public String detectText(Bitmap bitmap) {
+//    public String detectText(Bitmap bitmap) {
+//
+//        TessBaseAPI tessBaseAPI = new TessBaseAPI();
+//
+//        String path = "/tessdata/eng.traineddata";
+//
+//        tessBaseAPI.setDebug(true);
+//        tessBaseAPI.init(path, "eng"); //Init the Tess with the trained data file, with english language
+//
+//        //For example if we want to only detect numbers
+//        tessBaseAPI.setVariable(TessBaseAPI.VAR_CHAR_WHITELIST, "1234567890");
+//        tessBaseAPI.setVariable(TessBaseAPI.VAR_CHAR_BLACKLIST, "!@#$%^&*()_+=-qwertyuiop[]}{POIU" +
+//                "YTREWQasdASDfghFGHjklJKLl;L:'\"\\|~`xcvXCVbnmBNM,./<>?");
+//
+//
+//        tessBaseAPI.setImage(bitmap);
+//
+//        String text = tessBaseAPI.getUTF8Text();
+//
+//        tessBaseAPI.end();
+//
+//        return text;
+//    }
 
-        TessBaseAPI tessBaseAPI = new TessBaseAPI();
-
-        String path = "/tessdata/eng.traineddata";
-
-        tessBaseAPI.setDebug(true);
-        tessBaseAPI.init(path, "eng"); //Init the Tess with the trained data file, with english language
-
-        //For example if we want to only detect numbers
-        tessBaseAPI.setVariable(TessBaseAPI.VAR_CHAR_WHITELIST, "1234567890");
-        tessBaseAPI.setVariable(TessBaseAPI.VAR_CHAR_BLACKLIST, "!@#$%^&*()_+=-qwertyuiop[]}{POIU" +
-                "YTREWQasdASDfghFGHjklJKLl;L:'\"\\|~`xcvXCVbnmBNM,./<>?");
-
-
-        tessBaseAPI.setImage(bitmap);
-
-        String text = tessBaseAPI.getUTF8Text();
-
-        tessBaseAPI.end();
-
-        return text;
-    }
-
-    public String RetrieveText(Context context, String _path) {
+    public String RetrieveText(AssetManager assetMgr, String _path) {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 4;
 
@@ -99,7 +100,7 @@ public class OCREngine {
 
         Log.v(TAG, "Before baseApi");
 
-        TessExtractor tessExtractor = new TessExtractor(context, bitmap);
+        TessExtractor tessExtractor = new TessExtractor(assetMgr, bitmap);
         String text = tessExtractor.getText();
 
         return text;
@@ -107,7 +108,7 @@ public class OCREngine {
 
 //        TessBaseAPI baseApi = new TessBaseAPI();
 //        baseApi.setDebug(true);
-//        baseApi.init(DATA_PATH, lang);
+//        baseApi.init(ASSETS_PATH, lang);
 //        baseApi.setImage(bitmap);
 //
 //        String recognizedText = baseApi.getUTF8Text();

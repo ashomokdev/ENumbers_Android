@@ -1,6 +1,7 @@
 package com.ashomok.eNumbers.ocr;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.util.Log;
 
@@ -16,10 +17,10 @@ public class TessExtractor {
 	private TessBaseAPI baseApi;
 	private String extractedText;
 	
-	public TessExtractor(Context c, Bitmap photo) {
+	public TessExtractor(AssetManager assetManager, Bitmap photo) {
 		this.photo = photo;
 		extractedText = "";
-		tessFactory = new TessFactory(c);
+		tessFactory = new TessFactory(assetManager);
 	}
 	
 	public String getText(){
@@ -41,12 +42,13 @@ public class TessExtractor {
 		}
 		
 		System.out.println("in ocr function");
-		baseApi.init(TessFactory.DATA_PATH, TessFactory.lang);
+		baseApi.init(TessFactory.ASSETS_PATH, TessFactory.lang);
 
         //For example if we want to only detect numbers
 //        baseApi.setVariable(TessBaseAPI.VAR_CHAR_WHITELIST, "E1234567890");
 //        baseApi.setVariable(TessBaseAPI.VAR_CHAR_BLACKLIST, "!@#$%^&*()_+=-qwertyuiop[]}{POIU" +
 //                "YTRWQasdASDfghFGHjklJKLl;L:'\"\\|~`xcvXCVbnmBNM,./<>?");
+
 
 		System.out.println("training file loaded");
 		//photo = photo.copy(Bitmap.Config.ARGB_8888, true);

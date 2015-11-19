@@ -20,7 +20,6 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 
-import com.ashomok.eNumbers.ocr.OCREngine;
 import com.ashomok.eNumbers.sql.EN;
 import com.ashomok.eNumbers.sql.ENumbersSQLiteAssetHelper;
 import com.ashomok.eNumbers.R;
@@ -36,7 +35,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
     private static final int SPEECH_REQUEST_CODE = 0;
     private static final int PHOTO_REQUEST_CODE = 1;
     private String img_path;
-    private ENumberListAdapter scAdapter;
+    public ENumberListAdapter scAdapter;
     private ImageButton voiceInputBtn;
     private ImageButton closeBtn;
     private EditText inputEditText;
@@ -44,7 +43,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
     private String startChar;
     private ENumbersSQLiteAssetHelper db;
     private FloatingActionButton fab;
-    private TextView outputWarning;
+    public TextView outputWarning;
 
     public static final String TAG = "MainFragment";
 
@@ -197,21 +196,24 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         //making photo
         if (requestCode == PHOTO_REQUEST_CODE && resultCode == getActivity().RESULT_OK)
         {
-            onPhotoInputResult();
+            CaptureImageAsyncTask task = new CaptureImageAsyncTask(this, img_path);
+            task.execute();
+//            onPhotoInputResult();
         }
     }
 
 
-    private void onPhotoInputResult() {
-
-        OCREngine ocrEngine = new OCREngine();
-
-        String result = ocrEngine.RetrieveText(getActivity().getApplicationContext(),
-                img_path);
-
-        scAdapter.changeCursor(null);
-        outputWarning.setText(result);
-    }
+//    //TODO run asynhroniosly
+//    private void onPhotoInputResult() {
+//
+//        OCREngine ocrEngine = new OCREngine();
+//
+//        String result = ocrEngine.RetrieveText(getActivity().getApplicationContext(),
+//                img_path);
+//
+//        scAdapter.changeCursor(null);
+//        outputWarning.setText(result);
+//    }
 
 
     private void onVoiceInputResult(Intent data) {

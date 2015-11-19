@@ -13,8 +13,10 @@ import com.ashomok.eNumbers.sql.ENumbersSQLiteAssetHelper;
 
 import junit.framework.Assert;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -47,6 +49,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         Assert.assertTrue(helper.selectRowsByCodes(new String[]{"E100", "E123"}).getCount() == 2);
     }
 
+    //TODO refactoring needed
     public void testOCREngine() throws IOException {
         //create folders for tessdata files
         prepareDirectories(
@@ -57,11 +60,11 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         OCREngine ocrEngine = new OCREngine();
 
         for (String file: files) {
-            String result = ocrEngine.RetrieveText(getActivity().getApplicationContext(),
+            String result = ocrEngine.RetrieveText(getActivity().getApplicationContext().getAssets(),
                     file);
-            Log.v(TAG, "Result from " + file + "/n" + result);
-        }
 
+            appendLog( "Result from " + file + result);
+        }
     }
 
     private void prepareDirectories(String[] paths) {
@@ -116,5 +119,35 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 
         }
          return files;
+    }
+
+    public void appendLog(String text)
+    {
+        File logFile = new File("sdcard/log.file");
+        if (!logFile.exists())
+        {
+            try
+            {
+                logFile.createNewFile();
+            }
+            catch (IOException e)
+            {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        try
+        {
+            //BufferedWriter for performance, true to set append to file flag
+            BufferedWriter buf = new BufferedWriter(new FileWriter(logFile, true));
+            buf.append(text);
+            buf.newLine();
+            buf.close();
+        }
+        catch (IOException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 }
