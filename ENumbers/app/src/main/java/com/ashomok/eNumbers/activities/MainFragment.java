@@ -206,7 +206,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
 //    //TODO run asynhroniosly
 //    private void onPhotoInputResult() {
 //
-//        OCREngine ocrEngine = new OCREngine();
+//        OCREngineImpl ocrEngine = new OCREngineImpl();
 //
 //        String result = ocrEngine.RetrieveText(getActivity().getApplicationContext(),
 //                img_path);

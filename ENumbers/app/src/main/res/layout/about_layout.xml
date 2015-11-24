@@ -3,7 +3,7 @@
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:id="@+id/frame_layout">
+                android:id="@+id/data_layout">
 
     <include android:id="@+id/toolbar_about_layout"
              android:layout_width="match_parent"

@@ -16,5 +16,6 @@
     <string name="email">bieliaievays@gmail.com</string>
     <string name="version">version 1.0.0</string>
 
+    <string name="ocrRecognition">OCR recognition...</string>
 </resources>
 

@@ -8,7 +8,7 @@ import android.util.Log;
 import com.googlecode.tesseract.android.TessBaseAPI;
 
 
-public class TessExtractor {
+class TessExtractor {
 	
 	public static final String TAG = "TessExtractor";
 
