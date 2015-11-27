@@ -127,7 +127,8 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
             listView.setAdapter(scAdapter);
 
         } catch (Exception e) {
-            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+            Log.e(this.getClass().getCanonicalName(), e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -149,7 +150,8 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
                 startActivityForResult(takePictureIntent, PHOTO_REQUEST_CODE);
             }
         } catch (Exception e) {
-            //TODO nothing??
+            Log.e(this.getClass().getCanonicalName(), e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -185,7 +187,8 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
                 getLoaderManager().restartLoader(0, b, this);
 
             } catch (Exception e) {
-                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+                Log.e(this.getClass().getCanonicalName(), e.getMessage());
+                e.printStackTrace();
             }
         }
     }
@@ -269,8 +272,8 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
                 }
             });
         } catch (Exception e) {
-            Log.e(this.getClass().getCanonicalName(), e.getMessage() + e.getStackTrace().toString());
-            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+            Log.e(this.getClass().getCanonicalName(), e.getMessage());
+            e.printStackTrace();
         }
     }
 

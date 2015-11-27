@@ -40,6 +40,7 @@ public class ENDetailsActivity extends AppCompatActivity {
             Bundle extras = getIntent().getExtras();
             if (extras != null) {
                 en = (EN)getIntent().getSerializableExtra("en");
+
             }
 
             setContentView(R.layout.details_layout);
@@ -142,8 +143,8 @@ public class ENDetailsActivity extends AppCompatActivity {
             }
 
         } catch (Exception e) {
-            Log.e(this.getClass().getCanonicalName(), e.getMessage() + e.getStackTrace().toString());
-            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+            Log.e(this.getClass().getCanonicalName(), e.getMessage());
+            e.printStackTrace();
         }
     }
 
