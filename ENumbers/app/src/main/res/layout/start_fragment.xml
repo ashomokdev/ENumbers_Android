@@ -18,15 +18,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/apptheme_textfield_default_holo_light"
-            android:digits="1234567890abcdefghijklmnopqrstuvwxyz,"
             android:imeOptions="actionDone"
-            android:inputType="number"
-            android:maxLength="15"
+            android:maxLength="30"
             android:singleLine="true"
             android:text="@string/startChar"
             android:textColor="@color/white"
             android:textCursorDrawable="@drawable/cursorcolor"
-            android:textSize="30sp"
+            android:textSize="24sp"
             android:layout_weight="1"
             android:layout_marginStart="@dimen/layout_margin"/>
 
@@ -36,16 +34,19 @@
             android:layout_height="wrap_content"
             android:paddingStart="0dp"
             android:paddingTop="@dimen/icon_padding"
+            android:paddingEnd="@dimen/icon_padding"
             android:background="@null"
             android:gravity="center_vertical"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_clear_36dp" />
+            android:src="@drawable/ic_clear_36dp"
+            android:layout_marginEnd="@dimen/layout_margin"/>
 
         <ImageButton
             android:id="@+id/ic_mic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/icon_padding"
+            android:paddingTop="@dimen/icon_padding"
+            android:paddingEnd="@dimen/icon_padding"
             android:background="@null"
             android:gravity="center_vertical"
             android:scaleType="fitCenter"
