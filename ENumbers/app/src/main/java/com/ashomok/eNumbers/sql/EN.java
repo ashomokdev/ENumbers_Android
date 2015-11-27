@@ -10,21 +10,21 @@ import java.io.Serializable;
  */
 public class EN implements Serializable {
     public EN (Cursor cursor) {
-        //TODO check if size ==1
-        try {
-            this.setCode(cursor.getString(cursor.getColumnIndex(ENumbersSQLiteAssetHelper.COLUMN_NAME_CODE)));
-            this.setName(cursor.getString(cursor.getColumnIndex(ENumbersSQLiteAssetHelper.COLUMN_NAME_NAME)));
-            this.setPurpose(cursor.getString(cursor.getColumnIndex(ENumbersSQLiteAssetHelper.COLUMN_NAME_PURPOSE)));
-            this.setStatus(cursor.getString(cursor.getColumnIndex(ENumbersSQLiteAssetHelper.COLUMN_NAME_STATUS)));
-            this.setAdditionalInfo(cursor.getString(cursor.getColumnIndex(ENumbersSQLiteAssetHelper.COLUMN_NAME_ADDITIONAL_INFO)));
-            this.setApprovedIn(cursor.getString(cursor.getColumnIndex(ENumbersSQLiteAssetHelper.COLUMN_NAME_APPROVED_IN)));
-            this.setBannedIn(cursor.getString(cursor.getColumnIndex(ENumbersSQLiteAssetHelper.COLUMN_NAME_BANNED_IN)));
-            this.setTypicalProducts(cursor.getString(cursor.getColumnIndex(ENumbersSQLiteAssetHelper.COLUMN_NAME_TYPICAL_PRODUCTS)));
-            this.setDangerLevel(cursor.getString(cursor.getColumnIndex(ENumbersSQLiteAssetHelper.COLUMN_NAME_DANGER_LEVEL)));
-            this.setBadForChildren(cursor.getString(cursor.getColumnIndex(ENumbersSQLiteAssetHelper.COLUMN_NAME_BAD_FOR_CHILDREN)));
-        }
-        catch (Exception e) {
-            Log.e(this.getClass().getCanonicalName(), e.getMessage() + e.getStackTrace().toString());
+        if (cursor.getCount() == 1) {
+            try {
+                this.setCode(cursor.getString(cursor.getColumnIndex(ENumbersSQLiteAssetHelper.COLUMN_NAME_CODE)));
+                this.setName(cursor.getString(cursor.getColumnIndex(ENumbersSQLiteAssetHelper.COLUMN_NAME_NAME)));
+                this.setPurpose(cursor.getString(cursor.getColumnIndex(ENumbersSQLiteAssetHelper.COLUMN_NAME_PURPOSE)));
+                this.setStatus(cursor.getString(cursor.getColumnIndex(ENumbersSQLiteAssetHelper.COLUMN_NAME_STATUS)));
+                this.setAdditionalInfo(cursor.getString(cursor.getColumnIndex(ENumbersSQLiteAssetHelper.COLUMN_NAME_ADDITIONAL_INFO)));
+                this.setApprovedIn(cursor.getString(cursor.getColumnIndex(ENumbersSQLiteAssetHelper.COLUMN_NAME_APPROVED_IN)));
+                this.setBannedIn(cursor.getString(cursor.getColumnIndex(ENumbersSQLiteAssetHelper.COLUMN_NAME_BANNED_IN)));
+                this.setTypicalProducts(cursor.getString(cursor.getColumnIndex(ENumbersSQLiteAssetHelper.COLUMN_NAME_TYPICAL_PRODUCTS)));
+                this.setDangerLevel(cursor.getString(cursor.getColumnIndex(ENumbersSQLiteAssetHelper.COLUMN_NAME_DANGER_LEVEL)));
+                this.setBadForChildren(cursor.getString(cursor.getColumnIndex(ENumbersSQLiteAssetHelper.COLUMN_NAME_BAD_FOR_CHILDREN)));
+            } catch (Exception e) {
+                Log.e(this.getClass().getCanonicalName(), e.getMessage() + e.getStackTrace().toString());
+            }
         }
     }
 

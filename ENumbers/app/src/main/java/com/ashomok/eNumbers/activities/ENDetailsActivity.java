@@ -121,22 +121,22 @@ public class ENDetailsActivity extends AppCompatActivity {
             switch (dangerLevel) {
                 case "safe":
                     flag.setmIsGreen(true);
-                    mTextView_danger_level.setText("safe");
+                    mTextView_danger_level.setText(R.string.safe);
                     break;
                 case "medium":
-                    mTextView_danger_level.setText("use with caution");
+                    mTextView_danger_level.setText(R.string.use_with_caution);
                     flag.setmIsYellow(true);
                     break;
                 case "hight":
-                    mTextView_danger_level.setText("unsafe");
+                    mTextView_danger_level.setText(R.string.unsafe);
                     flag.setmIsRed(true);
                     break;
                 case "unknown":
-                    mTextView_danger_level.setText("unknown");
+                    mTextView_danger_level.setText(R.string.unknown);
                     flag.setmIsGrey(true);
                     break;
                 default:
-                    mTextView_danger_level.setText("unknown");
+                    mTextView_danger_level.setText(R.string.unknown);
                     flag.setmIsGrey(true);
                     break;
             }

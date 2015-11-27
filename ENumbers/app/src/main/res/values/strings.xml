@@ -17,5 +17,10 @@
     <string name="version">version 1.0.0</string>
 
     <string name="ocrRecognition">OCR recognition...</string>
+
+    <string name="safe">safe</string>
+    <string name="use_with_caution">use with caution</string>
+    <string name="unsafe">unsafe</string>
+    <string name="unknown">unknown</string>
 </resources>
 

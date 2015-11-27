@@ -20,6 +20,8 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 
+import com.ashomok.eNumbers.ocr.OCREngine;
+import com.ashomok.eNumbers.ocr.OCREngineImpl;
 import com.ashomok.eNumbers.sql.EN;
 import com.ashomok.eNumbers.sql.ENumbersSQLiteAssetHelper;
 import com.ashomok.eNumbers.R;
@@ -30,12 +32,12 @@ import java.util.List;
 /**
  * Created by Iuliia on 29.08.2015.
  */
-public class MainFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class MainFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, TaskDelegate {
 
     private static final int SPEECH_REQUEST_CODE = 0;
     private static final int PHOTO_REQUEST_CODE = 1;
     private String img_path;
-    public ENumberListAdapter scAdapter;
+    private ENumberListAdapter scAdapter;
     private ImageButton voiceInputBtn;
     private ImageButton closeBtn;
     private EditText inputEditText;
@@ -43,7 +45,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
     private String startChar;
     private ENumbersSQLiteAssetHelper db;
     private FloatingActionButton fab;
-    public TextView outputWarning;
+    private TextView outputWarning;
 
     public static final String TAG = "MainFragment";
 
@@ -130,7 +132,6 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
     }
 
 
-
     protected void startCameraActivity() {
         try {
             String IMGS_PATH = Environment.getExternalStorageDirectory().toString() + "/ENumbers/imgs";
@@ -147,39 +148,45 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
             if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
                 startActivityForResult(takePictureIntent, PHOTO_REQUEST_CODE);
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             //TODO nothing??
         }
     }
 
     private void prepareDirectory(String path) throws Exception {
 
-            File dir = new File(path);
-            if (!dir.exists()) {
-                if (!dir.mkdirs()) {
-                    Log.v(TAG, "ERROR: Creation of directory " + path
-                            + " on sdcard failed");
-                        throw new Exception(
-                                "Could not create folder" + path);
-                    }
-                } else {
-                    Log.v(TAG, "Created directory " + path + " on sdcard");
-                }
+        File dir = new File(path);
+        if (!dir.exists()) {
+            if (!dir.mkdirs()) {
+                Log.v(TAG, "ERROR: Creation of directory " + path
+                        + " on sdcard failed");
+                throw new Exception(
+                        "Could not create folder" + path);
             }
+        } else {
+            Log.v(TAG, "Created directory " + path + " on sdcard");
+        }
+    }
 
+    private void GetInfoFromInputing(String input) {
 
-    private void GetInfoByENumber(String inputing) {
-        //TODO give checkings before
-        Bundle b = new Bundle();
-        b.putStringArray("codes", new String[]{inputing});
-        try {
+        OCREngine parser = new OCREngineImpl();
+        String[] enumbers = parser.parseResult(input);
 
-            getLoaderManager().restartLoader(0, b, this);
+        GetInfoByENumbers(enumbers);
+    }
 
-        } catch (Exception e) {
-            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+    private void GetInfoByENumbers(String[] enumbers) {
+        if (enumbers.length > 0) {
+            Bundle b = new Bundle();
+            b.putStringArray("codes", enumbers);
+            try {
+
+                getLoaderManager().restartLoader(0, b, this);
+
+            } catch (Exception e) {
+                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+            }
         }
     }
 
@@ -194,26 +201,11 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         }
 
         //making photo
-        if (requestCode == PHOTO_REQUEST_CODE && resultCode == getActivity().RESULT_OK)
-        {
-            CaptureImageAsyncTask task = new CaptureImageAsyncTask(this, img_path);
+        if (requestCode == PHOTO_REQUEST_CODE && resultCode == getActivity().RESULT_OK) {
+            RecognizeImageAsyncTask task = new RecognizeImageAsyncTask(this, img_path, this); //TODO ugly
             task.execute();
-//            onPhotoInputResult();
         }
     }
-
-
-//    //TODO run asynhroniosly
-//    private void onPhotoInputResult() {
-//
-//        OCREngineImpl ocrEngine = new OCREngineImpl();
-//
-//        String result = ocrEngine.RetrieveText(getActivity().getApplicationContext(),
-//                img_path);
-//
-//        scAdapter.changeCursor(null);
-//        outputWarning.setText(result);
-//    }
 
 
     private void onVoiceInputResult(Intent data) {
@@ -227,7 +219,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         String spokenText = results.get(0);
         inputEditText.append(spokenText);
 
-        GetInfoByENumber(inputEditText.getText().toString());
+        GetInfoFromInputing(inputEditText.getText().toString());
     }
 
 
@@ -256,26 +248,26 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         try {
-                scAdapter = new ENumberListAdapter(getActivity(), cursor, 0);
+            scAdapter = new ENumberListAdapter(getActivity(), cursor, 0);
 
-                listView.setAdapter(scAdapter);
-                scAdapter.changeCursor(cursor);
+            listView.setAdapter(scAdapter);
+            scAdapter.changeCursor(cursor);
 
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View arg1, int position, long arg3) {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View arg1, int position, long arg3) {
 
-                        Cursor cursor = (Cursor) parent.getAdapter().getItem(position);
+                    Cursor cursor = (Cursor) parent.getAdapter().getItem(position);
 
-                        EN enumb = new EN(cursor);
+                    EN enumb = new EN(cursor);
 
-                        Intent intent = new Intent(getActivity(), ENDetailsActivity.class);
+                    Intent intent = new Intent(getActivity(), ENDetailsActivity.class);
 
-                        intent.putExtra("en", enumb);
-                        startActivity(intent);
-                    }
-                });
+                    intent.putExtra("en", enumb);
+                    startActivity(intent);
+                }
+            });
         } catch (Exception e) {
             Log.e(this.getClass().getCanonicalName(), e.getMessage() + e.getStackTrace().toString());
             Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
@@ -300,23 +292,26 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         db.close();
     }
 
-    private class FabClickHandler implements View.OnClickListener
-    {
+    @Override
+    public void TaskCompletionResult(String[] result) {
+        GetInfoByENumbers(result);
+    }
+
+    private class FabClickHandler implements View.OnClickListener {
         @Override
         public void onClick(View v) {
 
-                startCameraActivity();
+            startCameraActivity();
         }
     }
 
-    private class BtnDoneHandler implements EditText.OnEditorActionListener
-    {
+    private class BtnDoneHandler implements EditText.OnEditorActionListener {
         @Override
         public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
 
             if (actionId == EditorInfo.IME_ACTION_DONE) {
 
-                GetInfoByENumber(textView.getText().toString());
+                GetInfoFromInputing(textView.getText().toString());
 
                 //to hide the soft keyboard
                 InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
@@ -330,10 +325,10 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         }
     }
 
-    private class StartCharKeeper implements TextWatcher
-    {
+    private class StartCharKeeper implements TextWatcher {
         @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -348,7 +343,8 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         }
 
         @Override
-        public void afterTextChanged(Editable s) {}
+        public void afterTextChanged(Editable s) {
+        }
     }
 }
 
