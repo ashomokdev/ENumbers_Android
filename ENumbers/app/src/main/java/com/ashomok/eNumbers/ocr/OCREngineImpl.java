@@ -58,7 +58,6 @@ public class OCREngineImpl implements OCREngine {
         Bitmap bitmap = BitmapFactory.decodeFile(_path, options);
 
         try {
-            //TODO wrong orientation detection: orient 6, rotation 90
             ExifInterface exif = new ExifInterface(_path);
             int exifOrientation = exif.getAttributeInt(
                     ExifInterface.TAG_ORIENTATION,
@@ -90,7 +89,7 @@ public class OCREngineImpl implements OCREngine {
 
                 // Setting pre rotate
                 Matrix mtx = new Matrix();
-                mtx.preRotate(rotate);
+                mtx.postRotate(rotate);
 
                 // Rotating Bitmap
                 bitmap = Bitmap.createBitmap(bitmap, 0, 0, w, h, mtx, false);

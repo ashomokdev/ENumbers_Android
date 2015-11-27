@@ -52,7 +52,6 @@
             android:scaleType="fitCenter"
             android:src="@drawable/ic_mic_36dp"
             android:layout_marginEnd="@dimen/layout_margin"/>
-
     </LinearLayout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -61,7 +60,8 @@
         android:gravity="center_horizontal|center_vertical"
         android:orientation="vertical"
         android:visibility="invisible"
-        android:id="@+id/progressBarLayout">
+        android:id="@+id/progressBarLayout"
+        >
         <TextView
             style="@style/CustomText"
             android:layout_width="wrap_content"
@@ -69,10 +69,12 @@
             android:text="@string/ocrRecognition" />
         <ProgressBar
             android:id="@+id/progressBar"
-            style="@android:style/Widget.ProgressBar.Horizontal"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/layout_margin"
+            android:layout_marginStart="@dimen/progress_bar_margin"
+            android:layout_marginEnd="@dimen/progress_bar_margin"
+            style="?android:attr/progressBarStyleHorizontal"
             />
     </LinearLayout>
 
