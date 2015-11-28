@@ -22,7 +22,7 @@ public class ENumberListAdapter extends CursorAdapter {
     // you don't bind any data to the view at this point.
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        return LayoutInflater.from(context).inflate(R.layout.enumb_proxy_list_row_layout, null, false);
+        return LayoutInflater.from(context).inflate(R.layout.enumb_proxy_list_row_layout, parent, false);
 
     }
 

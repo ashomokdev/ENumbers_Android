@@ -20,7 +20,13 @@ class TessExtractor {
 	public TessExtractor(AssetManager assetManager, Bitmap photo) {
 		this.photo = photo;
 		extractedText = "";
+
+		long startTime = System.currentTimeMillis();
 		tessFactory = new TessFactory(assetManager);
+		long stopTime = System.currentTimeMillis();
+		long elapsedTime = stopTime - startTime;
+
+		Log.e(TAG, "tessFactory = new TessFactory(assetManager); elapsed" + elapsedTime);
 	}
 	
 	public String getText(){
@@ -31,7 +37,13 @@ class TessExtractor {
 	
 	private String extractText(){
 		try{
+			long startTime = System.currentTimeMillis();
 			baseApi = tessFactory.getTess();
+			long stopTime = System.currentTimeMillis();
+			long elapsedTime = stopTime - startTime;
+
+			Log.e(TAG, "baseApi = tessFactory.getTess(); elapsed" + elapsedTime);
+
 		} catch (TesseractNotInitializedException e){
 			Log.e(TAG, e.getMessage());
 			if(baseApi == null){
@@ -40,10 +52,14 @@ class TessExtractor {
 		} catch (DirectoryNotCreatedException ee){
 			Log.e(TAG, ee.getMessage());
 		}
-		
+
+		long startTime = System.currentTimeMillis();
 		System.out.println("in ocr function");
 		baseApi.init(TessFactory.ASSETS_PATH, TessFactory.lang);
+		long stopTime = System.currentTimeMillis();
+		long elapsedTime = stopTime - startTime;
 
+		Log.e(TAG, "baseApi.init(TessFactory.ASSETS_PATH, TessFactory.lang); elapsed" + elapsedTime);
         //For example if we want to only detect numbers
 //        baseApi.setVariable(TessBaseAPI.VAR_CHAR_WHITELIST, "E1234567890");
 //        baseApi.setVariable(TessBaseAPI.VAR_CHAR_BLACKLIST, "!@#$%^&*()_+=-qwertyuiop[]}{POIU" +

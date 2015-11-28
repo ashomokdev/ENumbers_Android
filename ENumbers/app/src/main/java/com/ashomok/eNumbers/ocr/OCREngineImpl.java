@@ -107,7 +107,13 @@ public class OCREngineImpl implements OCREngine {
         Log.v(TAG, "Before baseApi");
 
         TessExtractor tessExtractor = new TessExtractor(assetMgr, bitmap);
+
+        long startTime = System.currentTimeMillis();
         String text = tessExtractor.getText();
+        long stopTime = System.currentTimeMillis();
+        long elapsedTime = stopTime - startTime;
+
+        Log.e(TAG, "String text = tessExtractor.getText(); elapsed" + elapsedTime);
 
         return text;
 

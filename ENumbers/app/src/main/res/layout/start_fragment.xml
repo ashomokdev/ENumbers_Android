@@ -118,6 +118,7 @@
         android:layout_alignParentEnd="true"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
+        android:padding="@dimen/icon_padding"
         android:src="@drawable/ic_camera_alt_36dp" />
 </RelativeLayout>
 

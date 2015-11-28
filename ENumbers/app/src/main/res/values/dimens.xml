@@ -7,5 +7,4 @@
     <dimen name = "flag_margin">5dp</dimen >
     <dimen name="icon_padding">4dp</dimen>
     <dimen name="progress_bar_margin">60dp</dimen>
-
 </resources>
