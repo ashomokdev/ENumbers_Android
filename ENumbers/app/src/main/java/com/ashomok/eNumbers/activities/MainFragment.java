@@ -132,7 +132,9 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         }
     }
 
-
+    /**
+     * to get high resolution image from camera
+     */
     protected void startCameraActivity() {
         try {
             String IMGS_PATH = Environment.getExternalStorageDirectory().toString() + "/ENumbers/imgs";
