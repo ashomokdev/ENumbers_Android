@@ -1,6 +1,6 @@
 package com.ashomok.eNumbers.ocr;
 
-import android.content.Context;
+
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,8 +8,6 @@ import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.support.annotation.Nullable;
 import android.util.Log;
-
-import com.googlecode.tesseract.android.TessBaseAPI;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -113,7 +111,7 @@ public class OCREngineImpl implements OCREngine {
         long stopTime = System.currentTimeMillis();
         long elapsedTime = stopTime - startTime;
 
-        Log.e(TAG, "String text = tessExtractor.getText(); elapsed" + elapsedTime);
+        Log.i(TAG, "String text = tessExtractor.getText(); elapsed" + elapsedTime);
 
         return text;
 

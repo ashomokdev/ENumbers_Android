@@ -197,6 +197,8 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 
         String result9 = "E101a, E200, E1414";
 
+      //  String result10 = "E401, E4506"; //fails
+
         OCREngine ocrEngine = new OCREngineImpl();
 
         Assert.assertTrue(
@@ -225,6 +227,9 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 
         Assert.assertTrue(
                 Arrays.equals(new String[]{"E101a", "E200", "E1414"}, ocrEngine.parseResult(result9)));
+
+//        Assert.assertTrue(
+//                Arrays.equals(new String[]{"E401", "E450"}, ocrEngine.parseResult(result10)));
 
     }
 

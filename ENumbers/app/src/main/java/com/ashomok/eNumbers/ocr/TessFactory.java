@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import android.content.Context;
 import android.content.res.AssetManager;
 import android.os.Environment;
 import android.util.Log;
@@ -19,9 +18,6 @@ class TessFactory {
 
     public static final String ASSETS_PATH = Environment.getExternalStorageDirectory().toString() + "/ENumbers/";
     public static final String TESSDATA = "tessdata";
-
-    public static final String CONFIGS = "configs";
-    public static final String TESSCONFIGS = "tessconfigs";
 
     public static final String TAG = "TessFactory";
 
@@ -55,17 +51,6 @@ class TessFactory {
                 });
 
         copyFiles(TESSDATA);
-
-        //create folders for tessdata files
-//        prepareDirectories(
-//                new String[]{
-//                        ASSETS_PATH + TESSDATA,
-//                        ASSETS_PATH + TESSDATA + "/" + CONFIGS,
-//                        ASSETS_PATH + TESSDATA + "/" + TESSCONFIGS
-//                });
-
-//        copyFiles(TESSDATA + "/" + CONFIGS);
-//        copyFiles(TESSDATA + "/" + TESSCONFIGS);
     }
 
     private void copyFiles(String source) throws TesseractNotInitializedException {
