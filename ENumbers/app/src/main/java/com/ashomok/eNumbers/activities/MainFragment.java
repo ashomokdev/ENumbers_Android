@@ -20,6 +20,8 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 
+import com.ashomok.eNumbers.activities.ocr_task.RecognizeImageAsyncTaskRESTClient;
+
 import com.ashomok.eNumbers.ocr.OCREngine;
 import com.ashomok.eNumbers.ocr.OCREngineImpl;
 import com.ashomok.eNumbers.sql.EN;
@@ -207,9 +209,14 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
 
         //making photo
         if (requestCode == PHOTO_REQUEST_CODE && resultCode == getActivity().RESULT_OK) {
-            RecognizeImageAsyncTask task = new RecognizeImageAsyncTask(this, img_path, this); //TODO ugly
-            task.execute();
+            startOCRtask();
         }
+    }
+
+    private void startOCRtask() {
+        RecognizeImageAsyncTaskRESTClient task = new RecognizeImageAsyncTaskRESTClient(this, img_path, this); //TODO ugly call
+        // RecognizeImageAsyncTaskStandalone task = new RecognizeImageAsyncTaskStandalone(this, img_path, this);
+        task.execute();
     }
 
 

@@ -10,8 +10,8 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -153,7 +153,7 @@ public class OCREngineImpl implements OCREngine {
         if (input.contains(E)) {
             //get possible E-numbers
 
-            List<String> words = new ArrayList<>();
+            Set<String> words =  new HashSet<String>();
 
             int fromIndex = 0;
             while (fromIndex < input.length()) {

@@ -36,7 +36,6 @@ class TessExtractor {
 			Log.e(this.getClass().getCanonicalName(), ee.getMessage());
 		}
 
-
 		System.out.println("in ocr function");
 		baseApi.init(TessFactory.ASSETS_PATH, TessFactory.lang);
         //For example if we want to only detect numbers

@@ -8,6 +8,7 @@ import android.test.mock.MockContentResolver;
 import android.util.Log;
 
 import com.ashomok.eNumbers.activities.MainActivity;
+import com.ashomok.eNumbers.activities.ocr_task.RecognizeImageAsyncTaskRESTClient;
 import com.ashomok.eNumbers.ocr.OCREngine;
 import com.ashomok.eNumbers.ocr.OCREngineImpl;
 import com.ashomok.eNumbers.sql.ENumbersSQLiteAssetHelper;
@@ -31,7 +32,7 @@ import java.util.Arrays;
 public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
     public static final String DATA_PATH = Environment.getExternalStorageDirectory().toString() + "/ENumbers/";
-    public static final String DATA_DIR = "test_imgs";
+    public static final String TEST_IMGS = "test_imgs";
 
     public static final String TAG = "MainActivityTest";
 
@@ -56,9 +57,9 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     public void testOCREngineRecognize() throws IOException {
         //create folders for tessdata files
         prepareDirectories(
-                new String[]{DATA_PATH + DATA_DIR});
+                new String[]{DATA_PATH + TEST_IMGS});
 
-        ArrayList<String> files = copyFiles();
+        ArrayList<String> files = getTestImages();
 
         OCREngineImpl ocrEngine = new OCREngineImpl();
 
@@ -233,6 +234,16 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 
     }
 
+//    public void testRecognizeImageAsyncTask()
+//    {
+//        IsolatedContext _openHelperContext = new IsolatedContext(new MockContentResolver(), getActivity());
+//        ArrayList<String> files = getTestImages();
+//
+//        RecognizeImageAsyncTaskRESTClient task = new RecognizeImageAsyncTaskRESTClient(_openHelperContext, files.get(0), _openHelperContext); //TODO ugly
+//        // RecognizeImageAsyncTaskStandalone task = new RecognizeImageAsyncTaskStandalone(this, img_path, this); //TODO ugly
+//        task.execute();
+//    }
+
     private void prepareDirectories(String[] paths) {
         for (String path : paths) {
             File dir = new File(path);
@@ -247,22 +258,22 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         }
     }
 
-    private ArrayList<String> copyFiles() {
+    private ArrayList<String> getTestImages() {
 
         ArrayList<String> files = new ArrayList<String>();
 
         try {
             AssetManager assetManager = getInstrumentation().getContext().getAssets();
-            String fileList[] = assetManager.list(DATA_DIR);
+            String fileList[] = assetManager.list(TEST_IMGS);
 
             for (String fileName : fileList) {
 
                 // open file within the assets folder
                 // if it is not already there copy it to the sdcard
-                String pathToDataFile = DATA_PATH + DATA_DIR + "/" + fileName;
+                String pathToDataFile = DATA_PATH + TEST_IMGS + "/" + fileName;
                 if (!(new File(pathToDataFile)).exists()) {
 
-                    InputStream in = assetManager.open(DATA_DIR + "/" + fileName);
+                    InputStream in = assetManager.open(TEST_IMGS + "/" + fileName);
 
                     OutputStream out = new FileOutputStream(pathToDataFile);
 
