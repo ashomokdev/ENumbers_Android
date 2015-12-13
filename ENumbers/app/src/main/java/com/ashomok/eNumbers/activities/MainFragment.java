@@ -2,10 +2,15 @@ package com.ashomok.eNumbers.activities;
 
 import android.app.Fragment;
 import android.app.LoaderManager;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.ThumbnailUtils;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -20,14 +25,18 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 
+import com.ashomok.eNumbers.activities.ocr_task.OCRAnimationActivity;
+import com.ashomok.eNumbers.activities.ocr_task.RecognizeImageAsyncTask;
 import com.ashomok.eNumbers.activities.ocr_task.RecognizeImageAsyncTaskRESTClient;
 
+import com.ashomok.eNumbers.activities.ocr_task.RecognizeImageAsyncTaskStandalone;
 import com.ashomok.eNumbers.ocr.OCREngine;
 import com.ashomok.eNumbers.ocr.OCREngineImpl;
 import com.ashomok.eNumbers.sql.EN;
 import com.ashomok.eNumbers.sql.ENumbersSQLiteAssetHelper;
 import com.ashomok.eNumbers.R;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.List;
 
@@ -209,14 +218,36 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
 
         //making photo
         if (requestCode == PHOTO_REQUEST_CODE && resultCode == getActivity().RESULT_OK) {
-            startOCRtask();
+
+            Bitmap bitmap = BitmapFactory.decodeFile(img_path);
+            int origWidth = bitmap.getWidth();
+            int origHeight = bitmap.getHeight();
+            bitmap = Bitmap.createScaledBitmap(bitmap, origWidth / 10, origHeight / 10, false);
+
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            byte[] bytes = stream.toByteArray();
+
+            startOCRtask(bytes);
         }
     }
 
-    private void startOCRtask() {
-        RecognizeImageAsyncTaskRESTClient task = new RecognizeImageAsyncTaskRESTClient(this, img_path, this); //TODO ugly call
-        // RecognizeImageAsyncTaskStandalone task = new RecognizeImageAsyncTaskStandalone(this, img_path, this);
-        task.execute();
+    private void startOCRtask(byte[] lowquality_image) {
+
+        //run animation
+        Intent intent = new Intent(getActivity(), OCRAnimationActivity.class);
+        intent.putExtra("image", lowquality_image);
+        startActivity(intent);
+
+//        //start ocr
+//        RecognizeImageAsyncTask task;
+//        if (isNetworkAvailable(getActivity())) {
+//            task = new RecognizeImageAsyncTaskRESTClient(this, img_path, this); //TODO ugly call
+//
+//        } else {
+//            task = new RecognizeImageAsyncTaskStandalone(this, img_path, this); //TODO ugly call
+//        }
+//        task.execute();
     }
 
 
@@ -243,6 +274,13 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
 
         // Start the activity, the intent will be populated with the speech text
         startActivityForResult(intent, SPEECH_REQUEST_CODE);
+    }
+
+    private boolean isNetworkAvailable(final Context context) {
+        final ConnectivityManager connectivityManager =
+                ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));
+        return connectivityManager.getActiveNetworkInfo() != null &&
+                connectivityManager.getActiveNetworkInfo().isConnected();
     }
 
 
@@ -358,5 +396,6 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         public void afterTextChanged(Editable s) {
         }
     }
+
 }
 

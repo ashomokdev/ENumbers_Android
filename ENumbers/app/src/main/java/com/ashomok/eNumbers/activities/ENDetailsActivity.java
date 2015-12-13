@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ashomok.eNumbers.sql.EN;
 import com.ashomok.eNumbers.R;

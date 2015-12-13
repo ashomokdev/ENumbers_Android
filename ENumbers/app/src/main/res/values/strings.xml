@@ -22,5 +22,7 @@
     <string name="use_with_caution">use with caution</string>
     <string name="unsafe">unsafe</string>
     <string name="unknown">unknown</string>
+    <string name="cancel">Cancel</string>
+    <string name="recognition">Recognition...</string>
 </resources>
 
