@@ -48,6 +48,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
     private static final int SPEECH_REQUEST_CODE = 0;
     private static final int PHOTO_REQUEST_CODE = 1;
     private String img_path;
+    private  Uri outputFileUri;
     private ENumberListAdapter scAdapter;
     private ImageButton voiceInputBtn;
     private ImageButton closeBtn;
@@ -154,7 +155,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
             img_path = IMGS_PATH + "/ocr.jpg";
 
             File file = new File(img_path);
-            Uri outputFileUri = Uri.fromFile(file);
+            outputFileUri = Uri.fromFile(file);
 
             final Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
@@ -219,24 +220,24 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         //making photo
         if (requestCode == PHOTO_REQUEST_CODE && resultCode == getActivity().RESULT_OK) {
 
-            Bitmap bitmap = BitmapFactory.decodeFile(img_path);
-            int origWidth = bitmap.getWidth();
-            int origHeight = bitmap.getHeight();
-            bitmap = Bitmap.createScaledBitmap(bitmap, origWidth / 10, origHeight / 10, false);
+//            Bitmap bitmap = BitmapFactory.decodeFile(img_path);
+//            int origWidth = bitmap.getWidth();
+//            int origHeight = bitmap.getHeight();
+//            bitmap = Bitmap.createScaledBitmap(bitmap, origWidth / 10, origHeight / 10, false);
+//
+//            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+//            byte[] bytes = stream.toByteArray();
 
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            byte[] bytes = stream.toByteArray();
-
-            startOCRtask(bytes);
+            startOCRtask(outputFileUri);
         }
     }
 
-    private void startOCRtask(byte[] lowquality_image) {
+    private void startOCRtask(Uri outputFileUri) {
 
         //run animation
         Intent intent = new Intent(getActivity(), OCRAnimationActivity.class);
-        intent.putExtra("image", lowquality_image);
+        intent.putExtra("image", outputFileUri);
         startActivity(intent);
 
 //        //start ocr
