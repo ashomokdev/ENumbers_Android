@@ -21,6 +21,7 @@ public class OCRAnimationActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
 
+
         // find the retained fragment on activity restarts
         FragmentManager fm = getFragmentManager();
         OCRAnimationFragment dataFragment = (OCRAnimationFragment) fm.findFragmentByTag("data");
@@ -30,7 +31,7 @@ public class OCRAnimationActivity extends AppCompatActivity {
             // add the fragment
             dataFragment = new OCRAnimationFragment();
             dataFragment.setArguments(extras);
-            fm.beginTransaction().replace(R.id.content_frame, dataFragment, "data").commit();
+            fm.beginTransaction().add(R.id.content_frame, dataFragment, "data").commit();
         }
 
         cancel = (Button) findViewById(R.id.cancel_btn);
@@ -41,6 +42,5 @@ public class OCRAnimationActivity extends AppCompatActivity {
             }
         });
     }
-
 
 }
