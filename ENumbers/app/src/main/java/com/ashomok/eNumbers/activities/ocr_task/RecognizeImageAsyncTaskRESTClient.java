@@ -25,8 +25,8 @@ public final class RecognizeImageAsyncTaskRESTClient extends RecognizeImageAsync
 
     private String img_path;
 
-    public RecognizeImageAsyncTaskRESTClient(Fragment parentFragment, String img_path, TaskDelegate delegate) {
-        super(parentFragment, delegate);
+    public RecognizeImageAsyncTaskRESTClient(String img_path, TaskDelegate delegate) {
+        super(delegate);
 
         this.img_path = img_path;
     }

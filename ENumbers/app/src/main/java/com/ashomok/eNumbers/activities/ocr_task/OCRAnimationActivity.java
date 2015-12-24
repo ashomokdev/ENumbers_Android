@@ -21,7 +21,6 @@ public class OCRAnimationActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
 
-
         // find the retained fragment on activity restarts
         FragmentManager fm = getFragmentManager();
         OCRAnimationFragment dataFragment = (OCRAnimationFragment) fm.findFragmentByTag("data");
@@ -38,9 +37,13 @@ public class OCRAnimationActivity extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO
+
+                setResult(RESULT_CANCELED);
+                finish();
             }
         });
+
+
     }
 
 }

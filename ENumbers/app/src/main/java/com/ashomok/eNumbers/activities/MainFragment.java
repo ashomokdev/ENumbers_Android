@@ -1,15 +1,12 @@
 package com.ashomok.eNumbers.activities;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.LoaderManager;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.ThumbnailUtils;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -36,7 +33,6 @@ import com.ashomok.eNumbers.sql.EN;
 import com.ashomok.eNumbers.sql.ENumbersSQLiteAssetHelper;
 import com.ashomok.eNumbers.R;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.List;
 
@@ -47,8 +43,10 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
 
     private static final int SPEECH_REQUEST_CODE = 0;
     private static final int PHOTO_REQUEST_CODE = 1;
+    private static final int OCRAnimationActivity_REQUEST_CODE = 2;
+
     private String img_path;
-    private  Uri outputFileUri;
+    private Uri outputFileUri;
     private ENumberListAdapter scAdapter;
     private ImageButton voiceInputBtn;
     private ImageButton closeBtn;
@@ -58,6 +56,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
     private ENumbersSQLiteAssetHelper db;
     private FloatingActionButton fab;
     private TextView outputWarning;
+    private RecognizeImageAsyncTask recognizeImageAsyncTask;
 
     public static final String TAG = "MainFragment";
 
@@ -212,24 +211,20 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
     public void onActivityResult(int requestCode, int resultCode,
                                  Intent data) {
         //voice inputing
-        if (requestCode == SPEECH_REQUEST_CODE && resultCode == getActivity().RESULT_OK) {
+        if (requestCode == SPEECH_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
 
             onVoiceInputResult(data);
         }
 
         //making photo
-        if (requestCode == PHOTO_REQUEST_CODE && resultCode == getActivity().RESULT_OK) {
-
-//            Bitmap bitmap = BitmapFactory.decodeFile(img_path);
-//            int origWidth = bitmap.getWidth();
-//            int origHeight = bitmap.getHeight();
-//            bitmap = Bitmap.createScaledBitmap(bitmap, origWidth / 10, origHeight / 10, false);
-//
-//            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-//            byte[] bytes = stream.toByteArray();
+        if (requestCode == PHOTO_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
 
             startOCRtask(outputFileUri);
+        }
+
+        //ocr canceled
+        if (requestCode == OCRAnimationActivity_REQUEST_CODE && resultCode == Activity.RESULT_CANCELED) {
+            recognizeImageAsyncTask.cancel(true);
         }
     }
 
@@ -238,17 +233,16 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         //run animation
         Intent intent = new Intent(getActivity(), OCRAnimationActivity.class);
         intent.putExtra("image", outputFileUri);
-        startActivity(intent);
+        getActivity().startActivityForResult(intent, OCRAnimationActivity_REQUEST_CODE);
 
-//        //start ocr
-//        RecognizeImageAsyncTask task;
-//        if (isNetworkAvailable(getActivity())) {
-//            task = new RecognizeImageAsyncTaskRESTClient(this, img_path, this); //TODO ugly call
-//
-//        } else {
-//            task = new RecognizeImageAsyncTaskStandalone(this, img_path, this); //TODO ugly call
-//        }
-//        task.execute();
+        //start ocr
+        if (isNetworkAvailable(getActivity())) {
+            recognizeImageAsyncTask = new RecognizeImageAsyncTaskRESTClient(img_path, this);
+
+        } else {
+            recognizeImageAsyncTask = new RecognizeImageAsyncTaskStandalone(getActivity(), img_path, this);
+        }
+        recognizeImageAsyncTask.execute();
     }
 
 
@@ -345,6 +339,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
 
     @Override
     public void TaskCompletionResult(String[] result) {
+        getActivity().finishActivity(OCRAnimationActivity_REQUEST_CODE);
         GetInfoByENumbers(result);
     }
 

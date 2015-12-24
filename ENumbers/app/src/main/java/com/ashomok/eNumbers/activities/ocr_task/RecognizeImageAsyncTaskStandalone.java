@@ -1,6 +1,6 @@
 package com.ashomok.eNumbers.activities.ocr_task;
 
-import android.app.Fragment;
+import android.content.Context;
 import android.content.res.AssetManager;
 
 import com.ashomok.eNumbers.activities.TaskDelegate;
@@ -13,19 +13,19 @@ import com.ashomok.eNumbers.ocr.OCREngineImpl;
 public final class RecognizeImageAsyncTaskStandalone extends RecognizeImageAsyncTask {
 
     private String img_path;
-    private Fragment parentFragment;
+    private Context context;
 
-    public RecognizeImageAsyncTaskStandalone(Fragment parentFragment, String img_path, TaskDelegate delegate) {
-        super(parentFragment, delegate);
+    public RecognizeImageAsyncTaskStandalone(Context context, String img_path, TaskDelegate delegate) {
+        super(delegate);
         this.img_path = img_path;
-        this.parentFragment = parentFragment;
+        this.context = context;
     }
 
     @Override
     protected String[] doInBackground(Void... params) {
         OCREngine ocrEngine = new OCREngineImpl();
 
-        AssetManager assetMgr = parentFragment.getActivity().getAssets();
+        AssetManager assetMgr = context.getAssets();
         String text = ocrEngine.RetrieveText(assetMgr, img_path);
 
         if (!text.isEmpty()) {
