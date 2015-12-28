@@ -4,6 +4,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -14,7 +17,7 @@ import com.ashomok.eNumbers.R;
 /**
  * Created by Iuliia on 24.12.2015.
  */
-public final class OCRAnimationView extends View implements BinarizeTaskDelegate {
+public final class OCRAnimationView extends View implements BitmapTaskDelegate {
     private float dX;
 
     private Bitmap scanband;
@@ -22,9 +25,14 @@ public final class OCRAnimationView extends View implements BinarizeTaskDelegate
     private int screenH;
     private float X;
     private float Y;
-    private int scanBandW = 50;
+    private static final int scanBandW = 50;
+
+    private static final float a = 77f;
+    private static final float b = 151f;
+    private static final float c = 28f;
+    private static final float t = 120 * -256f;
+
     private Bitmap background;
-    private Bitmap binarizated;
 
 
     public OCRAnimationView(Context context, Uri imageUri) {
@@ -36,12 +44,12 @@ public final class OCRAnimationView extends View implements BinarizeTaskDelegate
 
         scanband = BitmapFactory.decodeResource(getResources(), R.drawable.scan_band); //load a scanband image
 
-        BinarizeAsyncTask binarizeAsyncTask = new BinarizeAsyncTask(context, this);
+        BitmapAsyncTask bitmapAsyncTask = new BitmapAsyncTask(context, this);
         if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.HONEYCOMB) {
-            binarizeAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, imageUri);
+            bitmapAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, imageUri);
         }
         else {
-            binarizeAsyncTask.execute(imageUri);
+            bitmapAsyncTask.execute(imageUri);
         }
     }
 
@@ -57,9 +65,6 @@ public final class OCRAnimationView extends View implements BinarizeTaskDelegate
         if (background != null) {
             background = Bitmap.createScaledBitmap(background, w, h, true); //Resize background to fit the screen.
         }
-        if (binarizated != null) {
-            binarizated = Bitmap.createScaledBitmap(binarizated, w, h, true); //Resize to fit the screen.
-        }
 
         scanband = Bitmap.createScaledBitmap(scanband, scanband.getWidth(), h, true);
         if (X > screenW - scanBandW) {
@@ -74,11 +79,15 @@ public final class OCRAnimationView extends View implements BinarizeTaskDelegate
         if (background != null) {
             //Draw background
             canvas.drawBitmap(background, 0, 0, null);
-        }
 
-        if (binarizated != null) {
-            Bitmap croppedBitmap = Bitmap.createBitmap(binarizated, (int) X, 0, scanBandW, screenH);
-            canvas.drawBitmap(croppedBitmap, X, 0, null);
+            Bitmap croppedBitmap = Bitmap.createBitmap(background, (int) X, 0, scanBandW, screenH);
+            Paint paint = new Paint();
+
+            ColorMatrix cm = new ColorMatrix();
+
+            cm.set(new float[] { a, b, c, 0, t, a, b, c, 0, t, a, b, c, 0, t, 0, 0, 0, 1, 0 });
+            paint.setColorFilter(new ColorMatrixColorFilter(cm));
+            canvas.drawBitmap(croppedBitmap, X, 0, paint);
         }
 
         //Compute scanband speed and location.
@@ -99,17 +108,12 @@ public final class OCRAnimationView extends View implements BinarizeTaskDelegate
         invalidate();
     }
 
-    //TODO rewrite
     @Override
-    public void TaskCompletionResult(Bitmap[] result) {
-        background = result[0];
-        binarizated = result[1];
+    public void TaskCompletionResult(Bitmap result) {
+        background = result;
 
         if (background != null) {
             background = Bitmap.createScaledBitmap(background, screenW, screenH, true); //Resize background to fit the screen.
-        }
-        if (binarizated != null) {
-            binarizated = Bitmap.createScaledBitmap(binarizated, screenW, screenH, true); //Resize to fit the screen.
         }
     }
 }
