@@ -1,6 +1,8 @@
 package com.ashomok.eNumbers;
 
 import android.content.res.AssetManager;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Environment;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.IsolatedContext;
@@ -8,7 +10,10 @@ import android.test.mock.MockContentResolver;
 import android.util.Log;
 
 import com.ashomok.eNumbers.activities.MainActivity;
+import com.ashomok.eNumbers.activities.TaskDelegate;
+import com.ashomok.eNumbers.activities.ocr_task.RecognizeImageAsyncTask;
 import com.ashomok.eNumbers.activities.ocr_task.RecognizeImageAsyncTaskRESTClient;
+import com.ashomok.eNumbers.activities.ocr_task.RecognizeImageAsyncTaskStandalone;
 import com.ashomok.eNumbers.ocr.OCREngine;
 import com.ashomok.eNumbers.ocr.OCREngineImpl;
 import com.ashomok.eNumbers.sql.ENumbersSQLiteAssetHelper;
@@ -24,6 +29,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
@@ -55,10 +61,6 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     }
 
     public void testOCREngineRecognize() throws IOException {
-        //create folders for tessdata files
-        prepareDirectories(
-                new String[]{DATA_PATH + TEST_IMGS});
-
         ArrayList<String> files = getTestImages();
 
         OCREngineImpl ocrEngine = new OCREngineImpl();
@@ -198,7 +200,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 
         String result9 = "E101a, E200, E1414";
 
-      //  String result10 = "E401, E4506"; //fails
+        //  String result10 = "E401, E4506"; //fails
 
         OCREngine ocrEngine = new OCREngineImpl();
 
@@ -234,15 +236,61 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 
     }
 
-//    public void testRecognizeImageAsyncTask()
-//    {
-//        IsolatedContext _openHelperContext = new IsolatedContext(new MockContentResolver(), getActivity());
-//        ArrayList<String> files = getTestImages();
-//
-//        RecognizeImageAsyncTaskRESTClient task = new RecognizeImageAsyncTaskRESTClient(_openHelperContext, files.get(0), _openHelperContext); //TODO ugly
-//        // RecognizeImageAsyncTaskStandalone task = new RecognizeImageAsyncTaskStandalone(this, img_path, this); //TODO ugly
-//        task.execute();
-//    }
+    /**
+     * time a method's execution for RecognizeImageAsyncTaskRESTClient and RecognizeImageAsyncTaskStandalone
+     * And comparing
+     */
+    public void testRecognizeImageAsyncTask() {
+
+        ArrayList<String> files = getTestImages();
+
+        long startTime = System.nanoTime();
+        for (String path : files) {
+
+            final CountDownLatch signal = new CountDownLatch(1);
+            TaskDelegateImpl delegate = new TaskDelegateImpl(signal);
+
+            RecognizeImageAsyncTask task = new RecognizeImageAsyncTaskRESTClient(path, delegate);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            } else {
+                task.execute();
+            }
+            try {
+                signal.await();// wait for callback
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        long endTime = System.nanoTime();
+        long duration = (endTime - startTime);  //divide by 1000000 to get milliseconds.
+        Log.v(TAG, "RecognizeImageAsyncTaskRESTClient: " + duration + "/n");
+
+
+        startTime = System.nanoTime();
+        IsolatedContext context = new IsolatedContext(new MockContentResolver(), getActivity());
+
+        for (String path : files) {
+
+            final CountDownLatch signal = new CountDownLatch(1);
+            TaskDelegateImpl delegate = new TaskDelegateImpl(signal);
+
+            RecognizeImageAsyncTask task = new RecognizeImageAsyncTaskStandalone(context, path, delegate);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            } else {
+                task.execute();
+            }
+            try {
+                signal.await();// wait for callback
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        endTime = System.nanoTime();
+        duration = (endTime - startTime);  //divide by 1000000 to get milliseconds.
+        Log.v(TAG, "RecognizeImageAsyncTaskStandalone: " + duration + "/n");
+    }
 
     private void prepareDirectories(String[] paths) {
         for (String path : paths) {
@@ -259,6 +307,9 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     }
 
     private ArrayList<String> getTestImages() {
+        //create folders for tessdata files
+        prepareDirectories(
+                new String[]{DATA_PATH + TEST_IMGS});
 
         ArrayList<String> files = new ArrayList<String>();
 
@@ -317,6 +368,25 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+        }
+    }
+
+    private class TaskDelegateImpl implements TaskDelegate {
+        private CountDownLatch signal;
+
+        public TaskDelegateImpl(CountDownLatch signal) {
+            this.signal = signal;
+        }
+
+        @Override
+        public void TaskCompletionResult(String[] result) {
+            StringBuilder builder = new StringBuilder();
+            for (String s : result) {
+                builder.append(s);
+            }
+            Log.v(TAG, " result: " + builder.toString());
+
+            signal.countDown();// notify the count down latch
         }
     }
 }

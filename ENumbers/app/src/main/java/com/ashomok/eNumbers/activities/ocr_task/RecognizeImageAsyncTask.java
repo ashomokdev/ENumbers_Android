@@ -13,10 +13,6 @@ public abstract class RecognizeImageAsyncTask extends AsyncTask<Void, Integer, S
 
     protected RecognizeImageAsyncTask(TaskDelegate delegate) {
         this.delegate = delegate;
-        try {
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override

@@ -200,6 +200,9 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
                 getLoaderManager().restartLoader(0, b, this);
 
             } catch (Exception e) {
+                //TODO delete
+                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+
                 Log.e(this.getClass().getCanonicalName(), e.getMessage());
                 e.printStackTrace();
             }
