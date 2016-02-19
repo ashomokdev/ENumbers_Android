@@ -242,6 +242,11 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
      */
     public void testRecognizeImageAsyncTask() {
 
+    //results of timing RecognizeImageAsyncTaskRESTClient
+    //URL  41098071129  40289779933  42650368734
+    //URL2 191964505082 203698485182 193867012634 67070300688 71843954948
+    //URL1 123115701776 129641047762 131110172450 53560201043 42370121722 195613520967
+
         ArrayList<String> files = getTestImages();
 
         long startTime = System.nanoTime();

@@ -1,7 +1,5 @@
 package com.ashomok.eNumbers.activities.ocr_task;
 
-import android.app.Fragment;
-
 import com.ashomok.eNumbers.activities.TaskDelegate;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpEntity;
@@ -21,7 +19,10 @@ import java.io.File;
  */
 public final class RecognizeImageAsyncTaskRESTClient extends RecognizeImageAsyncTask {
 
-    final private String URL = "http://enumb.azurewebsites.net/enumbservice-0.3.0/upload";
+    final private String URL1 = "http://enumb.azurewebsites.net/enumbservice-0.3.0/upload";
+    final private String URL2 = "http://10.0.3.2:8080/enumbservice-0.3.0/upload";
+
+    final private String URL = "http://5.196.135.1:8080/upload";
 
     private String img_path;
 
@@ -56,7 +57,6 @@ public final class RecognizeImageAsyncTaskRESTClient extends RecognizeImageAsync
             result = new String[0];
         }
         return result;
-
     }
 
 }

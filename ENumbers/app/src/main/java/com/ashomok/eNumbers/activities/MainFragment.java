@@ -192,7 +192,6 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
     }
 
     private void GetInfoByENumbers(String[] enumbers) {
-        if (enumbers.length > 0) {
             Bundle b = new Bundle();
             b.putStringArray("codes", enumbers);
             try {
@@ -200,13 +199,10 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
                 getLoaderManager().restartLoader(0, b, this);
 
             } catch (Exception e) {
-                //TODO delete
-                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
 
                 Log.e(this.getClass().getCanonicalName(), e.getMessage());
                 e.printStackTrace();
             }
-        }
     }
 
 
