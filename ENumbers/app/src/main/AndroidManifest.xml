@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ashomok.eNumbers"
-    android:versionCode="1"
-    android:versionName="1.0">
+    package="com.ashomok.eNumbers">
 
-    <uses-sdk android:minSdkVersion="19" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
-    <!--TODO disable feachure if no camera-->
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="false" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -58,6 +54,13 @@
             android:name=".activities.ocr_task.OCRAnimationActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Recognizing"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity" />
+        </activity>
+        <activity android:name=".activities.capture_image.CaptureImageActivity"
             android:parentActivityName=".activities.MainActivity"
             android:theme="@style/AppTheme">
             <meta-data
