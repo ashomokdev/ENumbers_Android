@@ -342,7 +342,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
 
     @Override
     public void TaskCompletionResult(String[] result) {
-        getActivity().finishActivity(OCRAnimationActivity_REQUEST_CODE); //todo not finished
+        getActivity().finishActivity(OCRAnimationActivity_REQUEST_CODE);
         GetInfoByENumbers(result);
     }
 

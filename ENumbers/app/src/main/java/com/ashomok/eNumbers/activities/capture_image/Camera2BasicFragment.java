@@ -42,6 +42,7 @@ import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.CaptureResult;
 import android.hardware.camera2.TotalCaptureResult;
 import android.hardware.camera2.params.StreamConfigurationMap;
+import android.media.ExifInterface;
 import android.media.Image;
 import android.media.ImageReader;
 import android.net.Uri;
@@ -67,13 +68,18 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
+import java.util.Date;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
+
+
+//import com.drew.imaging.ImageMetadataReader;
+//import com.drew.metadata.Metadata;
+//import com.drew.metadata.exif.ExifIFD0Directory;
+//import com.drew.metadata.jpeg.JpegDirectory;
 
 public class Camera2BasicFragment extends Fragment
         implements View.OnClickListener, FragmentCompat.OnRequestPermissionsResultCallback {
@@ -345,24 +351,6 @@ public class Camera2BasicFragment extends Fragment
                                        @NonNull CaptureRequest request,
                                        @NonNull TotalCaptureResult result) {
             process(result);
-
-            //todo stop activity here to fix exception
-//            02-20 21:31:41.221 13292-13482/com.ashomok.eNumbers W/System.err: java.lang.NullPointerException: Attempt to invoke virtual method 'void android.hardware.camera2.CameraCaptureSession.stopRepeating()' on a null object reference
-//            02-20 21:31:41.221 13292-13482/com.ashomok.eNumbers W/System.err:     at com.ashomok.eNumbers.activities.capture_image.Camera2BasicFragment.captureStillPicture(Camera2BasicFragment.java:792)
-//            02-20 21:31:41.221 13292-13482/com.ashomok.eNumbers W/System.err:     at com.ashomok.eNumbers.activities.capture_image.Camera2BasicFragment.access$800(Camera2BasicFragment.java:77)
-//            02-20 21:31:41.221 13292-13482/com.ashomok.eNumbers W/System.err:     at com.ashomok.eNumbers.activities.capture_image.Camera2BasicFragment$4.process(Camera2BasicFragment.java:309)
-//            02-20 21:31:41.221 13292-13482/com.ashomok.eNumbers W/System.err:     at com.ashomok.eNumbers.activities.capture_image.Camera2BasicFragment$4.onCaptureCompleted(Camera2BasicFragment.java:346)
-//            02-20 21:31:41.221 13292-13482/com.ashomok.eNumbers W/System.err:     at java.lang.reflect.Method.invoke(Native Method)
-//            02-20 21:31:41.221 13292-13482/com.ashomok.eNumbers W/System.err:     at java.lang.reflect.Method.invoke(Method.java:372)
-//            02-20 21:31:41.221 13292-13482/com.ashomok.eNumbers W/System.err:     at android.hardware.camera2.dispatch.InvokeDispatcher.dispatch(InvokeDispatcher.java:39)
-//            02-20 21:31:41.221 13292-13482/com.ashomok.eNumbers W/System.err:     at android.hardware.camera2.dispatch.HandlerDispatcher$1.run(HandlerDispatcher.java:65)
-//            02-20 21:31:41.221 13292-13482/com.ashomok.eNumbers W/System.err:     at android.os.Handler.handleCallback(Handler.java:739)
-//            02-20 21:31:41.221 13292-13482/com.ashomok.eNumbers W/System.err:     at android.os.Handler.dispatchMessage(Handler.java:95)
-//            02-20 21:31:41.221 13292-13482/com.ashomok.eNumbers W/System.err:     at android.os.Looper.loop(Looper.java:211)
-//            02-20 21:31:41.221 13292-13482/com.ashomok.eNumbers W/System.err:     at android.os.HandlerThread.run(HandlerThread.java:61)
-//            02-20 21:31:41.226 13292-13568/com.ashomok.eNumbers W/LegacyRequestMapper: convertRequestMetadata - control.awbRegions setting is not supported, ignoring value
-//            02-20 21:31:41.226 13292-13568/com.ashomok.eNumbers W/LegacyRequestMapper: Only received metering rectangles with weight 0.
-//            02-20 21:31:41.226 13292-13568/com.ashomok.eNumbers W/LegacyRequestMapper: Only received metering rectangles with weight 0.
         }
 
     };
@@ -384,6 +372,7 @@ public class Camera2BasicFragment extends Fragment
         }
     }
 
+
     public static Camera2BasicFragment newInstance() {
         return new Camera2BasicFragment();
     }
@@ -403,7 +392,7 @@ public class Camera2BasicFragment extends Fragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mFile = new File(getActivity().getExternalFilesDir(null), "ocr.jpg");
+        mFile = new File(getActivity().getExternalFilesDir(null),  new Date(System.currentTimeMillis()).toString() + ".jpg");
     }
 
     @Override
@@ -803,8 +792,47 @@ public class Camera2BasicFragment extends Fragment
                                                @NonNull CaptureRequest request,
                                                @NonNull TotalCaptureResult result) {
 
-                    Log.d(TAG, mFile.toString());
-                    unlockFocus();
+                    try {
+                        if (mFile.exists()) {
+                            Log.d(TAG, mFile.toString() + " CREATED.");
+
+
+
+//                          //check orientation
+//                            ExifInterface exif = new ExifInterface(mFile.getPath());
+//                            int exifOrientation = exif.getAttributeInt(
+//                                    ExifInterface.TAG_ORIENTATION,
+//                                    ExifInterface.ORIENTATION_NORMAL);
+//
+//                            Log.v(TAG, "Orient: " + exifOrientation);
+//
+//                            int rotate = 0;
+//
+//                            switch (exifOrientation) {
+//                                case ExifInterface.ORIENTATION_ROTATE_90:
+//                                    rotate = 90;
+//                                    break;
+//                                case ExifInterface.ORIENTATION_ROTATE_180:
+//                                    rotate = 180;
+//                                    break;
+//                                case ExifInterface.ORIENTATION_ROTATE_270:
+//                                    rotate = 270;
+//                                    break;
+//                            }
+//                            Log.v(TAG, "Rotation: " + rotate);
+
+
+
+                            Intent intent = new Intent();
+                            intent.putExtra("file", Uri.fromFile(mFile));
+                            getActivity().setResult(Activity.RESULT_OK, intent);
+                            getActivity().finish();
+                        } else {
+                            throw new Exception("Camera have not created any file.");
+                        }
+                    } catch (Exception e) {
+                        Log.e(TAG, e.getMessage());
+                    }
                 }
             };
 
@@ -815,40 +843,17 @@ public class Camera2BasicFragment extends Fragment
         }
     }
 
-    /**
-     * Unlock the focus. This method should be called when still image capture sequence is
-     * finished.
-     */
-    private void unlockFocus() {
-        try {
-            // Reset the auto-focus trigger
-            mPreviewRequestBuilder.set(CaptureRequest.CONTROL_AF_TRIGGER,
-                    CameraMetadata.CONTROL_AF_TRIGGER_CANCEL);
-            setAutoFlash(mPreviewRequestBuilder);
-            mCaptureSession.capture(mPreviewRequestBuilder.build(), mCaptureCallback,
-                    mBackgroundHandler);
-            // After this, the camera will go back to the normal state of preview.
-            mState = STATE_PREVIEW;
-            mCaptureSession.setRepeatingRequest(mPreviewRequest, mCaptureCallback,
-                    mBackgroundHandler);
-        } catch (CameraAccessException e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.picture: {
-                takePicture();
-
-                Intent intent = new Intent();
-                intent.putExtra("file", Uri.fromFile(mFile));
-                getActivity().setResult(Activity.RESULT_OK, intent);
-                getActivity().finish();
-
+        try {
+            switch (view.getId()) {
+                case R.id.picture: {
+                    takePicture();
+                }
                 break;
             }
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
         }
     }
 

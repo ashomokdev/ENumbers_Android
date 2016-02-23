@@ -24,30 +24,6 @@ public class OCREngineImpl implements OCREngine {
 
     private static final String REGEX_ENUMB = "E[ ]{0,2}[0-9]{3,4}[a-j]{0,1}";
 
-//    public String detectText(Bitmap bitmap) {
-//
-//        TessBaseAPI tessBaseAPI = new TessBaseAPI();
-//
-//        String path = "/tessdata/eng.traineddata";
-//
-//        tessBaseAPI.setDebug(true);
-//        tessBaseAPI.init(path, "eng"); //Init the Tess with the trained data file, with english language
-//
-//        //For example if we want to only detect numbers
-//        tessBaseAPI.setVariable(TessBaseAPI.VAR_CHAR_WHITELIST, "1234567890");
-//        tessBaseAPI.setVariable(TessBaseAPI.VAR_CHAR_BLACKLIST, "!@#$%^&*()_+=-qwertyuiop[]}{POIU" +
-//                "YTREWQasdASDfghFGHjklJKLl;L:'\"\\|~`xcvXCVbnmBNM,./<>?");
-//
-//
-//        tessBaseAPI.setImage(bitmap);
-//
-//        String text = tessBaseAPI.getUTF8Text();
-//
-//        tessBaseAPI.end();
-//
-//        return text;
-//    }
-
     @Override
     public String RetrieveText(AssetManager assetMgr, String _path) {
         BitmapFactory.Options options = new BitmapFactory.Options();
