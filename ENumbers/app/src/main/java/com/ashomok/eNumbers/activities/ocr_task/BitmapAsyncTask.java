@@ -1,12 +1,14 @@
 package com.ashomok.eNumbers.activities.ocr_task;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.provider.MediaStore;
 import android.util.Log;
 
 import java.io.IOException;
@@ -15,25 +17,23 @@ import java.io.InputStream;
 /**
  * Created by Iuliia on 24.12.2015.
  */
-    public class BitmapAsyncTask extends AsyncTask<Uri, Integer, Bitmap> {
+    public class BitmapAsyncTask extends AsyncTask<String, Integer, Bitmap> {
 
-    private final Context context;
     private BitmapTaskDelegate delegate;
-    private static final int MAX_IMAGE_DIMENSION = 512;
     private Bitmap background;
+    public static final String TAG = "BitmapAsyncTask";
 
 
-    public BitmapAsyncTask(Context context, BitmapTaskDelegate delegate)
+    public BitmapAsyncTask(BitmapTaskDelegate delegate)
     {
-        this.context = context;
         this.delegate = delegate;
     }
 
     @Override
-    protected Bitmap doInBackground(Uri... params) {
-        Uri imageUri;
+    protected Bitmap doInBackground(String... params) {
+        String imagePath;
         try {
-            imageUri = params[0];
+            imagePath = params[0];
         }
         catch (IndexOutOfBoundsException e)
         {
@@ -41,7 +41,7 @@ import java.io.InputStream;
             return  null;
         }
 
-        background = prepareImage(imageUri);
+        background = prepareImage(imagePath);
 
         return background;
     }
@@ -52,9 +52,9 @@ import java.io.InputStream;
         delegate.TaskCompletionResult(result);
     }
 
-    private Bitmap prepareImage(Uri imageUri) {
+    private Bitmap prepareImage(String path) {
         try {
-            return getCorrectlyOrientedImage(context, imageUri);
+            return getCorrectlyOrientedImage(path);
         } catch (IOException e) {
             e.printStackTrace();
             Log.e(this.getClass().getCanonicalName(), e.getMessage());
@@ -62,79 +62,59 @@ import java.io.InputStream;
         return null;
     }
 
-    private Bitmap getCorrectlyOrientedImage(Context context, Uri photoUri) throws IOException {
-
-        InputStream is = context.getContentResolver().openInputStream(photoUri);
-        BitmapFactory.Options dbo = new BitmapFactory.Options();
-        dbo.inJustDecodeBounds = true;
-        BitmapFactory.decodeStream(is, null, dbo);
-        is.close();
-
-        int rotatedWidth, rotatedHeight;
-
-        ExifInterface exif = new ExifInterface(photoUri.getEncodedPath());
-
-        int exifOrientation = exif.getAttributeInt(
-                ExifInterface.TAG_ORIENTATION,
-                ExifInterface.ORIENTATION_NORMAL);
-
-        if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_90 ||
-                exifOrientation == ExifInterface.ORIENTATION_ROTATE_270) {
-            rotatedWidth = dbo.outHeight;
-            rotatedHeight = dbo.outWidth;
-        } else {
-            rotatedWidth = dbo.outWidth;
-            rotatedHeight = dbo.outHeight;
-        }
-
-        Bitmap srcBitmap;
-        is = context.getContentResolver().openInputStream(photoUri);
-        if (rotatedWidth > MAX_IMAGE_DIMENSION || rotatedHeight > MAX_IMAGE_DIMENSION) {
-            float widthRatio = ((float) rotatedWidth) / ((float) MAX_IMAGE_DIMENSION);
-            float heightRatio = ((float) rotatedHeight) / ((float) MAX_IMAGE_DIMENSION);
-            float maxRatio = Math.max(widthRatio, heightRatio);
-
-            // Create the bitmap from file
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inSampleSize = (int) maxRatio;
-            srcBitmap = BitmapFactory.decodeStream(is, null, options);
-        } else {
-            srcBitmap = BitmapFactory.decodeStream(is);
-        }
-        is.close();
-
-    /*
-     * if the orientation is not 0 (or -1, which means we don't know), we
-     * have to do a rotation.
+    /**
+     * decrease the size and correct orientation
+     * @param _path
+     * @return
+     * @throws IOException
      */
+    private Bitmap getCorrectlyOrientedImage(String _path) throws IOException {
 
-        int rotate = 0;
-        switch (exifOrientation) {
-            case ExifInterface.ORIENTATION_ROTATE_90:
-                rotate = 90;
-                break;
-            case ExifInterface.ORIENTATION_ROTATE_180:
-                rotate = 180;
-                break;
-            case ExifInterface.ORIENTATION_ROTATE_270:
-                rotate = 270;
-                break;
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = 16;
+
+        Bitmap bitmap = BitmapFactory.decodeFile(_path, options);
+
+        try {
+            ExifInterface exif = new ExifInterface(_path);
+            int exifOrientation = exif.getAttributeInt(
+                    ExifInterface.TAG_ORIENTATION,
+                    ExifInterface.ORIENTATION_NORMAL);
+
+            Log.v(TAG, "Orient: " + exifOrientation);
+
+            int rotate = 0;
+
+            switch (exifOrientation) {
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    rotate = 90;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    rotate = 180;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    rotate = 270;
+                    break;
+            }
+
+            Log.v(TAG, "Rotation: " + rotate);
+
+            if (rotate != 0) {
+
+                // Getting width & height of the given image.
+                int w = bitmap.getWidth();
+                int h = bitmap.getHeight();
+
+                // Setting pre rotate
+                Matrix mtx = new Matrix();
+                mtx.postRotate(rotate);
+
+                // Rotating Bitmap
+                bitmap = Bitmap.createBitmap(bitmap, 0, 0, w, h, mtx, false);
+            }
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
         }
-
-        if (rotate != 0) {
-            // Setting pre rotate
-            Matrix mtx = new Matrix();
-            mtx.postRotate(rotate);
-
-            // Rotating Bitmap
-            srcBitmap = Bitmap.createBitmap(srcBitmap, 0, 0, srcBitmap.getWidth(),
-                    srcBitmap.getHeight(), mtx, true);
-        }
-
-        return srcBitmap;
+        return bitmap;
     }
-
-
-
-
 }

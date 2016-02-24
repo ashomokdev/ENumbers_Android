@@ -227,17 +227,17 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         }
     }
 
+    //TODO takes string path
     private void startOCRtask(Uri outputFileUri) {
         if (outputFileUri != null) {
+            String img_path = outputFileUri.getPath();
 
             //run animation
             Intent intent = new Intent(getActivity(), OCRAnimationActivity.class);
-            intent.putExtra("image", outputFileUri);
+            intent.putExtra("image", img_path);
             getActivity().startActivityForResult(intent, OCRAnimationActivity_REQUEST_CODE);
 
             //start ocr
-            String img_path = outputFileUri.getPath();
-
             if (isNetworkAvailable(getActivity())) {
                 recognizeImageAsyncTask = new RecognizeImageAsyncTaskRESTClient(img_path, this);
 

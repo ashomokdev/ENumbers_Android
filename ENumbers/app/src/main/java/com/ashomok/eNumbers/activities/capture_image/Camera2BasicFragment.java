@@ -796,33 +796,6 @@ public class Camera2BasicFragment extends Fragment
                         if (mFile.exists()) {
                             Log.d(TAG, mFile.toString() + " CREATED.");
 
-
-
-//                          //check orientation
-//                            ExifInterface exif = new ExifInterface(mFile.getPath());
-//                            int exifOrientation = exif.getAttributeInt(
-//                                    ExifInterface.TAG_ORIENTATION,
-//                                    ExifInterface.ORIENTATION_NORMAL);
-//
-//                            Log.v(TAG, "Orient: " + exifOrientation);
-//
-//                            int rotate = 0;
-//
-//                            switch (exifOrientation) {
-//                                case ExifInterface.ORIENTATION_ROTATE_90:
-//                                    rotate = 90;
-//                                    break;
-//                                case ExifInterface.ORIENTATION_ROTATE_180:
-//                                    rotate = 180;
-//                                    break;
-//                                case ExifInterface.ORIENTATION_ROTATE_270:
-//                                    rotate = 270;
-//                                    break;
-//                            }
-//                            Log.v(TAG, "Rotation: " + rotate);
-
-
-
                             Intent intent = new Intent();
                             intent.putExtra("file", Uri.fromFile(mFile));
                             getActivity().setResult(Activity.RESULT_OK, intent);

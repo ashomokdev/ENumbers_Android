@@ -35,7 +35,7 @@ public final class OCRAnimationView extends View implements BitmapTaskDelegate {
     private Bitmap background;
 
 
-    public OCRAnimationView(Context context, Uri imageUri) {
+    public OCRAnimationView(Context context, String imageUri) {
         super(context);
 
         X = 0;
@@ -44,7 +44,7 @@ public final class OCRAnimationView extends View implements BitmapTaskDelegate {
 
         scanband = BitmapFactory.decodeResource(getResources(), R.drawable.scan_band); //load a scanband image
 
-        BitmapAsyncTask bitmapAsyncTask = new BitmapAsyncTask(context, this);
+        BitmapAsyncTask bitmapAsyncTask = new BitmapAsyncTask(this);
         if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.HONEYCOMB) {
             bitmapAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, imageUri);
         }
