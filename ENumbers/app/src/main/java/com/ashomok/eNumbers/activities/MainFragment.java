@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.support.design.widget.FloatingActionButton;
@@ -44,7 +43,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
     private static final int OCRAnimationActivity_REQUEST_CODE = 2;
 
 
-    private Uri outputFileUri;
+    private String outputFilePath;
     private ENumberListAdapter scAdapter;
     private ImageButton voiceInputBtn;
     private ImageButton closeBtn;
@@ -152,10 +151,10 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
 //            img_path = IMGS_PATH + "/ocr.jpg";
 //
 //            File file = new File(img_path);
-//            outputFileUri = Uri.fromFile(file);
+//            outputFilePath = Uri.fromFile(file);
 //
 //            final Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+//            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFilePath);
 //
 //            if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
 //                startActivityForResult(takePictureIntent, PHOTO_REQUEST_CODE);
@@ -216,9 +215,9 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         //making photo
         if (requestCode == CaptureImage_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
 
-            outputFileUri = data.getExtras().getParcelable("file");
+            outputFilePath = data.getStringExtra("file");
 
-            startOCRtask(outputFileUri);
+            startOCRtask(outputFilePath);
         }
 
         //ocr canceled
@@ -227,10 +226,8 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         }
     }
 
-    //TODO takes string path
-    private void startOCRtask(Uri outputFileUri) {
-        if (outputFileUri != null) {
-            String img_path = outputFileUri.getPath();
+    private void startOCRtask(String img_path) {
+
 
             //run animation
             Intent intent = new Intent(getActivity(), OCRAnimationActivity.class);
@@ -245,7 +242,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
                 recognizeImageAsyncTask = new RecognizeImageAsyncTaskStandalone(getActivity(), img_path, this);
             }
             recognizeImageAsyncTask.execute();
-        }
+
     }
 
 

@@ -76,11 +76,6 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 
-//import com.drew.imaging.ImageMetadataReader;
-//import com.drew.metadata.Metadata;
-//import com.drew.metadata.exif.ExifIFD0Directory;
-//import com.drew.metadata.jpeg.JpegDirectory;
-
 public class Camera2BasicFragment extends Fragment
         implements View.OnClickListener, FragmentCompat.OnRequestPermissionsResultCallback {
 
@@ -797,7 +792,7 @@ public class Camera2BasicFragment extends Fragment
                             Log.d(TAG, mFile.toString() + " CREATED.");
 
                             Intent intent = new Intent();
-                            intent.putExtra("file", Uri.fromFile(mFile));
+                            intent.putExtra("file", mFile.getPath());
                             getActivity().setResult(Activity.RESULT_OK, intent);
                             getActivity().finish();
                         } else {

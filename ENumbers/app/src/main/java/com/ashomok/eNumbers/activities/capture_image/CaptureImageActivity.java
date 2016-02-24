@@ -23,13 +23,4 @@ public class CaptureImageActivity extends Activity {
                     .commit();
         }
     }
-
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        Log.i(this.getClass().getCanonicalName(), "Activity finished");
-//
-//        setResult(RESULT_CANCELED);
-//        finish();
-//    }
 }
