@@ -407,8 +407,10 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         Keyboard customKeyboard = new Keyboard(getActivity(), R.xml.enumbers);
         keyboardView.setKeyboard(customKeyboard);
         ENumbersListener numbersListener = new ENumbersListener(inputEditText);
-        EditorInfo attrs = new EditorInfo();
-        inputEditText.onCreateInputConnection(attrs);
+        getActivity()
+                .getWindow()
+                .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        //Yo dawg
         numbersListener.setSubmitListener(new ENumbersListener.SubmitListener() {
             @Override
             public void onSubmit() {
@@ -424,6 +426,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
                 return false;
             }
         });
+        inputEditText.setShowSoftInputOnFocus(false);
         inputEditText.setOnFocusChangeListener(focusChangeListener);
     }
 
@@ -435,6 +438,14 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         keyboardView.setVisibility(View.VISIBLE);
     }
 
+    public boolean hideDefaultKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getActivity().getApplicationContext().getSystemService(
+                android.content.Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(keyboardView.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        showCustomKeyboard();
+        return true;
+    }
+
     private View.OnFocusChangeListener focusChangeListener = new View.OnFocusChangeListener() {
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
@@ -443,14 +454,6 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
             } else {
                 hideCustomKeyboard();
             }
-        }
-
-        public boolean hideDefaultKeyboard() {
-            InputMethodManager imm = (InputMethodManager) getActivity().getApplicationContext().getSystemService(
-                    android.content.Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(keyboardView.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-            showCustomKeyboard();
-            return true;
         }
     };
 
