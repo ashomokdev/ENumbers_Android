@@ -1,7 +1,6 @@
 package com.ashomok.eNumbers.activities.ocr_task;
 
 import android.app.Fragment;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,7 @@ import android.view.ViewGroup;
 public class OCRAnimationFragment extends Fragment {
 
 
-    private Uri imageUri;
+    private String imageUri;
 
 
     @Override
@@ -25,7 +24,7 @@ public class OCRAnimationFragment extends Fragment {
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            imageUri = bundle.getParcelable("image");
+            imageUri = bundle.getString("image");
         }
     }
 

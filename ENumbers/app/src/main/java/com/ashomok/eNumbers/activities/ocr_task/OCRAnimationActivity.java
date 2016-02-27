@@ -42,8 +42,7 @@ public class OCRAnimationActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-
     }
+
 
 }

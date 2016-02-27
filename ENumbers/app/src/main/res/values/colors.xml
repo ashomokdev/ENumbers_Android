@@ -19,4 +19,6 @@
 
     <item name="black85" type="color">#D9000000</item>
 
+    <item name="black50" type="color">#80000000</item>
+
 </resources>

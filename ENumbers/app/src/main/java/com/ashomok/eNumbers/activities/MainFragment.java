@@ -11,10 +11,7 @@ import android.database.Cursor;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.net.ConnectivityManager;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.speech.RecognizerIntent;
 import android.support.design.widget.FloatingActionButton;
 import android.text.Editable;
@@ -25,6 +22,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 
+import com.ashomok.eNumbers.activities.capture_image.CaptureImageActivity;
 import com.ashomok.eNumbers.activities.ocr_task.OCRAnimationActivity;
 import com.ashomok.eNumbers.activities.ocr_task.RecognizeImageAsyncTask;
 import com.ashomok.eNumbers.activities.ocr_task.RecognizeImageAsyncTaskRESTClient;
@@ -37,7 +35,6 @@ import com.ashomok.eNumbers.sql.EN;
 import com.ashomok.eNumbers.sql.ENumbersSQLiteAssetHelper;
 import com.ashomok.eNumbers.R;
 
-import java.io.File;
 import java.util.List;
 
 /**
@@ -46,11 +43,11 @@ import java.util.List;
 public class MainFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, TaskDelegate {
 
     private static final int SPEECH_REQUEST_CODE = 0;
-    private static final int PHOTO_REQUEST_CODE = 1;
+    private static final int CaptureImage_REQUEST_CODE = 1;
     private static final int OCRAnimationActivity_REQUEST_CODE = 2;
 
-    private String img_path;
-    private Uri outputFileUri;
+
+    private String outputFilePath;
     private ENumberListAdapter scAdapter;
     private ImageButton voiceInputBtn;
     private ImageButton closeBtn;
@@ -148,45 +145,45 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         }
     }
 
-    /**
-     * to get high resolution image from camera
-     */
-    protected void startCameraActivity() {
-        try {
-            String IMGS_PATH = Environment.getExternalStorageDirectory().toString() + "/ENumbers/imgs";
-            prepareDirectory(IMGS_PATH);
+//    /**
+//     * to get high resolution image from camera
+//     */
+//    protected void startCameraActivity() {
+//        try {
+//            String IMGS_PATH = Environment.getExternalStorageDirectory().toString() + "/ENumbers/imgs";
+//            prepareDirectory(IMGS_PATH);
+//
+//            img_path = IMGS_PATH + "/ocr.jpg";
+//
+//            File file = new File(img_path);
+//            outputFilePath = Uri.fromFile(file);
+//
+//            final Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFilePath);
+//
+//            if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+//                startActivityForResult(takePictureIntent, PHOTO_REQUEST_CODE);
+//            }
+//        } catch (Exception e) {
+//            Log.e(this.getClass().getCanonicalName(), e.getMessage());
+//            e.printStackTrace();
+//        }
+//    }
 
-            img_path = IMGS_PATH + "/ocr.jpg";
-
-            File file = new File(img_path);
-            outputFileUri = Uri.fromFile(file);
-
-            final Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
-
-            if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-                startActivityForResult(takePictureIntent, PHOTO_REQUEST_CODE);
-            }
-        } catch (Exception e) {
-            Log.e(this.getClass().getCanonicalName(), e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-    private void prepareDirectory(String path) throws Exception {
-
-        File dir = new File(path);
-        if (!dir.exists()) {
-            if (!dir.mkdirs()) {
-                Log.v(TAG, "ERROR: Creation of directory " + path
-                        + " on sdcard failed");
-                throw new Exception(
-                        "Could not create folder" + path);
-            }
-        } else {
-            Log.v(TAG, "Created directory " + path + " on sdcard");
-        }
-    }
+//    private void prepareDirectory(String path) throws Exception {
+//
+//        File dir = new File(path);
+//        if (!dir.exists()) {
+//            if (!dir.mkdirs()) {
+//                Log.v(TAG, "ERROR: Creation of directory " + path
+//                        + " on sdcard failed");
+//                throw new Exception(
+//                        "Could not create folder" + path);
+//            }
+//        } else {
+//            Log.v(TAG, "Created directory " + path + " on sdcard");
+//        }
+//    }
 
     private void GetInfoFromInputing(String input) {
 
@@ -221,9 +218,11 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         }
 
         //making photo
-        if (requestCode == PHOTO_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+        if (requestCode == CaptureImage_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
 
-            startOCRtask(outputFileUri);
+            outputFilePath = data.getStringExtra("file");
+
+            startOCRtask(outputFilePath);
         }
 
         //ocr canceled
@@ -232,21 +231,23 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         }
     }
 
-    private void startOCRtask(Uri outputFileUri) {
+    private void startOCRtask(String img_path) {
 
-        //run animation
-        Intent intent = new Intent(getActivity(), OCRAnimationActivity.class);
-        intent.putExtra("image", outputFileUri);
-        getActivity().startActivityForResult(intent, OCRAnimationActivity_REQUEST_CODE);
 
-        //start ocr
-        if (isNetworkAvailable(getActivity())) {
-            recognizeImageAsyncTask = new RecognizeImageAsyncTaskRESTClient(img_path, this);
+            //run animation
+            Intent intent = new Intent(getActivity(), OCRAnimationActivity.class);
+            intent.putExtra("image", img_path);
+            getActivity().startActivityForResult(intent, OCRAnimationActivity_REQUEST_CODE);
 
-        } else {
-            recognizeImageAsyncTask = new RecognizeImageAsyncTaskStandalone(getActivity(), img_path, this);
-        }
-        recognizeImageAsyncTask.execute();
+            //start ocr
+            if (isNetworkAvailable(getActivity())) {
+                recognizeImageAsyncTask = new RecognizeImageAsyncTaskRESTClient(img_path, this);
+
+            } else {
+                recognizeImageAsyncTask = new RecognizeImageAsyncTaskStandalone(getActivity(), img_path, this);
+            }
+            recognizeImageAsyncTask.execute();
+
     }
 
 
@@ -355,7 +356,9 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         @Override
         public void onClick(View v) {
 
-            startCameraActivity();
+            Intent intent = new Intent(getActivity(), CaptureImageActivity.class);
+            startActivityForResult(intent, CaptureImage_REQUEST_CODE);
+
         }
     }
 
@@ -387,9 +390,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            if (charSequence.toString().startsWith(startChar)) {
-
-            } else {
+            if (! charSequence.toString().startsWith(startChar)) {
 
                 inputEditText.setText(startChar);
             }
