@@ -90,52 +90,12 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@id/keyboard"
+        android:layout_alignWithParentIfMissing="true"
         android:layout_alignParentEnd="true"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:padding="@dimen/icon_padding"
         android:src="@drawable/ic_camera_alt_36dp" />
+    <include layout="@layout/keyboard"/>
 </RelativeLayout>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
