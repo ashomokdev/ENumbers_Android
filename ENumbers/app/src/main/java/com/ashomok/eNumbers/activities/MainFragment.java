@@ -3,11 +3,14 @@ package com.ashomok.eNumbers.activities;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.LoaderManager;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.inputmethodservice.Keyboard;
+import android.inputmethodservice.KeyboardView;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -27,6 +30,7 @@ import com.ashomok.eNumbers.activities.ocr_task.RecognizeImageAsyncTask;
 import com.ashomok.eNumbers.activities.ocr_task.RecognizeImageAsyncTaskRESTClient;
 
 import com.ashomok.eNumbers.activities.ocr_task.RecognizeImageAsyncTaskStandalone;
+import com.ashomok.eNumbers.keyboard.ENumbersListener;
 import com.ashomok.eNumbers.ocr.OCREngine;
 import com.ashomok.eNumbers.ocr.OCREngineImpl;
 import com.ashomok.eNumbers.sql.EN;
@@ -58,6 +62,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
     private RecognizeImageAsyncTask recognizeImageAsyncTask;
 
     public static final String TAG = "MainFragment";
+    private KeyboardView keyboardView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -135,7 +140,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
             listView.setEmptyView(outputWarning);
 
             listView.setAdapter(scAdapter);
-
+            createCustomKeyboard();
         } catch (Exception e) {
             Log.e(this.getClass().getCanonicalName(), e.getMessage());
             e.printStackTrace();
@@ -230,7 +235,11 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
 
         // Start the activity, the intent will be populated with the speech text
-        startActivityForResult(intent, SPEECH_REQUEST_CODE);
+        try{
+            startActivityForResult(intent, SPEECH_REQUEST_CODE);
+        }catch(ActivityNotFoundException anfe){
+            Toast.makeText(getActivity(), "No speech recognition available", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private boolean isNetworkAvailable(final Context context) {
@@ -371,6 +380,61 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         public void afterTextChanged(Editable s) {
         }
     }
+
+    private void createCustomKeyboard() {
+        keyboardView = (KeyboardView) getActivity().findViewById(R.id.keyboard);
+        Keyboard customKeyboard = new Keyboard(getActivity(), R.xml.enumbers);
+        keyboardView.setKeyboard(customKeyboard);
+        ENumbersListener numbersListener = new ENumbersListener(inputEditText);
+        getActivity()
+                .getWindow()
+                .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        //Yo dawg
+        numbersListener.setSubmitListener(new ENumbersListener.SubmitListener() {
+            @Override
+            public void onSubmit() {
+                GetInfoFromInputing(inputEditText.getText().toString());
+                hideCustomKeyboard();
+            }
+        });
+        keyboardView.setOnKeyboardActionListener(numbersListener);
+        inputEditText.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                showCustomKeyboard();
+                return false;
+            }
+        });
+        inputEditText.setShowSoftInputOnFocus(false);
+        inputEditText.setOnFocusChangeListener(focusChangeListener);
+    }
+
+    private void hideCustomKeyboard() {
+        keyboardView.setVisibility(View.GONE);
+    }
+
+    private void showCustomKeyboard() {
+        keyboardView.setVisibility(View.VISIBLE);
+    }
+
+    public boolean hideDefaultKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getActivity().getApplicationContext().getSystemService(
+                android.content.Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(keyboardView.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        showCustomKeyboard();
+        return true;
+    }
+
+    private View.OnFocusChangeListener focusChangeListener = new View.OnFocusChangeListener() {
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            if (hasFocus) {
+                hideDefaultKeyboard();
+            } else {
+                hideCustomKeyboard();
+            }
+        }
+    };
 
 }
 
