@@ -36,7 +36,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/black50">
 
         <ImageButton
             android:id="@+id/picture"

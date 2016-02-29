@@ -6,9 +6,11 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.speech.RecognizerIntent;
 import android.support.design.widget.FloatingActionButton;
 import android.text.Editable;
@@ -139,46 +141,6 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
             e.printStackTrace();
         }
     }
-
-//    /**
-//     * to get high resolution image from camera
-//     */
-//    protected void startCameraActivity() {
-//        try {
-//            String IMGS_PATH = Environment.getExternalStorageDirectory().toString() + "/ENumbers/imgs";
-//            prepareDirectory(IMGS_PATH);
-//
-//            img_path = IMGS_PATH + "/ocr.jpg";
-//
-//            File file = new File(img_path);
-//            outputFilePath = Uri.fromFile(file);
-//
-//            final Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFilePath);
-//
-//            if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-//                startActivityForResult(takePictureIntent, PHOTO_REQUEST_CODE);
-//            }
-//        } catch (Exception e) {
-//            Log.e(this.getClass().getCanonicalName(), e.getMessage());
-//            e.printStackTrace();
-//        }
-//    }
-
-//    private void prepareDirectory(String path) throws Exception {
-//
-//        File dir = new File(path);
-//        if (!dir.exists()) {
-//            if (!dir.mkdirs()) {
-//                Log.v(TAG, "ERROR: Creation of directory " + path
-//                        + " on sdcard failed");
-//                throw new Exception(
-//                        "Could not create folder" + path);
-//            }
-//        } else {
-//            Log.v(TAG, "Created directory " + path + " on sdcard");
-//        }
-//    }
 
     private void GetInfoFromInputing(String input) {
 
@@ -347,9 +309,26 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         @Override
         public void onClick(View v) {
 
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(v.getContext());
+
+            boolean firstOpened = preferences.getBoolean("first_opened", true);
+
+            if(firstOpened) {
+
+                showWelcomeScreen();
+
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putBoolean("first_opened", false);
+                editor.apply();
+            }
+
             Intent intent = new Intent(getActivity(), CaptureImageActivity.class);
             startActivityForResult(intent, CaptureImage_REQUEST_CODE);
 
+        }
+
+        private void showWelcomeScreen() {
+            //TODO add new Dialog Fragment here
         }
     }
 
