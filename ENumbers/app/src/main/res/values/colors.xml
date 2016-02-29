@@ -21,4 +21,6 @@
 
     <item name="black50" type="color">#80000000</item>
 
+    <item name="black25" type="color">#40000000</item>
+
 </resources>

@@ -5,13 +5,15 @@ import android.inputmethodservice.KeyboardView;
 import android.text.Editable;
 import android.widget.EditText;
 
-public class ENumbersListener implements KeyboardView.OnKeyboardActionListener{
+import com.ashomok.eNumbers.R;
+
+public class CustomKeyboardListener implements KeyboardView.OnKeyboardActionListener {
 
 
     private final EditText text;
     private SubmitListener submitListener;
 
-    public ENumbersListener(EditText text) {
+    public CustomKeyboardListener(EditText text) {
         this.text = text;
     }
 
@@ -38,8 +40,9 @@ public class ENumbersListener implements KeyboardView.OnKeyboardActionListener{
                 break;
             case Keyboard.KEYCODE_DONE:
                 SubmitListener submitListener = getSubmitListener();
-                if(submitListener !=null)
+                if (submitListener != null) {
                     submitListener.onSubmit();
+                }
                 break;
             default:
                 char code = (char) primaryCode;
@@ -81,7 +84,7 @@ public class ENumbersListener implements KeyboardView.OnKeyboardActionListener{
         this.submitListener = submitListener;
     }
 
-    public interface SubmitListener{
+    public interface SubmitListener {
         void onSubmit();
     }
 }

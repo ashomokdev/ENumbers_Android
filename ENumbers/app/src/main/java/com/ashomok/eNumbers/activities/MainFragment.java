@@ -30,7 +30,7 @@ import com.ashomok.eNumbers.activities.ocr_task.RecognizeImageAsyncTask;
 import com.ashomok.eNumbers.activities.ocr_task.RecognizeImageAsyncTaskRESTClient;
 
 import com.ashomok.eNumbers.activities.ocr_task.RecognizeImageAsyncTaskStandalone;
-import com.ashomok.eNumbers.keyboard.ENumbersListener;
+import com.ashomok.eNumbers.keyboard.CustomKeyboardListener;
 import com.ashomok.eNumbers.ocr.OCREngine;
 import com.ashomok.eNumbers.ocr.OCREngineImpl;
 import com.ashomok.eNumbers.sql.EN;
@@ -140,6 +140,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
             listView.setEmptyView(outputWarning);
 
             listView.setAdapter(scAdapter);
+
             createCustomKeyboard();
         } catch (Exception e) {
             Log.e(this.getClass().getCanonicalName(), e.getMessage());
@@ -383,14 +384,14 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
 
     private void createCustomKeyboard() {
         keyboardView = (KeyboardView) getActivity().findViewById(R.id.keyboard);
-        Keyboard customKeyboard = new Keyboard(getActivity(), R.xml.enumbers);
+        Keyboard customKeyboard = new Keyboard(getActivity(), R.xml.keyboard_keys);
         keyboardView.setKeyboard(customKeyboard);
-        ENumbersListener numbersListener = new ENumbersListener(inputEditText);
+        CustomKeyboardListener numbersListener = new CustomKeyboardListener(inputEditText);
         getActivity()
                 .getWindow()
                 .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        //Yo dawg
-        numbersListener.setSubmitListener(new ENumbersListener.SubmitListener() {
+
+        numbersListener.setSubmitListener(new CustomKeyboardListener.SubmitListener() {
             @Override
             public void onSubmit() {
                 GetInfoFromInputing(inputEditText.getText().toString());
