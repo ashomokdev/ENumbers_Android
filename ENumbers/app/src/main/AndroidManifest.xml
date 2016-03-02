@@ -18,11 +18,9 @@
 
         <activity
             android:name=".activities.MainActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:label="@string/appName"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

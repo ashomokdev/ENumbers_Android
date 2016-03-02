@@ -28,5 +28,6 @@
     <string name="camera_error">Your device not support this feature</string>
     <string name="picture">Picture</string>
     <string name="capture_photo">capture photo</string>
+    <string name="DONE">DONE</string>
 </resources>
 

@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.ashomok.eNumbers.sql.EN;
+import com.ashomok.eNumbers.data_load.EN;
 import com.ashomok.eNumbers.R;
 
 /**

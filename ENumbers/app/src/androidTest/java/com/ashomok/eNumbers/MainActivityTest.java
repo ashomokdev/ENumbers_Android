@@ -16,7 +16,7 @@ import com.ashomok.eNumbers.activities.ocr_task.RecognizeImageAsyncTaskRESTClien
 import com.ashomok.eNumbers.activities.ocr_task.RecognizeImageAsyncTaskStandalone;
 import com.ashomok.eNumbers.ocr.OCREngine;
 import com.ashomok.eNumbers.ocr.OCREngineImpl;
-import com.ashomok.eNumbers.sql.ENumbersSQLiteAssetHelper;
+import com.ashomok.eNumbers.data_load.ENumbersSQLiteAssetHelper;
 
 import junit.framework.Assert;
 

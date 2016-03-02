@@ -3,7 +3,6 @@ package com.ashomok.eNumbers.activities.capture_image;
 import android.app.Activity;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import com.ashomok.eNumbers.R;
 

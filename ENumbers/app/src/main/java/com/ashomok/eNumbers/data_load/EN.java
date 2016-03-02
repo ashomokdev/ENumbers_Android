@@ -1,4 +1,4 @@
-package com.ashomok.eNumbers.sql;
+package com.ashomok.eNumbers.data_load;
 
 import android.database.Cursor;
 import android.util.Log;

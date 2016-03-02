@@ -1,18 +1,13 @@
 package com.ashomok.eNumbers.activities.ocr_task;
 
-import android.content.Context;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
-import android.net.Uri;
 import android.os.AsyncTask;
-import android.provider.MediaStore;
 import android.util.Log;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * Created by Iuliia on 24.12.2015.
@@ -71,7 +66,7 @@ import java.io.InputStream;
     private Bitmap getCorrectlyOrientedImage(String _path) throws IOException {
 
         BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inSampleSize = 16;
+        options.inSampleSize = 8;
 
         Bitmap bitmap = BitmapFactory.decodeFile(_path, options);
 
@@ -111,6 +106,7 @@ import java.io.InputStream;
 
                 // Rotating Bitmap
                 bitmap = Bitmap.createBitmap(bitmap, 0, 0, w, h, mtx, false);
+
             }
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
