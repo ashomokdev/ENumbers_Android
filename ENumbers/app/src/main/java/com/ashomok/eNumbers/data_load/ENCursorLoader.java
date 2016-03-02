@@ -1,4 +1,4 @@
-package com.ashomok.eNumbers.activities;
+package com.ashomok.eNumbers.data_load;
 
 import android.content.Context;
 import android.content.CursorLoader;
@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.ashomok.eNumbers.sql.ENumbersSQLiteAssetHelper;
+import com.ashomok.eNumbers.data_load.ENumbersSQLiteAssetHelper;
 
 /**
  * Created by Iuliia on 14.09.2015.

@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
-                .add(R.id.content_frame, fragment)
+                .replace(R.id.content_frame, fragment)
                 .commit();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
