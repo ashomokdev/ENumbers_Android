@@ -51,6 +51,7 @@ Uploads/
 
 # IDE files #
 #############
+.idea/
 .idea/workspace.xml
 .idea/libraries/Maven*.xml
 .idea/compiler.xml
