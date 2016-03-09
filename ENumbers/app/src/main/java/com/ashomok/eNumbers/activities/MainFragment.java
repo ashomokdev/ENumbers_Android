@@ -12,12 +12,14 @@ import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.net.ConnectivityManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.speech.RecognizerIntent;
 import android.support.design.widget.FloatingActionButton;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.*;
@@ -40,6 +42,7 @@ import com.ashomok.eNumbers.data_load.ENumbersSQLiteAssetHelper;
 import com.ashomok.eNumbers.R;
 
 import java.io.File;
+import java.lang.reflect.Method;
 import java.util.List;
 
 /**
@@ -87,6 +90,22 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
             startChar = getString(R.string.startChar);
 
             inputEditText = (EditText) view.findViewById(R.id.inputE);
+
+            //hide default keyboard
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                inputEditText.setShowSoftInputOnFocus(false);
+            } else {
+                try {
+                    final Method method = EditText.class.getMethod(
+                            "setShowSoftInputOnFocus"
+                            , new Class[]{boolean.class});
+                    method.setAccessible(true);
+                    method.invoke(inputEditText, false);
+                } catch (Exception e) {
+                    // ignore
+                }
+            }
+
             inputEditText.setSelection(inputEditText.getText().length()); //starts type after "E"
             inputEditText.addTextChangedListener(new StartCharKeeper());
             inputEditText.setOnEditorActionListener(new BtnDoneHandler());
@@ -151,10 +170,9 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
         //making photo
         if (requestCode == CaptureImage_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
 
-            if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP) {
+            if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP) {
                 img_path = outputFileUri.getPath();
-            }
-            else {
+            } else {
                 img_path = data.getStringExtra("file");
             }
             startOCRtask(img_path);
@@ -259,14 +277,13 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
         @Override
         public void onClick(View v) {
 
-            if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP) {
+            if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP) {
 
                 startBuildInCameraActivity();
-            }
-            else {
+            } else {
 
-            Intent intent = new Intent(getActivity(), CaptureImageActivity.class);
-            startActivityForResult(intent, CaptureImage_REQUEST_CODE);
+                Intent intent = new Intent(getActivity(), CaptureImageActivity.class);
+                startActivityForResult(intent, CaptureImage_REQUEST_CODE);
 
             }
         }
@@ -312,14 +329,15 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
         }
     }
 
+
     private void createCustomKeyboard() {
         keyboardView = (KeyboardView) getActivity().findViewById(R.id.keyboard);
         Keyboard customKeyboard = new Keyboard(getActivity(), R.xml.keyboard_keys);
         keyboardView.setKeyboard(customKeyboard);
         CustomKeyboardListener numbersListener = new CustomKeyboardListener(inputEditText);
-        getActivity()
-                .getWindow()
-                .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
 
         numbersListener.setSubmitListener(new CustomKeyboardListener.SubmitListener() {
             @Override
@@ -336,6 +354,22 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
                 return false;
             }
         });
+
+//        //hide default keyboard
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            inputEditText.setShowSoftInputOnFocus(false);
+//        } else {
+//            try {
+//                final Method method = EditText.class.getMethod(
+//                        "setShowSoftInputOnFocus"
+//                        , new Class[]{boolean.class});
+//                method.setAccessible(true);
+//                method.invoke(inputEditText, false);
+//            } catch (Exception e) {
+//                // ignore
+//            }
+//        }
+
         inputEditText.setOnFocusChangeListener(focusChangeListener);
     }
 
