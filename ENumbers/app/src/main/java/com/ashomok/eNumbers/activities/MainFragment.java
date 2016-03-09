@@ -7,13 +7,14 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.speech.RecognizerIntent;
 import android.support.design.widget.FloatingActionButton;
 import android.text.Editable;
@@ -38,6 +39,7 @@ import com.ashomok.eNumbers.data_load.EN;
 import com.ashomok.eNumbers.data_load.ENumbersSQLiteAssetHelper;
 import com.ashomok.eNumbers.R;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -49,8 +51,8 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
     private static final int CaptureImage_REQUEST_CODE = 1;
     private static final int OCRAnimationActivity_REQUEST_CODE = 2;
 
-
-    private String outputFilePath;
+    private String img_path;
+    private Uri outputFileUri;
     private ImageButton voiceInputBtn;
     private ImageButton closeBtn;
     private EditText inputEditText;
@@ -149,9 +151,13 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
         //making photo
         if (requestCode == CaptureImage_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
 
-            outputFilePath = data.getStringExtra("file");
-
-            startOCRtask(outputFilePath);
+            if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP) {
+                img_path = outputFileUri.getPath();
+            }
+            else {
+                img_path = data.getStringExtra("file");
+            }
+            startOCRtask(img_path);
         }
 
         //ocr canceled
@@ -253,26 +259,16 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
         @Override
         public void onClick(View v) {
 
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(v.getContext());
+            if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP) {
 
-            boolean firstOpened = preferences.getBoolean("first_opened", true);
-
-            if (firstOpened) {
-
-                showWelcomeScreen();
-
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putBoolean("first_opened", false);
-                editor.apply();
+                startBuildInCameraActivity();
             }
+            else {
 
             Intent intent = new Intent(getActivity(), CaptureImageActivity.class);
             startActivityForResult(intent, CaptureImage_REQUEST_CODE);
 
-        }
-
-        private void showWelcomeScreen() {
-            //TODO add new Dialog Fragment here
+            }
         }
     }
 
@@ -340,7 +336,6 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
                 return false;
             }
         });
-        inputEditText.setShowSoftInputOnFocus(false);
         inputEditText.setOnFocusChangeListener(focusChangeListener);
     }
 
@@ -353,11 +348,53 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
     }
 
     public boolean hideDefaultKeyboard() {
+
         InputMethodManager imm = (InputMethodManager) getActivity().getApplicationContext().getSystemService(
                 android.content.Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(keyboardView.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+
         showCustomKeyboard();
         return true;
+    }
+
+    /**
+     * to get high resolution image from camera
+     */
+    protected void startBuildInCameraActivity() {
+        try {
+            String IMGS_PATH = Environment.getExternalStorageDirectory().toString() + "/ENumbers/imgs";
+            prepareDirectory(IMGS_PATH);
+
+            img_path = IMGS_PATH + "/ocr.jpg";
+
+            File file = new File(img_path);
+            outputFileUri = Uri.fromFile(file);
+
+            final Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+
+            if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                startActivityForResult(takePictureIntent, CaptureImage_REQUEST_CODE);
+            }
+        } catch (Exception e) {
+            Log.e(this.getClass().getCanonicalName(), e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void prepareDirectory(String path) throws Exception {
+
+        File dir = new File(path);
+        if (!dir.exists()) {
+            if (!dir.mkdirs()) {
+                Log.v(TAG, "ERROR: Creation of directory " + path
+                        + " on sdcard failed");
+                throw new Exception(
+                        "Could not create folder" + path);
+            }
+        } else {
+            Log.v(TAG, "Created directory " + path + " on sdcard");
+        }
     }
 
     private View.OnFocusChangeListener focusChangeListener = new View.OnFocusChangeListener() {
