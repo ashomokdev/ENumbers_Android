@@ -22,7 +22,7 @@ public class EN implements Serializable {
             this.setDangerLevel(cursor.getString(cursor.getColumnIndex(ENumbersSQLiteAssetHelper.COLUMN_NAME_DANGER_LEVEL)));
             this.setBadForChildren(cursor.getString(cursor.getColumnIndex(ENumbersSQLiteAssetHelper.COLUMN_NAME_BAD_FOR_CHILDREN)));
         } catch (Exception e) {
-            Log.e(this.getClass().getCanonicalName(), e.getMessage() + e.getStackTrace().toString());
+            Log.e(this.getClass().getCanonicalName(), e.getMessage());
         }
 
     }
@@ -75,9 +75,6 @@ public class EN implements Serializable {
     public String getName() {
         return name;
     }
-
-
-    private int id;
 
     private String code;
 

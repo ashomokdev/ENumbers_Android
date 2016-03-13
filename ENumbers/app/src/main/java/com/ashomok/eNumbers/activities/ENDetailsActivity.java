@@ -47,7 +47,9 @@ public class ENDetailsActivity extends AppCompatActivity {
             toolbar = (Toolbar) findViewById(R.id.toolbar_details_layout);
             setSupportActionBar(toolbar);
 
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            if (getSupportActionBar() != null) {
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            }
 
             mTextView_ecode = (TextView) findViewById(R.id.eCodeFull);
             mTextView_ecode.setText(en.getCode());

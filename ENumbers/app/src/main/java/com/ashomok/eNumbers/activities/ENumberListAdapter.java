@@ -13,7 +13,7 @@ import com.ashomok.eNumbers.activities.ENumbFlag;
 /**
  * Created by y.belyaeva on 28.07.2015.
  */
-public class ENumberListAdapter extends CursorAdapter {
+class ENumberListAdapter extends CursorAdapter {
     public ENumberListAdapter(Context context, Cursor cursor, int flags) {
         super(context, cursor, 0);
     }

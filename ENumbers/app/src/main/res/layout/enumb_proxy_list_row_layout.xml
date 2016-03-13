@@ -1,55 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/data_layout"
-              android:duplicateParentState="true">
+    android:id="@+id/data_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:duplicateParentState="true"
+    android:orientation="horizontal">
 
     <!--<com.example.eNumbers.ENumbFlag-->
-            <!--android:id="@+id/imageViewFlag"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:src="@drawable/flagcolor"-->
-            <!--android:duplicateParentState="true"/>-->
+    <!--android:id="@+id/imageViewFlag"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:src="@drawable/flagcolor"-->
+    <!--android:duplicateParentState="true"/>-->
 
-    <include android:id="@+id/enumbFlag_enumb_proxy_list_row_layout"
-             layout="@layout/enumb_flag"
-             />
+    <include
+        android:id="@+id/enumbFlag_enumb_proxy_list_row_layout"
+        layout="@layout/enumb_flag" />
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical"
-              android:duplicateParentState="true">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:duplicateParentState="true"
+        android:orientation="vertical">
 
-    <TextView
+        <TextView
             android:id="@+id/ECode"
+            style="@style/ECode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:typeface="sans"
-            android:text="default ECode"
-            style="@style/ECode"
-            />
+            android:typeface="sans" />
 
-    <TextView
+        <TextView
             android:id="@+id/EName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             style="@style/EName"
-            android:text="default EName"
-            />
-
-    <TextView
-            android:id="@+id/EPurpose"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/EName"
-            style="@style/EPurpose"
-            android:text="default EPurpose"
-            />
+            android:layout_height="wrap_content" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/EPurpose"
+            style="@style/EPurpose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 </LinearLayout>
 

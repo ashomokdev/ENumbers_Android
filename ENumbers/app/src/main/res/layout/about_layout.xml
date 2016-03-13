@@ -1,73 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:orientation="vertical"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/data_layout">
+    android:id="@+id/data_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
 
-    <include android:id="@+id/toolbar_about_layout"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             layout="@layout/toolbar"/>
+    <include
+        android:id="@+id/toolbar_about_layout"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:orientation="vertical"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_marginTop="@dimen/layout_margin"
-                    android:layout_marginBottom="@dimen/layout_margin"
-                    android:layout_marginLeft="@dimen/layout_margin"
-                    android:layout_marginRight="@dimen/layout_margin"
-            >
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="@dimen/layout_margin"
+        android:layout_marginLeft="@dimen/layout_margin"
+        android:layout_marginRight="@dimen/layout_margin"
+        android:layout_marginTop="@dimen/layout_margin"
+        android:orientation="vertical">
 
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="false"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:id="@+id/appName"
-                android:textStyle="bold"
-                android:typeface="sans"
-                style="@style/CustomText"
-                />
+            android:id="@+id/appName"
+            style="@style/CustomText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:textStyle="bold"
+            android:typeface="sans" />
 
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="false"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:id="@+id/developer"
-                android:typeface="sans"
-                style="@style/CustomText"
-                android:layout_below="@id/appName"
-                />
+            android:id="@+id/developer"
+            style="@style/CustomText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:typeface="sans"
+            />
 
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:id="@+id/email"
-                android:typeface="sans"
-                style="@style/CustomText"
-                android:layout_below="@id/developer"
-                />
+            android:id="@+id/email"
+            style="@style/CustomText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:typeface="sans"
+            />
+
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="false"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:id="@+id/version"
-                android:typeface="sans"
-                style="@style/CustomText"
-                android:layout_below="@id/email"
-                />
-
-
-
+            android:id="@+id/version"
+            style="@style/CustomText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:typeface="sans"
+            />
     </LinearLayout>
 </LinearLayout>

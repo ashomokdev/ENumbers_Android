@@ -1,63 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <android.support.v4.widget.DrawerLayout
-            android:id="@+id/drawer_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <!-- Your normal content view -->
         <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <!-- We use a Toolbar so that our drawer can be displayed
                  in front of the action bar -->
-            <include android:id="@+id/toolbar"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     layout="@layout/toolbar"
-                    />
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
             <!-- The rest of your content view -->
 
-        <!--a FrameLayout to contain the main content (populated by a Fragment at runtime)-->
-        <FrameLayout
+            <!--a FrameLayout to contain the main content (populated by a Fragment at runtime)-->
+            <FrameLayout
                 android:id="@+id/content_frame"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/toolbar"
-                />
+                android:layout_below="@+id/toolbar" />
         </RelativeLayout>
 
-        <LinearLayout
-                android:layout_gravity="start"
-                android:layout_width="240dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:id="@+id/start_activity_layout_linear"
-                >
+        <RelativeLayout
+            android:id="@+id/start_activity_layout_linear"
+            android:layout_width="240dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start">
+
             <ImageView
-                    android:layout_width="240dp"
-                    android:layout_height="150dp"
-                    android:src="@drawable/menu_img_copy"
-                    android:id="@+id/image_menu"
-                    android:layout_gravity="start"/>
+                android:id="@+id/image_menu"
+                android:layout_width="240dp"
+                android:layout_height="150dp"
+                android:layout_gravity="start"
+                android:src="@drawable/menu_footer" />
             <!--a ListView for the navigation drawer-->
             <ListView
-                    android:id="@+id/lv_navigation_drawer"
-                    android:layout_width="240dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="start"
-                    android:choiceMode="singleChoice"
-                    android:divider="@android:color/transparent"
-                    android:dividerHeight="0dp"
-                    android:background="@color/light_blue"
-                    android:layout_below="@+id/image_menu"/>
-        </LinearLayout>
+                android:id="@+id/lv_navigation_drawer"
+                android:layout_width="240dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="start"
+                android:layout_marginTop="149dp"
+                android:background="@color/light_blue"
+                android:choiceMode="singleChoice"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="0dp" />
+        </RelativeLayout>
     </android.support.v4.widget.DrawerLayout>
 </LinearLayout>

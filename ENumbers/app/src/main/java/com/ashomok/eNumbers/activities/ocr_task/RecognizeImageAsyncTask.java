@@ -9,9 +9,9 @@ import com.ashomok.eNumbers.activities.TaskDelegate;
  */
 public abstract class RecognizeImageAsyncTask extends AsyncTask<Void, Integer, String[]> {
 
-    private TaskDelegate delegate;
+    private final TaskDelegate delegate;
 
-    protected RecognizeImageAsyncTask(TaskDelegate delegate) {
+    RecognizeImageAsyncTask(TaskDelegate delegate) {
         this.delegate = delegate;
     }
 

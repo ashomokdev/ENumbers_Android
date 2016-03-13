@@ -7,7 +7,6 @@ import android.graphics.Canvas;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.view.View;
@@ -34,7 +33,7 @@ public final class OCRAnimationView extends View implements BitmapTaskDelegate {
 
     private Bitmap background;
 
-
+//todo  Custom view OCRAnimationView is missing constructor used by tools: (Context) or (Context,AttributeSet) or (Context,AttributeSet,int)
     public OCRAnimationView(Context context, String imageUri) {
         super(context);
 
@@ -80,6 +79,7 @@ public final class OCRAnimationView extends View implements BitmapTaskDelegate {
             //Draw background
             canvas.drawBitmap(background, 0, 0, null);
 
+            //todo   Avoid object allocations during draw/layout operations (preallocate and reuse instead)
             Bitmap croppedBitmap = Bitmap.createBitmap(background, (int) X, 0, scanBandW, screenH);
             Paint paint = new Paint();
 

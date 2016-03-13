@@ -22,7 +22,7 @@ public class OCREngineImpl implements OCREngine {
 
     private static final String TAG = "OCREngineImpl.java";
 
-    private static final String REGEX_ENUMB = "E[ ]{0,2}[0-9]{3,4}[a-j]{0,1}";
+    private static final String REGEX_ENUMB = "E[ ]{0,2}[0-9]{3,4}[a-j]?";
 
     @Override
     public String RetrieveText(AssetManager assetMgr, String _path) {
@@ -129,7 +129,7 @@ public class OCREngineImpl implements OCREngine {
         if (input.contains(E)) {
             //get possible E-numbers
 
-            Set<String> words =  new HashSet<String>();
+            Set<String> words =  new HashSet<>();
 
             int fromIndex = 0;
             while (fromIndex < input.length()) {
@@ -161,7 +161,7 @@ public class OCREngineImpl implements OCREngine {
     }
 
     @Nullable
-    public String parseWord(String word) {
+    private String parseWord(String word) {
         Pattern pattern = Pattern.compile(REGEX_ENUMB);
         Matcher matcher = pattern.matcher(word);
         if (matcher.find()) {

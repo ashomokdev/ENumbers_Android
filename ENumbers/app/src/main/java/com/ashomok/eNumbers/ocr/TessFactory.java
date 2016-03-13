@@ -17,11 +17,11 @@ class TessFactory {
     public static final String lang = "eng";
 
     public static final String ASSETS_PATH = Environment.getExternalStorageDirectory().toString() + "/ENumbers/";
-    public static final String TESSDATA = "tessdata";
+    private static final String TESSDATA = "tessdata";
 
-    public static final String TAG = "TessFactory";
+    private static final String TAG = "TessFactory";
 
-    private AssetManager context;
+    private final AssetManager context;
     private TessBaseAPI tessBaseApi;
 
     public TessFactory(AssetManager context) {
@@ -34,11 +34,9 @@ class TessFactory {
             initTessdata();
             tessBaseApi = new TessBaseAPI();
         }
-        if (tessBaseApi == null) {
-            Log.i(TAG, "TessBaseAPI still not initialized, just successfully copied");
-        } else {
-            Log.i(TAG, "TessBaseAPI initialized...");
-        }
+
+        Log.i(TAG, "TessBaseAPI initialized...");
+
         return tessBaseApi;
     }
 

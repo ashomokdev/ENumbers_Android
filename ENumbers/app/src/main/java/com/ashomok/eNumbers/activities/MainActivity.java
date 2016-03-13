@@ -5,18 +5,19 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.*;
-import android.widget.*;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.ashomok.eNumbers.R;
-
-import java.lang.reflect.Method;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -60,33 +61,20 @@ public class MainActivity extends AppCompatActivity {
                     toolbar,
                     R.string.navigation_drawer_open,
                     R.string.navigation_drawer_close) {
-                /**
-                 * Called when a drawer has settled in a completely closed state.
-                 */
-                public void onDrawerClosed(View view) {
-                    super.onDrawerClosed(view);
-                   // invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu() ruduntant?
-                }
-
-                /**
-                 * Called when a drawer has settled in a completely open state.
-                 */
-                public void onDrawerOpened(View drawerView) {
-                    super.onDrawerOpened(drawerView);
-                    //invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()  ruduntant?
-                }
             };
 
             toggle.setDrawerIndicatorEnabled(true);
 
-            getSupportActionBar().setHomeButtonEnabled(true);
+            if (getSupportActionBar() != null) {
+                getSupportActionBar().setHomeButtonEnabled(true);
+            }
 
             // Set the drawer toggle as the DrawerListener
             mDrawerLayout.setDrawerListener(toggle);
 
             mMenuArray = getResources().getStringArray(R.array.main_menu_array);
             mDrawerList = (ListView) findViewById(R.id.lv_navigation_drawer);
-            mDrawerList.setAdapter(new ArrayAdapter<String>(
+            mDrawerList.setAdapter(new ArrayAdapter<>(
                     this,
                     R.layout.drawer_list_item,
                     mMenuArray));
@@ -101,7 +89,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void setTitle(CharSequence title) {
         mTitle = title;
-        getSupportActionBar().setTitle(mTitle);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(mTitle);
+        }
     }
 
     @Override
@@ -160,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
             // Highlight the selected item, update the title, and close the drawer
             // update selected item and title, then close the drawer
             mDrawerList.setItemChecked(position, true);
-            LinearLayout linearLayout = (LinearLayout) findViewById(R.id.start_activity_layout_linear);
+            RelativeLayout linearLayout = (RelativeLayout) findViewById(R.id.start_activity_layout_linear);
             mDrawerLayout.closeDrawer(linearLayout);
         }
     }

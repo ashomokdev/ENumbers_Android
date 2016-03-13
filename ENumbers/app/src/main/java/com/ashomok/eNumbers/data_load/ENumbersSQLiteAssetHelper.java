@@ -43,7 +43,7 @@ public class ENumbersSQLiteAssetHelper extends SQLiteAssetHelper {
             COLUMN_NAME_TYPICAL_PRODUCTS,
             COLUMN_NAME_DANGER_LEVEL};
 
-    private static String sqlTable = "Enumbers";
+    private static final String sqlTable = "Enumbers";
 
     public ENumbersSQLiteAssetHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -63,7 +63,7 @@ public class ENumbersSQLiteAssetHelper extends SQLiteAssetHelper {
             c.moveToFirst();
             return c;
         } catch (Exception e) {
-            Log.e(this.getClass().getCanonicalName(), e.getMessage() + e.getStackTrace().toString());
+            Log.e(this.getClass().getCanonicalName(), e.getMessage());
         }
         return null;
     }
@@ -83,7 +83,7 @@ public class ENumbersSQLiteAssetHelper extends SQLiteAssetHelper {
 
             return c;
         } catch (Exception e) {
-            Log.e(this.getClass().getCanonicalName(), e.getMessage() + e.getStackTrace().toString());
+            Log.e(this.getClass().getCanonicalName(), e.getMessage());
         }
         return null;
     }

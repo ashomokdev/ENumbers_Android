@@ -5,10 +5,6 @@ package com.ashomok.eNumbers.ocr;
  */
 class DirectoryNotCreatedException extends Exception {
 
-    public DirectoryNotCreatedException() {
-        // TODO Auto-generated constructor stub
-    }
-
     public DirectoryNotCreatedException(String detailMessage) {
         super(detailMessage);
     }

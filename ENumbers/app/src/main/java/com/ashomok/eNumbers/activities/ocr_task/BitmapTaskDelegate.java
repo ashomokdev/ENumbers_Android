@@ -5,6 +5,6 @@ import android.graphics.Bitmap;
 /**
  * Created by Iuliia on 24.12.2015.
  */
-public interface BitmapTaskDelegate {
+interface BitmapTaskDelegate {
     void TaskCompletionResult(Bitmap result);
 }

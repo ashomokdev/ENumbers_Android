@@ -5,8 +5,6 @@ import android.inputmethodservice.KeyboardView;
 import android.text.Editable;
 import android.widget.EditText;
 
-import com.ashomok.eNumbers.R;
-
 public class CustomKeyboardListener implements KeyboardView.OnKeyboardActionListener {
 
 

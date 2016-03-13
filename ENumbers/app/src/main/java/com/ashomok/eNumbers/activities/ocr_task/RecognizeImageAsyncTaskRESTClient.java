@@ -43,7 +43,7 @@ public final class RecognizeImageAsyncTaskRESTClient extends RecognizeImageAsync
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
-        HttpEntity<LinkedMultiValueMap<String, Object>> requestEntity = new HttpEntity<LinkedMultiValueMap<String, Object>>(
+        HttpEntity<LinkedMultiValueMap<String, Object>> requestEntity = new HttpEntity<>(
                 map, headers);
         ResponseEntity<String[]> responseEntity = restTemplate.exchange(
                 URL, HttpMethod.POST, requestEntity,

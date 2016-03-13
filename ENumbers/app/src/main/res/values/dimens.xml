@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name = "detail_vertical_margin">4dp</dimen >
-    <dimen name="right_bottom_margin">15dp</dimen>
     <dimen name="layout_margin">10dp</dimen>
     <dimen name = "label_vertical_margin">20dp</dimen >
     <dimen name = "flag_margin">5dp</dimen >
-    <dimen name="icon_padding">4dp</dimen>
-    <dimen name="progress_bar_margin">60dp</dimen>
+    <dimen name="icon_padding">2dp</dimen>
     <dimen name="capture_photo_btn_padding">16dp</dimen>
 </resources>

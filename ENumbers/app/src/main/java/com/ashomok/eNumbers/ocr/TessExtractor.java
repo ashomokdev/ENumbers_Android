@@ -7,8 +7,8 @@ import android.util.Log;
 import com.googlecode.tesseract.android.TessBaseAPI;
 
 class TessExtractor {
-	private Bitmap photo;
-	private TessFactory tessFactory;
+	private final Bitmap photo;
+	private final TessFactory tessFactory;
 	private TessBaseAPI baseApi;
 	private String extractedText;
 	

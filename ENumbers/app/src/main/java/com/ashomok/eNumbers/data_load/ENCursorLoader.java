@@ -13,14 +13,9 @@ import com.ashomok.eNumbers.data_load.ENumbersSQLiteAssetHelper;
  */
 public class ENCursorLoader extends CursorLoader {
 
-    private ENumbersSQLiteAssetHelper db;
+    private final ENumbersSQLiteAssetHelper db;
 
     private String[] codes;
-
-    public ENCursorLoader(Context context, ENumbersSQLiteAssetHelper db) {
-        super(context);
-        this.db = db;
-    }
 
     public ENCursorLoader(Context context, ENumbersSQLiteAssetHelper db, Bundle bundle) {
         super(context);

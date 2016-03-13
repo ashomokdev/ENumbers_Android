@@ -12,8 +12,8 @@ import com.ashomok.eNumbers.ocr.OCREngineImpl;
  */
 public final class RecognizeImageAsyncTaskStandalone extends RecognizeImageAsyncTask {
 
-    private String img_path;
-    private Context context;
+    private final String img_path;
+    private final Context context;
 
     public RecognizeImageAsyncTaskStandalone(Context context, String img_path, TaskDelegate delegate) {
         super(delegate);

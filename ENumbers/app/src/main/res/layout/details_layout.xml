@@ -18,7 +18,7 @@
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                       android:orientation="vertical"
                       android:layout_width="fill_parent"
-                      android:layout_height="fill_parent"
+                      android:layout_height="wrap_content"
                       android:layout_gravity="fill"
                       android:layout_marginTop="@dimen/layout_margin"
                       android:layout_marginBottom="@dimen/layout_margin"
@@ -28,7 +28,7 @@
 
             <TextView
                     android:id="@+id/eCodeFull"
-                    android:text="code"
+                    android:text="@string/code"
                     android:gravity="center"
                     style="@style/ECode_Big"
                     />
@@ -54,7 +54,7 @@
                             android:layout_width="fill_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:text="unsafe"
+                            android:text="@string/unsafe"
                             style="@style/TextForFlags"
                             />
                 </LinearLayout>
@@ -63,7 +63,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/forbidden_for_children_flag_layout">
                     <ImageView
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginLeft="25dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/flag_forbidden_for_children"
@@ -75,7 +75,7 @@
                             android:layout_width="fill_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:text="forbidden for children"
+                            android:text="@string/forbidden_for_children"
                             style="@style/TextForFlags"
                             />
                 </LinearLayout>
@@ -89,14 +89,13 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Name:"
+                        android:text="@string/name"
                         style="@style/Label"
                         />
                 <TextView
                         android:id="@+id/eNameFull"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="default EName"
                         style="@style/BasicText"
                         />
             </LinearLayout>
@@ -108,14 +107,13 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Countries, banned in:"
+                        android:text="@string/countries_banned_in"
                         style="@style/Label"
                         />
                 <TextView
                         android:id="@+id/ebanned_inFull"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="default banned_in"
                         style="@style/BasicText"
                         />
             </LinearLayout>
@@ -127,14 +125,13 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Countries, approved in:"
+                        android:text="@string/countries_approved_in"
                         style="@style/Label"
                         />
                 <TextView
                         android:id="@+id/eapproved_inFull"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="default approved_in"
                         style="@style/BasicText"
                         />
             </LinearLayout>
@@ -147,14 +144,13 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Purpose:"
+                        android:text="@string/purpose"
                         style="@style/Label"
                         />
                 <TextView
                         android:id="@+id/ePurposeFull"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="default EPurpose"
                         style="@style/BasicText"
                         />
             </LinearLayout>
@@ -167,14 +163,13 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Status:"
+                        android:text="@string/status"
                         style="@style/Label"
                         />
                 <TextView
                         android:id="@+id/eStatusFull"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="default eStatus"
                         style="@style/BasicText"
                         />
             </LinearLayout>
@@ -188,14 +183,13 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Typical products:"
+                        android:text="@string/typical_products"
                         style="@style/Label"
                         />
                 <TextView
                         android:id="@+id/etypical_productsFull"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="default typical_products"
                         style="@style/BasicText"
                         />
             </LinearLayout>
@@ -208,14 +202,13 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Additional info:"
+                        android:text="@string/additional_info"
                         style="@style/Label"
                         />
                 <TextView
                         android:id="@+id/additional_infoFull"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="default additional_info"
                         style="@style/BasicTextSmaller"
                         />
             </LinearLayout>

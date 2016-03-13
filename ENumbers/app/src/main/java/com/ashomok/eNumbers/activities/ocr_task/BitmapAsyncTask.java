@@ -12,15 +12,14 @@ import java.io.IOException;
 /**
  * Created by Iuliia on 24.12.2015.
  */
-    public class BitmapAsyncTask extends AsyncTask<String, Integer, Bitmap> {
+class BitmapAsyncTask extends AsyncTask<String, Integer, Bitmap> {
 
-    private BitmapTaskDelegate delegate;
+    private final BitmapTaskDelegate delegate;
     private Bitmap background;
-    public static final String TAG = "BitmapAsyncTask";
+    private static final String TAG = "BitmapAsyncTask";
 
 
-    public BitmapAsyncTask(BitmapTaskDelegate delegate)
-    {
+    public BitmapAsyncTask(BitmapTaskDelegate delegate) {
         this.delegate = delegate;
     }
 
@@ -29,11 +28,9 @@ import java.io.IOException;
         String imagePath;
         try {
             imagePath = params[0];
-        }
-        catch (IndexOutOfBoundsException e)
-        {
+        } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
-            return  null;
+            return null;
         }
 
         background = prepareImage(imagePath);
@@ -48,22 +45,16 @@ import java.io.IOException;
     }
 
     private Bitmap prepareImage(String path) {
-        try {
-            return getCorrectlyOrientedImage(path);
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.e(this.getClass().getCanonicalName(), e.getMessage());
-        }
-        return null;
+        return getCorrectlyOrientedImage(path);
     }
 
     /**
      * decrease the size and correct orientation
+     *
      * @param _path
      * @return
-     * @throws IOException
      */
-    private Bitmap getCorrectlyOrientedImage(String _path) throws IOException {
+    private Bitmap getCorrectlyOrientedImage(String _path) {
 
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 8;

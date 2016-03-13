@@ -19,27 +19,34 @@ import android.provider.MediaStore;
 import android.speech.RecognizerIntent;
 import android.support.design.widget.FloatingActionButton;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.*;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.*;
+import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.ashomok.eNumbers.R;
 import com.ashomok.eNumbers.activities.capture_image.CaptureImageActivity;
 import com.ashomok.eNumbers.activities.ocr_task.OCRAnimationActivity;
 import com.ashomok.eNumbers.activities.ocr_task.RecognizeImageAsyncTask;
 import com.ashomok.eNumbers.activities.ocr_task.RecognizeImageAsyncTaskRESTClient;
-
 import com.ashomok.eNumbers.activities.ocr_task.RecognizeImageAsyncTaskStandalone;
+import com.ashomok.eNumbers.data_load.EN;
 import com.ashomok.eNumbers.data_load.ENCursorLoader;
+import com.ashomok.eNumbers.data_load.ENumbersSQLiteAssetHelper;
 import com.ashomok.eNumbers.keyboard.CustomKeyboardListener;
 import com.ashomok.eNumbers.ocr.OCREngine;
 import com.ashomok.eNumbers.ocr.OCREngineImpl;
-import com.ashomok.eNumbers.data_load.EN;
-import com.ashomok.eNumbers.data_load.ENumbersSQLiteAssetHelper;
-import com.ashomok.eNumbers.R;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -67,13 +74,8 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
     private FloatingActionButton fab;
     private RecognizeImageAsyncTask recognizeImageAsyncTask;
 
-    public static final String TAG = "MainFragment";
+    private static final String TAG = "MainFragment";
     private KeyboardView keyboardView;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -98,7 +100,7 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
                 try {
                     final Method method = EditText.class.getMethod(
                             "setShowSoftInputOnFocus"
-                            , new Class[]{boolean.class});
+                            , boolean.class);
                     method.setAccessible(true);
                     method.invoke(inputEditText, false);
                 } catch (Exception e) {
@@ -131,7 +133,7 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
 
                     inputEditText.setText("");
 
-                    showAllData(view);
+                    showAllData();
                 }
             });
 
@@ -161,7 +163,7 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
     @Override
     public void onActivityResult(int requestCode, int resultCode,
                                  Intent data) {
-        //voice inputing
+        //voice inputting
         if (requestCode == SPEECH_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
 
             onVoiceInputResult(data);
@@ -184,7 +186,7 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
         }
     }
 
-    private void GetInfoFromInputing(String input) {
+    private void GetInfoFromInputting(String input) {
 
         OCREngine parser = new OCREngineImpl();
         String[] enumbers = parser.parseResult(input);
@@ -236,11 +238,11 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
         String spokenText = results.get(0);
         inputEditText.append(spokenText);
 
-        GetInfoFromInputing(inputEditText.getText().toString());
+        GetInfoFromInputting(inputEditText.getText().toString());
     }
 
 
-    public void displaySpeechRecognizer() {
+    private void displaySpeechRecognizer() {
 
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
@@ -262,7 +264,7 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
     }
 
 
-    private void showAllData(View view) {
+    private void showAllData() {
         getLoaderManager().restartLoader(0, null, this);
     }
 
@@ -295,7 +297,7 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
 
             if (actionId == EditorInfo.IME_ACTION_DONE) {
 
-                GetInfoFromInputing(textView.getText().toString());
+                GetInfoFromInputting(textView.getText().toString());
 
                 //to hide the soft keyboard
                 InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
@@ -337,12 +339,14 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
         CustomKeyboardListener numbersListener = new CustomKeyboardListener(inputEditText);
 
         final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
+        if (getView()!=null) {
+            imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
+        }
 
         numbersListener.setSubmitListener(new CustomKeyboardListener.SubmitListener() {
             @Override
             public void onSubmit() {
-                GetInfoFromInputing(inputEditText.getText().toString());
+                GetInfoFromInputting(inputEditText.getText().toString());
                 hideCustomKeyboard();
             }
         });
@@ -355,21 +359,6 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
             }
         });
 
-//        //hide default keyboard
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            inputEditText.setShowSoftInputOnFocus(false);
-//        } else {
-//            try {
-//                final Method method = EditText.class.getMethod(
-//                        "setShowSoftInputOnFocus"
-//                        , new Class[]{boolean.class});
-//                method.setAccessible(true);
-//                method.invoke(inputEditText, false);
-//            } catch (Exception e) {
-//                // ignore
-//            }
-//        }
-
         inputEditText.setOnFocusChangeListener(focusChangeListener);
     }
 
@@ -381,20 +370,19 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
         keyboardView.setVisibility(View.VISIBLE);
     }
 
-    public boolean hideDefaultKeyboard() {
+    private void hideDefaultKeyboard() {
 
         InputMethodManager imm = (InputMethodManager) getActivity().getApplicationContext().getSystemService(
                 android.content.Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(keyboardView.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 
         showCustomKeyboard();
-        return true;
     }
 
     /**
      * to get high resolution image from camera
      */
-    protected void startBuildInCameraActivity() {
+    private void startBuildInCameraActivity() {
         try {
             String IMGS_PATH = Environment.getExternalStorageDirectory().toString() + "/ENumbers/imgs";
             prepareDirectory(IMGS_PATH);

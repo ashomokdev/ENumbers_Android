@@ -14,23 +14,29 @@
     <string name="appName">ENumbers</string>
     <string name="developer">by Iuliia Ashomok</string>
     <string name="email">bieliaievays@gmail.com</string>
-    <string name="version">version 2.0.0</string>
-
-    <string name="ocrRecognition">OCR recognition...</string>
-
+    <string name="version">version %1$s</string>
     <string name="safe">safe</string>
     <string name="use_with_caution">use with caution</string>
     <string name="unsafe">unsafe</string>
     <string name="unknown">unknown</string>
     <string name="cancel">Cancel</string>
-    <string name="recognition">Recognition...</string>
+    <string name="recognition">Recognition…</string>
     <string name="request_permission">This app needs camera permission</string>
     <string name="camera_error">Your device not support this feature</string>
-    <string name="picture">Picture</string>
-    <string name="capture_photo">capture photo</string>
-    <string name="DONE">DONE</string>
     <string name="make_photo_with_ingredients">Make photo with Ingredients:</string>
     <string name="ok">OK</string>
     <string name="requirement">Requirement</string>
+    <string name="feedback">Feedback</string>
+    <string name="send_email_to_dev">Send mail to Developer:</string>
+    <string name="mailto">mail to</string>
+    <string name="code">code</string>
+    <string name="forbidden_for_children">forbidden for children</string>
+    <string name="name">Name:</string>
+    <string name="countries_banned_in">Countries, banned in:</string>
+    <string name="countries_approved_in">Countries, approved in:</string>
+    <string name="purpose">Purpose:</string>
+    <string name="status">Status:</string>
+    <string name="typical_products">Typical products:</string>
+    <string name="additional_info">Additional info:</string>
 </resources>
 
