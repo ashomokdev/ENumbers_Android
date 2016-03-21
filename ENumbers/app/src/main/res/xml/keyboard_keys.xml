@@ -7,35 +7,49 @@
         <Key
             android:codes="49"
             android:keyEdgeFlags="left"
-            android:keyLabel="1" />
+            android:keyLabel="1"
+            android:keyWidth="20%p" />
         <Key
             android:codes="50"
-            android:keyLabel="2" />
+            android:keyLabel="2"
+            android:keyWidth="20%p" />
         <Key
             android:codes="51"
-            android:keyLabel="3" />
+            android:keyLabel="3"
+            android:keyWidth="20%p" />
         <Key
             android:codes="52"
-            android:keyLabel="4" />
+            android:keyLabel="4"
+            android:keyWidth="20%p" />
         <Key
             android:codes="53"
-            android:keyLabel="5" />
+            android:keyEdgeFlags="right"
+            android:keyLabel="5"
+            android:keyWidth="20%p" />
+    </Row>
+    <Row>
         <Key
             android:codes="54"
-            android:keyLabel="6" />
+            android:keyEdgeFlags="left"
+            android:keyLabel="6"
+            android:keyWidth="20%p" />
         <Key
             android:codes="55"
-            android:keyLabel="7" />
+            android:keyLabel="7"
+            android:keyWidth="20%p" />
         <Key
             android:codes="56"
-            android:keyLabel="8" />
+            android:keyLabel="8"
+            android:keyWidth="20%p" />
         <Key
             android:codes="57"
-            android:keyLabel="9" />
+            android:keyLabel="9"
+            android:keyWidth="20%p" />
         <Key
             android:codes="48"
             android:keyEdgeFlags="right"
-            android:keyLabel="0" />
+            android:keyLabel="0"
+            android:keyWidth="20%p" />
     </Row>
     <Row>
         <Key
@@ -58,6 +72,18 @@
             android:codes="102"
             android:keyLabel="f" />
         <Key
+            android:codes="-5"
+            android:keyEdgeFlags="right"
+            android:keyIcon="@drawable/ic_backspace_black_24dp"
+            android:keyWidth="40%p" />
+    </Row>
+    <Row android:rowEdgeFlags="bottom">
+        <Key
+            android:codes="44"
+            android:keyEdgeFlags="left"
+            android:keyLabel=","
+            android:keyWidth="20%p" />
+        <Key
             android:codes="103"
             android:keyLabel="g" />
         <Key
@@ -70,23 +96,11 @@
             android:codes="106"
             android:keyEdgeFlags="right"
             android:keyLabel="j" />
-    </Row>
-    <Row android:rowEdgeFlags="bottom">
-        <Key
-            android:codes="44"
-            android:keyEdgeFlags="left"
-            android:keyLabel=","
-            android:keyWidth="33.33%p" />
-        <Key
-            android:codes="-5"
-            android:keyIcon="@drawable/ic_backspace_black_24dp"
-            android:keyWidth="33.33%p" />
         <Key
             android:codes="-4"
             android:keyEdgeFlags="right"
             android:keyIcon="@drawable/ic_search_black_24dp"
-            android:keyWidth="33.33%p"
-            />
+            android:keyWidth="40%p" />
     </Row>
 
 </Keyboard>
