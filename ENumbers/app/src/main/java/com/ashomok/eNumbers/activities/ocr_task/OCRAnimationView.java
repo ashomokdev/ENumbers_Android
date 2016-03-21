@@ -9,6 +9,7 @@ import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.util.AttributeSet;
 import android.view.View;
 
 import com.ashomok.eNumbers.R;
@@ -33,21 +34,22 @@ public final class OCRAnimationView extends View implements BitmapTaskDelegate {
 
     private Bitmap background;
 
-//todo  Custom view OCRAnimationView is missing constructor used by tools: (Context) or (Context,AttributeSet) or (Context,AttributeSet,int)
-    public OCRAnimationView(Context context, String imageUri) {
-        super(context);
+
+    public OCRAnimationView(Context context, AttributeSet attrs) {
+        super(context, attrs);
 
         X = 0;
         Y = 0;
         dX = 0.7f; //horizontal speed
 
         scanband = BitmapFactory.decodeResource(getResources(), R.drawable.scan_band); //load a scanband image
+    }
 
+    public void setImageUri(String imageUri) {
         BitmapAsyncTask bitmapAsyncTask = new BitmapAsyncTask(this);
-        if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.HONEYCOMB) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             bitmapAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, imageUri);
-        }
-        else {
+        } else {
             bitmapAsyncTask.execute(imageUri);
         }
     }
@@ -85,7 +87,7 @@ public final class OCRAnimationView extends View implements BitmapTaskDelegate {
 
             ColorMatrix cm = new ColorMatrix();
 
-            cm.set(new float[] { a, b, c, 0, t, a, b, c, 0, t, a, b, c, 0, t, 0, 0, 0, 1, 0 });
+            cm.set(new float[]{a, b, c, 0, t, a, b, c, 0, t, a, b, c, 0, t, 0, 0, 0, 1, 0});
             paint.setColorFilter(new ColorMatrixColorFilter(cm));
             canvas.drawBitmap(croppedBitmap, X, 0, paint);
         }

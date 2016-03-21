@@ -12,28 +12,23 @@ import android.view.ViewGroup;
 public class OCRAnimationFragment extends Fragment {
 
 
-    private String imageUri;
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        // retain this fragment
-        setRetainInstance(true);
-
-        Bundle bundle = this.getArguments();
-        if (bundle != null) {
-            imageUri = bundle.getString("image");
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        return new OCRAnimationView(getActivity(), imageUri);
-    }
-
-
+//    private String imageUri;
+//
+//
+//    @Override
+//    public void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//
+//        Bundle bundle = this.getArguments();
+//        if (bundle != null) {
+//            imageUri = bundle.getString("image");
+//        }
+//    }
+//
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//                             Bundle savedInstanceState) {
+//
+//        return new OCRAnimationView(getActivity(), imageUri);
+//    }
 }

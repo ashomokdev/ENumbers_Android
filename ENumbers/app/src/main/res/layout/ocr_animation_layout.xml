@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/ocr_animation_layout"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/ocr_animation_layout">
+    android:orientation="vertical">
 
-    <FrameLayout
-        android:id="@+id/content_frame"
+    <com.ashomok.eNumbers.activities.ocr_task.OCRAnimationView
+        android:id="@+id/ocr_animation_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent" />
+
     <TextView
+        style="@style/BasicTextSmaller"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/recognition"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
         android:layout_marginStart="@dimen/layout_margin"
-        style="@style/BasicTextSmaller"
-        android:textColor="@color/red"
-        />
+        android:text="@string/recognition"
+        android:textColor="@color/red" />
 
     <Button
+        android:id="@+id/cancel_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/cancel"
-        android:layout_gravity="end"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:layout_gravity="end"
         android:layout_margin="@dimen/layout_margin"
-        android:id="@+id/cancel_btn"/>
+        android:text="@string/cancel" />
 
 </RelativeLayout>
