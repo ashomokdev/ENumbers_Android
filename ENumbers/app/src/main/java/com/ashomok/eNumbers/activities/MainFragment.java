@@ -2,6 +2,7 @@ package com.ashomok.eNumbers.activities;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.LoaderManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -158,6 +159,22 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
 
         // create Loader for data reading
         getLoaderManager().initLoader(0, null, this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        inputEditText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    hideCustomKeyboard();
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     @Override
@@ -339,7 +356,7 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
         CustomKeyboardListener numbersListener = new CustomKeyboardListener(inputEditText);
 
         final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (getView()!=null) {
+        if (getView() != null) {
             imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
         }
 
@@ -359,6 +376,8 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
             }
         });
 
+
+
         inputEditText.setOnFocusChangeListener(focusChangeListener);
     }
 
@@ -368,6 +387,9 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
 
     private void showCustomKeyboard() {
         keyboardView.setVisibility(View.VISIBLE);
+
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction().addToBackStack(null).commit();
     }
 
     private void hideDefaultKeyboard() {
@@ -430,6 +452,7 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
         }
     };
 
+
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         // Prepare the loader
@@ -473,4 +496,3 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
     }
 
 }
-

@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.inputmethodservice.KeyboardView;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -31,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
     private String[] mMenuArray;
 
+    private Fragment fragment;
+
+
     /**
      * Called when the activity is first created.
      */
@@ -41,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.start_activity_layout);
 
-        Fragment fragment = new MainFragment();
+        fragment = new MainFragment();
 
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
@@ -110,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (getFragmentManager().getBackStackEntryCount() > 0) {
-            getFragmentManager().popBackStack();
+            getFragmentManager().popBackStackImmediate();
         } else {
             super.onBackPressed();
         }
