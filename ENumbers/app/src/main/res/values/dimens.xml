@@ -6,4 +6,5 @@
     <dimen name = "flag_margin">5dp</dimen >
     <dimen name="icon_padding">2dp</dimen>
     <dimen name="capture_photo_btn_padding">16dp</dimen>
+    <dimen name="keyboard_key_hight">60dp</dimen>
 </resources>

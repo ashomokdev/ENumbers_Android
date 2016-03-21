@@ -11,6 +11,7 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
+import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Build;
@@ -74,6 +75,7 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
     private TextView outputWarning;
     private FloatingActionButton fab;
     private RecognizeImageAsyncTask recognizeImageAsyncTask;
+    private AudioManager audioManager;
 
     private static final String TAG = "MainFragment";
     private KeyboardView keyboardView;
@@ -331,6 +333,9 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
     private class StartCharKeeper implements TextWatcher {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            float vol = 0.3f; //This will be half of the default system sound
+            audioManager.playSoundEffect(AudioManager.FX_KEY_CLICK, vol);
         }
 
         @Override
@@ -368,6 +373,7 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
             }
         });
         keyboardView.setOnKeyboardActionListener(numbersListener);
+
         inputEditText.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -376,9 +382,9 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
             }
         });
 
-
-
         inputEditText.setOnFocusChangeListener(focusChangeListener);
+
+        audioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
     }
 
     private void hideCustomKeyboard() {
