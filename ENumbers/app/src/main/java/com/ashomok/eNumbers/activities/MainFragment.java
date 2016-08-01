@@ -76,6 +76,7 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
     private FloatingActionButton fab;
     private RecognizeImageAsyncTask recognizeImageAsyncTask;
     private AudioManager audioManager;
+    private Context context;
 
     private static final String TAG = "MainFragment";
     private KeyboardView keyboardView;
@@ -140,14 +141,16 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
                 }
             });
 
-            db = new ENumbersSQLiteAssetHelper(getActivity());
+            db = new ENumbersSQLiteAssetHelper(view.getContext());
 
-            listView = (ListView) getActivity().findViewById(R.id.ENumberList);
-            outputWarning = (TextView) getActivity().findViewById(R.id.warning);
+            listView = (ListView) view.findViewById(R.id.ENumberList);
+            outputWarning = (TextView) view.findViewById(R.id.warning);
             listView.setEmptyView(outputWarning);
             listView.setAdapter(scAdapter);
 
-            createCustomKeyboard();
+            createCustomKeyboard(view);
+
+            context = view.getContext();
 
         } catch (Exception e) {
             Log.e(this.getClass().getCanonicalName(), e.getMessage());
@@ -231,16 +234,16 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
 
 
         //run animation
-        Intent intent = new Intent(getActivity(), OCRAnimationActivity.class);
+        Intent intent = new Intent(context, OCRAnimationActivity.class);
         intent.putExtra("image", img_path);
-        getActivity().startActivityForResult(intent, OCRAnimationActivity_REQUEST_CODE);
+        startActivityForResult(intent, OCRAnimationActivity_REQUEST_CODE);
 
         //start ocr
-        if (isNetworkAvailable(getActivity())) {
+        if (isNetworkAvailable(context)) {
             recognizeImageAsyncTask = new RecognizeImageAsyncTaskRESTClient(img_path, this);
 
         } else {
-            recognizeImageAsyncTask = new RecognizeImageAsyncTaskStandalone(getActivity(), img_path, this);
+            recognizeImageAsyncTask = new RecognizeImageAsyncTaskStandalone(context, img_path, this);
         }
         recognizeImageAsyncTask.execute();
 
@@ -252,7 +255,7 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
 
 
         inputEditText.setText(
-                getActivity().getApplicationContext().getString(R.string.startChar));
+                context.getApplicationContext().getString(R.string.startChar));
 
         String spokenText = results.get(0);
         inputEditText.append(spokenText);
@@ -269,9 +272,9 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
 
         // Start the activity, the intent will be populated with the speech text
         try {
-            startActivityForResult(intent, SPEECH_REQUEST_CODE);
+            getActivity().startActivityForResult(intent, SPEECH_REQUEST_CODE);
         } catch (ActivityNotFoundException anfe) {
-            Toast.makeText(getActivity(), "No speech recognition available", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "No speech recognition available", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -300,10 +303,10 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
 
             if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP) {
 
-                startBuildInCameraActivity();
+                startBuildInCameraActivity(v);
             } else {
 
-                Intent intent = new Intent(getActivity(), CaptureImageActivity.class);
+                Intent intent = new Intent(v.getContext(), CaptureImageActivity.class);
                 startActivityForResult(intent, CaptureImage_REQUEST_CODE);
 
             }
@@ -319,7 +322,7 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
                 GetInfoFromInputting(textView.getText().toString());
 
                 //to hide the soft keyboard
-                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
+                InputMethodManager imm = (InputMethodManager) context.getSystemService(
                         Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(textView.getWindowToken(), 0);
 
@@ -354,13 +357,13 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
     }
 
 
-    private void createCustomKeyboard() {
-        keyboardView = (KeyboardView) getActivity().findViewById(R.id.keyboard);
-        Keyboard customKeyboard = new Keyboard(getActivity(), R.xml.keyboard_keys);
+    private void createCustomKeyboard(View view) {
+        keyboardView = (KeyboardView) view.findViewById(R.id.keyboard);
+        Keyboard customKeyboard = new Keyboard(view.getContext(), R.xml.keyboard_keys);
         keyboardView.setKeyboard(customKeyboard);
         CustomKeyboardListener numbersListener = new CustomKeyboardListener(inputEditText);
 
-        final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        final InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         if (getView() != null) {
             imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
         }
@@ -384,7 +387,7 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
 
         inputEditText.setOnFocusChangeListener(focusChangeListener);
 
-        audioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
+        audioManager = (AudioManager) view.getContext().getSystemService(Context.AUDIO_SERVICE);
     }
 
     private void hideCustomKeyboard() {
@@ -398,9 +401,9 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
         fragmentManager.beginTransaction().addToBackStack(null).commit();
     }
 
-    private void hideDefaultKeyboard() {
+    private void hideDefaultKeyboard(View v) {
 
-        InputMethodManager imm = (InputMethodManager) getActivity().getApplicationContext().getSystemService(
+        InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(
                 android.content.Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(keyboardView.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 
@@ -409,8 +412,9 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
 
     /**
      * to get high resolution image from camera
+     * @param v
      */
-    private void startBuildInCameraActivity() {
+    private void startBuildInCameraActivity(View v) {
         try {
             String IMGS_PATH = Environment.getExternalStorageDirectory().toString() + "/ENumbers/imgs";
             prepareDirectory(IMGS_PATH);
@@ -423,7 +427,7 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
             final Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
 
-            if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+            if (takePictureIntent.resolveActivity(v.getContext().getPackageManager()) != null) {
                 startActivityForResult(takePictureIntent, CaptureImage_REQUEST_CODE);
             }
         } catch (Exception e) {
@@ -451,7 +455,7 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
             if (hasFocus) {
-                hideDefaultKeyboard();
+                hideDefaultKeyboard(v);
             } else {
                 hideCustomKeyboard();
             }
@@ -462,7 +466,7 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         // Prepare the loader
-        return new ENCursorLoader(getActivity(), db, bundle);
+        return new ENCursorLoader(context, db, bundle);
 
     }
 
@@ -470,7 +474,7 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
 
         try {
-            scAdapter = new ENumberListAdapter(getActivity(), cursor, 0);
+            scAdapter = new ENumberListAdapter(context, cursor, 0);
 
             listView.setAdapter(scAdapter);
             scAdapter.changeCursor(cursor);
@@ -484,7 +488,7 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
 
                     EN enumb = new EN(cursor);
 
-                    Intent intent = new Intent(getActivity(), ENDetailsActivity.class);
+                    Intent intent = new Intent(context, ENDetailsActivity.class);
 
                     intent.putExtra("en", enumb);
                     startActivity(intent);

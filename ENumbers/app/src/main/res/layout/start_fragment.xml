@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/start_fragment_frame_layout1"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:id="@+id/viewInput"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -57,7 +59,7 @@
             android:src="@drawable/ic_mic_36dp" />
     </LinearLayout>
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
         android:id="@+id/data_layout"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -104,3 +106,4 @@
 
     <include layout="@layout/keyboard" />
 </RelativeLayout>
+

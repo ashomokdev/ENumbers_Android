@@ -1,5 +1,12 @@
 apply plugin: 'com.android.application'
 
+configurations.all {
+    resolutionStrategy {
+        failOnVersionConflict()
+        force 'com.android.support:support-v4:23.2.0'
+    }
+}
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
@@ -10,6 +17,8 @@ android {
         targetSdkVersion 23
         versionCode 2
         versionName "2.0"
+        multiDexEnabled true
+        testInstrumentationRunner "com.android.test.runner.MultiDexTestRunner"
     }
     buildTypes {
         release {
@@ -24,23 +33,24 @@ android {
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/notice.txt'
     }
+
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.2.0'
     compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
-    compile 'com.android.support:design:23.2.0'
-    compile 'com.android.support:support-v4:23.2.0'
-    compile 'com.android.support:support-v13:23.2.0'
+    compile('com.android.support:design:23.2.0'){
+                exclude module: 'recyclerview-v7'
+            }
+    compile('com.android.support:support-v13:23.2.0')
     compile 'com.android.support:cardview-v7:23.2.0'
     compile project(':tess-two')
     compile 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.3.2'
 
     //appodeal
-    compile 'com.google.android.gms:play-services-ads:8.4.0'
+    compile 'com.google.android.gms:play-services-ads:9.2.1'
     compile files('src/libs/android-support-v7-recyclerview-23.1.1.jar')
     compile files('src/libs/applovin-6.2.2.jar')
     compile files('src/libs/appodeal-1.14.15.jar')
@@ -51,5 +61,7 @@ dependencies {
     compile files('src/libs/unity-ads-1.4.7.jar')
     compile files('src/libs/yandex-metrica-2.41.jar')
 }
+
+
 
 

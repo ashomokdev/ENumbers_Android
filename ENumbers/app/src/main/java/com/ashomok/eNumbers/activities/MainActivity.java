@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     private String[] mMenuArray;
 
-    private Fragment fragment;
+//    private Fragment fragment;
 
 
     /**
@@ -44,12 +44,6 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.start_activity_layout);
 
-        fragment = new MainFragment();
-
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.content_frame, fragment)
-                .commit();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
