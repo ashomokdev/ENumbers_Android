@@ -43,7 +43,7 @@
                 android:layout_width="240dp"
                 android:layout_height="150dp"
                 android:layout_gravity="start"
-                android:src="@drawable/menu_footer" />
+                android:src="@drawable/menu_header" />
             <!--a ListView for the navigation drawer-->
             <ListView
                 android:id="@+id/lv_navigation_drawer"

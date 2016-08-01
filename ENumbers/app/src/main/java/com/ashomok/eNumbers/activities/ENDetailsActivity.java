@@ -9,6 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.ashomok.eNumbers.ad.AdContainer;
+import com.ashomok.eNumbers.ad.AppodealContainerImpl;
 import com.ashomok.eNumbers.data_load.EN;
 import com.ashomok.eNumbers.R;
 
@@ -35,6 +37,9 @@ public class ENDetailsActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         try {
             super.onCreate(savedInstanceState);
+
+            AdContainer adContainer = new AppodealContainerImpl(this);
+            adContainer.init();
 
             Bundle extras = getIntent().getExtras();
             if (extras != null) {

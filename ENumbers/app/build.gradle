@@ -32,14 +32,24 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.2.0'
     compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
     compile 'com.android.support:design:23.2.0'
-    compile "com.android.support:support-v4:23.2.0"
-    compile "com.android.support:support-v13:23.2.0"
-    compile "com.android.support:cardview-v7:23.2.0"
-
-    compile project(':libs:tess-two')
-
+    compile 'com.android.support:support-v4:23.2.0'
+    compile 'com.android.support:support-v13:23.2.0'
+    compile 'com.android.support:cardview-v7:23.2.0'
+    compile project(':tess-two')
     compile 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.3.2'
+
+    //appodeal
+    compile 'com.google.android.gms:play-services-ads:8.4.0'
+    compile files('src/libs/android-support-v7-recyclerview-23.1.1.jar')
+    compile files('src/libs/applovin-6.2.2.jar')
+    compile files('src/libs/appodeal-1.14.15.jar')
+    compile files('src/libs/chartboost-6.4.1.jar')
+    compile files('src/libs/flurry-analytics-6.2.0.jar')
+    compile files('src/libs/inmobi-5.3.1.jar')
+    compile files('src/libs/my-target-4.5.1.jar')
+    compile files('src/libs/unity-ads-1.4.7.jar')
+    compile files('src/libs/yandex-metrica-2.41.jar')
 }
 
 
