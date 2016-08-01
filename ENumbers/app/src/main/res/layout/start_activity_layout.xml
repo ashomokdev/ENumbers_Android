@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <android.support.v4.widget.DrawerLayout
-        android:id="@+id/drawer_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
         <!-- Your normal content view -->
         <RelativeLayout
@@ -17,11 +12,15 @@
 
             <!-- We use a Toolbar so that our drawer can be displayed
                  in front of the action bar -->
-            <include
+            <android.support.v7.widget.Toolbar
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/toolbar"
-                layout="@layout/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/blue"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
             <!-- The rest of your content view -->
 
             <!--a FrameLayout to contain the main content (populated by a Fragment at runtime)-->
@@ -59,4 +58,3 @@
                 android:dividerHeight="0dp" />
         </RelativeLayout>
     </android.support.v4.widget.DrawerLayout>
-</LinearLayout>
