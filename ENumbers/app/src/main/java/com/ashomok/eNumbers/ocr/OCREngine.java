@@ -2,6 +2,8 @@ package com.ashomok.eNumbers.ocr;
 
 import android.content.res.AssetManager;
 
+import java.util.Set;
+
 /**
  * Created by Iuliia on 24.11.2015.
  */
@@ -18,7 +20,7 @@ public interface OCREngine {
     /**
      *
      * @param input Text obtained from OCR process
-     * @return      Array of E-numbers
+     * @return      Set of E-numbers
      */
-    String[] parseResult(String input);
+    Set<String> parseResult(String input);
 }

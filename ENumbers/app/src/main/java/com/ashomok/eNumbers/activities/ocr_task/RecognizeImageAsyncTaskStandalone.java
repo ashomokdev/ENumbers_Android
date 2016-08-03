@@ -7,6 +7,8 @@ import com.ashomok.eNumbers.activities.TaskDelegate;
 import com.ashomok.eNumbers.ocr.OCREngine;
 import com.ashomok.eNumbers.ocr.OCREngineImpl;
 
+import java.util.Set;
+
 /**
  * Created by Iuliia on 09.12.2015.
  */
@@ -29,8 +31,9 @@ public final class RecognizeImageAsyncTaskStandalone extends RecognizeImageAsync
         String text = ocrEngine.RetrieveText(assetMgr, img_path);
 
         if (!text.isEmpty()) {
-            String[] result = ocrEngine.parseResult(text);
-            return result;
+            Set<String> result = ocrEngine.parseResult(text);
+
+            return result.toArray(new String[result.size()]) ;
         }
 
         return new String[0];

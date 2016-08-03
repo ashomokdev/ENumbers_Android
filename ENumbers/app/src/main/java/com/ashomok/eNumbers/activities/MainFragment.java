@@ -53,6 +53,7 @@ import com.ashomok.eNumbers.ocr.OCREngineImpl;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Iuliia on 29.08.2015.
@@ -211,9 +212,9 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
     private void GetInfoFromInputting(String input) {
 
         OCREngine parser = new OCREngineImpl();
-        String[] enumbers = parser.parseResult(input);
+        Set<String> enumbers = parser.parseResult(input);
 
-        GetInfoByENumbers(enumbers);
+        GetInfoByENumbers(enumbers.toArray(new String[enumbers.size()]));
     }
 
     private void GetInfoByENumbers(String[] enumbers) {

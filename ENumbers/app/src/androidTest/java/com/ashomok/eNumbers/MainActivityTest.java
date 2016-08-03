@@ -30,6 +30,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -201,39 +203,39 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 
         String result9 = "E101a, E200, E1414";
 
-        //  String result10 = "E401, E4506"; //fails
+//        String result10 = "E401, E4506"; //fails
 
         OCREngine ocrEngine = new OCREngineImpl();
 
         Assert.assertTrue(
-                Arrays.equals(new String[]{"E202", "E211", "E951", "E950", "E954", "E955", "E621"}, ocrEngine.parseResult(result1)));
+                new HashSet<String>(Arrays.asList("E202", "E211", "E950", "E951", "E954", "E955", "E621")).equals(ocrEngine.parseResult(result1)));
 
         Assert.assertTrue(
-                Arrays.equals(new String[]{"E200"}, ocrEngine.parseResult(result2)));
+                new HashSet<String>(Arrays.asList("E200")).equals(ocrEngine.parseResult(result2)));
 
         Assert.assertTrue(
-                Arrays.equals(new String[0], ocrEngine.parseResult(result3)));
+                new HashSet<String>().equals(ocrEngine.parseResult(result3)));
 
         Assert.assertTrue(
-                Arrays.equals(new String[]{"E1414", "E3330", "E471", "E461"}, ocrEngine.parseResult(result4)));
+                new HashSet<String>(Arrays.asList("E1414", "E3330", "E471", "E461")).equals(ocrEngine.parseResult(result4)));
 
         Assert.assertTrue(
-                Arrays.equals(new String[0], ocrEngine.parseResult(result5)));
+                new HashSet<String>().equals(ocrEngine.parseResult(result5)));
 
         Assert.assertTrue(
-                Arrays.equals(new String[0], ocrEngine.parseResult(result6)));
+                new HashSet<String>().equals(ocrEngine.parseResult(result6)));
 
         Assert.assertTrue(
-                Arrays.equals(new String[0], ocrEngine.parseResult(result7)));
+                new HashSet<String>().equals(ocrEngine.parseResult(result7)));
 
         Assert.assertTrue(
-                Arrays.equals(new String[]{"E200"}, ocrEngine.parseResult(result8)));
+                new HashSet<String>(Arrays.asList("E200")).equals(ocrEngine.parseResult(result8)));
 
         Assert.assertTrue(
-                Arrays.equals(new String[]{"E101a", "E200", "E1414"}, ocrEngine.parseResult(result9)));
+                new HashSet<String>(Arrays.asList("E101a", "E200", "E1414")).equals(ocrEngine.parseResult(result9)));
 
 //        Assert.assertTrue(
-//                Arrays.equals(new String[]{"E401", "E450"}, ocrEngine.parseResult(result10)));
+//                new HashSet<String>(Arrays.asList("E401", "E450")).equals(ocrEngine.parseResult(result10)));
 
     }
 

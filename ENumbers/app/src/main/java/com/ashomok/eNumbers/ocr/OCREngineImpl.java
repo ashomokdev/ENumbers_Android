@@ -122,14 +122,15 @@ public class OCREngineImpl implements OCREngine {
     }
 
     @Override
-    public String[] parseResult(String input) {
+    public Set<String> parseResult(String input) {
         final String E = "E";
         final int lengthOfWord = 8;
 
+        Set<String> words =  new HashSet<>();
         if (input.contains(E)) {
             //get possible E-numbers
 
-            Set<String> words =  new HashSet<>();
+
 
             int fromIndex = 0;
             while (fromIndex < input.length()) {
@@ -154,10 +155,8 @@ public class OCREngineImpl implements OCREngine {
                     fromIndex = input.length();
                 }
             }
-            return words.toArray(new String[words.size()]);
-        } else {
-            return new String[0];
         }
+        return words;
     }
 
     @Nullable
