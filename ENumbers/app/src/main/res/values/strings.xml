@@ -38,5 +38,6 @@
     <string name="status">Status:</string>
     <string name="typical_products">Typical products:</string>
     <string name="additional_info">Additional info:</string>
+    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-5221781428763224/8597149992</string>
 </resources>
 

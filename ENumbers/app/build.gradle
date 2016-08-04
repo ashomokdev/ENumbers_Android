@@ -1,9 +1,9 @@
 apply plugin: 'com.android.application'
-
+//
 //configurations.all {
 //    resolutionStrategy {
 //        failOnVersionConflict()
-//        force 'com.android.support:support-v4:23.2.0'
+////        force 'com.android.support:support-v4:23.2.0'
 //    }
 //}
 
@@ -18,8 +18,6 @@ android {
         targetSdkVersion 24
         versionCode 2
         versionName "2.0"
-        multiDexEnabled true
-        testInstrumentationRunner "com.android.test.runner.MultiDexTestRunner"
     }
     buildTypes {
         release {
@@ -34,12 +32,6 @@ android {
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/notice.txt'
     }
-
-    dexOptions {
-        incremental false
-        javaMaxHeapSize "5120M"
-        preDexLibraries = false
-    }
 }
 
 dependencies {
@@ -51,20 +43,9 @@ dependencies {
     //tesseract
     compile 'com.rmtheis:tess-two:5.4.1'
 
-    //multidex
-    compile 'com.android.support:multidex:1.0.1'
 
-    //appodeal
-    compile files('src/libs/android-support-v7-recyclerview-23.1.1.jar')
-    compile files('src/libs/applovin-6.2.2.jar')
-    compile files('src/libs/appodeal-1.14.15.jar')
-    compile files('src/libs/chartboost-6.4.1.jar')
-    compile files('src/libs/flurry-analytics-6.2.0.jar')
-    compile files('src/libs/inmobi-5.3.1.jar')
-    compile files('src/libs/my-target-4.5.1.jar')
-    compile files('src/libs/unity-ads-1.4.7.jar')
-    compile files('src/libs/yandex-metrica-2.41.jar')
-
+    //admob
+    compile 'com.google.firebase:firebase-ads:9.2.0'
 
     compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
     compile 'com.android.support:support-v13:24.1.1'
@@ -72,8 +53,10 @@ dependencies {
 
     compile 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.3.2'
-    compile 'com.google.android.gms:play-services-ads:9.2.1'
 }
+
+//admob
+apply plugin: 'com.google.gms.google-services'
 
 
 

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "174020761168",
+    "firebase_url": "https://enumbers-14e9a.firebaseio.com",
+    "project_id": "enumbers-14e9a",
+    "storage_bucket": "enumbers-14e9a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:174020761168:android:c3c3d32c02d00e7d",
+        "android_client_info": {
+          "package_name": "com.ashomok.eNumbers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "174020761168-5472usrdo9j4cqp564ldudgdqnigo5gb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQaCOvBMXtvUTV5qES3uHxbn0ZyKpSo-4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.ashomok.eNumbers.ad.AdContainer;
-import com.ashomok.eNumbers.ad.AppodealContainerImpl;
+import com.ashomok.eNumbers.ad.AdMobContainerImpl;
 import com.ashomok.eNumbers.data_load.EN;
 import com.ashomok.eNumbers.R;
 
@@ -38,7 +38,7 @@ public class ENDetailsActivity extends AppCompatActivity {
         try {
             super.onCreate(savedInstanceState);
 
-            AdContainer adContainer = new AppodealContainerImpl(this);
+            AdContainer adContainer = new AdMobContainerImpl(this);
             adContainer.init();
 
             Bundle extras = getIntent().getExtras();
