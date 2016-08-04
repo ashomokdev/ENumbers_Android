@@ -37,6 +37,7 @@ public class ENDetailsActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         try {
             super.onCreate(savedInstanceState);
+            setContentView(R.layout.details_layout);
 
             AdContainer adContainer = new AdMobContainerImpl(this);
             adContainer.init();
@@ -46,8 +47,6 @@ public class ENDetailsActivity extends AppCompatActivity {
                 en = (EN)getIntent().getSerializableExtra("en");
 
             }
-
-            setContentView(R.layout.details_layout);
 
             toolbar = (Toolbar) findViewById(R.id.toolbar_details_layout);
             setSupportActionBar(toolbar);
