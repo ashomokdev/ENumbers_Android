@@ -305,7 +305,9 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
             File dir = new File(path);
             if (!dir.exists()) {
                 if (!dir.mkdirs()) {
-                    Log.v(TAG, "ERROR: Creation of directory " + path
+                    Log.e(TAG, "ERROR: Creation of directory " + path
+                            + " on sdcard failed");
+                    Assert.fail("ERROR: Creation of directory " + path
                             + " on sdcard failed");
                 } else {
                     Log.v(TAG, "Created directory " + path + " on sdcard");
@@ -352,6 +354,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
             }
         } catch (IOException e) {
             Log.e(TAG, "Was unable to copy files to test_imgs " + e.toString());
+            Assert.fail("Was unable to copy files to test_imgs " + e.toString());
 
         }
         return files;
@@ -392,7 +395,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
             for (String s : result) {
                 builder.append(s);
             }
-            Log.v(TAG, " result: " + builder.toString());
+            Log.d(TAG, " result: " + builder.toString());
 
             signal.countDown();// notify the count down latch
         }

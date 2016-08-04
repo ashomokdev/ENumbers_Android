@@ -237,7 +237,7 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
         //run animation
         Intent intent = new Intent(context, OCRAnimationActivity.class);
         intent.putExtra("image", img_path);
-        startActivityForResult(intent, OCRAnimationActivity_REQUEST_CODE);
+        getActivity().startActivityForResult(intent, OCRAnimationActivity_REQUEST_CODE);
 
         //start ocr
         if (isNetworkAvailable(context)) {

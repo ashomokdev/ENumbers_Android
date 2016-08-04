@@ -90,35 +90,6 @@ public class OCREngineImpl implements OCREngine {
         Log.i(TAG, "String text = tessExtractor.getText(); elapsed" + elapsedTime);
 
         return text;
-
-
-//        TessBaseAPI baseApi = new TessBaseAPI();
-//        baseApi.setDebug(true);
-//        baseApi.init(ASSETS_PATH, lang);
-//        baseApi.setImage(bitmap);
-//
-//        String recognizedText = baseApi.getUTF8Text();
-//
-//        baseApi.end();
-//
-//        // You now have the text in recognizedText var, you can do anything with it.
-//        // We will display a stripped out trimmed alpha-numeric version of it (if lang is eng)
-//        // so that garbage doesn't make it to the display.
-//
-//        Log.v(TAG, "OCRED TEXT: " + recognizedText);
-//
-//        if ( lang.equalsIgnoreCase("eng") ) {
-//            recognizedText = recognizedText.replaceAll("[^a-zA-Z0-9]+", " ");
-//        }
-//
-//        recognizedText = recognizedText.trim();
-//
-//        if ( recognizedText.length() != 0 ) {
-//            _field.setText(_field.getText().toString().length() == 0 ? recognizedText : _field.getText() + " " + recognizedText);
-//            _field.setSelection(_field.getText().toString().length());
-//        }
-
-        // Cycle done.
     }
 
     @Override
