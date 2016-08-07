@@ -23,7 +23,6 @@
             android:name="com.ashomok.eNumbers.activities.MainFragment"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_below="@+id/toolbar"
             tools:layout="@layout/start_fragment" />
 
     </RelativeLayout>

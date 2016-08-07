@@ -1,7 +1,5 @@
 package com.ashomok.eNumbers.activities;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
@@ -30,8 +28,6 @@ public class MainActivity extends AppCompatActivity {
     private CharSequence mTitle;
 
     private String[] mMenuArray;
-
-//    private Fragment fragment;
 
 
     /**
