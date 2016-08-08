@@ -1,11 +1,4 @@
 apply plugin: 'com.android.application'
-//
-//configurations.all {
-//    resolutionStrategy {
-//        failOnVersionConflict()
-////        force 'com.android.support:support-v4:23.2.0'
-//    }
-//}
 
 
 android {

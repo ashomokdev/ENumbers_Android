@@ -1,8 +1,7 @@
 package com.ashomok.eNumbers.activities;
 
-import android.content.Intent;
+import android.content.Context;
 import android.content.res.Configuration;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -10,12 +9,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.ashomok.eNumbers.R;
+import com.ashomok.eNumbers.menu.Menu;
+import com.ashomok.eNumbers.menu.RowsAdapter;
+import com.ashomok.eNumbers.menu.Row;
+import com.ashomok.eNumbers.menu.RowClickListener;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,9 +30,6 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
 
     private CharSequence mTitle;
-
-    private String[] mMenuArray;
-
 
     /**
      * Called when the activity is first created.
@@ -65,14 +66,13 @@ public class MainActivity extends AppCompatActivity {
             // Set the drawer toggle as the DrawerListener
             mDrawerLayout.setDrawerListener(toggle);
 
-            mMenuArray = getResources().getStringArray(R.array.main_menu_array);
             mDrawerList = (ListView) findViewById(R.id.lv_navigation_drawer);
-            mDrawerList.setAdapter(new ArrayAdapter<>(
-                    this,
-                    R.layout.drawer_list_item,
-                    mMenuArray));
 
-            mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+            List<Row> menuItems = Menu.getRows();
+
+            mDrawerList.setAdapter(new RowsAdapter(this, menuItems));
+
+            mDrawerList.setOnItemClickListener(new DrawerItemClickListener(this));
 
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
@@ -109,41 +109,25 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void selectItem(int position) {
-        switch (position) {
-            case 0:
-                //leave feedback
-                leaveFeedback();
-                break;
-            case 1:
-                //About
-                Intent intent = new Intent(this, AboutActivity.class);
-                startActivity(intent);
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void leaveFeedback() {
-        String appPackageName = getPackageName();
-        Intent marketIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName));
-        marketIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET | Intent.FLAG_ACTIVITY_MULTIPLE_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(marketIntent);
-    }
-
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
+
+        private RowClickListener rowClickListener;
+
+
+        public DrawerItemClickListener(Context context)
+        {
+            rowClickListener = new RowClickListener(context);
+        }
 
         @Override
         public void onItemClick(AdapterView parent, View view, int position, long id) {
 
-            selectItem(position);
+            rowClickListener.onRowClicked(position);
 
             // Highlight the selected item, update the title, and close the drawer
-            // update selected item and title, then close the drawer
             mDrawerList.setItemChecked(position, true);
-            RelativeLayout linearLayout = (RelativeLayout) findViewById(R.id.start_activity_layout_linear);
-            mDrawerLayout.closeDrawer(linearLayout);
+            RelativeLayout layout = (RelativeLayout) findViewById(R.id.menu);
+            mDrawerLayout.closeDrawer(layout);
         }
     }
 }

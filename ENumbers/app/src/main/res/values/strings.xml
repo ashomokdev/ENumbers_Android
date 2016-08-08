@@ -3,17 +3,12 @@
     <string name="startChar">E</string>
     <string name="notFoundMessage">Not found. Check inputting and try again.</string>
 
-    <string-array name="main_menu_array">
-        <item>Your feedback</item>
-        <item>About</item>
-    </string-array>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="appName">ENumbers</string>
     <string name="developer">by Iuliia Ashomok</string>
-    <string name="email">bieliaievays@gmail.com</string>
+    <string name="email">ashomokdev@gmail.com</string>
     <string name="version">version %1$s</string>
     <string name="safe">safe</string>
     <string name="use_with_caution">use with caution</string>
@@ -39,5 +34,11 @@
     <string name="typical_products">Typical products:</string>
     <string name="additional_info">Additional info:</string>
     <string name="banner_ad_unit_id" translatable="false">ca-app-pub-5221781428763224/8597149992</string>
+    <string name="categories">Categories</string>
+    <string name="about">About</string>
+    <string name="rate">Rate</string>
+    <string name="more_apps">More our apps</string>
+    <string name="buy_no_ads_version">Support &amp; Buy ads-free version</string>
+
 </resources>
 
