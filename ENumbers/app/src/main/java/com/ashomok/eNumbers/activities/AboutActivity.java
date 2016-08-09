@@ -2,14 +2,14 @@ package com.ashomok.eNumbers.activities;
 
 import android.content.Intent;
 import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
-import android.view.*;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.ashomok.eNumbers.R;
@@ -56,7 +56,6 @@ public class AboutActivity extends AppCompatActivity {
                     callSendMeMail();
                 }
             });
-            // mTextView_email.setMovementMethod(LinkMovementMethod.getInstance()); TODO use for sources
 
             mTextView_version = (TextView) findViewById(R.id.version);
 

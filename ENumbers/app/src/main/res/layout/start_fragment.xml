@@ -43,19 +43,6 @@
             android:paddingTop="@dimen/icon_padding"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_clear_36dp" />
-
-        <ImageButton
-            android:id="@+id/ic_mic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/layout_margin"
-            android:background="@null"
-            android:gravity="center_vertical"
-            android:paddingEnd="@dimen/icon_padding"
-            android:paddingStart="@dimen/icon_padding"
-            android:paddingTop="@dimen/icon_padding"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_mic_36dp" />
     </LinearLayout>
 
     <RelativeLayout

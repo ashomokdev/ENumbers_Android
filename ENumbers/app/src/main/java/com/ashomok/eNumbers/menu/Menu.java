@@ -19,7 +19,9 @@ public class Menu {
        menuItems.add(new Row(R.drawable.ic_camera_alt_36dp, R.string.about));
        menuItems.add(new Row(R.drawable.ic_camera_alt_36dp, R.string.rate));
        menuItems.add(new Row(R.drawable.ic_camera_alt_36dp, R.string.more_apps));
-       menuItems.add(new Row(R.drawable.ic_camera_alt_36dp, R.string.buy_no_ads_version));
+
+       //todo
+//       menuItems.add(new Row(R.drawable.ic_camera_alt_36dp, R.string.buy_no_ads_version));
 
        return menuItems;
    }

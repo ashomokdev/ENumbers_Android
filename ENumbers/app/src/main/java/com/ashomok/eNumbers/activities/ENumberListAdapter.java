@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.*;
 
 import com.ashomok.eNumbers.R;
-import com.ashomok.eNumbers.activities.ENumbFlag;
 
 /**
  * Created by y.belyaeva on 28.07.2015.
@@ -22,7 +21,7 @@ class ENumberListAdapter extends CursorAdapter {
     // you don't bind any data to the view at this point.
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        return LayoutInflater.from(context).inflate(R.layout.enumb_proxy_list_row_layout, parent, false);
+        return LayoutInflater.from(context).inflate(R.layout.enumb_row, parent, false);
 
     }
 

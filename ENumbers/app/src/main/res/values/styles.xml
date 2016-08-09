@@ -37,12 +37,8 @@
         <item name="android:typeface">monospace</item>
     </style>
 
-    <style name="Widget.MyApp.Toolbar.Solid" parent="Widget.AppCompat.ActionBar">
-        <item name="android:textColorPrimary">@color/white</item>
-    </style>
-
     <style name="ECode_Big">
-        <item name="android:textSize">34sp</item>
+        <item name="android:textSize">32sp</item>
         <item name="android:textColor">@color/black85</item>
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">fill_parent</item>
@@ -60,6 +56,20 @@
         <item name="android:cursorVisible">false</item>
         <item name="android:focusable">false</item>
         <item name="android:focusableInTouchMode">false</item>
+    </style>
+
+    <style name="Category_title">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/black85</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+    </style>
+
+    <style name="Category_subheading">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/blue</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
     </style>
 
     <style name="BasicText" parent="EName"></style>

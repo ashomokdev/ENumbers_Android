@@ -66,7 +66,6 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
 
     private String img_path;
     private Uri outputFileUri;
-    private ImageButton voiceInputBtn;
     private ImageButton closeBtn;
     private EditText inputEditText;
     private static String startChar;
@@ -104,8 +103,7 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
             } else {
                 try {
                     final Method method = EditText.class.getMethod(
-                            "setShowSoftInputOnFocus"
-                            , boolean.class);
+                            "setShowSoftInputOnFocus", boolean.class);
                     method.setAccessible(true);
                     method.invoke(inputEditText, false);
                 } catch (Exception e) {
@@ -119,16 +117,6 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
 
             fab = (FloatingActionButton) view.findViewById(R.id.fab);
             fab.setOnClickListener(new FabClickHandler());
-
-            voiceInputBtn = (ImageButton) view.findViewById(R.id.ic_mic);
-            voiceInputBtn.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View view) {
-
-                    displaySpeechRecognizer();
-                }
-            });
 
             closeBtn = (ImageButton) view.findViewById(R.id.ic_close);
             closeBtn.setOnClickListener(new View.OnClickListener() {
@@ -264,20 +252,6 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
         GetInfoFromInputting(inputEditText.getText().toString());
     }
 
-
-    private void displaySpeechRecognizer() {
-
-        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-
-        // Start the activity, the intent will be populated with the speech text
-        try {
-            getActivity().startActivityForResult(intent, SPEECH_REQUEST_CODE);
-        } catch (ActivityNotFoundException anfe) {
-            Toast.makeText(context, "No speech recognition available", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     private boolean isNetworkAvailable(final Context context) {
         final ConnectivityManager connectivityManager =

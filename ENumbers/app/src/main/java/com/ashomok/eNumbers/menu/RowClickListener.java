@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import com.ashomok.eNumbers.Settings;
 import com.ashomok.eNumbers.activities.AboutActivity;
+import com.ashomok.eNumbers.activities.categories.CategoriesListActivity;
 
 /**
  * Created by iuliia on 8/8/16.
@@ -31,11 +32,13 @@ public class RowClickListener {
         switch (position) {
             case 0:
                 //Categories
+                context.startActivity(
+                        new Intent(context, CategoriesListActivity.class));
                 break;
             case 1:
                 //About
-                Intent intent = new Intent(context, AboutActivity.class);
-                context.startActivity(intent);
+                context.startActivity(
+                        new Intent(context, AboutActivity.class));
                 break;
             case 2:
                 //Rate

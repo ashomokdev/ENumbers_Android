@@ -40,6 +40,23 @@
                 android:value=".activities.MainActivity" />
         </activity>
         <activity
+            android:name=".activities.categories.CategoriesListActivity"
+            android:label="Categories"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.categories.CategoryActivity"
+            android:parentActivityName=".activities.categories.CategoriesListActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.categories.CategoriesListActivity" />
+        </activity>
+        <activity
             android:name=".activities.ENDetailsActivity"
             android:label="Details"
             android:parentActivityName=".activities.MainActivity"
