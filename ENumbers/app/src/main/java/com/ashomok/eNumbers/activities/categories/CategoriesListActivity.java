@@ -36,7 +36,7 @@ public class CategoriesListActivity extends AppCompatActivity implements Adapter
 
             ListView listView = (ListView) findViewById(R.id.lv_categories);
 
-            List<CategorySettings> listItems = new ArrayList<>(CategoriesFragmentFactory.settingsList.values());
+            List<CategorySettings> listItems = CategoriesFragmentFactory.settingsList;
 
             listView.setAdapter(new RowsAdapter(this, listItems));
 

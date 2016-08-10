@@ -2,12 +2,6 @@ package com.ashomok.eNumbers.activities.categories;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-
-import com.ashomok.eNumbers.R;
 
 /**
  * Created by iuliia on 8/8/16.

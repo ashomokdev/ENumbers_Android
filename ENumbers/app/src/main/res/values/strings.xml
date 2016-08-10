@@ -8,8 +8,9 @@
 
     <string name="appName">ENumbers</string>
     <string name="developer">by Iuliia Ashomok</string>
-    <string name="email">ashomokdev@gmail.com</string>
-    <string name="version">version %1$s</string>
+    <string name="email" translatable="false">email</string>
+    <string name="my_email" translatable="false">ashomokdev@gmail.com</string>
+    <string name="version">version</string>
     <string name="safe">safe</string>
     <string name="use_with_caution">use with caution</string>
     <string name="unsafe">unsafe</string>
@@ -47,6 +48,15 @@
     <string name="antibiotics">Antibiotics</string>
     <string name="miscellaneous">Miscellaneous</string>
     <string name="additional_chemicals">Additional chemicals. New chemicals that do not fall into standard classification schemes.</string>
+    <string name="copied">Copied</string>
+    <string name="data_sources">Data sources:</string>
+    <string name="data_source_1">&#8226; http://en.wikipedia.org/wiki/E_number</string>
+    <string name="data_source_2">&#8226; http://www.additivealert.com.au</string>
+    <string name="data_source_3">&#8226; http://nac.allergyforum.com/additives</string>
+
+
+
+
 
 </resources>
 

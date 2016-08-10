@@ -1,9 +1,10 @@
 package com.ashomok.eNumbers.activities;
 
-import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.net.Uri;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
@@ -11,7 +12,9 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.ashomok.eNumbers.BuildConfig;
 import com.ashomok.eNumbers.R;
 
 /**
@@ -24,6 +27,8 @@ public class AboutActivity extends AppCompatActivity {
     private TextView mTextView_developer;
     private TextView mTextView_email;
     private TextView mTextView_version;
+    private TextView mTextView_sourcesHeader;
+    private TextView mTextview_sources;
     private static final String TAG = "AboutActivity";
 
 
@@ -40,6 +45,7 @@ public class AboutActivity extends AppCompatActivity {
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             }
 
+            //base app data
             mTextView_appName = (TextView) findViewById(R.id.appName);
             mTextView_appName.setText(R.string.appName);
 
@@ -47,35 +53,47 @@ public class AboutActivity extends AppCompatActivity {
             mTextView_developer.setText(R.string.developer);
 
             mTextView_email = (TextView) findViewById(R.id.email);
-            mTextView_email.setText(Html.fromHtml("<u>" + getString(R.string.email) + "</u>"));
+            mTextView_email.setText(Html.fromHtml("<u>" + getString(R.string.my_email) + "</u>"));
             mTextView_email.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View view) {
 
-                    callSendMeMail();
+                    copyTextToClipboard(mTextView_email.getText());
                 }
             });
 
             mTextView_version = (TextView) findViewById(R.id.version);
+            String version = getString(R.string.version) + " " + BuildConfig.VERSION_NAME;
+            mTextView_version.setText(version);
 
-            PackageInfo pInfo  = getPackageManager().getPackageInfo(getPackageName(), 0);
-            String version = pInfo.versionName;
 
-            mTextView_version.setText(getString(R.string.version, version));
+            //sources of data
+            mTextView_sourcesHeader = (TextView) findViewById(R.id.sources_header);
+            mTextView_sourcesHeader.setText(getString(R.string.data_sources));
+
+            mTextview_sources = (TextView) findViewById(R.id.sources);
+            mTextview_sources.setText(Html.fromHtml(
+                    getString(R.string.data_source_1) + "<br/>" +
+                    getString(R.string.data_source_2) + "<br/>" +
+                    getString(R.string.data_source_3) + "<br/>"
+            ));
+
+
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
             e.printStackTrace();
         }
     }
 
-    private void callSendMeMail() {
-        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                getString(R.string.mailto), mTextView_email.getText().toString(), null));
-
-        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[] { mTextView_email.getText().toString() });
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.feedback));
-        startActivity(Intent.createChooser(emailIntent, getString(R.string.send_email_to_dev)));
+    private void copyTextToClipboard(CharSequence text) {
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText(getString(R.string.email), text);
+        clipboard.setPrimaryClip(clip);
+        Toast.makeText(this, getString(R.string.copied), Toast.LENGTH_SHORT).show();
+        Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
+        // Vibrate for 300 milliseconds
+        v.vibrate(300);
     }
 
 

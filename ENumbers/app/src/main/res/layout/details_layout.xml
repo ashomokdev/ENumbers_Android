@@ -114,13 +114,17 @@
                     style="@style/Label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/countries_banned_in" />
+                    android:text="@string/countries_banned_in"
+                    android:textStyle="bold"
+                    />
 
                 <TextView
                     android:id="@+id/ebanned_inFull"
                     style="@style/BasicText"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    />
             </LinearLayout>
 
             <LinearLayout
