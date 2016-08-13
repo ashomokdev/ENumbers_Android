@@ -31,9 +31,6 @@ public class MainActivity extends AppCompatActivity {
 
     private CharSequence mTitle;
 
-    /**
-     * Called when the activity is first created.
-     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -114,8 +111,7 @@ public class MainActivity extends AppCompatActivity {
         private RowClickListener rowClickListener;
 
 
-        public DrawerItemClickListener(Context context)
-        {
+        public DrawerItemClickListener(Context context) {
             rowClickListener = new RowClickListener(context);
         }
 
@@ -131,6 +127,3 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
-
-
-

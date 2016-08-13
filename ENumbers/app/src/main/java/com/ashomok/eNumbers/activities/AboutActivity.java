@@ -29,6 +29,8 @@ public class AboutActivity extends AppCompatActivity {
     private TextView mTextView_version;
     private TextView mTextView_sourcesHeader;
     private TextView mTextview_sources;
+    private TextView mTextView_ocr_explanationHeader;
+    private TextView mTextView_ocr_explanation;
     private static final String TAG = "AboutActivity";
 
 
@@ -66,6 +68,13 @@ public class AboutActivity extends AppCompatActivity {
             mTextView_version = (TextView) findViewById(R.id.version);
             String version = getString(R.string.version) + " " + BuildConfig.VERSION_NAME;
             mTextView_version.setText(version);
+
+
+            //ocr explanation
+            mTextView_ocr_explanationHeader = (TextView) findViewById(R.id.ocr_header);
+            mTextView_ocr_explanationHeader.setText(R.string.ocr_header);
+            mTextView_ocr_explanation = (TextView) findViewById(R.id.ocr_explanation);
+            mTextView_ocr_explanation.setText(R.string.ocr_explanation);
 
 
             //sources of data

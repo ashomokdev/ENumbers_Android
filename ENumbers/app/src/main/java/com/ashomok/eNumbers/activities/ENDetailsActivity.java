@@ -48,7 +48,7 @@ public class ENDetailsActivity extends AppCompatActivity {
 
             }
 
-            toolbar = (Toolbar) findViewById(R.id.toolbar_details_layout);
+            toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
 
             if (getSupportActionBar() != null) {

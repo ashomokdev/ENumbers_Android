@@ -53,9 +53,53 @@
     <string name="data_source_1">&#8226; http://en.wikipedia.org/wiki/E_number</string>
     <string name="data_source_2">&#8226; http://www.additivealert.com.au</string>
     <string name="data_source_3">&#8226; http://nac.allergyforum.com/additives</string>
-
-
-
+    <string name="ocr_header">Photo feature explanation:</string>
+    <string name="ocr_explanation">Detecting E numbers from photo works in test mode. \nMake photo of text, which contains E numbers and press \'Recognize\' button. Wait while recognition completed.  \nFor better result provide high-quality photo.</string>
+    <string name="all">All</string>
+    <string name="oranges">oranges</string>
+    <string name="yellows">yellows</string>
+    <string name="reds">reds</string>
+    <string name="greens">greens</string>
+    <string name="sorbates">sorbates</string>
+    <string name="benzoates">benzoates</string>
+    <string name="sulphites">sulphites</string>
+    <string name="nitrates">nitrates</string>
+    <string name="lactates">lactates</string>
+    <string name="others">others</string>
+    <string name="phosphates">phosphates</string>
+    <string name="alginates">alginates</string>
+    <string name="silicates">silicates</string>
+    <string name="inosinates">inosinates</string>
+    <string name="waxes">waxes</string>
+    <string name="sweeteners">sweeteners</string>
+    <string name="foaming">foaming agents</string>
+    <string name="packaging">packaging gases</string>
+    <string name="improving">improving agents</string>
+    <string name="synthetic">synthetic glazes</string>
+    <string name="glutamates">glutamates &amp; guanylates</string>
+    <string name="stearates">stearates &amp; gluconates</string>
+    <string name="alkali">alkali metal compounds</string>
+    <string name="sulphates">sulphates &amp; hydroxides</string>
+    <string name="chlorides">chlorides &amp; sulphates</string>
+    <string name="mineral">mineral acids &amp; bases</string>
+    <string name="fatty">fatty acids &amp; compounds</string>
+    <string name="cellulose">cellulose compounds</string>
+    <string name="natural">natural emulsifiers</string>
+    <string name="polyoxyethene">polyoxyethene compounds</string>
+    <string name="other_natural">other natural agents</string>
+    <string name="natural_gums">natural gums</string>
+    <string name="succinates">succinates &amp; fumarates</string>
+    <string name="malates">malates &amp; adipates</string>
+    <string name="citrates">citrates &amp; tartrates</string>
+    <string name="gallates">gallates &amp; erythorbates</string>
+    <string name="Tocopherol">Tocopherol(vitamin E)</string>
+    <string name="ascorbates">ascorbates(vitamin C)</string>
+    <string name="propionates">propionates(propanoates)</string>
+    <string name="acetates">acetates(ethanoates)</string>
+    <string name="phenols">phenols &amp; formates(methanoates)</string>
+    <string name="gold">gold and others</string>
+    <string name="browns">browns &amp; blacks</string>
+    <string name="blues">blues &amp; violets</string>
 
 
 </resources>

@@ -3,7 +3,7 @@ package com.ashomok.eNumbers.activities.categories;
 /**
  * Created by iuliia on 8/8/16.
  */
-class CategorySettings {
+class Row {
 
     private int startNumber;
     private int endNumber;
@@ -21,7 +21,7 @@ class CategorySettings {
         return titleResourceID;
     }
 
-    public CategorySettings(int startNumber, int endNumber, int titleResourceID)
+    public Row(int startNumber, int endNumber, int titleResourceID)
     {
         this.startNumber = startNumber;
         this.endNumber = endNumber;

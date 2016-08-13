@@ -50,7 +50,7 @@
                 android:value=".activities.MainActivity" />
         </activity>
         <activity
-            android:name=".activities.categories.CategoryActivity"
+            android:name=".activities.categories.SubcategoriesListActivity"
             android:parentActivityName=".activities.categories.CategoriesListActivity"
             android:theme="@style/AppTheme">
             <meta-data

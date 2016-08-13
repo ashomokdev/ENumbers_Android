@@ -52,7 +52,6 @@ import com.ashomok.eNumbers.ocr.OCREngineImpl;
 
 import java.io.File;
 import java.lang.reflect.Method;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -60,7 +59,6 @@ import java.util.Set;
  */
 public class MainFragment extends Fragment implements TaskDelegate, LoaderManager.LoaderCallbacks<Cursor> {
 
-    private static final int SPEECH_REQUEST_CODE = 0;
     private static final int CaptureImage_REQUEST_CODE = 1;
     private static final int OCRAnimationActivity_REQUEST_CODE = 2;
 
@@ -133,8 +131,10 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
             db = new ENumbersSQLiteAssetHelper(view.getContext());
 
             listView = (ListView) view.findViewById(R.id.ENumberList);
+
             outputWarning = (TextView) view.findViewById(R.id.warning);
             listView.setEmptyView(outputWarning);
+
             listView.setAdapter(scAdapter);
 
             createCustomKeyboard(view);
@@ -174,11 +174,6 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
     @Override
     public void onActivityResult(int requestCode, int resultCode,
                                  Intent data) {
-        //voice inputting
-        if (requestCode == SPEECH_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-
-            onVoiceInputResult(data);
-        }
 
         //making photo
         if (requestCode == CaptureImage_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
@@ -221,7 +216,6 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
 
     private void startOCRtask(String img_path) {
 
-
         //run animation
         Intent intent = new Intent(context, OCRAnimationActivity.class);
         intent.putExtra("image", img_path);
@@ -237,21 +231,6 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
         recognizeImageAsyncTask.execute();
 
     }
-
-    private void onVoiceInputResult(Intent data) {
-        List<String> results = data.getStringArrayListExtra(
-                RecognizerIntent.EXTRA_RESULTS);
-
-
-        inputEditText.setText(
-                context.getApplicationContext().getString(R.string.startChar));
-
-        String spokenText = results.get(0);
-        inputEditText.append(spokenText);
-
-        GetInfoFromInputting(inputEditText.getText().toString());
-    }
-
 
     private boolean isNetworkAvailable(final Context context) {
         final ConnectivityManager connectivityManager =
@@ -387,6 +366,7 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
 
     /**
      * to get high resolution image from camera
+     *
      * @param v
      */
     private void startBuildInCameraActivity(View v) {
@@ -463,7 +443,7 @@ public class MainFragment extends Fragment implements TaskDelegate, LoaderManage
 
                     EN enumb = new EN(cursor);
 
-                    Intent intent = new Intent(context, ENDetailsActivity.class);
+                    Intent intent = new Intent(context, ENDetailsActivity.class);//todo update activity instead recreating
 
                     intent.putExtra("en", enumb);
                     startActivity(intent);

@@ -14,10 +14,10 @@ import java.util.List;
 /**
  * Created by iuliia on 8/9/16.
  */
-class RowsAdapter extends ArrayAdapter<CategorySettings> {
+class RowsAdapter extends ArrayAdapter<Row> {
 
 
-    public RowsAdapter(Context context, List<CategorySettings> objects) {
+    public RowsAdapter(Context context, List<Row> objects) {
         super(context, 0, objects);
     }
 
@@ -25,7 +25,7 @@ class RowsAdapter extends ArrayAdapter<CategorySettings> {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         // Get the data item for this position
-        CategorySettings row = getItem(position);
+        Row row = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.category_row, parent, false);
