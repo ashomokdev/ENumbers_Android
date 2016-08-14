@@ -18,17 +18,15 @@
         android:layout_below="@+id/toolbar">
 
         <!-- "Fragment A" -->
-        <fragment
-            android:id="@+id/list_frag"
-            android:name="com.ashomok.eNumbers.activities.categories.SubcategoriesListFragment"
+        <FrameLayout
+            android:id="@+id/list_container"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
         <!-- "Fragment B" -->
-        <fragment
-            android:id="@+id/details_frag"
-            android:name="com.ashomok.eNumbers.activities.categories.SubcategoryFragment"
+        <FrameLayout
+            android:id="@+id/details_container"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2" />

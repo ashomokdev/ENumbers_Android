@@ -23,4 +23,6 @@
 
     <item name="blue_light" type="color">#c5cae9</item>
 
+    <item name="light_orange" type="color">#FFCCBC</item>
+
 </resources>

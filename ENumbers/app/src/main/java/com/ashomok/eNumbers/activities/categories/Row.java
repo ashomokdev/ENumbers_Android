@@ -1,9 +1,15 @@
 package com.ashomok.eNumbers.activities.categories;
 
+import android.database.Cursor;
+
+import java.io.Serializable;
+
 /**
  * Created by iuliia on 8/8/16.
  */
-class Row {
+class Row implements Serializable {
+
+    public static final String TAG = Row.class.getSimpleName();
 
     private int startNumber;
     private int endNumber;

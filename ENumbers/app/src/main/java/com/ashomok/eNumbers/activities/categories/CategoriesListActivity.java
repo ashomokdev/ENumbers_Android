@@ -1,5 +1,7 @@
 package com.ashomok.eNumbers.activities.categories;
 
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +12,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.ashomok.eNumbers.R;
+import com.ashomok.eNumbers.activities.ENDetailsActivity;
+import com.ashomok.eNumbers.data_load.EN;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +22,9 @@ import java.util.List;
  * Created by iuliia on 8/9/16.
  */
 
-public class CategoriesListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class CategoriesListActivity extends AppCompatActivity {
 
-    private static List<Row> dataList = new ArrayList<Row>(){{
+    private static List<Row> dataList = new ArrayList<Row>() {{
         add(new Row(100, 199, R.string.colours));
         add(new Row(200, 299, R.string.preservatives));
         add(new Row(300, 399, R.string.antioxidants));
@@ -53,7 +57,18 @@ public class CategoriesListActivity extends AppCompatActivity implements Adapter
 
             listView.setAdapter(new RowsAdapter(this, listItems));
 
-            listView.setOnItemClickListener(this);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long arg3) {
+
+                    Row row = (Row) parent.getAdapter().getItem(position);
+
+                    Intent intent = new Intent(view.getContext(), SubcategoriesListActivity.class);//todo update activity instead recreating
+
+                    intent.putExtra(Row.TAG, row);
+                    startActivity(intent);
+                }
+            });
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
             e.printStackTrace();
@@ -69,10 +84,5 @@ public class CategoriesListActivity extends AppCompatActivity implements Adapter
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//todo
     }
 }

@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.ListFragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,28 +13,37 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.ashomok.eNumbers.R;
+import com.ashomok.eNumbers.data_load.EN;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by iuliia on 8/12/16.
  */
-public class SubcategoriesListFragment extends ListFragment {
+public class SubcategoriesListFragment extends Fragment {
 
+    private static final String TAG = SubcategoriesListFragment.class.getSimpleName();
     private OnItemSelectedListener mCallback;
+
+    private ListView listView;
+
+    private Context context;
 
     public interface OnItemSelectedListener {
         void onItemSelected(int position);
     }
 
-    private static final String ARGUMENT_START_NUMBER = "arg_start_number";
-    private static final String ARGUMENT_END_NUMBER = "arg_end_number";
-    private static final String ARGUMENT_TITLE_RESOURCE_ID = "arg_title_resource_id";
+//    private static final String ARGUMENT_START_NUMBER = "arg_start_number";
+//    private static final String ARGUMENT_END_NUMBER = "arg_end_number";
+//    private static final String ARGUMENT_TITLE_RESOURCE_ID = "arg_title_resource_id";
+//
+//    private int startNumber;
+//    private int endNumber;
+//    private int titleResourceID;
 
-    private int startNumber;
-    private int endNumber;
-    private int titleResourceID;
+    private Row row;
 
     private static List<Row> dataList = new ArrayList<Row>() {{
         add(new Row(100, 199, R.string.all));
@@ -110,9 +120,7 @@ public class SubcategoriesListFragment extends ListFragment {
 
         Bundle arguments = new Bundle();
 
-        arguments.putInt(ARGUMENT_START_NUMBER, settings.getStartNumber());
-        arguments.putInt(ARGUMENT_END_NUMBER, settings.getEndNumber());
-        arguments.putInt(ARGUMENT_TITLE_RESOURCE_ID, settings.getTitleResourceID());
+        arguments.putSerializable(Row.TAG, settings);
 
         categoryFragment.setArguments(arguments);
         return categoryFragment;
@@ -137,14 +145,37 @@ public class SubcategoriesListFragment extends ListFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        startNumber = getArguments().getInt(ARGUMENT_START_NUMBER);
-        endNumber = getArguments().getInt(ARGUMENT_END_NUMBER);
-        titleResourceID = getArguments().getInt(ARGUMENT_TITLE_RESOURCE_ID);
+
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            Serializable serializable = bundle.getSerializable(Row.TAG);
+
+            if (serializable instanceof Row) {
+                row = (Row) serializable;
+            }
+        }
     }
 
     public void updateContent(Row settings) {
-        //// TODO: 8/13/16
+
+        if (settings != null) {
+            List<Row> rows = new ArrayList<>();
+            for (Row r : dataList) {
+                if (r.getStartNumber() >= row.getStartNumber() && r.getEndNumber() <= row.getEndNumber()) {
+                    rows.add(r);
+                }
+            }
+
+            if (listView != null) {
+                listView.setAdapter(new RowsAdapter(context, rows));
+            } else {
+                Log.e(TAG, "listView == null");
+            }
+        } else {
+            Log.e(TAG, "Can not update content. settings == null.");
+        }
     }
 
     @Override
@@ -153,11 +184,10 @@ public class SubcategoriesListFragment extends ListFragment {
 
         View view = inflater.inflate(R.layout.listview, null);
 
-        ListView listView = (ListView) view.findViewById(R.id.lv_subcategories);
+        context = view.getContext();
+        listView = (ListView) view.findViewById(R.id.lv_subcategories);
 
-        List<Row> listItems = dataList; //todo
-
-        listView.setAdapter(new RowsAdapter(view.getContext(), listItems));
+        updateContent(row);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -166,7 +196,7 @@ public class SubcategoriesListFragment extends ListFragment {
                 mCallback.onItemSelected(position);
 
                 // Set the item as checked to be highlighted when in two-pane layout
-                getListView().setItemChecked(position, true);
+                listView.setItemChecked(position, true);
             }
         });
 

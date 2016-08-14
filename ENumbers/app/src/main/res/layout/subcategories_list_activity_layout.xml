@@ -12,10 +12,9 @@
 
 
         <!-- "Fragment A" -->
-        <fragment
-            android:id="@+id/list_frag"
+        <FrameLayout
+            android:id="@+id/list_container"
             android:layout_below="@+id/toolbar"
-            class="com.ashomok.eNumbers.activities.categories.SubcategoriesListFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
          />
