@@ -44,7 +44,7 @@ public class ENDetailsActivity extends AppCompatActivity {
 
             Bundle extras = getIntent().getExtras();
             if (extras != null) {
-                en = (EN)getIntent().getSerializableExtra("en");
+                en = (EN)getIntent().getSerializableExtra(EN.TAG);
 
             }
 

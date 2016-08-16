@@ -1,40 +1,67 @@
 package com.ashomok.eNumbers.data_load;
 
+import android.content.AsyncTaskLoader;
 import android.content.Context;
-import android.content.CursorLoader;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.ashomok.eNumbers.data_load.ENumbersSQLiteAssetHelper;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Iuliia on 14.09.2015.
  */
-public class ENCursorLoader extends CursorLoader {
+public class ENCursorLoader extends AsyncTaskLoader<List<EN>> {
 
-    private final ENumbersSQLiteAssetHelper db;
 
     private String[] codes;
+    private int startValue = -1;
+    private int endValue = -1;
 
-    public ENCursorLoader(Context context, ENumbersSQLiteAssetHelper db, Bundle bundle) {
+    private Context context;
+    private boolean hasResult;
+    private List<EN> mData;
+
+    public ENCursorLoader(Context context, Bundle bundle) {
         super(context);
-        this.db = db;
+
+        this.context = context;
+
         if (bundle != null) {
-            codes = bundle.getStringArray("codes");
+            codes = bundle.getStringArray("codes_array");
+            startValue = bundle.getInt("start_value");
+            endValue = bundle.getInt("end_value");
         }
     }
 
     @Override
-    public Cursor loadInBackground() {
+    protected void onStartLoading() {
+
+            forceLoad();
+            deliverResult(mData);
+    }
+
+    @Override
+    public void deliverResult(final List<EN> data) {
+        mData = data;
+        hasResult = true;
+        super.deliverResult(data);
+    }
+
+    //todo never called
+    @Override
+    public List<EN> loadInBackground() {
         try {
-            Cursor cursor;
-            if (codes == null) {
-                cursor = db.selectAllData();
+            EN_ORM instance = EN_ORM.getInstance(context);
+            List<EN> data = new ArrayList<>();
+            if (codes != null) {
+                data = instance.getEnumbsByCodeArray(codes);
+            } else if (startValue > 0 && endValue > 0) {
+                data = instance.getEnumbsByCodeRange(startValue, endValue);
             } else {
-                cursor = db.selectRowsByCodes(codes);
+                data = instance.getAllEnumbs();
             }
-            return cursor;
+            return data;
 
         } catch (Exception e) {
             Log.e(this.getClass().getCanonicalName(), e.getMessage() + Log.getStackTraceString(e));

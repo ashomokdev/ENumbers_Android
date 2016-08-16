@@ -9,6 +9,9 @@ import java.io.Serializable;
  * Created by Iuliia on 15.09.2015.
  */
 public class EN implements Serializable {
+
+    public static final String TAG = EN.class.getSimpleName();
+
     public EN(Cursor cursor) {
         try {
             this.setCode(cursor.getString(cursor.getColumnIndex(ENumbersSQLiteAssetHelper.COLUMN_NAME_CODE)));

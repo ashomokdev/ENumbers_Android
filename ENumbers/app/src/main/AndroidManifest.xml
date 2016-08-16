@@ -58,14 +58,6 @@
                 android:value=".activities.categories.CategoriesListActivity" />
         </activity>
         <activity
-            android:name=".activities.categories.SubcategoryActivity"
-            android:parentActivityName=".activities.categories.SubcategoriesListActivity"
-            android:theme="@style/AppTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.categories.SubcategoriesListActivity" />
-        </activity>
-        <activity
             android:name=".activities.ENDetailsActivity"
             android:label="Details"
             android:parentActivityName=".activities.MainActivity"

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.ListFragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,16 +33,8 @@ public class SubcategoriesListFragment extends Fragment {
     private Context context;
 
     public interface OnItemSelectedListener {
-        void onItemSelected(int position);
+        void onItemSelected(Row row);
     }
-
-//    private static final String ARGUMENT_START_NUMBER = "arg_start_number";
-//    private static final String ARGUMENT_END_NUMBER = "arg_end_number";
-//    private static final String ARGUMENT_TITLE_RESOURCE_ID = "arg_title_resource_id";
-//
-//    private int startNumber;
-//    private int endNumber;
-//    private int titleResourceID;
 
     private Row row;
 
@@ -134,13 +127,15 @@ public class SubcategoriesListFragment extends Fragment {
 
         if (context instanceof Activity) {
             activity = (Activity) context;
-            try {
-                mCallback = (OnItemSelectedListener) activity;
-            } catch (ClassCastException e) {
-                throw new ClassCastException(activity.toString()
-                        + " must implement OnItemSelectedListener");
-            }
+            initCallback(activity);
         }
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        initCallback(activity);
     }
 
     @Override
@@ -192,8 +187,11 @@ public class SubcategoriesListFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View arg1, int position, long arg3) {
+
+                Row row = (Row) parent.getAdapter().getItem(position);
+
                 // Notify the parent activity of selected item
-                mCallback.onItemSelected(position);
+                mCallback.onItemSelected(row);
 
                 // Set the item as checked to be highlighted when in two-pane layout
                 listView.setItemChecked(position, true);
@@ -201,5 +199,14 @@ public class SubcategoriesListFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void initCallback(Activity activity) {
+        try {
+            mCallback = (OnItemSelectedListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnItemSelectedListener");
+        }
     }
 }

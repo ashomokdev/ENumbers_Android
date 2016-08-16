@@ -1,5 +1,6 @@
 package com.ashomok.eNumbers.activities.categories;
 
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -49,12 +50,7 @@ public class SubcategoriesListActivity extends AppCompatActivity implements Subc
             // pass the Intent's extras to the fragment as arguments
             firstFragment.setArguments(getIntent().getExtras());
 
-            try {
-                String label = getResources().getString(((Row) getIntent().getExtras().getSerializable(Row.TAG)).getTitleResourceID());
-                setTitle(label);
-            } catch (Exception e) {
-                Log.w(TAG, "Can't set label for activity's action bar");
-            }
+            updateActivityLabel(((Row) getIntent().getExtras().getSerializable(Row.TAG)));
 
             // Add the fragment to the 'fragment_container' FrameLayout
             getFragmentManager().beginTransaction().add(R.id.list_container, firstFragment).commit();
@@ -68,20 +64,40 @@ public class SubcategoriesListActivity extends AppCompatActivity implements Subc
      * calls when a list item is selected
      */
     @Override
-    public void onItemSelected(int position) {
+    public void onItemSelected(Row row) {
         SubcategoryFragment subcategoryFragment = (SubcategoryFragment) getFragmentManager()
                 .findFragmentById(R.id.details_container);
         if (subcategoryFragment == null) {
+
             // SubcategoryFragment (Fragment B) is not in the layout (handset layout),
-            // so start SubcategoryActivity (Activity B)
-            // and pass it the info about the selected item
-            Intent intent = new Intent(this, SubcategoryActivity.class);
-            intent.putExtra("position", position);
-            startActivity(intent);
+            // replace the fragment
+            SubcategoryFragment newFragment = new SubcategoryFragment(); //todo use existing instance instead of creating new one
+            Bundle args = new Bundle();
+            args.putSerializable(Row.TAG, row);
+            newFragment.setArguments(args);
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+            //replace whatever is in the list_container view with this fragment
+            //add transaction to the back stack so the user can navigate back
+
+            transaction.replace(R.id.list_container, newFragment);
+            transaction.addToBackStack(null).commit();
+
         } else {
             // DisplayFragment (Fragment B) is in the layout (tablet layout),
             // so tell the fragment to update
-            subcategoryFragment.updateContent(position);
+            subcategoryFragment.updateContent(row);
+        }
+
+        updateActivityLabel(row);
+    }
+
+    private void updateActivityLabel(Row row) {
+        try {
+            String label = getResources().getString(row.getTitleResourceID());
+            setTitle(label);
+        } catch (Exception e) {
+            Log.w(TAG, "Can't set label for activity's action bar");
         }
     }
 

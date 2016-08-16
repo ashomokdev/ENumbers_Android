@@ -31,7 +31,6 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -56,11 +55,11 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 
         ENumbersSQLiteAssetHelper helper = new ENumbersSQLiteAssetHelper(_openHelperContext);
 
-        Assert.assertTrue(helper.selectRowsByCodes(new String[]{"E100"}).getCount() == 1);
+        Assert.assertTrue(helper.selectRowsByCodesArray(new String[]{"E100"}).getCount() == 1);
 
-        Assert.assertTrue(helper.selectRowsByCodes(new String[]{"E100", "E123"}).getCount() == 2);
+        Assert.assertTrue(helper.selectRowsByCodesArray(new String[]{"E100", "E123"}).getCount() == 2);
 
-        Assert.assertTrue(helper.selectRowsByCodes(new String[]{"E100", "E123", "E101a"}).getCount() == 3);
+        Assert.assertTrue(helper.selectRowsByCodesArray(new String[]{"E100", "E123", "E101a"}).getCount() == 3);
     }
 
     public void testOCREngineRecognize() throws IOException {
