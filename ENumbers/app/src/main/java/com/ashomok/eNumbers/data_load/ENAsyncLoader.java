@@ -11,18 +11,18 @@ import java.util.List;
 /**
  * Created by Iuliia on 14.09.2015.
  */
-public class ENCursorLoader extends AsyncTaskLoader<List<EN>> {
+public class ENAsyncLoader extends AsyncTaskLoader<List<EN>> {
 
 
+    private static final String TAG = ENAsyncLoader.class.getSimpleName();
     private String[] codes;
     private int startValue = -1;
     private int endValue = -1;
 
     private Context context;
-    private boolean hasResult;
-    private List<EN> mData;
+    private List<EN> data;
 
-    public ENCursorLoader(Context context, Bundle bundle) {
+    public ENAsyncLoader(Context context, Bundle bundle) {
         super(context);
 
         this.context = context;
@@ -36,24 +36,32 @@ public class ENCursorLoader extends AsyncTaskLoader<List<EN>> {
 
     @Override
     protected void onStartLoading() {
+        try {
+            if (data != null) {
+                deliverResult(data);
+            }
+            if (takeContentChanged() || data == null) {
+                forceLoad();
+            }
 
-            forceLoad();
-            deliverResult(mData);
+            Log.d(TAG, "onStartLoading() ");
+        } catch (Exception e) {
+            Log.d(TAG, e.getMessage());
+        }
     }
 
     @Override
     public void deliverResult(final List<EN> data) {
-        mData = data;
-        hasResult = true;
+        Log.d(TAG, "deliverResult(final List<EN> data)");
         super.deliverResult(data);
     }
 
-    //todo never called
     @Override
     public List<EN> loadInBackground() {
+        Log.d(TAG, "loadInBackground()");
         try {
             EN_ORM instance = EN_ORM.getInstance(context);
-            List<EN> data = new ArrayList<>();
+            data = new ArrayList<>();
             if (codes != null) {
                 data = instance.getEnumbsByCodeArray(codes);
             } else if (startValue > 0 && endValue > 0) {
@@ -68,4 +76,30 @@ public class ENCursorLoader extends AsyncTaskLoader<List<EN>> {
         }
         return null;
     }
+
+    /**
+     * Handles a request to stop the Loader.
+     */
+    @Override
+    protected void onStopLoading() {
+        // Attempt to cancel the current load task if possible.
+        cancelLoad();
+    }
+
+    /**
+     * Handles a request to completely reset the Loader.
+     */
+    @Override
+    protected void onReset() {
+        super.onReset();
+
+        // Ensure the loader is stopped
+        onStopLoading();
+
+        // At this point we can release the resources if needed.
+        if (data != null) {
+            data = null;
+        }
+    }
+
 }

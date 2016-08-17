@@ -53,7 +53,6 @@ public class SubcategoryFragment extends ENListFragment {
 
         } catch (Exception e) {
             Log.e(this.getClass().getCanonicalName(), e.getMessage());
-            throw e;
         }
     }
 

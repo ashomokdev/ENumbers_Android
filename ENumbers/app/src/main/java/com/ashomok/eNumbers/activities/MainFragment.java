@@ -3,12 +3,8 @@ package com.ashomok.eNumbers.activities;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.LoaderManager;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.content.Loader;
-import android.database.Cursor;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.media.AudioManager;
@@ -18,7 +14,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.speech.RecognizerIntent;
 import android.support.design.widget.FloatingActionButton;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -30,12 +25,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ashomok.eNumbers.R;
 import com.ashomok.eNumbers.activities.capture_image.CaptureImageActivity;
@@ -43,15 +36,12 @@ import com.ashomok.eNumbers.activities.ocr_task.OCRAnimationActivity;
 import com.ashomok.eNumbers.activities.ocr_task.RecognizeImageAsyncTask;
 import com.ashomok.eNumbers.activities.ocr_task.RecognizeImageAsyncTaskRESTClient;
 import com.ashomok.eNumbers.activities.ocr_task.RecognizeImageAsyncTaskStandalone;
-import com.ashomok.eNumbers.data_load.EN;
-import com.ashomok.eNumbers.data_load.ENCursorLoader;
 import com.ashomok.eNumbers.keyboard.CustomKeyboardListener;
 import com.ashomok.eNumbers.ocr.OCREngine;
 import com.ashomok.eNumbers.ocr.OCREngineImpl;
 
 import java.io.File;
 import java.lang.reflect.Method;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -417,7 +407,7 @@ public class MainFragment extends Fragment implements TaskDelegate {
 //    @Override
 //    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
 //        // Prepare the loader
-//        return new ENCursorLoader(context, bundle);
+//        return new ENAsyncLoader(context, bundle);
 //
 //    }
 //

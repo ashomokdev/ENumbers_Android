@@ -6,7 +6,6 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
-import android.database.Cursor;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.media.AudioManager;
@@ -28,7 +27,7 @@ import android.widget.TextView;
 
 import com.ashomok.eNumbers.R;
 import com.ashomok.eNumbers.data_load.EN;
-import com.ashomok.eNumbers.data_load.ENCursorLoader;
+import com.ashomok.eNumbers.data_load.ENAsyncLoader;
 import com.ashomok.eNumbers.keyboard.CustomKeyboardListener;
 import com.ashomok.eNumbers.ocr.OCREngine;
 import com.ashomok.eNumbers.ocr.OCREngineImpl;
@@ -113,11 +112,17 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
         }
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
+
+    @Override public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        // create Loader for data reading
+        scAdapter = new ENumberListAdapter(getActivity(), 0);
+
+        listView.setAdapter(scAdapter);
+
+
+        // Prepare the loader.  Either re-connect with an existing one,
+        // or start a new one.
         getLoaderManager().initLoader(0, null, this);
     }
 
@@ -159,6 +164,7 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
     }
 
     private void showAllData() {
+        getLoaderManager().initLoader(0, null, this);
         getLoaderManager().restartLoader(0, null, this);
     }
 
@@ -274,8 +280,9 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
 
     @Override
     public Loader<List<EN>> onCreateLoader(int i, Bundle bundle) {
+        Log.d(TAG, "onCreateLoader(int i, Bundle bundle)");
         // Prepare the loader
-        return new ENCursorLoader(getActivity(), bundle);
+        return new ENAsyncLoader(getActivity(), bundle);
 
     }
 
@@ -283,12 +290,13 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
     //use data here
     @Override
     public void onLoadFinished(Loader<List<EN>> loader, List<EN> data) {
+        Log.d(TAG, "onLoadFinished(Loader<List<EN>> loader, List<EN> data)");
         try {
-            scAdapter = new ENumberListAdapter(getActivity(), 0);
+          //  scAdapter = new ENumberListAdapter(getActivity(), 0);
             // Set the new data in the adapter.
             scAdapter.setData(data);
 
-            listView.setAdapter(scAdapter);
+         //   listView.setAdapter(scAdapter);
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -311,7 +319,8 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
 
     @Override
     public void onLoaderReset(Loader<List<EN>> loader) {
-//        scAdapter.swapCursor(null);
+        Log.d(TAG, "onLoaderReset(Loader<List<EN>> loader) ");
+        scAdapter.setData(null);
     }
 
 }
