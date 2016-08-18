@@ -10,7 +10,7 @@
     <LinearLayout
         android:id="@+id/viewInput"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:background="@color/blue"
         android:gravity="center_horizontal|center_vertical"
         android:orientation="horizontal">
