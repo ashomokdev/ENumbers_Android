@@ -4,6 +4,9 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.widget.Toast;
+
+import com.ashomok.eNumbers.R;
 import com.ashomok.eNumbers.Settings;
 import com.ashomok.eNumbers.activities.AboutActivity;
 import com.ashomok.eNumbers.activities.categories.CategoriesListActivity;
@@ -59,10 +62,13 @@ public class RowClickListener {
 
     private void moreApps() {
         try {
-            //Todo is it stable to use hardcoded url?
             context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://developer?id=" + Settings.devName)));
         } catch (android.content.ActivityNotFoundException anfe) {
-            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/developer?id=" + Settings.devName)));
+            try {
+                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/developer?id=" + Settings.devName)));
+            } catch (android.content.ActivityNotFoundException e) {
+                Toast.makeText(context, R.string.cant_open, Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

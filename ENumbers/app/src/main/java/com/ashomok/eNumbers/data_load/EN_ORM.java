@@ -6,6 +6,8 @@ import android.database.Cursor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by iuliia on 8/16/16.
@@ -76,19 +78,39 @@ public class EN_ORM {
      * @return
      */
     public List<EN> getEnumbsByCodeRange(int startValue, int endValue) {
-        //todo
-      //  return null;
-        return getAllEnumbs();
+        List<EN> result = new ArrayList<>();
+
+        for (EN en : allEnumbs) {
+
+            //Get the number part. matcher.group(0) will be the result. Example E123d - 123.
+            Pattern pattern = Pattern.compile("[0-9]+");
+            Matcher matcher = pattern.matcher(en.getCode());
+
+            if (matcher.find()) {
+                if (startValue <= Integer.parseInt(matcher.group(0)) && Integer.parseInt(matcher.group(0)) <= endValue) {
+                    result.add(en);
+                }
+            }
+        }
+        return result;
     }
 
     /**
      * Get data by inputing contains both codes and names. Example E100, Curcumin, Alcanin, E123
      *
-     * @param codeOrName
+     * @param codesOrNames
      * @return
      */
-    public List<EN> getEnumbsbyCodeAndNameArray(String[] codeOrName) {
-        //// TODO: 8/16/16
-        return null;
+    public List<EN> getEnumbsbyCodeAndNameArray(String[] codesOrNames) {
+        List<EN> result = new ArrayList<>();
+        final List<String> inputList = new ArrayList<>(Arrays.asList(codesOrNames));
+
+        for (EN en : allEnumbs) {
+
+            if (inputList.contains(en.getCode()) || inputList.contains(en.getName())) {
+                result.add(en);
+            }
+        }
+        return result;
     }
 }

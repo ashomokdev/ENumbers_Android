@@ -53,9 +53,17 @@ public class SubcategoriesListActivity extends AppCompatActivity implements Subc
             updateActivityLabel(((Row) getIntent().getExtras().getSerializable(Row.TAG)));
 
             // Add the fragment to the 'fragment_container' FrameLayout
-            getFragmentManager().beginTransaction().add(R.id.list_container, firstFragment).commit();
+            getFragmentManager().beginTransaction().add(R.id.list_container, firstFragment)
+                    .commit();
         } else {
             Log.e(TAG, "R.id.list_container not found in layout file.");
+        }
+        if (findViewById(R.id.details_container) != null) {
+            SubcategoryFragment secondFragment = new SubcategoryFragment();
+            getFragmentManager().beginTransaction().add(R.id.details_container, secondFragment)
+                    .commit();
+        } else {
+            Log.d(TAG, "handset device. R.id.details_container not found in layout file");
         }
     }
 
@@ -71,7 +79,7 @@ public class SubcategoriesListActivity extends AppCompatActivity implements Subc
 
             // SubcategoryFragment (Fragment B) is not in the layout (handset layout),
             // replace the fragment
-            SubcategoryFragment newFragment = new SubcategoryFragment(); //todo use existing instance instead of creating new one
+            SubcategoryFragment newFragment = new SubcategoryFragment();
             Bundle args = new Bundle();
             args.putSerializable(Row.TAG, row);
             newFragment.setArguments(args);
@@ -81,7 +89,8 @@ public class SubcategoriesListActivity extends AppCompatActivity implements Subc
             //add transaction to the back stack so the user can navigate back
 
             transaction.replace(R.id.list_container, newFragment);
-            transaction.addToBackStack(null).commit();
+            transaction.addToBackStack(null)
+                    .commit();
 
         } else {
             // DisplayFragment (Fragment B) is in the layout (tablet layout),

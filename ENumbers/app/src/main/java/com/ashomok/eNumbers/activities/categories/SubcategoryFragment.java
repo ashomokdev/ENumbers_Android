@@ -22,7 +22,7 @@ public class SubcategoryFragment extends ENListFragment {
 
     public void updateContent(Row row) {
         this.row = row;
-
+        LoadInfoByENumbersRange(row.getStartNumber(), row.getEndNumber());
     }
 
     @Override
@@ -37,13 +37,12 @@ public class SubcategoryFragment extends ENListFragment {
             if (serializable instanceof Row) {
                 row = (Row) serializable;
 
-                GetInfoByENumbersRange(row.getStartNumber(), row.getEndNumber());
+                LoadInfoByENumbersRange(row.getStartNumber(), row.getEndNumber());
             }
         }
     }
 
-    public void GetInfoByENumbersRange(int startValue, int endValue)
-    {
+    public void LoadInfoByENumbersRange(int startValue, int endValue) {
         Bundle b = new Bundle();
         b.putInt("start_value", startValue);
         b.putInt("end_value", endValue);
@@ -59,7 +58,52 @@ public class SubcategoryFragment extends ENListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
+        // If activity recreated (such as from screen rotate), restore
+        // the previous article selection set by onSaveInstanceState().
+        // This is primarily necessary when in the two-pane layout.
+        if (savedInstanceState != null) {
+            Serializable serializable = savedInstanceState.getSerializable(Row.TAG);
+            if (serializable instanceof Row) {
+                row = (Row) serializable;
+            }
+        }
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.en_list_fragment, container, false);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // During startup, check if there are arguments passed to the fragment.
+        // onStart is a good place to do this because the layout has already been
+        // applied to the fragment at this point so we can safely call the method
+        // below that sets the content of fragment b.
+
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            Serializable serializable = bundle.getSerializable(Row.TAG);
+
+            if (serializable instanceof Row) {
+                row = (Row) serializable;
+                updateContent(row);
+            }
+        } else {
+            if (row != null) {
+                //based on saved instance state defined during onCreateView
+                updateContent(row);
+            }
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // Save the current article selection in case we need to recreate the fragment
+        outState.putSerializable(Row.TAG, row);
     }
 }

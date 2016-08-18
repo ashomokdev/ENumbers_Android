@@ -365,7 +365,6 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
             try {
                 logFile.createNewFile();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
@@ -376,7 +375,6 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
             buf.newLine();
             buf.close();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

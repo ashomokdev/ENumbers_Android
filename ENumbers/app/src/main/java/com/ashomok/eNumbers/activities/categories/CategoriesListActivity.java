@@ -1,7 +1,6 @@
 package com.ashomok.eNumbers.activities.categories;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -12,8 +11,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.ashomok.eNumbers.R;
-import com.ashomok.eNumbers.activities.ENDetailsActivity;
-import com.ashomok.eNumbers.data_load.EN;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +60,7 @@ public class CategoriesListActivity extends AppCompatActivity {
 
                     Row row = (Row) parent.getAdapter().getItem(position);
 
-                    Intent intent = new Intent(view.getContext(), SubcategoriesListActivity.class);//todo update activity instead recreating
+                    Intent intent = new Intent(view.getContext(), SubcategoriesListActivity.class);
 
                     intent.putExtra(Row.TAG, row);
                     startActivity(intent);
@@ -71,7 +68,6 @@ public class CategoriesListActivity extends AppCompatActivity {
             });
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
-            e.printStackTrace();
         }
     }
 

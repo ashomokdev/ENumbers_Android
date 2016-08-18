@@ -92,14 +92,15 @@
     <string name="malates">malates &amp; adipates</string>
     <string name="citrates">citrates &amp; tartrates</string>
     <string name="gallates">gallates &amp; erythorbates</string>
-    <string name="Tocopherol">Tocopherol(vitamin E)</string>
-    <string name="ascorbates">ascorbates(vitamin C)</string>
+    <string name="Tocopherol">Tocopherol (vitamin E)</string>
+    <string name="ascorbates">ascorbates (vitamin C)</string>
     <string name="propionates">propionates(propanoates)</string>
     <string name="acetates">acetates(ethanoates)</string>
     <string name="phenols">phenols &amp; formates(methanoates)</string>
     <string name="gold">gold and others</string>
     <string name="browns">browns &amp; blacks</string>
     <string name="blues">blues &amp; violets</string>
+    <string name="cant_open">Can\'t open.</string>
 
 
 </resources>

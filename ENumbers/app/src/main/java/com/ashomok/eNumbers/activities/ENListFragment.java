@@ -292,11 +292,8 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
     public void onLoadFinished(Loader<List<EN>> loader, List<EN> data) {
         Log.d(TAG, "onLoadFinished(Loader<List<EN>> loader, List<EN> data)");
         try {
-          //  scAdapter = new ENumberListAdapter(getActivity(), 0);
             // Set the new data in the adapter.
             scAdapter.setData(data);
-
-         //   listView.setAdapter(scAdapter);
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -305,7 +302,7 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
 
                     EN item = (EN) parent.getAdapter().getItem(position);
 
-                    Intent intent = new Intent(getActivity(), ENDetailsActivity.class);//todo update activity instead recreating
+                    Intent intent = new Intent(getActivity(), ENDetailsActivity.class);
 
                     intent.putExtra(EN.TAG, item);
                     startActivity(intent);
@@ -313,7 +310,6 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
             });
         } catch (Exception e) {
             Log.e(this.getClass().getCanonicalName(), e.getMessage());
-            e.printStackTrace();
         }
     }
 

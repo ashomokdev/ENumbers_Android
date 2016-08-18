@@ -164,7 +164,7 @@ public class ENDetailsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    //TODO menu for sharing
+    //TODO menu for sharing (fb, vk, ets)
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 //        // Inflate the menu items for use in the action bar

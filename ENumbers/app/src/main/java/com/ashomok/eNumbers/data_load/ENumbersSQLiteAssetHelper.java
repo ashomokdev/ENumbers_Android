@@ -4,11 +4,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
-import android.text.TextUtils;
 import android.util.Log;
-import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
-import java.util.Collections;
+import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 /**
  * Created by Iuliia on 06.09.2015.
@@ -73,46 +71,4 @@ class ENumbersSQLiteAssetHelper extends SQLiteAssetHelper {
         }
         return null;
     }
-
-//    public Cursor selectRowsByCodesArray(String[] codes) {
-//        try {
-//            SQLiteDatabase db = getReadableDatabase();
-//            SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-//
-//            qb.setTables(sqlTable);
-//
-//            //todo rewrite style as here http://stackoverflow.com/questions/4757263/how-to-pass-two-or-more-selection-argument-in-query-method It is dufficult to read it now.
-//            Cursor c = qb.query(db, sqlSelect, COLUMN_NAME_CODE + " IN (" +
-//                            TextUtils.join(",", Collections.nCopies(codes.length, "?")) +
-//                            ")", codes,
-//                    null, null, null); //from http://stackoverflow.com/questions/7418849/android-sqlite-in-clause-and-placeholders
-//            c.moveToFirst();
-//
-//            return c;
-//        } catch (Exception e) {
-//            Log.e(this.getClass().getCanonicalName(), e.getMessage());
-//        }
-//        return null;
-//    }
-//
-//    public Cursor selectRowsByCodesRange(int startValue, int endValue) {
-////        //todo regex
-////        try {
-////            SQLiteDatabase db = getReadableDatabase();
-////            SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-////
-////            qb.setTables(sqlTable);
-////
-////            Cursor c = qb.query(db, sqlSelect, COLUMN_NAME_CODE + " IN (" +
-////                            TextUtils.join(",", Collections.nCopies(codes.length, "?")) +
-////                            ")", codes,
-////                    null, null, null); //from http://stackoverflow.com/questions/7418849/android-sqlite-in-clause-and-placeholders
-////            c.moveToFirst();
-////
-////            return c;
-////        } catch (Exception e) {
-////            Log.e(this.getClass().getCanonicalName(), e.getMessage());
-////        }
-//        return null;
-//    }
 }

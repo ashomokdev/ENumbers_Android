@@ -7,6 +7,5 @@ class TesseractNotInitializedException extends Exception {
 
     public TesseractNotInitializedException(String detailMessage) {
         super(detailMessage);
-        // TODO Auto-generated constructor stub
     }
 }
