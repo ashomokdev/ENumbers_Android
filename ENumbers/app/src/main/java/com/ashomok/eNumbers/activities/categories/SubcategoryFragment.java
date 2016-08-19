@@ -29,6 +29,15 @@ public class SubcategoryFragment extends ENListFragment {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            Serializable serializable = bundle.getSerializable(Row.TAG);
+
+            if (serializable instanceof Row) {
+                row = (Row) serializable;
+            }
+        }
     }
 
     private void LoadInfoByENumbersRange(int startValue, int endValue) {
