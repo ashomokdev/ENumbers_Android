@@ -51,6 +51,7 @@
         </activity>
         <activity
             android:name=".activities.categories.SubcategoriesListActivity"
+            android:windowSoftInputMode="stateHidden"
             android:parentActivityName=".activities.categories.CategoriesListActivity"
             android:theme="@style/AppTheme">
             <meta-data

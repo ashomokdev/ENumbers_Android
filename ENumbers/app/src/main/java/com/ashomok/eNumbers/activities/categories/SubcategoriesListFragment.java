@@ -2,9 +2,7 @@ package com.ashomok.eNumbers.activities.categories;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.ListFragment;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,7 +12,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.ashomok.eNumbers.R;
-import com.ashomok.eNumbers.data_load.EN;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -26,6 +23,10 @@ import java.util.List;
 public class SubcategoriesListFragment extends Fragment {
 
     private static final String TAG = SubcategoriesListFragment.class.getSimpleName();
+
+    private static final String CHECKED_ROW_POS_ARG = "checkedRowPosition";
+    private int checkedRowPosition;
+
     private OnItemSelectedListener mCallback;
 
     private ListView listView;
@@ -138,20 +139,6 @@ public class SubcategoriesListFragment extends Fragment {
         initCallback(activity);
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-
-        super.onCreate(savedInstanceState);
-
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            Serializable serializable = bundle.getSerializable(Row.TAG);
-
-            if (serializable instanceof Row) {
-                row = (Row) serializable;
-            }
-        }
-    }
 
     public void updateContent(Row settings) {
 
@@ -165,11 +152,28 @@ public class SubcategoriesListFragment extends Fragment {
 
             if (listView != null) {
                 listView.setAdapter(new RowsAdapter(context, rows));
+
+                setCheckedRow(listView, checkedRowPosition);
             } else {
                 Log.e(TAG, "listView == null");
             }
-        } else {
-            Log.e(TAG, "Can not update content. settings == null.");
+        }
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            Serializable serializable = bundle.getSerializable(Row.TAG);
+
+            if (serializable instanceof Row) {
+                row = (Row) serializable;
+            }
+
+            checkedRowPosition = bundle.getInt(CHECKED_ROW_POS_ARG);
         }
     }
 
@@ -177,28 +181,46 @@ public class SubcategoriesListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        // If activity recreated (such as from screen rotate), restore
+        // the previous article selection set by onSaveInstanceState().
+        // This is primarily necessary when in the two-pane layout.
+        if (savedInstanceState != null) {
+            checkedRowPosition = savedInstanceState.getInt(CHECKED_ROW_POS_ARG);
+        }
+
         View view = inflater.inflate(R.layout.listview, null);
 
         context = view.getContext();
         listView = (ListView) view.findViewById(R.id.lv_subcategories);
 
-        updateContent(row);
+      //  updateContent(row);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View arg1, int position, long arg3) {
 
-                Row row = (Row) parent.getAdapter().getItem(position);
-
-                // Notify the parent activity of selected item
-                mCallback.onItemSelected(row);
-
-                // Set the item as checked to be highlighted when in two-pane layout
-                listView.setItemChecked(position, true);
+                checkedRowPosition = position;
+                setCheckedRow(parent, checkedRowPosition);
             }
         });
 
         return view;
+    }
+
+    private void setCheckedRow(AdapterView<?> parent, int position) {
+        Row row = (Row) parent.getAdapter().getItem(position);
+
+        // Notify the parent activity of selected item
+        mCallback.onItemSelected(row);
+
+        // Set the item as checked to be highlighted when in two-pane layout
+        listView.setItemChecked(position, true);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateContent(row);
     }
 
     private void initCallback(Activity activity) {
@@ -208,5 +230,15 @@ public class SubcategoriesListFragment extends Fragment {
             throw new ClassCastException(activity.toString()
                     + " must implement OnItemSelectedListener");
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        // Save the current article selection in case we need to recreate the fragment
+        outState.putSerializable(Row.TAG, row);
+
+        outState.putInt(CHECKED_ROW_POS_ARG, checkedRowPosition);
+
+        super.onSaveInstanceState(outState);
     }
 }

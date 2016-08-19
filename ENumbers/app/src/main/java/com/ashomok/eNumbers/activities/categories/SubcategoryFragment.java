@@ -29,20 +29,9 @@ public class SubcategoryFragment extends ENListFragment {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            Serializable serializable = bundle.getSerializable(Row.TAG);
-
-            if (serializable instanceof Row) {
-                row = (Row) serializable;
-
-                LoadInfoByENumbersRange(row.getStartNumber(), row.getEndNumber());
-            }
-        }
     }
 
-    public void LoadInfoByENumbersRange(int startValue, int endValue) {
+    private void LoadInfoByENumbersRange(int startValue, int endValue) {
         Bundle b = new Bundle();
         b.putInt("start_value", startValue);
         b.putInt("end_value", endValue);
@@ -77,26 +66,10 @@ public class SubcategoryFragment extends ENListFragment {
     @Override
     public void onStart() {
         super.onStart();
-
-        // During startup, check if there are arguments passed to the fragment.
-        // onStart is a good place to do this because the layout has already been
-        // applied to the fragment at this point so we can safely call the method
-        // below that sets the content of fragment b.
-
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            Serializable serializable = bundle.getSerializable(Row.TAG);
-
-            if (serializable instanceof Row) {
-                row = (Row) serializable;
-                updateContent(row);
-            }
-        } else {
             if (row != null) {
                 //based on saved instance state defined during onCreateView
                 updateContent(row);
             }
-        }
     }
 
     @Override

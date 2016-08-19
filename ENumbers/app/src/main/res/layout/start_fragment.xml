@@ -61,7 +61,7 @@
             android:layout_marginTop="@dimen/detail_vertical_margin"
             android:clickable="false"
             android:cursorVisible="false"
-            android:dividerHeight="1dp"
+            android:dividerHeight="2dp"
             android:focusable="false"
             android:focusableInTouchMode="false" />
 

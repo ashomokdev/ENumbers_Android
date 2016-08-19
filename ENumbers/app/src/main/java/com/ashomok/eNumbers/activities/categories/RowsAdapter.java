@@ -39,17 +39,8 @@ class RowsAdapter extends ArrayAdapter<Row> {
         int endNumber = row.getEndNumber();
         String text = "E" + startNumber + " - E" + endNumber;
         codes.setText(text);
+
         title.setText(getContext().getResources().getString(row.getTitleResourceID()));
-
-        //Alternate row Colors in ListView
-        if (row.getTitleResourceID() == (R.string.all)) {
-            convertView.setBackgroundColor(convertView.getContext().getResources().getColor(R.color.light_orange));
-        } else if (position % 2 == 1) {
-            convertView.setBackgroundColor(convertView.getContext().getResources().getColor(R.color.white));
-
-        } else {
-            convertView.setBackgroundColor(convertView.getContext().getResources().getColor(R.color.blue_light));
-        }
 
         // Return the completed view to render on screen
         return convertView;

@@ -1,7 +1,7 @@
 package com.ashomok.eNumbers.activities.categories;
 
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +10,8 @@ import android.view.MenuItem;
 
 import com.ashomok.eNumbers.R;
 
+import java.io.PrintWriter;
+
 /**
  * Created by iuliia on 8/8/16.
  */
@@ -17,12 +19,21 @@ import com.ashomok.eNumbers.R;
 //Activity A
 public class SubcategoriesListActivity extends AppCompatActivity implements SubcategoriesListFragment.OnItemSelectedListener {
 
+    private String category;
     private static final String TAG = SubcategoriesListActivity.class.getSimpleName();
+
+    private static final String TITLE_ARG = "title";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
+
+        FragmentManager.enableDebugLogging(true);
+        getSupportFragmentManager().dump("", null,
+                new PrintWriter(System.out, true), null);
+
 
         setContentView(R.layout.subcategories_list_activity_layout);
 
@@ -41,6 +52,7 @@ public class SubcategoriesListActivity extends AppCompatActivity implements Subc
             // then we don't need to do anything and should return or else
             // we could end up with overlapping fragments.
             if (savedInstanceState != null) {
+                updateActivityTitle(savedInstanceState.getCharSequence(TITLE_ARG).toString());
                 return;
             }
 
@@ -50,7 +62,12 @@ public class SubcategoriesListActivity extends AppCompatActivity implements Subc
             // pass the Intent's extras to the fragment as arguments
             firstFragment.setArguments(getIntent().getExtras());
 
-            updateActivityLabel(((Row) getIntent().getExtras().getSerializable(Row.TAG)));
+            try {
+                category = getResources().getString(((Row) getIntent().getExtras().getSerializable(Row.TAG)).getTitleResourceID());
+                updateActivityTitle();
+            } catch (Exception e) {
+                Log.e(TAG, "Activity title can not be updated.");
+            }
 
             // Add the fragment to the 'fragment_container' FrameLayout
             getFragmentManager().beginTransaction().add(R.id.list_container, firstFragment)
@@ -67,12 +84,17 @@ public class SubcategoriesListActivity extends AppCompatActivity implements Subc
         }
     }
 
+    private void updateActivityTitle() {
+        updateActivityTitle("");
+    }
+
     /**
      * This is a callback that the list fragment (Fragment A)
      * calls when a list item is selected
      */
     @Override
     public void onItemSelected(Row row) {
+
         SubcategoryFragment subcategoryFragment = (SubcategoryFragment) getFragmentManager()
                 .findFragmentById(R.id.details_container);
         if (subcategoryFragment == null) {
@@ -98,13 +120,20 @@ public class SubcategoriesListActivity extends AppCompatActivity implements Subc
             subcategoryFragment.updateContent(row);
         }
 
-        updateActivityLabel(row);
+        updateActivityTitle(getResources().getString(row.getTitleResourceID()));
     }
 
-    private void updateActivityLabel(Row row) {
+    private void updateActivityTitle(String title) {
+        String newTitle;
         try {
-            String label = getResources().getString(row.getTitleResourceID());
-            setTitle(label);
+            if (category != null && !title.isEmpty()) {
+                newTitle = category + ", " + title;
+            } else if (category != null && title.isEmpty()) {
+                newTitle = category;
+            } else {
+                newTitle = title;
+            }
+            setTitle(newTitle);
         } catch (Exception e) {
             Log.w(TAG, "Can't set label for activity's action bar");
         }
@@ -121,4 +150,12 @@ public class SubcategoriesListActivity extends AppCompatActivity implements Subc
         return super.onOptionsItemSelected(item);
     }
 
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // Save the current article selection in case we need to recreate the fragment
+        outState.putCharSequence(TITLE_ARG, getTitle());
+    }
 }
