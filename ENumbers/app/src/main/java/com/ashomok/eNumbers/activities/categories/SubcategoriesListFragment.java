@@ -24,7 +24,7 @@ public class SubcategoriesListFragment extends Fragment {
 
     private static final String TAG = SubcategoriesListFragment.class.getSimpleName();
 
-    private static final String CHECKED_ROW_POS_ARG = "checkedRowPosition";
+    public static final String CHECKED_ROW_POS_ARG = "checkedRowPosition";
     private int checkedRowPosition;
 
     private OnItemSelectedListener mCallback;
@@ -109,17 +109,6 @@ public class SubcategoriesListFragment extends Fragment {
         add(new Row(1000, 1599, R.string.all));
     }};
 
-    public static Fragment newInstance(Row settings) {
-        SubcategoriesListFragment categoryFragment = new SubcategoriesListFragment();
-
-        Bundle arguments = new Bundle();
-
-        arguments.putSerializable(Row.TAG, settings);
-
-        categoryFragment.setArguments(arguments);
-        return categoryFragment;
-    }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -193,8 +182,6 @@ public class SubcategoriesListFragment extends Fragment {
         context = view.getContext();
         listView = (ListView) view.findViewById(R.id.lv_subcategories);
 
-      //  updateContent(row);
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View arg1, int position, long arg3) {
@@ -208,13 +195,16 @@ public class SubcategoriesListFragment extends Fragment {
     }
 
     private void setCheckedRow(AdapterView<?> parent, int position) {
-        Row row = (Row) parent.getAdapter().getItem(position);
+        //position == -1 for handset devices
+        if (position >= 0) {
+            Row row = (Row) parent.getAdapter().getItem(position);
 
-        // Notify the parent activity of selected item
-        mCallback.onItemSelected(row);
+            // Notify the parent activity of selected item
+            mCallback.onItemSelected(row);
 
-        // Set the item as checked to be highlighted when in two-pane layout
-        listView.setItemChecked(position, true);
+            // Set the item as checked to be highlighted when in two-pane layout
+            listView.setItemChecked(position, true);
+        }
     }
 
     @Override

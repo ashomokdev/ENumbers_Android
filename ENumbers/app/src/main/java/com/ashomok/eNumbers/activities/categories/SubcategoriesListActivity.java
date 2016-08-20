@@ -29,12 +29,6 @@ public class SubcategoriesListActivity extends AppCompatActivity implements Subc
 
         super.onCreate(savedInstanceState);
 
-
-        FragmentManager.enableDebugLogging(true);
-        getSupportFragmentManager().dump("", null,
-                new PrintWriter(System.out, true), null);
-
-
         setContentView(R.layout.subcategories_list_activity_layout);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -56,6 +50,8 @@ public class SubcategoriesListActivity extends AppCompatActivity implements Subc
                 return;
             }
 
+
+            //add CHECKED_ROW_POS_ARG = -1 here if handset mode. commit fragment a and b ony once.
             SubcategoriesListFragment firstFragment = new SubcategoriesListFragment();
 
             // In case this activity was started with special instructions from an Intent,
@@ -69,19 +65,26 @@ public class SubcategoriesListActivity extends AppCompatActivity implements Subc
                 Log.e(TAG, "Activity title can not be updated.");
             }
 
-            // Add the fragment to the 'fragment_container' FrameLayout
-            getFragmentManager().beginTransaction().add(R.id.list_container, firstFragment)
-                    .commit();
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.add(R.id.list_container, firstFragment);
+
+            if (findViewById(R.id.details_container) != null) {
+                SubcategoryFragment secondFragment = new SubcategoryFragment();
+                transaction.add(R.id.details_container, secondFragment);
+            } else {
+
+                Bundle bundle = firstFragment.getArguments();
+                bundle.putInt(SubcategoriesListFragment.CHECKED_ROW_POS_ARG, -1);
+                firstFragment.setArguments(bundle);
+
+                Log.d(TAG, "handset device. R.id.details_container not found in layout file");
+            }
+
+            transaction.commit();
         } else {
             Log.e(TAG, "R.id.list_container not found in layout file.");
         }
-        if (findViewById(R.id.details_container) != null) {
-            SubcategoryFragment secondFragment = new SubcategoryFragment();
-            getFragmentManager().beginTransaction().add(R.id.details_container, secondFragment)
-                    .commit();
-        } else {
-            Log.d(TAG, "handset device. R.id.details_container not found in layout file");
-        }
+
     }
 
     private void updateActivityTitle() {
