@@ -15,8 +15,6 @@
         android:id="@+id/lv_categories"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/layout_margin"
-        android:layout_marginRight="@dimen/layout_margin"
         android:layout_gravity="start"
         android:choiceMode="singleChoice"
         android:dividerHeight="2dp" />
