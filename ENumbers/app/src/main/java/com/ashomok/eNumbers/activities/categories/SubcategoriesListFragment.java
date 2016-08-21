@@ -188,6 +188,12 @@ public class SubcategoriesListFragment extends Fragment {
 
                 checkedRowPosition = position;
                 setCheckedRow(parent, checkedRowPosition);
+
+                if (checkedRowPosition >= 0) {
+                    Row row = (Row) parent.getAdapter().getItem(position);
+                    // Notify the parent activity of selected item
+                    mCallback.onItemSelected(row);
+                }
             }
         });
 
@@ -197,10 +203,6 @@ public class SubcategoriesListFragment extends Fragment {
     private void setCheckedRow(AdapterView<?> parent, int position) {
         //position == -1 for handset devices
         if (position >= 0) {
-            Row row = (Row) parent.getAdapter().getItem(position);
-
-            // Notify the parent activity of selected item
-            mCallback.onItemSelected(row);
 
             // Set the item as checked to be highlighted when in two-pane layout
             listView.setItemChecked(position, true);

@@ -80,7 +80,8 @@ public class SubcategoriesListActivity extends AppCompatActivity implements Subc
                 Log.d(TAG, "handset device. R.id.details_container not found in layout file");
             }
 
-            transaction.commit();
+         transaction.commit();
+
         } else {
             Log.e(TAG, "R.id.list_container not found in layout file.");
         }

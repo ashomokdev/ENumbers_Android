@@ -7,7 +7,75 @@
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true">
 
-    <include layout="@layout/en_list_fragment" />
+    <LinearLayout
+        android:id="@+id/viewInput"
+        android:layout_width="fill_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/blue"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/inputE"
+            style="@style/CustomText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin"
+            android:layout_weight="1"
+            android:background="@drawable/apptheme_textfield_default_holo_light"
+            android:imeOptions="actionDone"
+            android:maxLength="30"
+            android:singleLine="true"
+            android:text="@string/startChar"
+            android:textColor="@color/white"
+            android:textCursorDrawable="@drawable/cursorcolor"
+            android:textSize="24sp" />
+
+        <ImageButton
+            android:id="@+id/ic_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/layout_margin"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:paddingEnd="@dimen/icon_padding"
+            android:paddingStart="@dimen/icon_padding"
+            android:paddingTop="@dimen/icon_padding"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_clear_36dp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/data_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/viewInput"
+        android:layout_marginLeft="@dimen/layout_margin"
+        android:layout_marginRight="@dimen/layout_margin">
+
+        <ListView
+            android:id="@+id/ENumberList"
+            style="@style/CustomText"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="@dimen/detail_vertical_margin"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:dividerHeight="2dp"
+            android:focusable="false"
+            android:focusableInTouchMode="false" />
+
+        <TextView
+            android:id="@+id/warning"
+            style="@style/CustomText"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="@dimen/detail_vertical_margin"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:text="@string/notFoundMessage" />
+    </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -19,6 +87,7 @@
         android:layout_margin="16dp"
         android:padding="@dimen/icon_padding"
         android:src="@drawable/ic_camera_alt_36dp" />
-    
+
+    <include layout="@layout/keyboard" />
 </RelativeLayout>
 
