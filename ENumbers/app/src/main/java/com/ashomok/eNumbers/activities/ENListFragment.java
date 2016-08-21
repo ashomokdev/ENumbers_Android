@@ -74,7 +74,8 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
                     method.setAccessible(true);
                     method.invoke(inputEditText, false);
                 } catch (Exception e) {
-                    // ignore
+                    Log.e(TAG, e.getMessage());
+
                 }
             }
 
@@ -143,7 +144,7 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
     }
 
 
-    private void GetInfoFromInputting(String input) {
+    void GetInfoFromInputting(String input) {
 
         OCREngine parser = new OCREngineImpl();
         Set<String> enumbers = parser.parseResult(input);
@@ -151,7 +152,7 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
         GetInfoByENumbersArray(enumbers.toArray(new String[enumbers.size()]));
     }
 
-    private void GetInfoByENumbersArray(String[] enumbers) {
+    void GetInfoByENumbersArray(String[] enumbers) {
         Bundle b = new Bundle();
         b.putStringArray("codes_array", enumbers);
         try {
