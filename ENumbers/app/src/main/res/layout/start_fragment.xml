@@ -77,17 +77,25 @@
             android:text="@string/notFoundMessage" />
     </RelativeLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@id/keyboard"
-        android:layout_margin="16dp"
-        android:padding="@dimen/icon_padding"
-        android:src="@drawable/ic_camera_alt_36dp" />
+        android:layout_alignParentEnd="true">
 
-    <include layout="@layout/keyboard" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:padding="@dimen/icon_padding"
+            android:src="@drawable/ic_camera_alt_36dp" />
+
+        <include layout="@layout/keyboard" />
+    </FrameLayout>
+
 </RelativeLayout>
 

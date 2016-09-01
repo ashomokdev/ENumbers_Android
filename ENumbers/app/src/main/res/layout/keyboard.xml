@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.inputmethodservice.KeyboardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/keyboard"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:background="@color/light_blue"
-    android:keyBackground="@drawable/samplekeybackground"
-    android:keyPreviewLayout="@null"
-    android:keyTextColor="@color/black"
-    android:keyTextSize="20sp"
-    android:paddingBottom="3.5dp"
-    android:paddingTop="3.5dp"
-    android:shadowRadius="0.0"
-    android:visibility="gone" />
 
+<RelativeLayout android:id="@+id/keyboard_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <android.inputmethodservice.KeyboardView
+        android:id="@+id/keyboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/light_blue"
+        android:keyBackground="@drawable/samplekeybackground"
+        android:keyPreviewLayout="@null"
+        android:keyTextColor="@color/black"
+        android:keyTextSize="20sp"
+        android:paddingBottom="3.5dp"
+        android:paddingTop="3.5dp"
+        android:shadowRadius="0.0"
+        android:visibility="gone" />
+</RelativeLayout>
