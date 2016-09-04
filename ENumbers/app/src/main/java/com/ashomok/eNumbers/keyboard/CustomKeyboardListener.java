@@ -5,7 +5,7 @@ import android.inputmethodservice.KeyboardView;
 import android.text.Editable;
 import android.widget.EditText;
 
-public class CustomKeyboardListener implements KeyboardView.OnKeyboardActionListener {
+class CustomKeyboardListener implements KeyboardView.OnKeyboardActionListener {
 
 
     private final EditText text;
@@ -41,6 +41,9 @@ public class CustomKeyboardListener implements KeyboardView.OnKeyboardActionList
                 if (submitListener != null) {
                     submitListener.onSubmit();
                 }
+                break;
+            case 1://switch keyboard
+                //// TODO: 9/2/16
                 break;
             default:
                 char code = (char) primaryCode;
@@ -85,4 +88,5 @@ public class CustomKeyboardListener implements KeyboardView.OnKeyboardActionList
     public interface SubmitListener {
         void onSubmit();
     }
+
 }

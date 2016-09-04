@@ -1,24 +1,14 @@
 package com.ashomok.eNumbers.activities;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
-import android.inputmethodservice.Keyboard;
-import android.inputmethodservice.KeyboardView;
-import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -28,7 +18,7 @@ import android.widget.TextView;
 import com.ashomok.eNumbers.R;
 import com.ashomok.eNumbers.data_load.EN;
 import com.ashomok.eNumbers.data_load.ENAsyncLoader;
-import com.ashomok.eNumbers.keyboard.CustomKeyboardListener;
+import com.ashomok.eNumbers.keyboard.CustomKeyboard;
 import com.ashomok.eNumbers.ocr.OCREngine;
 import com.ashomok.eNumbers.ocr.OCREngineImpl;
 
@@ -43,24 +33,18 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
 
     private ImageButton closeBtn;
     private EditText inputEditText;
-    private static String startChar;
+
     private ENumberListAdapter scAdapter;
     private ListView listView;
     private TextView outputWarning;
-    private AudioManager audioManager;
-    private Context context;
 
     private static final String TAG = ENListFragment.class.getSimpleName();
-    private KeyboardView keyboardView;
-
 
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         try {
             super.onActivityCreated(savedInstanceState);
-
-            startChar = getString(R.string.startChar);
 
             inputEditText = (EditText) view.findViewById(R.id.inputE);
 
@@ -78,11 +62,6 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
 
                 }
             }
-
-            inputEditText.setSelection(inputEditText.getText().length()); //starts type after "E"
-            inputEditText.addTextChangedListener(new StartCharKeeper());
-            inputEditText.setOnEditorActionListener(new BtnDoneHandler());
-
 
             closeBtn = (ImageButton) view.findViewById(R.id.ic_close);
             closeBtn.setOnClickListener(new View.OnClickListener() {
@@ -103,9 +82,14 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
 
             listView.setAdapter(scAdapter);
 
-            createCustomKeyboard(view);
-
-            context = view.getContext();
+            CustomKeyboard keyboard = new CustomKeyboard();
+            keyboard.init(view, inputEditText);
+            keyboard.setOnSubmitListener(new CustomKeyboard.OnSubmitListener() {
+                @Override
+                public void onSubmit() {
+                    GetInfoFromInputting(inputEditText.getText().toString());
+                }
+            });
 
         } catch (Exception e) {
             Log.e(this.getClass().getCanonicalName(), e.getMessage());
@@ -114,33 +98,17 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
     }
 
 
-    @Override public void onActivityCreated(Bundle savedInstanceState) {
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         scAdapter = new ENumberListAdapter(getActivity(), 0);
 
         listView.setAdapter(scAdapter);
 
-
         // Prepare the loader.  Either re-connect with an existing one,
         // or start a new one.
         getLoaderManager().initLoader(0, null, this);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        inputEditText.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    hideCustomKeyboard();
-                    return true;
-                }
-                return false;
-            }
-        });
     }
 
 
@@ -168,115 +136,6 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
         getLoaderManager().initLoader(0, null, this);
         getLoaderManager().restartLoader(0, null, this);
     }
-
-
-    private class BtnDoneHandler implements EditText.OnEditorActionListener {
-        @Override
-        public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-
-                GetInfoFromInputting(textView.getText().toString());
-
-                //to hide the soft keyboard
-                InputMethodManager imm = (InputMethodManager) context.getSystemService(
-                        Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(textView.getWindowToken(), 0);
-
-                return true;
-            }
-
-            return false;
-        }
-    }
-
-    private class StartCharKeeper implements TextWatcher {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            float vol = 0.3f; //This will be half of the default system sound
-            audioManager.playSoundEffect(AudioManager.FX_KEY_CLICK, vol);
-        }
-
-        @Override
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            if (!charSequence.toString().startsWith(startChar)) {
-
-                inputEditText.setText(startChar);
-            }
-            inputEditText.setSelection(inputEditText.getText().length());
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-        }
-    }
-
-
-    private void createCustomKeyboard(View view) {
-        keyboardView = (KeyboardView) view.findViewById(R.id.keyboard);
-        Keyboard customKeyboard = new Keyboard(view.getContext(), R.xml.keyboard_keys);
-        keyboardView.setKeyboard(customKeyboard);
-        CustomKeyboardListener numbersListener = new CustomKeyboardListener(inputEditText);
-
-        final InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (getView() != null) {
-            imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
-        }
-
-        numbersListener.setSubmitListener(new CustomKeyboardListener.SubmitListener() {
-            @Override
-            public void onSubmit() {
-                GetInfoFromInputting(inputEditText.getText().toString());
-                hideCustomKeyboard();
-            }
-        });
-        keyboardView.setOnKeyboardActionListener(numbersListener);
-
-        inputEditText.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                showCustomKeyboard();
-                return false;
-            }
-        });
-
-        inputEditText.setOnFocusChangeListener(focusChangeListener);
-
-        audioManager = (AudioManager) view.getContext().getSystemService(Context.AUDIO_SERVICE);
-    }
-
-    private void hideCustomKeyboard() {
-        keyboardView.setVisibility(View.GONE);
-    }
-
-    private void showCustomKeyboard() {
-        keyboardView.setVisibility(View.VISIBLE);
-
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().addToBackStack(null).commit();
-    }
-
-    private void hideDefaultKeyboard(View v) {
-
-        InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(
-                Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(keyboardView.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-
-        showCustomKeyboard();
-    }
-
-    private View.OnFocusChangeListener focusChangeListener = new View.OnFocusChangeListener() {
-        @Override
-        public void onFocusChange(View v, boolean hasFocus) {
-            if (hasFocus) {
-                hideDefaultKeyboard(v);
-            } else {
-                hideCustomKeyboard();
-            }
-        }
-    };
 
 
     @Override
