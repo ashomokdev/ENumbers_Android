@@ -33,7 +33,6 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
 
     private ImageButton closeBtn;
     private EditText inputEditText;
-
     private ENumberListAdapter scAdapter;
     private ListView listView;
     private TextView outputWarning;
@@ -48,20 +47,20 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
 
             inputEditText = (EditText) view.findViewById(R.id.inputE);
 
-            //hide default keyboard
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                inputEditText.setShowSoftInputOnFocus(false);
-            } else {
-                try {
-                    final Method method = EditText.class.getMethod(
-                            "setShowSoftInputOnFocus", boolean.class);
-                    method.setAccessible(true);
-                    method.invoke(inputEditText, false);
-                } catch (Exception e) {
-                    Log.e(TAG, e.getMessage());
-
-                }
-            }
+//            //hide default keyboard
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                inputEditText.setShowSoftInputOnFocus(false);
+//            } else {
+//                try {
+//                    final Method method = EditText.class.getMethod(
+//                            "setShowSoftInputOnFocus", boolean.class);
+//                    method.setAccessible(true);
+//                    method.invoke(inputEditText, false);
+//                } catch (Exception e) {
+//                    Log.e(TAG, e.getMessage());
+//
+//                }
+//            }
 
             closeBtn = (ImageButton) view.findViewById(R.id.ic_close);
             closeBtn.setOnClickListener(new View.OnClickListener() {
@@ -82,18 +81,8 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
 
             listView.setAdapter(scAdapter);
 
-            CustomKeyboard keyboard = new CustomKeyboard();
-            keyboard.init(view, inputEditText);
-            keyboard.setOnSubmitListener(new CustomKeyboard.OnSubmitListener() {
-                @Override
-                public void onSubmit() {
-                    GetInfoFromInputting(inputEditText.getText().toString());
-                }
-            });
-
         } catch (Exception e) {
             Log.e(this.getClass().getCanonicalName(), e.getMessage());
-            e.printStackTrace();
         }
     }
 
@@ -109,6 +98,16 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
         // Prepare the loader.  Either re-connect with an existing one,
         // or start a new one.
         getLoaderManager().initLoader(0, null, this);
+
+        //todo call keyboard insted. implement fassade pattern here
+        CustomKeyboard keyboard = new CustomKeyboard();
+        keyboard.init(getActivity());
+        keyboard.setOnSubmitListener(new CustomKeyboard.OnSubmitListener() {
+            @Override
+            public void onSubmit() {
+                GetInfoFromInputting(inputEditText.getText().toString());
+            }
+        });
     }
 
 

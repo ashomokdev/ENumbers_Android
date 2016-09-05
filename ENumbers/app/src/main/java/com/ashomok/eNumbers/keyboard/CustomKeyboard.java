@@ -1,5 +1,6 @@
 package com.ashomok.eNumbers.keyboard;
 
+import android.app.Activity;
 import android.content.Context;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
@@ -22,24 +23,29 @@ import com.ashomok.eNumbers.R;
 public class CustomKeyboard {
     private static final String TAG = CustomKeyboard.class.getSimpleName();
     private KeyboardView keyboardView;
-    private View parent;
+    private Context context;
     private EditText editText;
     private AudioManager audioManager;
     private CustomKeyboard.OnSubmitListener listener;
     private static String startChar;
 
-    private void createCustomKeyboard(View view, final EditText inputEditText) {
-        keyboardView = (KeyboardView) view.findViewById(R.id.keyboard);
-        Keyboard customKeyboard = new Keyboard(view.getContext(), R.xml.keyboard_keys);
+    private void createCustomKeyboard(Context context) {
+
+        editText = (EditText) ((Activity) context).findViewById(R.id.inputE);
+
+        keyboardView = (KeyboardView) ((Activity) context).findViewById(R.id.keyboard);
+        Keyboard customKeyboard = new Keyboard(context, R.xml.keyboard_keys);
         keyboardView.setKeyboard(customKeyboard);
-        CustomKeyboardListener numbersListener = new CustomKeyboardListener(inputEditText);
+        CustomKeyboardListener numbersListener = new CustomKeyboardListener(editText);
 
-        startChar = view.getContext().getString(R.string.startChar);
 
-        final InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (view != null) {
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
+        startChar = context.getString(R.string.startChar);
+
+        //todo reduntant?
+//        final InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+//        if (view != null) {
+//            imm.hideSoftInputFromWindow((Activity)context).getWindowToken(), 0);
+//        }
 
         numbersListener.setSubmitListener(new CustomKeyboardListener.SubmitListener() {
             @Override
@@ -51,14 +57,14 @@ public class CustomKeyboard {
 
         keyboardView.setOnKeyboardActionListener(numbersListener);
 
-        inputEditText.setOnClickListener(new View.OnClickListener() {
+        editText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showCustomKeyboard();
             }
         });
 
-        inputEditText.setOnKeyListener(new View.OnKeyListener() {
+        editText.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -69,7 +75,7 @@ public class CustomKeyboard {
             }
         });
 
-        inputEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
@@ -80,11 +86,11 @@ public class CustomKeyboard {
             }
         });
 
-        audioManager = (AudioManager) view.getContext().getSystemService(Context.AUDIO_SERVICE);
+        audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 
-        inputEditText.setSelection(inputEditText.getText().length()); //starts type after "E"
-        inputEditText.addTextChangedListener(new StartCharKeeper());
-        inputEditText.setOnEditorActionListener(new BtnDoneHandler());
+        editText.setSelection(editText.getText().length()); //starts type after "E"
+        editText.addTextChangedListener(new StartCharKeeper());
+        editText.setOnEditorActionListener(new BtnDoneHandler());
 
     }
 
@@ -105,11 +111,9 @@ public class CustomKeyboard {
         showCustomKeyboard();
     }
 
-    public void init(View parent, EditText inputEditText) {
-        this.parent = parent;
-        this.editText = inputEditText;
-
-        createCustomKeyboard(parent, inputEditText);
+    public void init(Context context) {
+        this.context = context;
+        createCustomKeyboard(context);
     }
 
     public interface OnSubmitListener {
@@ -121,7 +125,7 @@ public class CustomKeyboard {
     }
 
     public void setOnSubmitListener(CustomKeyboard.OnSubmitListener listener) {
-        if (editText == null || parent == null) {
+        if (editText == null || context == null) {
             Log.e(TAG, "Keyboard was not initialized. Call init() before");
         } else {
             this.listener = listener;
@@ -154,7 +158,7 @@ public class CustomKeyboard {
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             float vol = 0.3f; //This will be half of the default system sound
-              audioManager.playSoundEffect(AudioManager.FX_KEY_CLICK, vol);
+            audioManager.playSoundEffect(AudioManager.FX_KEY_CLICK, vol);
         }
 
         @Override

@@ -3,6 +3,7 @@ package com.ashomok.eNumbers.keyboard;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.text.Editable;
+import android.view.View;
 import android.widget.EditText;
 
 class CustomKeyboardListener implements KeyboardView.OnKeyboardActionListener {
@@ -42,7 +43,10 @@ class CustomKeyboardListener implements KeyboardView.OnKeyboardActionListener {
                     submitListener.onSubmit();
                 }
                 break;
-            case 1://switch keyboard
+            case 1:
+                DefaultKeyboard keyboard = new DefaultKeyboard(text.getContext());
+                keyboard.init();
+                //switch keyboard
                 //// TODO: 9/2/16
                 break;
             default:
