@@ -2,10 +2,8 @@ package com.ashomok.eNumbers.activities;
 
 import android.app.Fragment;
 import android.app.LoaderManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,11 +16,11 @@ import android.widget.TextView;
 import com.ashomok.eNumbers.R;
 import com.ashomok.eNumbers.data_load.EN;
 import com.ashomok.eNumbers.data_load.ENAsyncLoader;
-import com.ashomok.eNumbers.keyboard.CustomKeyboard;
+import com.ashomok.eNumbers.keyboard.KeyboardFacade;
+import com.ashomok.eNumbers.keyboard.OnSubmitListener;
 import com.ashomok.eNumbers.ocr.OCREngine;
 import com.ashomok.eNumbers.ocr.OCREngineImpl;
 
-import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Set;
 
@@ -31,11 +29,9 @@ import java.util.Set;
  */
 public abstract class ENListFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<EN>> {
 
-    private ImageButton closeBtn;
     private EditText inputEditText;
     private ENumberListAdapter scAdapter;
     private ListView listView;
-    private TextView outputWarning;
 
     private static final String TAG = ENListFragment.class.getSimpleName();
 
@@ -47,38 +43,20 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
 
             inputEditText = (EditText) view.findViewById(R.id.inputE);
 
-//            //hide default keyboard
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//                inputEditText.setShowSoftInputOnFocus(false);
-//            } else {
-//                try {
-//                    final Method method = EditText.class.getMethod(
-//                            "setShowSoftInputOnFocus", boolean.class);
-//                    method.setAccessible(true);
-//                    method.invoke(inputEditText, false);
-//                } catch (Exception e) {
-//                    Log.e(TAG, e.getMessage());
-//
-//                }
-//            }
-
-            closeBtn = (ImageButton) view.findViewById(R.id.ic_close);
+            ImageButton closeBtn = (ImageButton) view.findViewById(R.id.ic_close);
             closeBtn.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View view) {
 
                     inputEditText.setText("");
-
                     showAllData();
                 }
             });
 
             listView = (ListView) view.findViewById(R.id.ENumberList);
-
-            outputWarning = (TextView) view.findViewById(R.id.warning);
+            TextView outputWarning = (TextView) view.findViewById(R.id.warning);
             listView.setEmptyView(outputWarning);
-
             listView.setAdapter(scAdapter);
 
         } catch (Exception e) {
@@ -98,14 +76,28 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
         // Prepare the loader.  Either re-connect with an existing one,
         // or start a new one.
         getLoaderManager().initLoader(0, null, this);
+    }
 
-        //todo call keyboard insted. implement fassade pattern here
-        CustomKeyboard keyboard = new CustomKeyboard();
-        keyboard.init(getActivity());
-        keyboard.setOnSubmitListener(new CustomKeyboard.OnSubmitListener() {
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
+        final KeyboardFacade keyboard = new KeyboardFacade(getActivity());
+        keyboard.init();
+        keyboard.setOnSubmitListener(new OnSubmitListener() {
             @Override
             public void onSubmit() {
                 GetInfoFromInputting(inputEditText.getText().toString());
+            }
+        });
+
+        inputEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (hasFocus) {
+                    keyboard.show();
+                }
             }
         });
     }

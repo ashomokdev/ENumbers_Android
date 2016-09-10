@@ -3,14 +3,19 @@ package com.ashomok.eNumbers.keyboard;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.text.Editable;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
 class CustomKeyboardListener implements KeyboardView.OnKeyboardActionListener {
 
 
+    private static final String TAG = CustomKeyboardListener.class.getSimpleName();
     private final EditText text;
-    private SubmitListener submitListener;
+    private OnSubmitListener submitListener;
+
+
+    private OnKeyboardSwitchListener keyboardSwitchListener;
 
     public CustomKeyboardListener(EditText text) {
         this.text = text;
@@ -38,16 +43,17 @@ class CustomKeyboardListener implements KeyboardView.OnKeyboardActionListener {
                 editable.append(", E");
                 break;
             case Keyboard.KEYCODE_DONE:
-                SubmitListener submitListener = getSubmitListener();
+                OnSubmitListener submitListener = getSubmitListener();
                 if (submitListener != null) {
                     submitListener.onSubmit();
                 }
                 break;
             case 1:
-                DefaultKeyboard keyboard = new DefaultKeyboard(text.getContext());
-                keyboard.init();
                 //switch keyboard
-                //// TODO: 9/2/16
+                OnKeyboardSwitchListener keyboardSwitchListener = getKeyboardSwitchListener();
+                if (keyboardSwitchListener != null) {
+                    keyboardSwitchListener.onKeyboardSwitch();
+                }
                 break;
             default:
                 char code = (char) primaryCode;
@@ -81,16 +87,26 @@ class CustomKeyboardListener implements KeyboardView.OnKeyboardActionListener {
 
     }
 
-    public SubmitListener getSubmitListener() {
+    public OnSubmitListener getSubmitListener() {
+        if (submitListener == null) {
+            Log.e(TAG, "SubmitListener was not setted. Call setSubmitListener(OnSubmitListener submitListener) before.");
+        }
         return submitListener;
     }
 
-    public void setSubmitListener(SubmitListener submitListener) {
+    public void setSubmitListener(OnSubmitListener submitListener) {
         this.submitListener = submitListener;
     }
 
-    public interface SubmitListener {
-        void onSubmit();
+    public OnKeyboardSwitchListener getKeyboardSwitchListener() {
+        if (keyboardSwitchListener == null) {
+            Log.e(TAG, "keyboardSwitchListener was not setted. Call setKeyboardSwitchListener(OnKeyboardSwitchListener keyboardSwitchListener) before.");
+        }
+        return keyboardSwitchListener;
+    }
+
+    public void setKeyboardSwitchListener(OnKeyboardSwitchListener keyboardSwitchListener) {
+        this.keyboardSwitchListener = keyboardSwitchListener;
     }
 
 }
