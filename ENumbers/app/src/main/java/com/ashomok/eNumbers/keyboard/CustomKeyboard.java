@@ -22,18 +22,18 @@ import java.lang.reflect.Method;
 /**
  * Created by iuliia on 9/2/16.
  */
-public class CustomKeyboard implements com.ashomok.eNumbers.keyboard.Keyboard {
+public class CustomKeyboard extends KeyboardImpl {
     private static final String TAG = CustomKeyboard.class.getSimpleName();
-    private KeyboardView keyboardView;
-    private Context context;
     private EditText editText;
     private AudioManager audioManager;
     private OnSubmitListener onSubmitListener;
     private static String startChar;
-    private boolean isVisible;
-    private OnKeyboardSwitchListener onKeyboardSwitchListener;
+    private KeyboardView keyboardView;
 
-    private void createCustomKeyboard(Context context) {
+
+    @Override
+    public void init(Context context) {
+        this.context = context;
 
         startChar = context.getString(R.string.startChar);
 
@@ -94,43 +94,18 @@ public class CustomKeyboard implements com.ashomok.eNumbers.keyboard.Keyboard {
         editText.setSelection(editText.getText().length()); //starts type after "E"
         editText.addTextChangedListener(new StartCharKeeper());
         editText.setOnEditorActionListener(new BtnDoneHandler());
-
     }
 
     @Override
-   public void hide() {
-        Log.d(TAG, "hide");
-
+    public void hide() {
+        super.hide();
         keyboardView.setVisibility(View.GONE);
-        isVisible = false;
     }
 
     @Override
     public void show() {
-        Log.d(TAG, "show");
-
+        super.show();
         keyboardView.setVisibility(View.VISIBLE);
-        isVisible = true;
-    }
-
-    @Override
-    public void init(Context context) {
-        this.context = context;
-        createCustomKeyboard(context);
-    }
-
-    @Override
-    public boolean isVisible() {
-        return isVisible;
-    }
-
-    @Override
-    public void setOnKeyboardSwitchListener(OnKeyboardSwitchListener listener) {
-        if (context == null) {
-            Log.e(TAG, "Keyboard was not initialized. Call init() before");
-        } else {
-            onKeyboardSwitchListener = listener;
-        }
     }
 
     @Override

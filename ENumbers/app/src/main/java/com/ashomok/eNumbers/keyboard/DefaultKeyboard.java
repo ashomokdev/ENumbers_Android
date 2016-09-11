@@ -18,24 +18,15 @@ import java.lang.reflect.Method;
 /**
  * Created by iuliia on 9/4/16.
  */
-public class DefaultKeyboard implements Keyboard {
+public class DefaultKeyboard extends KeyboardImpl {
     private static final String TAG = DefaultKeyboard.class.getSimpleName();
-
-    private boolean isVisible;
-    private EditText editText;
-    private Context context;
-    private OnKeyboardSwitchListener onKeyboardSwitchListener;
     private View view;
 
-    public void setVisibility (boolean visible) {
-        isVisible = visible;
-    }
 
     @Override
     public void init(Context context) {
 
         this.context = context;
-        editText = (EditText) ((Activity) context).findViewById(R.id.inputE);
 
         //init custom button
         LayoutInflater inflater = ((Activity) context).getLayoutInflater();
@@ -64,19 +55,7 @@ public class DefaultKeyboard implements Keyboard {
         return onKeyboardSwitchListener;
     }
 
-    @Override
-    public boolean isVisible() {
-        return isVisible;
-    }
 
-    @Override
-    public void setOnKeyboardSwitchListener(OnKeyboardSwitchListener listener) {
-        if (context == null) {
-            Log.e(TAG, "Keyboard was not initialized. Call init() before");
-        } else {
-           onKeyboardSwitchListener = listener;
-        }
-    }
 
     @Override
     public void setOnSubmitListener(OnSubmitListener onSubmitListener) {
@@ -85,29 +64,26 @@ public class DefaultKeyboard implements Keyboard {
 
     @Override
     public void hide() {
-        Log.d(TAG, "hide");
-
+        super.hide();
         view.setVisibility(View.GONE);
 
-        View view =((Activity) context).getCurrentFocus();
-        if (view != null) {
+        View v =((Activity) context).getCurrentFocus();
+        if (v != null) {
             InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
         }
-        isVisible = false;
+
     }
 
     @Override
     public void show() {
-        Log.d(TAG, "show");
-
+        super.show();
         view.setVisibility(View.VISIBLE);
 
-        View view =((Activity) context).getCurrentFocus();
-        if (view != null) {
+        View v =((Activity) context).getCurrentFocus();
+        if (v != null) {
             InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
+            imm.showSoftInput(v, InputMethodManager.SHOW_IMPLICIT);
         }
-       isVisible = true;
     }
 }
