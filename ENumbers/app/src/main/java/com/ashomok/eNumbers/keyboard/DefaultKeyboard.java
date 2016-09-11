@@ -85,6 +85,8 @@ public class DefaultKeyboard implements Keyboard {
 
     @Override
     public void hide() {
+        Log.d(TAG, "hide");
+
         view.setVisibility(View.GONE);
 
         View view =((Activity) context).getCurrentFocus();
@@ -92,27 +94,13 @@ public class DefaultKeyboard implements Keyboard {
             InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
-
-
-//reduntant?
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            editText.setShowSoftInputOnFocus(false);
-//        } else {
-//            try {
-//                final Method method = EditText.class.getMethod(
-//                        "setShowSoftInputOnFocus", boolean.class);
-//                method.setAccessible(true);
-//                method.invoke(editText, false);
-//            } catch (Exception e) {
-//                Log.e(TAG, e.getMessage());
-//
-//            }
-//        }
         isVisible = false;
     }
 
     @Override
     public void show() {
+        Log.d(TAG, "show");
+
         view.setVisibility(View.VISIBLE);
 
         View view =((Activity) context).getCurrentFocus();
@@ -120,21 +108,6 @@ public class DefaultKeyboard implements Keyboard {
             InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
         }
-
-////reduntant?
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            editText.setShowSoftInputOnFocus(true);
-//        } else {
-//            try {
-//                final Method method = EditText.class.getMethod(
-//                        "setShowSoftInputOnFocus", boolean.class);
-//                method.setAccessible(true);
-//                method.invoke(editText, true);
-//            } catch (Exception e) {
-//                Log.e(TAG, e.getMessage());
-//
-//            }
-//        }
        isVisible = true;
     }
 }

@@ -33,7 +33,6 @@ public class MainFragment extends ENListFragment implements TaskDelegate {
 
     private String img_path;
     private Uri outputFileUri;
-    private FloatingActionButton fab;
     private RecognizeImageAsyncTask recognizeImageAsyncTask;
 
     private static final String TAG = "MainFragment";
@@ -51,7 +50,7 @@ public class MainFragment extends ENListFragment implements TaskDelegate {
         try {
             super.onViewCreated(view, savedInstanceState);
 
-            fab = (FloatingActionButton) view.findViewById(R.id.fab);
+            FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
             fab.setOnClickListener(new FabClickHandler());
 
             context = view.getContext();

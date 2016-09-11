@@ -99,12 +99,16 @@ public class CustomKeyboard implements com.ashomok.eNumbers.keyboard.Keyboard {
 
     @Override
    public void hide() {
+        Log.d(TAG, "hide");
+
         keyboardView.setVisibility(View.GONE);
         isVisible = false;
     }
 
     @Override
     public void show() {
+        Log.d(TAG, "show");
+
         keyboardView.setVisibility(View.VISIBLE);
         isVisible = true;
     }
@@ -145,7 +149,6 @@ public class CustomKeyboard implements com.ashomok.eNumbers.keyboard.Keyboard {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
 
                 onSubmitListener.onSubmit();
-
                 return true;
             }
 

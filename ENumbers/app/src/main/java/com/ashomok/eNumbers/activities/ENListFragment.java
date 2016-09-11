@@ -41,6 +41,10 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
         try {
             super.onActivityCreated(savedInstanceState);
 
+            // Prepare the loader.  Either re-connect with an existing one,
+            // or start a new one.
+            getLoaderManager().initLoader(0, null, this);
+
             inputEditText = (EditText) view.findViewById(R.id.inputE);
 
             ImageButton closeBtn = (ImageButton) view.findViewById(R.id.ic_close);
@@ -58,7 +62,6 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
             TextView outputWarning = (TextView) view.findViewById(R.id.warning);
             listView.setEmptyView(outputWarning);
             listView.setAdapter(scAdapter);
-
         } catch (Exception e) {
             Log.e(this.getClass().getCanonicalName(), e.getMessage());
         }
@@ -73,15 +76,15 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
 
         listView.setAdapter(scAdapter);
 
-        // Prepare the loader.  Either re-connect with an existing one,
-        // or start a new one.
-        getLoaderManager().initLoader(0, null, this);
     }
 
     @Override
-    public void onResume()
-    {
+    public void onResume() {
+        //todo save info about keyboard type and visibility for restore after screen rotation
+
         super.onResume();
+
+        GetInfoFromInputting(inputEditText.getText().toString());
 
         final KeyboardFacade keyboard = new KeyboardFacade(getActivity());
         keyboard.init();
@@ -92,6 +95,8 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
             }
         });
 
+        //inputedit text never lose focus - this code will run only once.
+        //EXPLANATION: By its nature the first time you touch an EditText it receives focus with OnFocusChangeListener so that the user can type. The action is consumed here therefor OnClick is not called. Each successive touch doesn't change the focus so the event trickles down to the OnClickListener.
         inputEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
@@ -100,15 +105,26 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
                 }
             }
         });
+
+        inputEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                keyboard.show();
+            }
+        });
     }
 
 
     void GetInfoFromInputting(String input) {
+        if (input.contains("E") && ("E").contains(input)) {
+            showAllData();
+        } else {
 
-        OCREngine parser = new OCREngineImpl();
-        Set<String> enumbers = parser.parseResult(input);
+            OCREngine parser = new OCREngineImpl();
+            Set<String> enumbers = parser.parseResult(input);
 
-        GetInfoByENumbersArray(enumbers.toArray(new String[enumbers.size()]));
+            GetInfoByENumbersArray(enumbers.toArray(new String[enumbers.size()]));
+        }
     }
 
     void GetInfoByENumbersArray(String[] enumbers) {
@@ -124,7 +140,6 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
     }
 
     private void showAllData() {
-        getLoaderManager().initLoader(0, null, this);
         getLoaderManager().restartLoader(0, null, this);
     }
 
@@ -152,7 +167,6 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
                 public void onItemClick(AdapterView<?> parent, View arg1, int position, long arg3) {
 
                     EN item = (EN) parent.getAdapter().getItem(position);
-
                     Intent intent = new Intent(getActivity(), ENDetailsActivity.class);
 
                     intent.putExtra(EN.TAG, item);

@@ -11,14 +11,14 @@ class CustomKeyboardListener implements KeyboardView.OnKeyboardActionListener {
 
 
     private static final String TAG = CustomKeyboardListener.class.getSimpleName();
-    private final EditText text;
+    private final EditText editText;
     private OnSubmitListener submitListener;
 
 
     private OnKeyboardSwitchListener keyboardSwitchListener;
 
     public CustomKeyboardListener(EditText text) {
-        this.text = text;
+        this.editText = text;
     }
 
     @Override
@@ -33,7 +33,7 @@ class CustomKeyboardListener implements KeyboardView.OnKeyboardActionListener {
 
     @Override
     public void onKey(int primaryCode, int[] keyCodes) {
-        Editable editable = text.getEditableText();
+        Editable editable = editText.getEditableText();
 
         switch (primaryCode) {
             case Keyboard.KEYCODE_DELETE:
