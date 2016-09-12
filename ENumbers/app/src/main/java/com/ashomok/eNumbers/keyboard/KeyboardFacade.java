@@ -1,7 +1,13 @@
 package com.ashomok.eNumbers.keyboard;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
+import android.widget.EditText;
+
+import com.ashomok.eNumbers.R;
 
 /**
  * Created by iuliia on 9/4/16.
@@ -12,6 +18,7 @@ public class KeyboardFacade {
     private Context context;
     private Keyboard customKeyboard;
     private Keyboard defaultKeyboard;
+    private boolean isDefaultKeyboardShown;
 
     public KeyboardFacade(Context context) {
         this.context = context;
@@ -39,18 +46,36 @@ public class KeyboardFacade {
             }
         });
 
+        EditText editText = (EditText) ((Activity) context).findViewById(R.id.inputE);
+        editText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if (event.getAction() != KeyEvent.ACTION_DOWN) {
+                    return true;
+                }
+
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    hide();
+                    return true;
+                }
+                return false;
+            }
+        });
 
     }
 
-    private void showDefaultKeyboard() {
+    public void showDefaultKeyboard() {
         setKeyboardVisibility(customKeyboard, false);
         setKeyboardVisibility(defaultKeyboard, true);
+        isDefaultKeyboardShown = true;
     }
 
 
-    private void showCustomKeyboard() {
+    public void showCustomKeyboard() {
         setKeyboardVisibility(customKeyboard, true);
         setKeyboardVisibility(defaultKeyboard, false);
+        isDefaultKeyboardShown = false;
     }
 
     private void setKeyboardVisibility(Keyboard keyboard, boolean isVisible) {
@@ -72,5 +97,17 @@ public class KeyboardFacade {
 
     public void show() {
         showCustomKeyboard();
+    }
+
+    public boolean isDefaultKeyboardShown() {
+        return isDefaultKeyboardShown;
+    }
+
+    public void hide() {
+        if (isDefaultKeyboardShown) {
+            setKeyboardVisibility(defaultKeyboard, false);
+        } else {
+            setKeyboardVisibility(customKeyboard, false);
+        }
     }
 }

@@ -16,13 +16,13 @@ public abstract class KeyboardImpl implements Keyboard{
 
     @Override
     public void hide() {
-        Log.d(TAG, "hide");
+
         isVisible = false;
     }
 
     @Override
     public void show() {
-        Log.d(TAG, "show");
+
         isVisible = true;
     }
 

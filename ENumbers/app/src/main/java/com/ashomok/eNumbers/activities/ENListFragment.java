@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.Loader;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -13,7 +14,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.ashomok.eNumbers.R;
+import com.ashomok.eNumbers.R;;
 import com.ashomok.eNumbers.data_load.EN;
 import com.ashomok.eNumbers.data_load.ENAsyncLoader;
 import com.ashomok.eNumbers.keyboard.KeyboardFacade;
@@ -29,11 +30,16 @@ import java.util.Set;
  */
 public abstract class ENListFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<EN>> {
 
+    private static final String IS_KEYBOARD_SWOWN_ARG = "IS_KEYBOARD_SWOWN";
+    private static final String IS_DEFAULT_KEYBOARD_ARG = "IS_DEFAULT_KEYBOARD";
     private EditText inputEditText;
     private ENumberListAdapter scAdapter;
     private ListView listView;
 
     private static final String TAG = ENListFragment.class.getSimpleName();
+    private boolean isKeyboardShown;
+    private boolean isDefaultKeyboard;
+    private  KeyboardFacade keyboard;
 
 
     @Override
@@ -76,17 +82,17 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
 
         listView.setAdapter(scAdapter);
 
-    }
 
-    @Override
-    public void onResume() {
-        //todo save info about keyboard type and visibility for restore after screen rotation
-
-        super.onResume();
+        if (savedInstanceState != null) {
+            isKeyboardShown = savedInstanceState.getBoolean(IS_KEYBOARD_SWOWN_ARG);
+            if (isKeyboardShown) {
+                isDefaultKeyboard = savedInstanceState.getBoolean(IS_DEFAULT_KEYBOARD_ARG);
+            }
+        }
 
         GetInfoFromInputting(inputEditText.getText().toString());
 
-        final KeyboardFacade keyboard = new KeyboardFacade(getActivity());
+        keyboard = new KeyboardFacade(getActivity());
         keyboard.init();
         keyboard.setOnSubmitListener(new OnSubmitListener() {
             @Override
@@ -95,28 +101,52 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
             }
         });
 
+        inputEditText.clearFocus();
+
         //inputedit text never lose focus - this code will run only once.
         //EXPLANATION: By its nature the first time you touch an EditText it receives focus with OnFocusChangeListener so that the user can type. The action is consumed here therefor OnClick is not called. Each successive touch doesn't change the focus so the event trickles down to the OnClickListener.
         inputEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
                 if (hasFocus) {
-                    keyboard.show();
+                    Log.d(TAG, "hasFocus");
+                    if (isKeyboardShown) {
+                        if (isDefaultKeyboard) {
+                            keyboard.showDefaultKeyboard();
+                        } else {
+                            keyboard.showCustomKeyboard();
+                        }
+                    } else {
+                        keyboard.show();
+                    }
+
+                    //for savedInstanceState
+                    isKeyboardShown = true;
+                }
+                else
+                {
+                    Log.d(TAG, "lose focus");
                 }
             }
         });
+
+
 
         inputEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 keyboard.show();
+
+                //for savedInstanceState
+                isKeyboardShown = true;
             }
         });
+
     }
 
 
     void GetInfoFromInputting(String input) {
-        if (input.contains("E") && ("E").contains(input)) {
+        if (input.contains(getString(R.string.startChar)) && (getString(R.string.startChar)).contains(input)) {
             showAllData();
         } else {
 
@@ -182,6 +212,16 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
     public void onLoaderReset(Loader<List<EN>> loader) {
         Log.d(TAG, "onLoaderReset(Loader<List<EN>> loader) ");
         scAdapter.setData(null);
+    }
+
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+
+        outState.putBoolean(IS_KEYBOARD_SWOWN_ARG, isKeyboardShown);
+        outState.putBoolean(IS_DEFAULT_KEYBOARD_ARG, keyboard.isDefaultKeyboardShown());
+
+        super.onSaveInstanceState(outState);
     }
 
 }

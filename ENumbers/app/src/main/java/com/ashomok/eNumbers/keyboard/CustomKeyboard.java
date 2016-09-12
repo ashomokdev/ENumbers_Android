@@ -62,33 +62,6 @@ public class CustomKeyboard extends KeyboardImpl {
 
         keyboardView.setOnKeyboardActionListener(numbersListener);
 
-        editText.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    hide();
-                    return true;
-                }
-                return false;
-            }
-        });
-
-
-        //block default keyboard
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            editText.setShowSoftInputOnFocus(false);
-        } else {
-            try {
-                final Method method = EditText.class.getMethod(
-                        "setShowSoftInputOnFocus", boolean.class);
-                method.setAccessible(true);
-                method.invoke(editText, false);
-            } catch (Exception e) {
-                Log.e(TAG, e.getMessage());
-
-            }
-        }
-
         audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 
         editText.setSelection(editText.getText().length()); //starts type after "E"
@@ -98,12 +71,14 @@ public class CustomKeyboard extends KeyboardImpl {
 
     @Override
     public void hide() {
+        Log.d(TAG, "hide");
         super.hide();
         keyboardView.setVisibility(View.GONE);
     }
 
     @Override
     public void show() {
+        Log.d(TAG, "show");
         super.show();
         keyboardView.setVisibility(View.VISIBLE);
     }
