@@ -9,4 +9,5 @@
     <!-- Pressed state -->
     <item
         android:state_pressed="true"
-        android:drawable="@drawable/pressed" /></selector>
+        android:drawable="@drawable/pressed" />
+</selector>

@@ -6,12 +6,11 @@
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
     android:background="@color/light_blue"
-    android:keyBackground="@drawable/samplekeybackground"
+    android:keyBackground="@drawable/keybackground"
     android:keyPreviewLayout="@null"
     android:keyTextColor="@color/black"
-    android:keyTextSize="20sp"
-    android:paddingBottom="3.5dp"
-    android:paddingTop="3.5dp"
+    android:keyTextSize="@dimen/keyboard_text_size"
+    android:paddingBottom="3dp"
     android:shadowRadius="0.0"
     android:visibility="gone" />
 

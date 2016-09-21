@@ -3,14 +3,7 @@
     android:horizontalGap="0px"
     android:keyHeight="@dimen/keyboard_key_hight"
     android:verticalGap="0px">
-    <Row>
-        <!--custom-->
-        <Key
-            android:codes="1"
-            android:keyEdgeFlags="left"
-            android:keyLabel="@string/search_by_name"
-            android:keyWidth="100%p" />
-    </Row>
+
     <Row>
         <Key
             android:codes="49"

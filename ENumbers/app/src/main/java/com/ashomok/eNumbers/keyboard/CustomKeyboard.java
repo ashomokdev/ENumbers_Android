@@ -5,37 +5,31 @@ import android.content.Context;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.media.AudioManager;
-import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.RelativeLayout;
 
 import com.ashomok.eNumbers.R;
-
-import java.lang.reflect.Method;
 
 /**
  * Created by iuliia on 9/2/16.
  */
-public class CustomKeyboard extends KeyboardImpl {
+class CustomKeyboard extends KeyboardImpl {
     private static final String TAG = CustomKeyboard.class.getSimpleName();
     private EditText editText;
     private AudioManager audioManager;
     private OnSubmitListener onSubmitListener;
-    private static String startChar;
     private KeyboardView keyboardView;
+    private TextWatcher watcher;
 
 
     @Override
     public void init(Context context) {
-        this.context = context;
 
-        startChar = context.getString(R.string.startChar);
+        super.init(context);
 
         editText = (EditText) ((Activity) context).findViewById(R.id.inputE);
 
@@ -53,20 +47,20 @@ public class CustomKeyboard extends KeyboardImpl {
             }
         });
 
-        numbersListener.setKeyboardSwitchListener(new OnKeyboardSwitchListener() {
-            @Override
-            public void onKeyboardSwitch() {
-                onKeyboardSwitchListener.onKeyboardSwitch();
-            }
-        });
-
         keyboardView.setOnKeyboardActionListener(numbersListener);
 
         audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 
         editText.setSelection(editText.getText().length()); //starts type after "E"
-        editText.addTextChangedListener(new StartCharKeeper());
-        editText.setOnEditorActionListener(new BtnDoneHandler());
+
+        watcher = new StartCharKeeper();
+
+        keyboardView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
+            @Override
+            public void onSystemUiVisibilityChange(int i) {
+
+            }
+        });
     }
 
     @Override
@@ -74,6 +68,11 @@ public class CustomKeyboard extends KeyboardImpl {
         Log.d(TAG, "hide");
         super.hide();
         keyboardView.setVisibility(View.GONE);
+
+        editText.removeTextChangedListener(watcher);
+
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) switchButton.getLayoutParams();
+        params.removeRule(RelativeLayout.ABOVE);
     }
 
     @Override
@@ -81,6 +80,15 @@ public class CustomKeyboard extends KeyboardImpl {
         Log.d(TAG, "show");
         super.show();
         keyboardView.setVisibility(View.VISIBLE);
+
+        editText.addTextChangedListener(watcher);
+
+
+            //make switchButton on the top of customKeyboard
+            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) switchButton.getLayoutParams();
+            params.addRule(RelativeLayout.ABOVE, R.id.keyboard);
+            switchButton.setLayoutParams(params);
+
     }
 
     @Override
@@ -89,20 +97,6 @@ public class CustomKeyboard extends KeyboardImpl {
             Log.e(TAG, "Keyboard was not initialized. Call init() before");
         } else {
             onSubmitListener = listener;
-        }
-    }
-
-    private class BtnDoneHandler implements EditText.OnEditorActionListener {
-        @Override
-        public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-
-                onSubmitListener.onSubmit();
-                return true;
-            }
-
-            return false;
         }
     }
 

@@ -7,6 +7,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -23,13 +24,12 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = MainActivity.class.getSimpleName();
     private ActionBarDrawerToggle toggle;
 
     private ListView mDrawerList;
 
     private DrawerLayout mDrawerLayout;
-
-    private CharSequence mTitle;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,9 +78,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void setTitle(CharSequence title) {
-        mTitle = title;
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(mTitle);
+            getSupportActionBar().setTitle(title);
         }
     }
 
@@ -99,11 +98,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Log.d(TAG, "onBackPressed()");
         if (getFragmentManager().getBackStackEntryCount() > 0) {
             getFragmentManager().popBackStackImmediate();
         } else {
             super.onBackPressed();
         }
+
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {

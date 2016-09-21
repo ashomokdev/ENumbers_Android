@@ -4,7 +4,6 @@ import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.text.Editable;
 import android.util.Log;
-import android.view.View;
 import android.widget.EditText;
 
 class CustomKeyboardListener implements KeyboardView.OnKeyboardActionListener {
@@ -14,8 +13,6 @@ class CustomKeyboardListener implements KeyboardView.OnKeyboardActionListener {
     private final EditText editText;
     private OnSubmitListener submitListener;
 
-
-    private OnKeyboardSwitchListener keyboardSwitchListener;
 
     public CustomKeyboardListener(EditText text) {
         this.editText = text;
@@ -46,13 +43,6 @@ class CustomKeyboardListener implements KeyboardView.OnKeyboardActionListener {
                 OnSubmitListener submitListener = getSubmitListener();
                 if (submitListener != null) {
                     submitListener.onSubmit();
-                }
-                break;
-            case 1:
-                //switch keyboard
-                OnKeyboardSwitchListener keyboardSwitchListener = getKeyboardSwitchListener();
-                if (keyboardSwitchListener != null) {
-                    keyboardSwitchListener.onKeyboardSwitch();
                 }
                 break;
             default:
@@ -96,17 +86,6 @@ class CustomKeyboardListener implements KeyboardView.OnKeyboardActionListener {
 
     public void setSubmitListener(OnSubmitListener submitListener) {
         this.submitListener = submitListener;
-    }
-
-    public OnKeyboardSwitchListener getKeyboardSwitchListener() {
-        if (keyboardSwitchListener == null) {
-            Log.e(TAG, "keyboardSwitchListener was not setted. Call setKeyboardSwitchListener(OnKeyboardSwitchListener keyboardSwitchListener) before.");
-        }
-        return keyboardSwitchListener;
-    }
-
-    public void setKeyboardSwitchListener(OnKeyboardSwitchListener keyboardSwitchListener) {
-        this.keyboardSwitchListener = keyboardSwitchListener;
     }
 
 }

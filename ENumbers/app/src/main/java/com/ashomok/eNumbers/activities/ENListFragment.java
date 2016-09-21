@@ -59,7 +59,7 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
                 @Override
                 public void onClick(View view) {
 
-                    inputEditText.setText("");
+                    inputEditText.setText(getString(R.string.startChar));
                     showAllData();
                 }
             });
@@ -119,9 +119,6 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
                     } else {
                         keyboard.show();
                     }
-
-                    //for savedInstanceState
-                    isKeyboardShown = true;
                 }
                 else
                 {
@@ -136,9 +133,6 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
             @Override
             public void onClick(View view) {
                 keyboard.show();
-
-                //for savedInstanceState
-                isKeyboardShown = true;
             }
         });
 
@@ -218,7 +212,7 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
     @Override
     public void onSaveInstanceState(Bundle outState) {
 
-        outState.putBoolean(IS_KEYBOARD_SWOWN_ARG, isKeyboardShown);
+        outState.putBoolean(IS_KEYBOARD_SWOWN_ARG, keyboard.isShown());
         outState.putBoolean(IS_DEFAULT_KEYBOARD_ARG, keyboard.isDefaultKeyboardShown());
 
         super.onSaveInstanceState(outState);

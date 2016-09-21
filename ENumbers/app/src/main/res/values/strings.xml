@@ -101,7 +101,8 @@
     <string name="browns">browns &amp; blacks</string>
     <string name="blues">blues &amp; violets</string>
     <string name="cant_open">Can\'t open.</string>
-    <string name="search_by_name">search by name</string>
+    <string name="search_by_name">search by names</string>
+    <string name="search_by_codes">search by codes</string>
 
 
 </resources>

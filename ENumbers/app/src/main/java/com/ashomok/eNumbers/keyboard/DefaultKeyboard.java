@@ -5,12 +5,12 @@ import android.content.Context;
 import android.os.Build;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.ashomok.eNumbers.R;
 
@@ -19,57 +19,36 @@ import java.lang.reflect.Method;
 /**
  * Created by iuliia on 9/4/16.
  */
-public class DefaultKeyboard extends KeyboardImpl {
+class DefaultKeyboard extends KeyboardImpl {
     private static final String TAG = DefaultKeyboard.class.getSimpleName();
-    private View view;
+
+    private OnSubmitListener onSubmitListener;
+    private  EditText editText;
+
 
 
     @Override
     public void init(Context context) {
+        super.init(context);
 
-        this.context = context;
-
-        EditText editText = (EditText) ((Activity) context).findViewById(R.id.inputE);
-        editText.setText("");
-
-        //init custom button
-        LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-        ViewGroup relLayout = (ViewGroup) ((Activity) context).findViewById(R.id.keyboard_root);
-        view = inflater.inflate(R.layout.default_keyboard, relLayout, true);
-
-        ImageView switchButton = (ImageView) view.findViewById(R.id.switch_btn);
-        switchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //switch keyboard
-                OnKeyboardSwitchListener keyboardSwitchListener = getKeyboardSwitchListener();
-                if (keyboardSwitchListener != null) {
-                    keyboardSwitchListener.onKeyboardSwitch();
-                }
-            }
-        });
-
-        view.setVisibility(View.GONE);
-    }
-
-    public OnKeyboardSwitchListener getKeyboardSwitchListener() {
-        if (onKeyboardSwitchListener == null) {
-            Log.e(TAG, "keyboardSwitchListener was not setted. Call setKeyboardSwitchListener(OnKeyboardSwitchListener keyboardSwitchListener) before.");
-        }
-        return onKeyboardSwitchListener;
+        editText = (EditText) ((Activity) context).findViewById(R.id.inputE);
     }
 
 
     @Override
-    public void setOnSubmitListener(OnSubmitListener onSubmitListener) {
-        //// TODO: 9/6/16
+    public void setOnSubmitListener(OnSubmitListener listener) {
+        Log.d(TAG, "setOnSubmitListener");
+        if ( context == null) {
+            Log.e(TAG, "Keyboard was not initialized. Call init() before");
+        } else {
+            onSubmitListener = listener;
+        }
     }
 
     @Override
     public void hide() {
         super.hide();
         Log.d(TAG, "hide");
-        view.setVisibility(View.GONE);
 
         View v = ((Activity) context).getCurrentFocus();
         if (v != null) {
@@ -92,13 +71,17 @@ public class DefaultKeyboard extends KeyboardImpl {
             }
         }
 
+        editText.setOnEditorActionListener(null);
+        editText.setText(startChar);
+
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) switchButton.getLayoutParams();
+        params.removeRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
     }
 
     @Override
     public void show() {
         Log.d(TAG, "show");
         super.show();
-        view.setVisibility(View.VISIBLE);
 
         View v = ((Activity) context).getCurrentFocus();
         if (v != null) {
@@ -119,6 +102,28 @@ public class DefaultKeyboard extends KeyboardImpl {
                 Log.e(TAG, e.getMessage());
 
             }
+        }
+
+        editText.setOnEditorActionListener(new BtnDoneHandler());
+        editText.setText("");
+
+            //make switchButton on the top of  default Keyboard
+            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) switchButton.getLayoutParams();
+            params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+            switchButton.setLayoutParams(params);
+    }
+
+    private class BtnDoneHandler implements EditText.OnEditorActionListener {
+        @Override
+        public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+
+                onSubmitListener.onSubmit();
+                return true;
+            }
+
+            return false;
         }
     }
 }

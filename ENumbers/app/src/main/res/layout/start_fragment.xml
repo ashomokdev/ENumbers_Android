@@ -88,12 +88,13 @@
         android:padding="@dimen/icon_padding"
         android:src="@drawable/ic_camera_alt_36dp" />
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/keyboard_root">
-    </RelativeLayout>
+        android:id="@+id/switch_btn_root">
+    </FrameLayout>
 
     <include layout="@layout/keyboard" />
+
 </RelativeLayout>
 
