@@ -22,27 +22,9 @@ import java.lang.reflect.Method;
 class DefaultKeyboard extends KeyboardImpl {
     private static final String TAG = DefaultKeyboard.class.getSimpleName();
 
-    private OnSubmitListener onSubmitListener;
-    private  EditText editText;
-
-
-
     @Override
     public void init(Context context) {
         super.init(context);
-
-        editText = (EditText) ((Activity) context).findViewById(R.id.inputE);
-    }
-
-
-    @Override
-    public void setOnSubmitListener(OnSubmitListener listener) {
-        Log.d(TAG, "setOnSubmitListener");
-        if ( context == null) {
-            Log.e(TAG, "Keyboard was not initialized. Call init() before");
-        } else {
-            onSubmitListener = listener;
-        }
     }
 
     @Override
@@ -72,10 +54,11 @@ class DefaultKeyboard extends KeyboardImpl {
         }
 
         editText.setOnEditorActionListener(null);
-        editText.setText(startChar);
 
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) switchButton.getLayoutParams();
         params.removeRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+
+        onVisibilityChangedListener.onVisibilityChanged(false);
     }
 
     @Override
@@ -105,12 +88,16 @@ class DefaultKeyboard extends KeyboardImpl {
         }
 
         editText.setOnEditorActionListener(new BtnDoneHandler());
-        editText.setText("");
+        if (editText.getText().toString().contains(context.getString(R.string.startChar)) && context.getString(R.string.startChar).contains(editText.getText().toString())) {
+            editText.setText("");
+        }
 
-            //make switchButton on the top of  default Keyboard
-            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) switchButton.getLayoutParams();
-            params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-            switchButton.setLayoutParams(params);
+        //make switchButton on the top of  default Keyboard
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) switchButton.getLayoutParams();
+        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        switchButton.setLayoutParams(params);
+
+        onVisibilityChangedListener.onVisibilityChanged(true);
     }
 
     private class BtnDoneHandler implements EditText.OnEditorActionListener {
@@ -120,9 +107,10 @@ class DefaultKeyboard extends KeyboardImpl {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
 
                 onSubmitListener.onSubmit();
+                hide();
+
                 return true;
             }
-
             return false;
         }
     }

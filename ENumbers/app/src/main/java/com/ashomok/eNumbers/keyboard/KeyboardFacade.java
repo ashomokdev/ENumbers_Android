@@ -8,11 +8,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ToggleButton;
 
 import com.ashomok.eNumbers.R;
 
@@ -27,8 +23,8 @@ public class KeyboardFacade {
     private Keyboard customKeyboard;
     private Keyboard defaultKeyboard;
     private boolean isDefaultKeyboardShown;
-    private View switchKeyboardView;
     private FloatingActionButton fab;
+    private CustomToggleButton switchButton;
 
     public KeyboardFacade(Context context) {
         this.context = context;
@@ -60,15 +56,24 @@ public class KeyboardFacade {
         fab = (FloatingActionButton) ((Activity) context).findViewById(R.id.fab);
 
         initSwitchButton();
+
+        OnVisibilityChangedListener onVisibilityChangedListener = new OnVisibilityChangedListener() {
+            @Override
+            public void onVisibilityChanged(boolean isVisible) {
+                if (isVisible) {
+                    fab.setVisibility(View.GONE);
+                } else {
+                    fab.setVisibility(View.VISIBLE);
+                }
+            }
+        };
+
+        defaultKeyboard.setOnVisibilityChangedListener(onVisibilityChangedListener);
+        customKeyboard.setOnVisibilityChangedListener(onVisibilityChangedListener);
     }
 
     private void initSwitchButton() {
-        //init switchKeyboard button
-        LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-        ViewGroup relLayout = (ViewGroup) ((Activity) context).findViewById(R.id.switch_btn_root);
-        switchKeyboardView = inflater.inflate(R.layout.switch_keybord_btn, relLayout, true);
-
-        CustomToggleButton switchButton = (CustomToggleButton) ((Activity) context).findViewById(R.id.switch_btn);
+        switchButton = new CustomToggleButton(context);
 
         switchButton.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
@@ -82,16 +87,13 @@ public class KeyboardFacade {
                 }
             }
         });
-
-        switchKeyboardView.setVisibility(View.GONE);
     }
 
     public void showDefaultKeyboard() {
         setKeyboardVisibility(customKeyboard, false);
         setKeyboardVisibility(defaultKeyboard, true);
         isDefaultKeyboardShown = true;
-        switchKeyboardView.setVisibility(View.VISIBLE);
-        fab.hide();
+        switchButton.show(false);
     }
 
 
@@ -99,8 +101,7 @@ public class KeyboardFacade {
         setKeyboardVisibility(customKeyboard, true);
         setKeyboardVisibility(defaultKeyboard, false);
         isDefaultKeyboardShown = false;
-        switchKeyboardView.setVisibility(View.VISIBLE);
-        fab.hide();
+        switchButton.show(true);
     }
 
     private void setKeyboardVisibility(Keyboard keyboard, boolean isVisible) {
@@ -134,14 +135,12 @@ public class KeyboardFacade {
 
     public void hide() {
 
-        switchKeyboardView.setVisibility(View.GONE);
+        switchButton.hide();
 
         if (isDefaultKeyboardShown) {
             setKeyboardVisibility(defaultKeyboard, false);
         } else {
             setKeyboardVisibility(customKeyboard, false);
         }
-
-        fab.show();
     }
 }

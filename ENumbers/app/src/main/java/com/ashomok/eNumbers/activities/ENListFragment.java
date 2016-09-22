@@ -2,9 +2,13 @@ package com.ashomok.eNumbers.activities;
 
 import android.app.Fragment;
 import android.app.LoaderManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.media.AudioManager;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -39,7 +43,8 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
     private static final String TAG = ENListFragment.class.getSimpleName();
     private boolean isKeyboardShown;
     private boolean isDefaultKeyboard;
-    private  KeyboardFacade keyboard;
+    private KeyboardFacade keyboard;
+    private static String startChar;
 
 
     @Override
@@ -52,6 +57,9 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
             getLoaderManager().initLoader(0, null, this);
 
             inputEditText = (EditText) view.findViewById(R.id.inputE);
+            TextWatcher watcher = new StartCharKeeper();
+            inputEditText.addTextChangedListener(watcher);
+
 
             ImageButton closeBtn = (ImageButton) view.findViewById(R.id.ic_close);
             closeBtn.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +76,7 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
             TextView outputWarning = (TextView) view.findViewById(R.id.warning);
             listView.setEmptyView(outputWarning);
             listView.setAdapter(scAdapter);
+
         } catch (Exception e) {
             Log.e(this.getClass().getCanonicalName(), e.getMessage());
         }
@@ -119,14 +128,11 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
                     } else {
                         keyboard.show();
                     }
-                }
-                else
-                {
+                } else {
                     Log.d(TAG, "lose focus");
                 }
             }
         });
-
 
 
         inputEditText.setOnClickListener(new View.OnClickListener() {
@@ -135,6 +141,8 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
                 keyboard.show();
             }
         });
+
+        startChar = getString(R.string.startChar);
 
     }
 
@@ -216,6 +224,31 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
         outState.putBoolean(IS_DEFAULT_KEYBOARD_ARG, keyboard.isDefaultKeyboardShown());
 
         super.onSaveInstanceState(outState);
+    }
+
+    private class StartCharKeeper implements TextWatcher {
+
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            if (keyboard.isShown() && keyboard.isDefaultKeyboardShown()) {
+                //DO NOTHING
+            } else {
+                if (!charSequence.toString().startsWith(startChar)) {
+
+                    inputEditText.setText(startChar);
+                }
+                inputEditText.setSelection(inputEditText.getText().length());
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+        }
     }
 
 }

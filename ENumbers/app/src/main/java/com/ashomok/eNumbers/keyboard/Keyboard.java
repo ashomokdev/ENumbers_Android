@@ -13,6 +13,8 @@ interface Keyboard {
 
     void setOnSubmitListener(OnSubmitListener onSubmitListener);
 
+    void setOnVisibilityChangedListener(OnVisibilityChangedListener listener);
+
     void show();
 
     void hide();

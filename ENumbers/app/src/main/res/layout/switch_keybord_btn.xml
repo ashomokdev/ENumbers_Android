@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     >
-    <com.ashomok.eNumbers.keyboard.CustomToggleButton
+    <ImageView
         android:id="@+id/switch_btn"
         android:layout_width="match_parent"
         android:layout_height="@dimen/keyboard_key_hight"

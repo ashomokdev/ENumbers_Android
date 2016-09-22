@@ -14,7 +14,7 @@ class CustomKeyboardListener implements KeyboardView.OnKeyboardActionListener {
     private OnSubmitListener submitListener;
 
 
-    public CustomKeyboardListener(EditText text) {
+    CustomKeyboardListener(EditText text) {
         this.editText = text;
     }
 
