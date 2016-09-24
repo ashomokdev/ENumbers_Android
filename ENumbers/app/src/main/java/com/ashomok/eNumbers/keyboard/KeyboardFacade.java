@@ -4,13 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
 
 import com.ashomok.eNumbers.R;
+import com.ashomok.eNumbers.activities.CustomEditText;
+import com.ashomok.eNumbers.activities.EditTextImeBackListener;
 
 /**
  * Created by iuliia on 9/4/16.
@@ -40,16 +38,12 @@ public class KeyboardFacade {
         defaultKeyboard = new DefaultKeyboard();
         defaultKeyboard.init(context);
 
-        EditText editText = (EditText) ((Activity) context).findViewById(R.id.inputE);
-        editText.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
+        CustomEditText editText = (CustomEditText) ((Activity) context).findViewById(R.id.inputE);
 
-                if ((keyCode == KeyEvent.KEYCODE_BACK) && (event.getAction() == KeyEvent.ACTION_UP)) {
-                    hide();
-                    return true;
-                }
-                return false;
+        editText.setOnEditTextImeBackListener(new EditTextImeBackListener() {
+            @Override
+            public void onImeBack(CustomEditText ctrl, String text) {
+                hide();
             }
         });
 
@@ -133,7 +127,7 @@ public class KeyboardFacade {
         return customKeyboard.isVisible() || defaultKeyboard.isVisible();
     }
 
-    public void hide() {
+    private void hide() {
 
         switchButton.hide();
 

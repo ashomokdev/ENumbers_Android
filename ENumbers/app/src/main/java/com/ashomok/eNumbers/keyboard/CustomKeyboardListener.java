@@ -77,14 +77,14 @@ class CustomKeyboardListener implements KeyboardView.OnKeyboardActionListener {
 
     }
 
-    public OnSubmitListener getSubmitListener() {
+    private OnSubmitListener getSubmitListener() {
         if (submitListener == null) {
             Log.e(TAG, "SubmitListener was not setted. Call setSubmitListener(OnSubmitListener submitListener) before.");
         }
         return submitListener;
     }
 
-    public void setSubmitListener(OnSubmitListener submitListener) {
+    void setSubmitListener(OnSubmitListener submitListener) {
         this.submitListener = submitListener;
     }
 

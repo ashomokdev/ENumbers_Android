@@ -1,12 +1,13 @@
 package com.ashomok.eNumbers.keyboard;
 
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.RelativeLayout;
 
 import com.ashomok.eNumbers.R;
@@ -48,6 +49,12 @@ class CustomKeyboard extends KeyboardImpl {
 
             }
         });
+
+        //for keyboard close when on back pressed
+        FragmentManager fragmentManager = ((Activity) context).getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
     @Override

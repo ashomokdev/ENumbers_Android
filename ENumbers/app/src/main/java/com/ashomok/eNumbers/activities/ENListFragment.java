@@ -45,37 +45,25 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
     private boolean isDefaultKeyboard;
     private KeyboardFacade keyboard;
     private static String startChar;
+    private  ImageButton closeBtn;
 
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         try {
-            super.onActivityCreated(savedInstanceState);
+            super.onViewCreated(view, savedInstanceState);
 
-            // Prepare the loader.  Either re-connect with an existing one,
-            // or start a new one.
-            getLoaderManager().initLoader(0, null, this);
+            startChar = getString(R.string.startChar);
 
             inputEditText = (EditText) view.findViewById(R.id.inputE);
             TextWatcher watcher = new StartCharKeeper();
             inputEditText.addTextChangedListener(watcher);
 
-
-            ImageButton closeBtn = (ImageButton) view.findViewById(R.id.ic_close);
-            closeBtn.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View view) {
-
-                    inputEditText.setText(getString(R.string.startChar));
-                    showAllData();
-                }
-            });
-
             listView = (ListView) view.findViewById(R.id.ENumberList);
             TextView outputWarning = (TextView) view.findViewById(R.id.warning);
             listView.setEmptyView(outputWarning);
-            listView.setAdapter(scAdapter);
+
+            closeBtn = (ImageButton) view.findViewById(R.id.ic_close);
 
         } catch (Exception e) {
             Log.e(this.getClass().getCanonicalName(), e.getMessage());
@@ -87,8 +75,21 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        scAdapter = new ENumberListAdapter(getActivity(), 0);
+        // Prepare the loader.  Either re-connect with an existing one,
+        // or start a new one.
+        getLoaderManager().initLoader(0, null, this);
 
+        closeBtn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                inputEditText.setText(getString(R.string.startChar));
+                showAllData();
+            }
+        });
+
+        scAdapter = new ENumberListAdapter(getActivity(), 0);
         listView.setAdapter(scAdapter);
 
 
@@ -99,16 +100,8 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
             }
         }
 
-        GetInfoFromInputting(inputEditText.getText().toString());
-
         keyboard = new KeyboardFacade(getActivity());
         keyboard.init();
-        keyboard.setOnSubmitListener(new OnSubmitListener() {
-            @Override
-            public void onSubmit() {
-                GetInfoFromInputting(inputEditText.getText().toString());
-            }
-        });
 
         inputEditText.clearFocus();
 
@@ -141,9 +134,21 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
                 keyboard.show();
             }
         });
+    }
 
-        startChar = getString(R.string.startChar);
+    @Override
+    public void onStart()
+    {
+        super.onStart();
 
+        GetInfoFromInputting(inputEditText.getText().toString());
+
+        keyboard.setOnSubmitListener(new OnSubmitListener() {
+            @Override
+            public void onSubmit() {
+                GetInfoFromInputting(inputEditText.getText().toString());
+            }
+        });
     }
 
 
