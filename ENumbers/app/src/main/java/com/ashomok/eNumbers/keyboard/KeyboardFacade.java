@@ -13,7 +13,6 @@ import com.ashomok.eNumbers.activities.EditTextImeBackListener;
 /**
  * Created by iuliia on 9/4/16.
  */
-//todo modify also en_list_fragment.xml
 public class KeyboardFacade {
 
     private static final String TAG = KeyboardFacade.class.getSimpleName();
@@ -54,10 +53,12 @@ public class KeyboardFacade {
         OnVisibilityChangedListener onVisibilityChangedListener = new OnVisibilityChangedListener() {
             @Override
             public void onVisibilityChanged(boolean isVisible) {
-                if (isVisible) {
-                    fab.setVisibility(View.GONE);
-                } else {
-                    fab.setVisibility(View.VISIBLE);
+                if (fab != null) {
+                    if (isVisible) {
+                        fab.setVisibility(View.GONE);
+                    } else {
+                        fab.setVisibility(View.VISIBLE);
+                    }
                 }
             }
         };

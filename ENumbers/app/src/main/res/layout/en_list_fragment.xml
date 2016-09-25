@@ -15,7 +15,7 @@
         android:focusable="true"
         android:focusableInTouchMode="true" >
 
-        <EditText
+        <com.ashomok.eNumbers.activities.CustomEditText
             android:id="@+id/inputE"
             style="@style/CustomText"
             android:layout_width="0dp"
@@ -25,11 +25,11 @@
             android:background="@drawable/apptheme_textfield_default_holo_light"
             android:imeOptions="actionDone"
             android:maxLength="30"
-            android:singleLine="true"
             android:text="@string/startChar"
             android:textColor="@color/white"
             android:textCursorDrawable="@drawable/cursorcolor"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:maxLines="1" />
 
         <ImageButton
             android:id="@+id/ic_close"
@@ -63,8 +63,7 @@
             android:cursorVisible="false"
             android:dividerHeight="2dp"
             android:focusable="false"
-            android:focusableInTouchMode="false"
-            />
+            android:focusableInTouchMode="false" />
 
         <TextView
             android:id="@+id/warning"
@@ -78,13 +77,12 @@
             android:text="@string/notFoundMessage" />
     </RelativeLayout>
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/switch_btn_root">
-    </RelativeLayout>
+    </FrameLayout>
 
-    <include
-        layout="@layout/keyboard" />
+    <include layout="@layout/keyboard" />
+
 </RelativeLayout>
-

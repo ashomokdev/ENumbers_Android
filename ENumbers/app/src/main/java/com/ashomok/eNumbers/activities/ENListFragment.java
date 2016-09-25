@@ -2,15 +2,12 @@ package com.ashomok.eNumbers.activities;
 
 import android.app.Fragment;
 import android.app.LoaderManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
-import android.media.AudioManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -18,7 +15,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.ashomok.eNumbers.R;;
+import com.ashomok.eNumbers.R;
 import com.ashomok.eNumbers.data_load.EN;
 import com.ashomok.eNumbers.data_load.ENAsyncLoader;
 import com.ashomok.eNumbers.keyboard.KeyboardFacade;
@@ -29,12 +26,14 @@ import com.ashomok.eNumbers.ocr.OCREngineImpl;
 import java.util.List;
 import java.util.Set;
 
+;
+
 /**
  * Created by Iuliia on 29.08.2015.
  */
 public abstract class ENListFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<EN>> {
 
-    private static final String IS_KEYBOARD_SWOWN_ARG = "IS_KEYBOARD_SWOWN";
+    private static final String IS_KEYBOARD_SWOWN_ARG = "IS_KEYBOARD_SHOWN";
     private static final String IS_DEFAULT_KEYBOARD_ARG = "IS_DEFAULT_KEYBOARD";
     private EditText inputEditText;
     private ENumberListAdapter scAdapter;
@@ -72,7 +71,7 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
 
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
+    public void onActivityCreated(final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         // Prepare the loader.  Either re-connect with an existing one,
@@ -103,26 +102,25 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
         keyboard = new KeyboardFacade(getActivity());
         keyboard.init();
 
-        inputEditText.clearFocus();
-
         //inputedit text never lose focus - this code will run only once.
         //EXPLANATION: By its nature the first time you touch an EditText it receives focus with OnFocusChangeListener so that the user can type. The action is consumed here therefor OnClick is not called. Each successive touch doesn't change the focus so the event trickles down to the OnClickListener.
         inputEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
                 if (hasFocus) {
-                    Log.d(TAG, "hasFocus");
-                    if (isKeyboardShown) {
-                        if (isDefaultKeyboard) {
-                            keyboard.showDefaultKeyboard();
-                        } else {
-                            keyboard.showCustomKeyboard();
-                        }
-                    } else {
+                    if (savedInstanceState == null) {
+                        //first run (not recreation after screen rotation)
                         keyboard.show();
                     }
-                } else {
-                    Log.d(TAG, "lose focus");
+                    else {
+                        if (isKeyboardShown) {
+                            if (isDefaultKeyboard) {
+                                keyboard.showDefaultKeyboard();
+                            } else {
+                                keyboard.showCustomKeyboard();
+                            }
+                        }
+                    }
                 }
             }
         });
@@ -140,6 +138,8 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
     public void onStart()
     {
         super.onStart();
+
+        inputEditText.clearFocus();
 
         GetInfoFromInputting(inputEditText.getText().toString());
 

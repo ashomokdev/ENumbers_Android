@@ -2,12 +2,10 @@ package com.ashomok.eNumbers.keyboard;
 
 import android.app.Activity;
 import android.content.Context;
-import android.inputmethodservice.KeyboardView;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
 
 import com.ashomok.eNumbers.R;
 
