@@ -99,10 +99,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Log.d(TAG, "onBackPressed()" + getFragmentManager().getBackStackEntryCount());
+        if (getFragmentManager().getBackStackEntryCount() > 0) {
+            super.onBackPressed();
+        }
+        else {
+            ExitDialogFragment exitDialogFragment = ExitDialogFragment.newInstance(R.string.exit_dialog_title);
 
-        ExitDialogFragment exitDialogFragment = ExitDialogFragment.newInstance(R.string.exit_dialog_title);
-
-        exitDialogFragment.show(getFragmentManager(), "dialog");
+            exitDialogFragment.show(getFragmentManager(), "dialog");
+        }
 
     }
 

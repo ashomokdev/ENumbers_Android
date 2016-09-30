@@ -25,4 +25,5 @@
 
     <item name="light_orange" type="color">#FFCCBC</item>
 
+    <color name="white40">#66ffffff</color>
 </resources>

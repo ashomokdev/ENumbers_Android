@@ -10,10 +10,10 @@
         android:layout_width="fill_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/blue"
-        android:gravity="center_horizontal|center_vertical"
-        android:orientation="horizontal"
         android:focusable="true"
-        android:focusableInTouchMode="true" >
+        android:focusableInTouchMode="true"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="horizontal">
 
         <com.ashomok.eNumbers.activities.CustomEditText
             android:id="@+id/inputE"
@@ -25,11 +25,22 @@
             android:background="@drawable/apptheme_textfield_default_holo_light"
             android:imeOptions="actionDone"
             android:maxLength="30"
-            android:text="@string/startChar"
+            android:maxLines="1"
             android:textColor="@color/white"
             android:textCursorDrawable="@drawable/cursorcolor"
-            android:textSize="24sp"
-            android:maxLines="1" />
+            android:textSize="24sp" />
+
+        <ImageButton
+            android:id="@+id/ic_go"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/layout_margin"
+            android:background="@null"
+            android:paddingEnd="@dimen/icon_padding"
+            android:paddingStart="@dimen/icon_padding"
+            android:paddingTop="@dimen/icon_padding"
+            android:scaleType="fitCenter"
+            android:src="@drawable/search_btn" />
     </LinearLayout>
 
     <RelativeLayout
@@ -65,10 +76,9 @@
     </RelativeLayout>
 
     <FrameLayout
+        android:id="@+id/switch_btn_root"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/switch_btn_root">
-    </FrameLayout>
+        android:layout_height="wrap_content"></FrameLayout>
 
     <include layout="@layout/keyboard" />
 

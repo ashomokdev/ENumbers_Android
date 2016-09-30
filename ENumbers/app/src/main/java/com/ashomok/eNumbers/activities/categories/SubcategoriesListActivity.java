@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import com.ashomok.eNumbers.R;
+import com.ashomok.eNumbers.ad.AdContainer;
+import com.ashomok.eNumbers.ad.AdMobContainerImpl;
 
 import java.io.PrintWriter;
 
@@ -30,6 +32,9 @@ public class SubcategoriesListActivity extends AppCompatActivity implements Subc
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.subcategories_list_activity_layout);
+
+        AdContainer adContainer = new AdMobContainerImpl(this);
+        adContainer.init();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -66,7 +71,6 @@ public class SubcategoriesListActivity extends AppCompatActivity implements Subc
             }
 
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            int count = getFragmentManager().getBackStackEntryCount();
             transaction.add(R.id.list_container, firstFragment);
 
             if (findViewById(R.id.details_container) != null) {

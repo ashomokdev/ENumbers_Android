@@ -106,6 +106,7 @@
     <string name="cant_open">Can\'t open.</string>
     <string name="search_by_name">search by names</string>
     <string name="search_by_codes">search by codes</string>
+    <string name="only_one_name">Only one name allowed</string>
 
 
 </resources>

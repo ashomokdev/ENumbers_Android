@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/data_layout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_above="@+id/adBannerView">
 
     <include
         android:id="@+id/toolbar"
@@ -18,4 +23,14 @@
         android:layout_gravity="start"
         android:choiceMode="singleChoice"
         android:dividerHeight="2dp" />
+
 </LinearLayout>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adBannerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id" />
+</RelativeLayout>

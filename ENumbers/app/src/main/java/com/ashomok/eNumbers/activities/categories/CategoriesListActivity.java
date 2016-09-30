@@ -11,6 +11,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.ashomok.eNumbers.R;
+import com.ashomok.eNumbers.ad.AdContainer;
+import com.ashomok.eNumbers.ad.AdMobContainerImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +42,9 @@ public class CategoriesListActivity extends AppCompatActivity {
         try {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.categories_list_activity_layout);
+
+            AdContainer adContainer = new AdMobContainerImpl(this);
+            adContainer.init();
 
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);

@@ -17,17 +17,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ashomok.eNumbers.R;
 import com.ashomok.eNumbers.data_load.EN;
 import com.ashomok.eNumbers.data_load.ENAsyncLoader;
 import com.ashomok.eNumbers.keyboard.KeyboardFacade;
-import com.ashomok.eNumbers.keyboard.OnSubmitListener;
 import com.ashomok.eNumbers.ocr.OCREngine;
 import com.ashomok.eNumbers.ocr.OCREngineImpl;
 
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 ;
 
@@ -47,7 +48,7 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
     private boolean isDefaultKeyboard;
     private KeyboardFacade keyboard;
     private static String startChar;
-private ImageButton searchBtn;
+    private ImageButton searchBtn;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -63,6 +64,8 @@ private ImageButton searchBtn;
             listView = (ListView) view.findViewById(R.id.ENumberList);
             TextView outputWarning = (TextView) view.findViewById(R.id.warning);
             listView.setEmptyView(outputWarning);
+
+            searchBtn = (ImageButton) view.findViewById(R.id.ic_go);
 
         } catch (Exception e) {
             Log.e(this.getClass().getCanonicalName(), e.getMessage());
@@ -121,6 +124,13 @@ private ImageButton searchBtn;
                 keyboard.show();
             }
         });
+
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            LoadRequestedData(inputEditText.getText().toString());
+                        }
+                    });
     }
 
     @Override
@@ -129,25 +139,41 @@ private ImageButton searchBtn;
 
         inputEditText.clearFocus();
 
-        GetInfoFromInputting(inputEditText.getText().toString());
+        LoadRequestedData(inputEditText.getText().toString());
     }
 
 
-    void GetInfoFromInputting(String input) {
-        if (input.contains(getString(R.string.startChar)) && (getString(R.string.startChar)).contains(input)) {
-            showAllData();
-        } else {
+    void LoadRequestedData(String input) {
+        Pattern p = Pattern.compile("[0-9]");
 
+        if (input.equals(getString(R.string.startChar))) {
+            showAllData();
+        } else if (input.startsWith(getString(R.string.startChar)) &&
+                p.matcher(String.valueOf(input.charAt(1))).matches()) { //second char is number
             OCREngine parser = new OCREngineImpl();
             Set<String> enumbers = parser.parseResult(input);
 
             GetInfoByENumbersArray(enumbers.toArray(new String[enumbers.size()]));
+        } else {
+            GetInfoByName(input);
         }
     }
 
     void GetInfoByENumbersArray(String[] enumbers) {
         Bundle b = new Bundle();
         b.putStringArray("codes_array", enumbers);
+        try {
+
+            getLoaderManager().restartLoader(0, b, this);
+
+        } catch (Exception e) {
+            Log.e(this.getClass().getCanonicalName(), e.getMessage());
+        }
+    }
+
+    void GetInfoByName(String name) {
+        Bundle b = new Bundle();
+        b.putString("name", name);
         try {
 
             getLoaderManager().restartLoader(0, b, this);
@@ -221,50 +247,23 @@ private ImageButton searchBtn;
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            if (keyboard.isShown() && keyboard.isDefaultKeyboardShown()) {
-                //DO NOTHING
-            } else {
+
+            if (keyboard.isShown() && keyboard.isDefaultKeyboardShown()) { //default keyboard
+                if (charSequence.toString().endsWith(",")) {
+                    try {
+                        inputEditText.setText(charSequence.toString().substring(0, charSequence.length() - 2));
+                        inputEditText.setSelection(inputEditText.getText().length());
+                    } catch (StringIndexOutOfBoundsException e) {
+                        //ignore
+                    }
+                    Toast.makeText(inputEditText.getContext(), R.string.only_one_name, Toast.LENGTH_SHORT).show();
+                }
+            } else { //custom keyboard
                 if (!charSequence.toString().startsWith(startChar)) {
 
                     inputEditText.setText(startChar);
                 }
                 inputEditText.setSelection(inputEditText.getText().length());
-            }
-
-            if (charSequence.toString().length() > 1) {
-
-                if (searchBtn == null) {
-
-                   searchBtn = new ImageButton(inputEditText.getContext());
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.WRAP_CONTENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT);
-                params.setMarginEnd(getResources().getDimensionPixelSize(R.dimen.layout_margin));
-                    searchBtn.setLayoutParams(params);
-
-
-                    searchBtn.setBackground(null);
-                    searchBtn.setPadding(0,
-                            getResources().getDimensionPixelSize(R.dimen.icon_padding),
-                            getResources().getDimensionPixelSize(R.dimen.icon_padding),
-                            getResources().getDimensionPixelSize(R.dimen.icon_padding));
-                    searchBtn.setScaleType(ImageView.ScaleType.FIT_CENTER);
-                    searchBtn.setImageResource(R.drawable.search_btn);
-                    ((ViewGroup) inputEditText.getParent()).addView(searchBtn);
-
-                    searchBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            GetInfoFromInputting(inputEditText.getText().toString());
-                        }
-                    });
-                }
-            }
-            else if (charSequence.toString().length() <= 1 &&
-                    searchBtn != null &&
-                    searchBtn.getParent() != null)
-            {
-               ((ViewGroup) inputEditText.getParent()).removeView(searchBtn);
             }
         }
 

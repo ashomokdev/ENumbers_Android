@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 /**
  * Created by iuliia on 8/16/16.
  */
-public class EN_ORM {
+class EN_ORM {
 
     private static final String TAG = EN_ORM.class.getSimpleName();
     private static EN_ORM ourInstance;
@@ -35,7 +35,7 @@ public class EN_ORM {
         }
     }
 
-    public static EN_ORM getInstance(Context context) {
+    static EN_ORM getInstance(Context context) {
         if (ourInstance == null) {
             ourInstance = new EN_ORM(context);
         }
@@ -47,7 +47,7 @@ public class EN_ORM {
      *
      * @return
      */
-    public List<EN> getAllEnumbs() {
+    List<EN> getAllEnumbs() {
         return allEnumbs;
     }
 
@@ -57,7 +57,7 @@ public class EN_ORM {
      * @param codes
      * @return
      */
-    public List<EN> getEnumbsByCodeArray(String[] codes) {
+    List<EN> getEnumbsByCodeArray(String[] codes) {
         final List<String> codesList = new ArrayList<>(Arrays.asList(codes));
         List<EN> result = new ArrayList<>();
 
@@ -77,7 +77,7 @@ public class EN_ORM {
      * @param endValue
      * @return
      */
-    public List<EN> getEnumbsByCodeRange(int startValue, int endValue) {
+    List<EN> getEnumbsByCodeRange(int startValue, int endValue) {
         List<EN> result = new ArrayList<>();
 
         for (EN en : allEnumbs) {
@@ -101,13 +101,35 @@ public class EN_ORM {
      * @param codesOrNames
      * @return
      */
-    public List<EN> getEnumbsbyCodeAndNameArray(String[] codesOrNames) {
+    List<EN> getEnumbsbyCodeAndNameArray(String[] codesOrNames) {
+
         List<EN> result = new ArrayList<>();
-        final List<String> inputList = new ArrayList<>(Arrays.asList(codesOrNames));
+        final List<String> inputList = new ArrayList<>();
+        for (String s: codesOrNames)
+        {
+            inputList.add(s.toLowerCase());
+        }
 
         for (EN en : allEnumbs) {
 
-            if (inputList.contains(en.getCode()) || inputList.contains(en.getName())) {
+            if (inputList.contains(en.getCode()) || inputList.contains(en.getName().toLowerCase())) {
+                result.add(en);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Get data by inputing contains one name. Example curcumin
+     * @param name
+     * @return
+     */
+    List<EN> getEnumbsByName(String name) {
+        List<EN> result = new ArrayList<>();
+
+        for (EN en : allEnumbs) {
+
+            if (en.getName().toLowerCase().contains(name.toLowerCase())){
                 result.add(en);
             }
         }

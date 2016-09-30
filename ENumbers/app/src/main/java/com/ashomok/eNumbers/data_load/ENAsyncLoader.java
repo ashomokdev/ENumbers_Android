@@ -18,6 +18,7 @@ public class ENAsyncLoader extends AsyncTaskLoader<List<EN>> {
     private String[] codes;
     private int startValue = -1;
     private int endValue = -1;
+    private String name;
 
     private Context context;
     private List<EN> data;
@@ -31,6 +32,7 @@ public class ENAsyncLoader extends AsyncTaskLoader<List<EN>> {
             codes = bundle.getStringArray("codes_array");
             startValue = bundle.getInt("start_value");
             endValue = bundle.getInt("end_value");
+            name = bundle.getString("name");
         }
     }
 
@@ -64,6 +66,8 @@ public class ENAsyncLoader extends AsyncTaskLoader<List<EN>> {
             data = new ArrayList<>();
             if (codes != null) {
                 data = instance.getEnumbsByCodeArray(codes);
+            } else if (name != null) {
+                data = instance.getEnumbsByName(name);
             } else if (startValue > 0 && endValue > 0) {
                 data = instance.getEnumbsByCodeRange(startValue, endValue);
             } else {
