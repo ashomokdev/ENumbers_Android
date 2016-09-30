@@ -11,8 +11,6 @@ interface Keyboard {
 
     boolean isVisible();
 
-    void setOnSubmitListener(OnSubmitListener onSubmitListener);
-
     void setOnVisibilityChangedListener(OnVisibilityChangedListener listener);
 
     void show();

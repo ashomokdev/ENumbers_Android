@@ -93,8 +93,8 @@ public class KeyboardFacade {
 
 
     public void showCustomKeyboard() {
-        setKeyboardVisibility(customKeyboard, true);
         setKeyboardVisibility(defaultKeyboard, false);
+        setKeyboardVisibility(customKeyboard, true);
         isDefaultKeyboardShown = false;
         switchButton.show(true);
     }
@@ -104,15 +104,6 @@ public class KeyboardFacade {
             keyboard.show(); //error on landscape mode here
         } else {
             keyboard.hide();
-        }
-    }
-
-    public void setOnSubmitListener(OnSubmitListener onSubmitListener) {
-        if (context == null) {
-            Log.e(TAG, "Keyboard was not initialized. Call init() before");
-        } else {
-            customKeyboard.setOnSubmitListener(onSubmitListener);
-            defaultKeyboard.setOnSubmitListener(onSubmitListener);
         }
     }
 

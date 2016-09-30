@@ -11,7 +11,7 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 /**
  * Created by Iuliia on 06.09.2015.
  */
-class ENumbersSQLiteAssetHelper extends SQLiteAssetHelper {
+public class ENumbersSQLiteAssetHelper extends SQLiteAssetHelper {
 
     private static final String DATABASE_NAME = "Enumbers.db";
     private static final int DATABASE_VERSION = 2;

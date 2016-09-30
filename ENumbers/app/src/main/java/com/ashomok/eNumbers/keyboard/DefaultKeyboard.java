@@ -87,7 +87,6 @@ class DefaultKeyboard extends KeyboardImpl {
             }
         }
 
-        editText.setOnEditorActionListener(new BtnDoneHandler());
         if (editText.getText().toString().contains(context.getString(R.string.startChar)) && context.getString(R.string.startChar).contains(editText.getText().toString())) {
             editText.setText("");
         }
@@ -98,20 +97,5 @@ class DefaultKeyboard extends KeyboardImpl {
         switchButton.setLayoutParams(params);
 
         onVisibilityChangedListener.onVisibilityChanged(true);
-    }
-
-    private class BtnDoneHandler implements EditText.OnEditorActionListener {
-        @Override
-        public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-
-                onSubmitListener.onSubmit();
-                hide();
-
-                return true;
-            }
-            return false;
-        }
     }
 }

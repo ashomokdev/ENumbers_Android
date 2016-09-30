@@ -9,9 +9,12 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -44,8 +47,7 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
     private boolean isDefaultKeyboard;
     private KeyboardFacade keyboard;
     private static String startChar;
-    private  ImageButton closeBtn;
-
+private ImageButton searchBtn;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -62,8 +64,6 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
             TextView outputWarning = (TextView) view.findViewById(R.id.warning);
             listView.setEmptyView(outputWarning);
 
-            closeBtn = (ImageButton) view.findViewById(R.id.ic_close);
-
         } catch (Exception e) {
             Log.e(this.getClass().getCanonicalName(), e.getMessage());
         }
@@ -77,16 +77,6 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
         // Prepare the loader.  Either re-connect with an existing one,
         // or start a new one.
         getLoaderManager().initLoader(0, null, this);
-
-        closeBtn.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-
-                inputEditText.setText(getString(R.string.startChar));
-                showAllData();
-            }
-        });
 
         scAdapter = new ENumberListAdapter(getActivity(), 0);
         listView.setAdapter(scAdapter);
@@ -111,8 +101,7 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
                     if (savedInstanceState == null) {
                         //first run (not recreation after screen rotation)
                         keyboard.show();
-                    }
-                    else {
+                    } else {
                         if (isKeyboardShown) {
                             if (isDefaultKeyboard) {
                                 keyboard.showDefaultKeyboard();
@@ -135,20 +124,12 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
     }
 
     @Override
-    public void onStart()
-    {
+    public void onStart() {
         super.onStart();
 
         inputEditText.clearFocus();
 
         GetInfoFromInputting(inputEditText.getText().toString());
-
-        keyboard.setOnSubmitListener(new OnSubmitListener() {
-            @Override
-            public void onSubmit() {
-                GetInfoFromInputting(inputEditText.getText().toString());
-            }
-        });
     }
 
 
@@ -176,7 +157,7 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
         }
     }
 
-    private void showAllData() {
+    public void showAllData() {
         getLoaderManager().restartLoader(0, null, this);
     }
 
@@ -248,6 +229,42 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
                     inputEditText.setText(startChar);
                 }
                 inputEditText.setSelection(inputEditText.getText().length());
+            }
+
+            if (charSequence.toString().length() > 1) {
+
+                if (searchBtn == null) {
+
+                   searchBtn = new ImageButton(inputEditText.getContext());
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT);
+                params.setMarginEnd(getResources().getDimensionPixelSize(R.dimen.layout_margin));
+                    searchBtn.setLayoutParams(params);
+
+
+                    searchBtn.setBackground(null);
+                    searchBtn.setPadding(0,
+                            getResources().getDimensionPixelSize(R.dimen.icon_padding),
+                            getResources().getDimensionPixelSize(R.dimen.icon_padding),
+                            getResources().getDimensionPixelSize(R.dimen.icon_padding));
+                    searchBtn.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                    searchBtn.setImageResource(R.drawable.search_btn);
+                    ((ViewGroup) inputEditText.getParent()).addView(searchBtn);
+
+                    searchBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            GetInfoFromInputting(inputEditText.getText().toString());
+                        }
+                    });
+                }
+            }
+            else if (charSequence.toString().length() <= 1 &&
+                    searchBtn != null &&
+                    searchBtn.getParent() != null)
+            {
+               ((ViewGroup) inputEditText.getParent()).removeView(searchBtn);
             }
         }
 

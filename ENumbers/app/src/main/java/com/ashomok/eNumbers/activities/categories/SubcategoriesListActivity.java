@@ -66,6 +66,7 @@ public class SubcategoriesListActivity extends AppCompatActivity implements Subc
             }
 
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            int count = getFragmentManager().getBackStackEntryCount();
             transaction.add(R.id.list_container, firstFragment);
 
             if (findViewById(R.id.details_container) != null) {

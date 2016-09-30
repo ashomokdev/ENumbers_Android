@@ -98,12 +98,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Log.d(TAG, "onBackPressed()");
-        if (getFragmentManager().getBackStackEntryCount() > 0) {
-            getFragmentManager().popBackStackImmediate();
-        } else {
-            super.onBackPressed();
-        }
+        Log.d(TAG, "onBackPressed()" + getFragmentManager().getBackStackEntryCount());
+
+        ExitDialogFragment exitDialogFragment = ExitDialogFragment.newInstance(R.string.exit_dialog_title);
+
+        exitDialogFragment.show(getFragmentManager(), "dialog");
 
     }
 
@@ -112,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         private RowClickListener rowClickListener;
 
 
-        public DrawerItemClickListener(Context context) {
+        DrawerItemClickListener(Context context) {
             rowClickListener = new RowClickListener(context);
         }
 

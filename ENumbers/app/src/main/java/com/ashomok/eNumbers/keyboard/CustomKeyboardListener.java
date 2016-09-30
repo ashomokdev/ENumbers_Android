@@ -39,15 +39,10 @@ class CustomKeyboardListener implements KeyboardView.OnKeyboardActionListener {
             case 44://comma
                 editable.append(", E");
                 break;
-            case Keyboard.KEYCODE_DONE:
-                OnSubmitListener submitListener = getSubmitListener();
-                if (submitListener != null) {
-                    submitListener.onSubmit();
-                }
-                break;
             default:
                 char code = (char) primaryCode;
                 editable.append(code);
+                break;
         }
     }
 
@@ -75,17 +70,6 @@ class CustomKeyboardListener implements KeyboardView.OnKeyboardActionListener {
     @Override
     public void swipeUp() {
 
-    }
-
-    private OnSubmitListener getSubmitListener() {
-        if (submitListener == null) {
-            Log.e(TAG, "SubmitListener was not setted. Call setSubmitListener(OnSubmitListener submitListener) before.");
-        }
-        return submitListener;
-    }
-
-    void setSubmitListener(OnSubmitListener submitListener) {
-        this.submitListener = submitListener;
     }
 
 }

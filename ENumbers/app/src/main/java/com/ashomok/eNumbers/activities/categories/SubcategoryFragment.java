@@ -88,4 +88,10 @@ public class SubcategoryFragment extends ENListFragment {
         // Save the current article selection in case we need to recreate the fragment
         outState.putSerializable(Row.TAG, row);
     }
+
+    @Override
+    public void showAllData()
+    {
+        LoadInfoByENumbersRange(row.getStartNumber(), row.getEndNumber());
+    }
 }

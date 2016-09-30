@@ -12,6 +12,8 @@ import android.widget.RelativeLayout;
 
 import com.ashomok.eNumbers.R;
 
+import static android.app.FragmentManager.POP_BACK_STACK_INCLUSIVE;
+
 /**
  * Created by iuliia on 9/2/16.
  */
@@ -31,14 +33,6 @@ class CustomKeyboard extends KeyboardImpl {
 
         CustomKeyboardListener numbersListener = new CustomKeyboardListener(editText);
 
-        numbersListener.setSubmitListener(new OnSubmitListener() {
-            @Override
-            public void onSubmit() {
-                onSubmitListener.onSubmit();
-                hide();
-            }
-        });
-
         keyboardView.setOnKeyboardActionListener(numbersListener);
 
         editText.setSelection(editText.getText().length()); //starts type after "E"
@@ -49,18 +43,13 @@ class CustomKeyboard extends KeyboardImpl {
 
             }
         });
-
-        //for keyboard close when on back pressed
-        FragmentManager fragmentManager = ((Activity) context).getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
     }
 
     @Override
     public void hide() {
         Log.d(TAG, "hide");
         super.hide();
+
         keyboardView.setVisibility(View.GONE);
 
         editText.setSelection(editText.getText().length());
@@ -75,6 +64,16 @@ class CustomKeyboard extends KeyboardImpl {
     public void show() {
         Log.d(TAG, "show");
         super.show();
+
+        //for keyboard close when on back pressed
+        FragmentManager fragmentManager = ((Activity) context).getFragmentManager();
+        boolean fragmentPopped = fragmentManager.popBackStackImmediate(TAG, POP_BACK_STACK_INCLUSIVE);
+        if (!fragmentPopped) {
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.addToBackStack(TAG);
+            fragmentTransaction.commit();
+        }
+
         keyboardView.setVisibility(View.VISIBLE);
 
         //make switchButton on the top of customKeyboard
@@ -86,3 +85,5 @@ class CustomKeyboard extends KeyboardImpl {
 
     }
 }
+
+

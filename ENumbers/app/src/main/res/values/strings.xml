@@ -16,9 +16,12 @@
     <string name="unsafe">unsafe</string>
     <string name="unknown">unknown</string>
     <string name="cancel">Cancel</string>
+    <string name="exit_dialog_title">Do you want to exit?</string>
     <string name="recognition">Recognition…</string>
     <string name="request_permission">This app needs camera permission</string>
     <string name="camera_error">Your device not support this feature</string>
+    <string name="alert_dialog_cancel">Cancel</string>
+    <string name="alert_dialog_exit">Exit</string>
     <string name="make_photo_with_ingredients">Make photo with Ingredients:</string>
     <string name="ok">OK</string>
     <string name="requirement">Requirement</string>

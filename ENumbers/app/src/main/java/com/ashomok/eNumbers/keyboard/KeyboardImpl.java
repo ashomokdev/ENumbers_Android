@@ -17,7 +17,6 @@ abstract class KeyboardImpl implements Keyboard {
     private static final String TAG = KeyboardImpl.class.getSimpleName();
     private boolean isVisible;
     Context context;
-    OnSubmitListener onSubmitListener;
     OnVisibilityChangedListener onVisibilityChangedListener;
     EditText editText;
 
@@ -41,16 +40,6 @@ abstract class KeyboardImpl implements Keyboard {
 
         isVisible = true;
         switchButton.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void setOnSubmitListener(OnSubmitListener listener) {
-        Log.d(TAG, "setOnSubmitListener");
-        if (context == null) {
-            Log.e(TAG, "Keyboard was not initialized. Call init() before");
-        } else {
-            onSubmitListener = listener;
-        }
     }
 
     @Override

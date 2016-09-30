@@ -43,59 +43,54 @@
             android:codes="97"
             android:keyEdgeFlags="left"
             android:keyLabel="a"
-            android:keyWidth="6%p" />
+           />
         <Key
             android:codes="98"
             android:keyLabel="b"
-            android:keyWidth="6%p" />
+           />
         <Key
             android:codes="99"
             android:keyLabel="c"
-            android:keyWidth="6%p" />
+          />
         <Key
             android:codes="100"
             android:keyLabel="d"
-            android:keyWidth="6%p" />
+            />
         <Key
             android:codes="101"
             android:keyLabel="e"
-            android:keyWidth="6%p" />
+           />
         <Key
             android:codes="102"
             android:keyLabel="f"
-            android:keyWidth="6%p" />
+             />
         <Key
             android:codes="103"
             android:keyLabel="g"
-            android:keyWidth="6%p" />
+            />
         <Key
             android:codes="104"
             android:keyLabel="h"
-            android:keyWidth="6%p" />
+            />
         <Key
             android:codes="105"
             android:keyLabel="i"
-            android:keyWidth="6%p" />
+            />
         <Key
             android:codes="106"
             android:keyEdgeFlags="right"
             android:keyLabel="j"
-            android:keyWidth="6%p" />
+           />
 
         <Key
             android:codes="44"
             android:keyEdgeFlags="left"
             android:keyLabel=","
-            android:keyWidth="13.33%p" />
+            android:keyWidth="16.66%p" />
         <Key
             android:codes="-5"
             android:keyIcon="@drawable/ic_backspace_black_24dp"
-            android:keyWidth="13.33%p" />
-        <Key
-            android:codes="-4"
-            android:keyEdgeFlags="right"
-            android:keyIcon="@drawable/ic_search_black_24dp"
-            android:keyWidth="13.33%p" />
+            android:keyWidth="16.66%p" />
     </Row>
 
 </Keyboard>
