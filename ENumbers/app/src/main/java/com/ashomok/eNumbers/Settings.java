@@ -9,4 +9,5 @@ public class Settings {
 
     public static final boolean isAdActive = true;
     public static final boolean isAdinTestMode = true;
+    public static final boolean isFree = true;
 }

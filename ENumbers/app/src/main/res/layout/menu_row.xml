@@ -11,8 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_mic_36dp" />
+        android:scaleType="fitCenter" />
 
     <TextView
         android:id="@+id/text"

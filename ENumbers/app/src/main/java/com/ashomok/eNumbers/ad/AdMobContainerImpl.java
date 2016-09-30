@@ -2,6 +2,7 @@ package com.ashomok.eNumbers.ad;
 
 import android.app.Activity;
 import android.util.Log;
+import android.view.View;
 
 import com.ashomok.eNumbers.R;
 import com.ashomok.eNumbers.Settings;
@@ -41,6 +42,11 @@ public class AdMobContainerImpl implements AdContainer {
                 adRequest = new AdRequest.Builder().build();
 
                 mAdView.loadAd(adRequest);
+            }
+            else
+            {
+                AdView mAdView = (AdView) context.findViewById(R.id.adBannerView);
+                mAdView.setVisibility(View.GONE);
             }
 
 //            //init interstitial
