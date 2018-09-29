@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/details_layout_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:duplicateParentState="true"
+    android:orientation="horizontal">
+
+    <include
+        android:id="@+id/enumb_flag"
+        layout="@layout/enumb_flag" />
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:duplicateParentState="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/ECode"
+            style="@style/ECode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:typeface="sans"
+            tools:text="preview"/>
+
+        <TextView
+            android:id="@+id/EName"
+            style="@style/EName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="preview"/>
+
+        <TextView
+            android:id="@+id/EPurpose"
+            style="@style/EPurpose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="preview"/>
+
+    </LinearLayout>
+</LinearLayout>
+

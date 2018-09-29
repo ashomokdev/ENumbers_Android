@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="flag_color">
+        <attr name="state_red" format="boolean" />
+        <attr name="state_yellow" format="boolean" />
+        <attr name="state_green" format="boolean" />
+        <attr name="state_grey" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="BottomNavigationView">
+        <attr name="buttom_titles_array" format="reference"/>
+        <attr name="buttom_text_color" format="color" />
+    </declare-styleable>
+</resources>
