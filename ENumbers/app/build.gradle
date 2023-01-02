@@ -1,16 +1,20 @@
-apply plugin: 'com.android.application'
-
+plugins {
+    id 'com.android.application'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion "28.0.3"
+    compileSdkVersion 33
 
     defaultConfig {
         applicationId "com.ashomok"
         minSdkVersion 17
-        targetSdkVersion 28
-        versionCode 13
-        versionName "2.2.2"
+        targetSdkVersion 33
+        versionCode 15
+        versionName "2.2.5"
         multiDexEnabled true
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -36,16 +40,17 @@ android {
         }
     }
     packagingOptions {
-        exclude 'META-INF/ASL2.0'
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/license.txt'
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/notice.txt'
+        resources {
+            excludes += ['META-INF/ASL2.0', 'META-INF/LICENSE', 'META-INF/license.txt', 'META-INF/NOTICE', 'META-INF/notice.txt']
+        }
     }
     compileOptions {
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
     }
+    namespace 'com.ashomok.eNumbers'
+    buildToolsVersion '33.0.0'
+    ndkVersion '23.1.7779620'
 }
 
 repositories {
@@ -70,14 +75,14 @@ dependencies {
 
     implementation 'com.android.support:design:28.0.0'
 
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2') {
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2') {
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude group: 'org.hamcrest', module: 'hamcrest-integration'
         exclude group: 'com.google.code.findbugs'
 
     }
 
-    androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.2') {
+    androidTestImplementation('com.android.support.test.espresso:espresso-contrib:2.2') {
         // Necessary to avoid version conflicts
         exclude group: 'com.android.support', module: 'appcompat'
         exclude group: 'com.android.support', module: 'support-v4'
@@ -86,23 +91,22 @@ dependencies {
         exclude group: 'com.google.code.findbugs'
     }
 
-    testCompile 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.12'
     testImplementation "org.robolectric:robolectric:3.8"
     testImplementation "org.robolectric:multidex:3.4.2"
     testImplementation group: 'org.robolectric', name: 'playservices', version: '3.4.1'
 
     testImplementation "com.android.support.test:monitor:1.0.2"
-    testCompile 'org.mockito:mockito-core:2.15.0'
-    androidTestCompile 'org.mockito:mockito-core:2.15.0'
-    androidTestCompile 'com.google.dexmaker:dexmaker:1.2'
-    androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.2'
+    testImplementation 'org.mockito:mockito-core:2.15.0'
+    androidTestImplementation 'org.mockito:mockito-core:2.15.0'
+    androidTestImplementation 'com.google.dexmaker:dexmaker:1.2'
+    androidTestImplementation 'com.google.dexmaker:dexmaker-mockito:1.2'
 
     implementation 'com.android.support:multidex:1.0.3'
 
-}
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.7.20"
 
-//admob
-apply plugin: 'com.google.gms.google-services'
+}
 
 
 
