@@ -63,8 +63,7 @@ Uploads/
 #########
 .svn/
 completed versions
-ENumbers/.gradle/2.10/
-ENumbers/.gradle/2.14.1/
+.gradle/
 ENumbers/app/app-free-release.apk
 ENumbers/app/app-pro-release.apk
 ENumbers/app/app-release.apk
