@@ -1,5 +1,7 @@
 package com.ashomok.eNumbers.keyboard;
 
+import static android.app.FragmentManager.POP_BACK_STACK_INCLUSIVE;
+
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -10,8 +12,6 @@ import android.util.Log;
 import android.view.View;
 
 import com.ashomok.eNumbers.R;
-
-import static android.app.FragmentManager.POP_BACK_STACK_INCLUSIVE;
 
 /**
  * Created by iuliia on 9/2/16.

@@ -15,11 +15,11 @@ import com.ashomok.eNumbers.keyboard.CustomKeyboardFacade;
  */
 
 public abstract class ENListKeyboardFragment extends ENListFragment {
-    private CustomKeyboardFacade keyboard;
     private static final String IS_KEYBOARD_SWOWN_ARG = "IS_KEYBOARD_SHOWN";
+    private static String startChar;
+    private CustomKeyboardFacade keyboard;
     private boolean isKeyboardShown;
     private EditText inputEditText;
-    private static String startChar;
 
     @Override
     public void onActivityCreated(final Bundle savedInstanceState) {

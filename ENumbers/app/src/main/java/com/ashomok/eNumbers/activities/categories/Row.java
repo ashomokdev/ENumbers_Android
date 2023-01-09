@@ -13,6 +13,12 @@ class Row implements Serializable {
     private int endNumber;
     private int titleResourceID;
 
+    public Row(int startNumber, int endNumber, int titleResourceID) {
+        this.startNumber = startNumber;
+        this.endNumber = endNumber;
+        this.titleResourceID = titleResourceID;
+    }
+
     int getStartNumber() {
         return startNumber;
     }
@@ -23,12 +29,5 @@ class Row implements Serializable {
 
     int getTitleResourceID() {
         return titleResourceID;
-    }
-
-    public Row(int startNumber, int endNumber, int titleResourceID)
-    {
-        this.startNumber = startNumber;
-        this.endNumber = endNumber;
-        this.titleResourceID = titleResourceID;
     }
 }

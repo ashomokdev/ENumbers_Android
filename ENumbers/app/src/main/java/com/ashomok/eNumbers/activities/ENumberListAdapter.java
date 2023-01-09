@@ -5,7 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import com.ashomok.eNumbers.R;
 import com.ashomok.eNumbers.data_load.EN;
@@ -19,6 +20,7 @@ class ENumberListAdapter extends ArrayAdapter<EN> {
 
     private static final String TAG = ENumberListAdapter.class.getSimpleName();
     private Context context;
+
     public ENumberListAdapter(Context context, int resource) {
         super(context, resource);
 
@@ -82,7 +84,7 @@ class ENumberListAdapter extends ArrayAdapter<EN> {
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
         }
-      return view;
+        return view;
     }
 
     public void setData(List<EN> data) {

@@ -7,7 +7,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="appName">ENumbers</string>
-    <string name="developer">by Iuliia Ashomok</string>
+    <string name="developer">by Ju Ash</string>
     <string name="email" translatable="false">email</string>
     <string name="my_email" translatable="false">ashomokdev@gmail.com</string>
     <string name="version">version</string>
@@ -21,7 +21,7 @@
     <string name="permissions_needs">Permission needs!</string>
     <string name="camera_error">Your device not support this feature</string>
     <string name="alert_dialog_exit">Exit</string>
-    <string name="make_photo_with_ingredients">Make photo with Ingredients:</string>
+    <string name="make_photo_with_ingredients">Make clear photo with Ingredients which contains E numbers:</string>
     <string name="ok">OK</string>
     <string name="requirement">Requirement</string>
     <string name="code">code</string>

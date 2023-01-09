@@ -1,15 +1,15 @@
 package com.ashomok.eNumbers.activities.categories;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
+
+import androidx.fragment.app.Fragment;
 
 import com.ashomok.eNumbers.R;
 
@@ -22,23 +22,8 @@ import java.util.List;
  */
 public class SubcategoriesListFragment extends Fragment {
 
-    private static final String TAG = SubcategoriesListFragment.class.getSimpleName();
-
     public static final String CHECKED_ROW_POS_ARG = "checkedRowPosition";
-    private int checkedRowPosition;
-
-    private OnItemSelectedListener mCallback;
-
-    private ListView listView;
-
-    private Context context;
-
-    public interface OnItemSelectedListener {
-        void onItemSelected(Row row);
-    }
-
-    private Row row;
-
+    private static final String TAG = SubcategoriesListFragment.class.getSimpleName();
     private static final List<Row> dataList = new ArrayList<Row>() {{
         add(new Row(100, 199, R.string.all));
         add(new Row(100, 109, R.string.yellows));
@@ -108,6 +93,11 @@ public class SubcategoriesListFragment extends Fragment {
 
         add(new Row(1000, 1599, R.string.all));
     }};
+    private int checkedRowPosition;
+    private OnItemSelectedListener mCallback;
+    private ListView listView;
+    private Context context;
+    private Row row;
 
     @Override
     public void onAttach(Context context) {
@@ -127,7 +117,6 @@ public class SubcategoriesListFragment extends Fragment {
         super.onAttach(activity);
         initCallback(activity);
     }
-
 
     public void updateContent(Row settings) {
 
@@ -229,5 +218,9 @@ public class SubcategoriesListFragment extends Fragment {
         outState.putInt(CHECKED_ROW_POS_ARG, checkedRowPosition);
 
         super.onSaveInstanceState(outState);
+    }
+
+    public interface OnItemSelectedListener {
+        void onItemSelected(Row row);
     }
 }

@@ -1,7 +1,9 @@
 package com.ashomok.eNumbers.tools;
 
-import android.app.Fragment;
+
 import android.content.Context;
+
+import androidx.fragment.app.Fragment;
 
 /**
  * Created by iuliia on 10/15/16.

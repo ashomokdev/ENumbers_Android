@@ -11,6 +11,16 @@ import java.io.Serializable;
 public class EN implements Serializable {
 
     public static final String TAG = EN.class.getSimpleName();
+    private String code;
+    private String name;
+    private String purpose;
+    private String status;
+    private String additionalInfo;
+    private String typicalProducts;
+    private String approvedIn;
+    private String bannedIn;
+    private String badForChildren;
+    private String dangerLevel;
 
     public EN(Cursor cursor) {
         try {
@@ -30,104 +40,83 @@ public class EN implements Serializable {
 
     }
 
-    public void setApprovedIn(String approvedIn) {
-        this.approvedIn = approvedIn;
-    }
-
-    public void setBannedIn(String bannedIn) {
-        this.bannedIn = bannedIn;
-    }
-
-    public void setTypicalProducts(String typicalProducts) {
-        this.typicalProducts = typicalProducts;
-    }
-
-    public void setAdditionalInfo(String additionalInfo) {
-        this.additionalInfo = additionalInfo;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+    public String getCode() {
+        return code;
     }
 
     public void setCode(String code) {
         this.code = code;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPurpose() {
+        return purpose;
     }
 
     public void setPurpose(String purpose) {
         this.purpose = purpose;
     }
 
-    public void setBadForChildren(String badForChildren) {
-        this.badForChildren = badForChildren;
-    }
-
-    public void setDangerLevel(String dangerLevel) {
-        this.dangerLevel = dangerLevel;
-    }
-
-
-    public String getCode() {
-        return code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    private String code;
-
-    private String name;
-
-    private String purpose;
-
-    public String getPurpose() {
-        return purpose;
-    }
-
     public String getStatus() {
         return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getAdditionalInfo() {
         return additionalInfo;
     }
 
+    public void setAdditionalInfo(String additionalInfo) {
+        this.additionalInfo = additionalInfo;
+    }
+
     public String getTypicalProducts() {
         return typicalProducts;
+    }
+
+    public void setTypicalProducts(String typicalProducts) {
+        this.typicalProducts = typicalProducts;
     }
 
     public String getApprovedIn() {
         return approvedIn;
     }
 
+    public void setApprovedIn(String approvedIn) {
+        this.approvedIn = approvedIn;
+    }
+
     public String getBannedIn() {
         return bannedIn;
+    }
+
+    public void setBannedIn(String bannedIn) {
+        this.bannedIn = bannedIn;
     }
 
     public String getBadForChildren() {
         return badForChildren;
     }
 
+    public void setBadForChildren(String badForChildren) {
+        this.badForChildren = badForChildren;
+    }
+
     public String getDangerLevel() {
         return dangerLevel;
     }
 
-    private String status;
-
-    private String additionalInfo;
-
-    private String typicalProducts;
-
-    private String approvedIn;
-
-    private String bannedIn;
-
-    private String badForChildren;
-
-    private String dangerLevel;
+    public void setDangerLevel(String dangerLevel) {
+        this.dangerLevel = dangerLevel;
+    }
 }

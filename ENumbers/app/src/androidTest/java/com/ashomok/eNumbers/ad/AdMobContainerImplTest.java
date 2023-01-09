@@ -1,24 +1,22 @@
 package com.ashomok.eNumbers.ad;
 
-import android.support.test.rule.ActivityTestRule;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+
 import android.util.Log;
+
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
 import com.ashomok.eNumbers.R;
 import com.ashomok.eNumbers.activities.ENDetailsActivity;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdView;
 
-
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 /**
  * Created by iuliia on 1/27/17.
@@ -26,22 +24,22 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 public class AdMobContainerImplTest {
     private static final String TAG = AdMobContainerImplTest.class.getSimpleName();
     @Rule
-    public ActivityTestRule<ENDetailsActivity> mActivityRule = new ActivityTestRule<>(
-            ENDetailsActivity.class, true, true);
+    public ActivityScenarioRule<ENDetailsActivity> mActivityRule = new ActivityScenarioRule<>(
+            ENDetailsActivity.class);
 
     @Test
     public void testAdVisibility() {
-
-        AdView ad = mActivityRule.getActivity().findViewById(R.id.ad_banner);
-        ad.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                super.onAdLoaded();
-                Log.i(TAG, "ad loaded");
-                Assert.assertNotNull(ad);
-                onView(withId(R.id.ad_banner)).check(matches(isDisplayed()));
-            }
+        mActivityRule.getScenario().onActivity(activity -> {
+            AdView ad = activity.findViewById(R.id.ad_banner);
+            ad.setAdListener(new AdListener() {
+                @Override
+                public void onAdLoaded() {
+                    super.onAdLoaded();
+                    Log.i(TAG, "ad loaded");
+                    Assert.assertNotNull(ad);
+                    onView(withId(R.id.ad_banner)).check(matches(isDisplayed()));
+                }
+            });
         });
-
     }
 }

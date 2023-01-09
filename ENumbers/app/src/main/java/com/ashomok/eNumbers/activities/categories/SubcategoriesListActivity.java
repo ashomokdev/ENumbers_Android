@@ -1,12 +1,13 @@
 package com.ashomok.eNumbers.activities.categories;
 
-import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.ashomok.eNumbers.R;
 import com.ashomok.eNumbers.ad.AdContainer;
@@ -19,10 +20,9 @@ import com.ashomok.eNumbers.ad.AdMobContainerImpl;
 //Activity A
 public class SubcategoriesListActivity extends AppCompatActivity implements SubcategoriesListFragment.OnItemSelectedListener {
 
-    private String category;
     private static final String TAG = SubcategoriesListActivity.class.getSimpleName();
-
     private static final String TITLE_ARG = "title";
+    private String category;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,7 +69,7 @@ public class SubcategoriesListActivity extends AppCompatActivity implements Subc
                 Log.e(TAG, "Activity title can not be updated.");
             }
 
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.add(R.id.list_container, firstFragment);
 
             if (findViewById(R.id.details_container) != null) {
@@ -84,7 +84,7 @@ public class SubcategoriesListActivity extends AppCompatActivity implements Subc
                 Log.d(TAG, "handset device. R.id.details_container not found in layout file");
             }
 
-         transaction.commit();
+            transaction.commit();
 
         } else {
             Log.e(TAG, "R.id.list_container not found in layout file.");
@@ -103,7 +103,7 @@ public class SubcategoriesListActivity extends AppCompatActivity implements Subc
     @Override
     public void onItemSelected(Row row) {
 
-        SubcategoryFragment subcategoryFragment = (SubcategoryFragment) getFragmentManager()
+        SubcategoryFragment subcategoryFragment = (SubcategoryFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.details_container);
         if (subcategoryFragment == null) {
 
@@ -113,7 +113,7 @@ public class SubcategoriesListActivity extends AppCompatActivity implements Subc
             Bundle args = new Bundle();
             args.putSerializable(Row.TAG, row);
             newFragment.setArguments(args);
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
             //replace whatever is in the list_container view with this fragment
             //add transaction to the back stack so the user can navigate back

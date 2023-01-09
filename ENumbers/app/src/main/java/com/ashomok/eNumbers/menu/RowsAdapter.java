@@ -20,7 +20,6 @@ import java.util.List;
 public class RowsAdapter extends ArrayAdapter<Row> {
 
 
-
     public RowsAdapter(Context context, List<Row> objects) {
         super(context, 0, objects);
     }

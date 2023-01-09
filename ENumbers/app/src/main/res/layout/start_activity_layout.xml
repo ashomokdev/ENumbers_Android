@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
@@ -7,25 +7,25 @@
     tools:context=".activities.MainActivity">
 
     <LinearLayout
+        android:id="@+id/start_activity_parent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:id="@+id/start_activity_parent">
+        android:orientation="vertical">
 
         <include
             android:id="@+id/toolbar"
             layout="@layout/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight = "0"/>
+            android:layout_weight="0" />
 
         <fragment
             android:id="@+id/titles"
             android:name="com.ashomok.eNumbers.activities.SearchByCodeFragment"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            tools:layout="@layout/start_fragment"
-            android:layout_weight = "1"/>
+            android:layout_weight="1"
+            tools:layout="@layout/start_fragment" />
 
     </LinearLayout>
 
@@ -46,8 +46,8 @@
             android:id="@+id/lv_navigation_drawer"
             android:layout_width="240dp"
             android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
             android:layout_gravity="start"
             android:layout_marginTop="149dp"
             android:background="@color/light_blue"
@@ -55,4 +55,4 @@
             android:divider="@android:color/transparent"
             android:dividerHeight="0dp" />
     </RelativeLayout>
-</android.support.v4.widget.DrawerLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

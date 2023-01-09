@@ -1,19 +1,20 @@
 package com.ashomok.eNumbers.activities;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import com.ashomok.eNumbers.R;
 import com.ashomok.eNumbers.activities.rate_app.RateAppAsker;
 import com.ashomok.eNumbers.ad.AdContainer;
 import com.ashomok.eNumbers.ad.AdMobContainerImpl;
 import com.ashomok.eNumbers.data_load.EN;
-import com.ashomok.eNumbers.R;
 
 /**
  * Created by Iuliia on 14.09.2015.
@@ -36,7 +37,7 @@ public class ENDetailsActivity extends AppCompatActivity {
 
             Bundle extras = getIntent().getExtras();
             if (extras != null) {
-                en = (EN)getIntent().getSerializableExtra(EN.TAG);
+                en = (EN) getIntent().getSerializableExtra(EN.TAG);
 
             }
 

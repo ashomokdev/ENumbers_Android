@@ -18,16 +18,13 @@ public abstract class RecognizeImageAsyncTask extends AsyncTask<Void, Integer, S
     protected void onPreExecute() {
     }
 
-
     @Override
     protected void onPostExecute(String[] result) {
-
         StringBuilder resultString = new StringBuilder();
         for (String aResult : result) {
             resultString.append(", ").append(aResult);
         }
         Log.d(TAG, resultString.toString());
-
         onTaskCompletedListener.onTaskCompleted(result);
     }
 

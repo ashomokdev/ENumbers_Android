@@ -23,7 +23,7 @@ public class SearchByNamesFragment extends ENListFragment {
     }
 
     @Override
-    protected void loadDefaultData() {
+    protected void loadData() {
         showAllData();
     }
 }

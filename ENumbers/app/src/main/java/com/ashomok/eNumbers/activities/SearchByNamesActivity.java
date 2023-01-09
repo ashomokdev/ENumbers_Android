@@ -1,11 +1,12 @@
 package com.ashomok.eNumbers.activities;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.ashomok.eNumbers.R;
 import com.ashomok.eNumbers.ad.AdContainer;

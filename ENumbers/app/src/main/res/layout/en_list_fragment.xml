@@ -35,9 +35,9 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/layout_margin"
             android:background="@null"
-            android:paddingEnd="@dimen/icon_padding"
             android:paddingStart="@dimen/icon_padding"
             android:paddingTop="@dimen/icon_padding"
+            android:paddingEnd="@dimen/icon_padding"
             android:scaleType="fitCenter"
             android:src="@drawable/search_btn" />
 
@@ -47,9 +47,9 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/layout_margin"
             android:background="@null"
-            android:paddingEnd="@dimen/icon_padding"
             android:paddingStart="@dimen/icon_padding"
             android:paddingTop="@dimen/icon_padding"
+            android:paddingEnd="@dimen/icon_padding"
             android:scaleType="fitCenter"
             android:src="@drawable/clear_btn" />
     </LinearLayout>

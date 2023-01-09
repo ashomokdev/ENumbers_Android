@@ -10,15 +10,15 @@
         layout="@layout/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight = "0"/>
+        android:layout_weight="0" />
 
     <ListView
         android:id="@+id/lv_categories"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
+        android:layout_weight="1"
         android:choiceMode="singleChoice"
-        android:dividerHeight="2dp"
-        android:layout_weight = "1"/>
+        android:dividerHeight="2dp" />
 
 </LinearLayout>

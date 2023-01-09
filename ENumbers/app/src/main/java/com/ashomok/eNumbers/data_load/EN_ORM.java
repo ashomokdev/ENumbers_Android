@@ -105,8 +105,7 @@ public class EN_ORM {
 
         List<EN> result = new ArrayList<>();
         final List<String> inputList = new ArrayList<>();
-        for (String s: codesOrNames)
-        {
+        for (String s : codesOrNames) {
             inputList.add(s.toLowerCase());
         }
 
@@ -121,6 +120,7 @@ public class EN_ORM {
 
     /**
      * Get data by inputing contains one name. Example curcumin
+     *
      * @param name
      * @return
      */
@@ -129,7 +129,7 @@ public class EN_ORM {
 
         for (EN en : allEnumbs) {
 
-            if (en.getName().toLowerCase().contains(name.toLowerCase())){
+            if (en.getName().toLowerCase().contains(name.toLowerCase())) {
                 result.add(en);
             }
         }

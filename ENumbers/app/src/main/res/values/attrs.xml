@@ -8,7 +8,7 @@
     </declare-styleable>
 
     <declare-styleable name="BottomNavigationView">
-        <attr name="buttom_titles_array" format="reference"/>
+        <attr name="buttom_titles_array" format="reference" />
         <attr name="buttom_text_color" format="color" />
     </declare-styleable>
 </resources>

@@ -1,17 +1,17 @@
 package com.ashomok.eNumbers.activities;
 
-import android.app.Fragment;
-import android.app.LoaderManager;
 import android.content.Intent;
-import android.content.Loader;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 
 import com.ashomok.eNumbers.R;
 import com.ashomok.eNumbers.data_load.EN;
@@ -28,11 +28,10 @@ import java.util.regex.Pattern;
  */
 public abstract class ENListFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<EN>> {
 
+    private static final String TAG = ENListFragment.class.getSimpleName();
     private EditText inputEditText;
     private ENumberListAdapter scAdapter;
     private ListView listView;
-
-    private static final String TAG = ENListFragment.class.getSimpleName();
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -47,8 +46,7 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
 
             ImageButton searchBtn = view.findViewById(R.id.ic_go);
 
-            // Prepare the loader.  Either re-connect with an existing one,
-            // or start a new one.
+            // Prepare the loader.  Either re-connect with an existing one, or start a new one.
             getLoaderManager().initLoader(0, null, this);
 
             scAdapter = new ENumberListAdapter(getActivity(), 0);
@@ -58,10 +56,8 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
 
             ImageButton closeBtn = view.findViewById(R.id.ic_close);
             closeBtn.setOnClickListener(view1 -> {
-
                 inputEditText.setText("");
-
-                loadDefaultData();
+                loadData();
             });
 
         } catch (Exception e) {
@@ -69,27 +65,21 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
         }
     }
 
-    protected abstract void loadDefaultData();
-
     @Override
     public void onStart() {
         super.onStart();
-
         inputEditText.clearFocus();
         Log.d(TAG, "onStart called");
     }
 
-
     void LoadRequestedData(String input) {
         Pattern p = Pattern.compile("[0-9]");
-
         if (input.equals("") || input.equals(getString(R.string.startChar))) {
             showAllData();
         } else if (input.startsWith(getString(R.string.startChar)) &&
                 p.matcher(String.valueOf(input.charAt(1))).matches()) { //second char is number
             OCREngine parser = new OCREngineImpl();
             Set<String> enumbers = parser.parseResult(input);
-
             GetInfoByENumbersArray(enumbers.toArray(new String[enumbers.size()]));
         } else {
             GetInfoByName(input);
@@ -100,7 +90,6 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
         Bundle b = new Bundle();
         b.putStringArray("codes_array", enumbers);
         try {
-
             getLoaderManager().restartLoader(0, b, this);
 
         } catch (Exception e) {
@@ -109,7 +98,7 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
     }
 
     void GetInfoByName(String name) {
-        if(name.isEmpty()) {
+        if (name.isEmpty()) {
             Log.w(TAG, "GetInfoByName with empty name called");
         }
         Bundle b = new Bundle();
@@ -162,4 +151,6 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
         Log.d(TAG, "onLoaderReset(Loader<List<EN>> loader) ");
         scAdapter.setData(null);
     }
+
+    protected abstract void loadData();
 }

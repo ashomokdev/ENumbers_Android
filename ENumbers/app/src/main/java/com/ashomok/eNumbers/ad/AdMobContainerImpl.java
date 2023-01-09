@@ -17,16 +17,11 @@ import com.google.android.gms.ads.AdView;
  */
 public class AdMobContainerImpl implements AdContainer {
 
-
-    public final String appID;
-
     private static final String TAG = AdMobContainerImpl.class.getSimpleName();
     private final Activity context;
 
     public AdMobContainerImpl(Activity context) {
         this.context = context;
-        appID = context.getResources().getString(R.string.appID);
-
     }
 
     private void initBottomBanner(ViewGroup parent) {
@@ -41,10 +36,9 @@ public class AdMobContainerImpl implements AdContainer {
                 adView.setLayoutParams(
                         new LinearLayout.LayoutParams(
                                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 0.0f));
-
             }
 
-            adView.setAdSize(AdSize.SMART_BANNER);
+            adView.setAdSize(AdSize.BANNER);
             adView.setAdUnitId(context.getResources().getString(R.string.banner_ad_unit_id));
             adView.setId(R.id.ad_banner);
             AdRequest adRequest = new AdRequest.Builder().build();
@@ -53,13 +47,11 @@ public class AdMobContainerImpl implements AdContainer {
         } else {
             Log.e(TAG, "Ads can not been loaded programmaticaly. RelativeLayout and LinearLayout are supported as parent.");
         }
-
     }
 
     @Override
     public void initAd(ViewGroup parentLayout) {
         initAd(Settings.isAdActive, parentLayout);
-
     }
 
     private void initAd(boolean isAdActive, ViewGroup parentLayout) {

@@ -1,15 +1,14 @@
 package com.ashomok.eNumbers;
 
 
-import android.support.test.filters.SmallTest;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.filters.SmallTest;
+import androidx.test.rule.ActivityTestRule;
 
 import com.ashomok.eNumbers.activities.MainActivity;
 import com.ashomok.eNumbers.data_load.EN_ORM;
 import com.ashomok.eNumbers.ocr.OCREngine;
 import com.ashomok.eNumbers.ocr.OCREngineImpl;
-
 
 import org.junit.Assert;
 import org.junit.Rule;

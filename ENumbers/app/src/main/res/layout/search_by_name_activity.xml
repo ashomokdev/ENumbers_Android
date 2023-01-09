@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_weight = "0"/>
+        android:layout_weight="0" />
 
     <fragment
         android:id="@+id/titles"
@@ -20,6 +20,6 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@+id/toolbar"
-        tools:layout="@layout/search_by_names_fragment"
-        android:layout_weight = "1"/>
+        android:layout_weight="1"
+        tools:layout="@layout/search_by_names_fragment" />
 </LinearLayout>

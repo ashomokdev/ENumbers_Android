@@ -3,7 +3,6 @@ package com.ashomok.eNumbers.activities;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
-import android.widget.EditText;
 
 /**
  * Created by iuliia on 9/24/16.
@@ -11,7 +10,7 @@ import android.widget.EditText;
  * uses for hiding switch keyboard btn
  */
 
-public class CustomEditText extends android.support.v7.widget.AppCompatEditText {
+public class CustomEditText extends androidx.appcompat.widget.AppCompatEditText {
 
     private EditTextImeBackListener mOnImeBack;
 

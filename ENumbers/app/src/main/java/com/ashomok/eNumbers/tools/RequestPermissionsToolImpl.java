@@ -3,15 +3,14 @@ package com.ashomok.eNumbers.tools;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.Fragment;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.v13.app.ActivityCompat;
-import android.support.v13.app.FragmentCompat;
 import android.widget.Toast;
+
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.legacy.app.ActivityCompat;
 
 import com.ashomok.eNumbers.R;
 
@@ -30,7 +29,6 @@ public class RequestPermissionsToolImpl implements RequestPermissionsTool {
     private static final String TAG = RequestPermissionsToolImpl.class.getSimpleName();
     private Fragment fragment;
 
-
     @Override
     public void requestPermissions(Fragment fragment, String[] permissions) {
         Map<Integer, String> permissionsMap = new HashMap<>();
@@ -42,15 +40,12 @@ public class RequestPermissionsToolImpl implements RequestPermissionsTool {
         }
 
         for (Map.Entry<Integer, String> permission : permissionsMap.entrySet()) {
-            if (!isPermissionGranted(fragment.getActivity(), permission.getValue())) {
-                if (FragmentCompat.shouldShowRequestPermissionRationale(fragment, permission.getValue())) {
-
+            if (isPermissionNotGranted(fragment.getActivity(), permission.getValue())) {
+                if (fragment.shouldShowRequestPermissionRationale(permission.getValue())) {
                     ConfirmationDialog.newInstance(permission.getKey(), permission.getValue()).
                             show(fragment.getFragmentManager(), CONFIRMATION_DIALOG);
-                }
-                else {
-                    FragmentCompat.requestPermissions(fragment, permissions,
-                            permission.getKey());
+                } else {
+                    fragment.requestPermissions(permissions, permission.getKey());
                     return;
                 }
             }
@@ -59,9 +54,8 @@ public class RequestPermissionsToolImpl implements RequestPermissionsTool {
 
     @Override
     public boolean isPermissionsGranted(Context context, String[] permissions) {
-
         for (String permission : permissions) {
-            if (!isPermissionGranted(context, permission)) {
+            if (isPermissionNotGranted(context, permission)) {
                 return false;
             }
         }
@@ -71,13 +65,12 @@ public class RequestPermissionsToolImpl implements RequestPermissionsTool {
     @Override
     public void onPermissionDenied() {
         ErrorDialog.newInstance(fragment.getResources().getString(R.string.permissions_needs)).
-        show(fragment.getFragmentManager(), CONFIRMATION_DIALOG);
+                show(fragment.getFragmentManager(), CONFIRMATION_DIALOG);
     }
 
-    private boolean isPermissionGranted(Context context, String permission) {
+    private boolean isPermissionNotGranted(Context context, String permission) {
         return ActivityCompat.checkSelfPermission(context,
-                permission)
-                == PackageManager.PERMISSION_GRANTED;
+                permission) != PackageManager.PERMISSION_GRANTED;
     }
 
 

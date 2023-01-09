@@ -41,7 +41,6 @@ public class SubcategoryFragment extends ENListKeyboardFragment {
     }
 
 
-
     private void LoadInfoByENumbersRange(int startValue, int endValue) {
         Bundle b = new Bundle();
         b.putInt("start_value", startValue);
@@ -76,7 +75,7 @@ public class SubcategoryFragment extends ENListKeyboardFragment {
 
 
     @Override
-    protected void loadDefaultData() {
+    protected void loadData() {
         if (row != null) {
             updateContent(row);
         }
@@ -85,7 +84,7 @@ public class SubcategoryFragment extends ENListKeyboardFragment {
     @Override
     public void onStart() {
         super.onStart();
-        loadDefaultData();
+        loadData();
     }
 
     @Override
@@ -97,8 +96,7 @@ public class SubcategoryFragment extends ENListKeyboardFragment {
     }
 
     @Override
-    public void showAllData()
-    {
+    public void showAllData() {
         LoadInfoByENumbersRange(row.getStartNumber(), row.getEndNumber());
     }
 }

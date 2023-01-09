@@ -2,14 +2,13 @@ package com.ashomok.eNumbers.activities.categories;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.ashomok.eNumbers.R;
 import com.ashomok.eNumbers.ad.AdContainer;
@@ -24,6 +23,7 @@ import java.util.List;
 
 public class CategoriesListActivity extends AppCompatActivity {
 
+    private static final String TAG = CategoriesListActivity.class.getSimpleName();
     private static List<Row> dataList = new ArrayList<Row>() {{
         add(new Row(100, 199, R.string.colours));
         add(new Row(200, 299, R.string.preservatives));
@@ -35,8 +35,6 @@ public class CategoriesListActivity extends AppCompatActivity {
         add(new Row(900, 999, R.string.miscellaneous));
         add(new Row(1000, 1599, R.string.additional_chemicals));
     }};
-
-    private static final String TAG = CategoriesListActivity.class.getSimpleName();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ListView android:id="@+id/lv_subcategories"
+<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lv_subcategories"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="start"
     android:choiceMode="singleChoice"
-    android:dividerHeight="2dp"
-    xmlns:android="http://schemas.android.com/apk/res/android" />
+    android:dividerHeight="2dp" />

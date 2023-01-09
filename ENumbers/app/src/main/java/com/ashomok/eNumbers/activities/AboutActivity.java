@@ -7,13 +7,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.ashomok.eNumbers.BuildConfig;
 import com.ashomok.eNumbers.R;
@@ -25,9 +26,8 @@ import com.ashomok.eNumbers.menu.ItemClickListener;
  */
 public class AboutActivity extends AppCompatActivity {
 
-    private TextView mTextView_email;
     private static final String TAG = "AboutActivity";
-
+    private TextView mTextView_email;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

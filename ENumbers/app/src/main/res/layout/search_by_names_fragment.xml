@@ -4,6 +4,6 @@
     android:layout_height="fill_parent">
 
     <!--todo simplify - use @layout/en_list_fragment instead this one -->
-    <include layout="@layout/en_list_fragment"/>
+    <include layout="@layout/en_list_fragment" />
 
 </RelativeLayout>

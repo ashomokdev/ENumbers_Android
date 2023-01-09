@@ -24,21 +24,21 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:typeface="sans"
-            tools:text="preview"/>
+            tools:text="preview" />
 
         <TextView
             android:id="@+id/EName"
             style="@style/EName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="preview"/>
+            tools:text="preview" />
 
         <TextView
             android:id="@+id/EPurpose"
             style="@style/EPurpose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="preview"/>
+            tools:text="preview" />
 
     </LinearLayout>
 </LinearLayout>

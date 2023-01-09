@@ -18,12 +18,10 @@ import java.lang.reflect.Method;
 abstract class KeyboardImpl implements Keyboard {
 
     private static final String TAG = KeyboardImpl.class.getSimpleName();
-    private boolean isVisible;
     Context context;
     OnVisibilityChangedListener onVisibilityChangedListener;
     EditText editText;
-
-
+    private boolean isVisible;
 
     public void init(Context c) {
         this.context = c;
@@ -44,8 +42,7 @@ abstract class KeyboardImpl implements Keyboard {
 
     }
 
-    private void hideDefaultKeyboard()
-    {
+    private void hideDefaultKeyboard() {
         Log.d(TAG, "hide default keyboard");
 
         View v = ((Activity) context).getCurrentFocus();

@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.ActivityNotFoundException;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -33,22 +32,22 @@ public class RateAppDialogFragment extends DialogFragment {
 
         return new AlertDialog.Builder(getActivity())
                 .setTitle(title)
-        .setMessage(R.string.share_opinion)
-        .setPositiveButton(R.string.ok,
-                (dialog, id) -> {
-                    rate();
-                    onStopAskListener.onStopAsk();
-                    dialog.cancel();
+                .setMessage(R.string.share_opinion)
+                .setPositiveButton(R.string.ok,
+                        (dialog, id) -> {
+                            rate();
+                            onStopAskListener.onStopAsk();
+                            dialog.cancel();
 
-                })
+                        })
 
-        .setNeutralButton(R.string.later,
-                (dialog, id) -> dialog.cancel())
-        .setNegativeButton(R.string.never,
-                (dialog, id) -> {
-                    onStopAskListener.onStopAsk();
-                    dialog.cancel();
-                })
+                .setNeutralButton(R.string.later,
+                        (dialog, id) -> dialog.cancel())
+                .setNegativeButton(R.string.never,
+                        (dialog, id) -> {
+                            onStopAskListener.onStopAsk();
+                            dialog.cancel();
+                        })
                 .create();
     }
 

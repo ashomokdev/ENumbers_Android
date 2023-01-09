@@ -3,12 +3,11 @@ package com.ashomok.eNumbers.keyboard;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 
 import com.ashomok.eNumbers.R;
 import com.ashomok.eNumbers.activities.CustomEditText;
-import com.ashomok.eNumbers.activities.EditTextImeBackListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
  * Created by iuliia on 9/4/16.

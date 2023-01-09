@@ -1,9 +1,10 @@
 package com.ashomok.eNumbers.data_load;
 
-import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+
+import androidx.loader.content.AsyncTaskLoader;
 
 import java.util.ArrayList;
 import java.util.List;

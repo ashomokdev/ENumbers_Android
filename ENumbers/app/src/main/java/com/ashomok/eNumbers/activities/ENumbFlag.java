@@ -2,7 +2,6 @@ package com.ashomok.eNumbers.activities;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.ashomok.eNumbers.R;
@@ -10,7 +9,7 @@ import com.ashomok.eNumbers.R;
 /**
  * Created by Iuliia on 22.09.2015.
  */
-public class ENumbFlag extends android.support.v7.widget.AppCompatImageView {
+public class ENumbFlag extends androidx.appcompat.widget.AppCompatImageView {
     private static final int[] STATE_RED = {R.attr.state_red};
     private static final int[] STATE_YELLOW = {R.attr.state_yellow};
     private static final int[] STATE_GREEN = {R.attr.state_green};

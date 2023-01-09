@@ -3,11 +3,12 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <include layout="@layout/en_list_fragment"/>
+    <include layout="@layout/en_list_fragment" />
 
-    <include layout="@layout/keyboard"
-        android:layout_alignParentBottom="true"
+    <include
+        layout="@layout/keyboard"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_width="match_parent" />
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

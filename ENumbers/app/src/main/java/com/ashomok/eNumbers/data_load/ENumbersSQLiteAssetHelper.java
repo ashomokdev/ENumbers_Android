@@ -13,9 +13,6 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
  */
 class ENumbersSQLiteAssetHelper extends SQLiteAssetHelper {
 
-    private static final String DATABASE_NAME = "Enumbers.db";
-    private static final int DATABASE_VERSION = 2;
-
     public static final String COLUMN_NAME_ID = "0 _id"; //It is returning the value of 0 with the column name _id (it's using column name alias). You can return a column that doesn't exist in your table this way.
     public static final String COLUMN_NAME_CODE = "code";
     public static final String COLUMN_NAME_NAME = "name";
@@ -27,7 +24,9 @@ class ENumbersSQLiteAssetHelper extends SQLiteAssetHelper {
     public static final String COLUMN_NAME_BAD_FOR_CHILDREN = "badForChildren";
     public static final String COLUMN_NAME_TYPICAL_PRODUCTS = "typicalProducts";
     public static final String COLUMN_NAME_DANGER_LEVEL = "dangerLevel";
-
+    private static final String DATABASE_NAME = "Enumbers.db";
+    private static final int DATABASE_VERSION = 2;
+    private static final String sqlTable = "Enumbers";
     private static String[] sqlSelect = {
             COLUMN_NAME_ID,
             COLUMN_NAME_CODE,
@@ -40,8 +39,6 @@ class ENumbersSQLiteAssetHelper extends SQLiteAssetHelper {
             COLUMN_NAME_BAD_FOR_CHILDREN,
             COLUMN_NAME_TYPICAL_PRODUCTS,
             COLUMN_NAME_DANGER_LEVEL};
-
-    private static final String sqlTable = "Enumbers";
 
     public ENumbersSQLiteAssetHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

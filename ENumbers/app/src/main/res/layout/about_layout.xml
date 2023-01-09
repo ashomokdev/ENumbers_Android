@@ -16,10 +16,10 @@
         android:id="@+id/scroll_view"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginBottom="@dimen/layout_margin"
         android:layout_marginLeft="@dimen/layout_margin"
+        android:layout_marginTop="@dimen/layout_margin"
         android:layout_marginRight="@dimen/layout_margin"
-        android:layout_marginTop="@dimen/layout_margin">
+        android:layout_marginBottom="@dimen/layout_margin">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
@@ -35,7 +35,7 @@
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:textStyle="bold"
-                tools:text="preview"/>
+                tools:text="preview" />
 
             <TextView
                 android:id="@+id/developer"
@@ -45,7 +45,7 @@
                 android:clickable="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                tools:text="preview"/>
+                tools:text="preview" />
 
             <TextView
                 android:id="@+id/email"
@@ -55,7 +55,7 @@
                 android:clickable="true"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                tools:text="preview"/>
+                tools:text="preview" />
 
             <TextView
                 android:id="@+id/version"
@@ -65,20 +65,21 @@
                 android:clickable="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                tools:text="preview"/>
+                tools:text="preview" />
 
             <TextView
-                android:layout_marginTop="26dp"
                 android:id="@+id/ocr_header"
                 style="@style/CustomText"
-                android:textColor="@color/lightred"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
                 android:clickable="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
+                android:textColor="@color/lightred"
                 android:textStyle="bold"
-                tools:text="preview"/>
+                tools:text="preview" />
+
             <TextView
                 android:id="@+id/ocr_explanation"
                 style="@style/CustomText"
@@ -87,19 +88,19 @@
                 android:clickable="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                tools:text="preview"/>
+                tools:text="preview" />
 
             <TextView
-                android:layout_marginTop="26dp"
                 android:id="@+id/ads_free_version_header"
                 style="@style/CustomText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
                 android:clickable="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:textStyle="bold"
-                tools:text="preview"/>
+                tools:text="preview" />
 
             <TextView
                 android:id="@+id/ads_free_version"
@@ -109,7 +110,7 @@
                 android:clickable="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                tools:text="preview"/>
+                tools:text="preview" />
 
             <TextView
                 android:id="@+id/buy_paid"
@@ -119,20 +120,20 @@
                 android:clickable="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                tools:text="preview"/>
+                tools:text="preview" />
 
 
             <TextView
-                android:layout_marginTop="26dp"
                 android:id="@+id/sources_header"
                 style="@style/CustomText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
                 android:clickable="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:textStyle="bold"
-                tools:text="preview"/>
+                tools:text="preview" />
 
             <TextView
                 android:id="@+id/sources"
@@ -142,7 +143,7 @@
                 android:clickable="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                tools:text="preview"/>
+                tools:text="preview" />
 
             <LinearLayout
                 android:id="@+id/privacy_policy_layout"
@@ -152,26 +153,26 @@
 
                 <TextView
                     android:id="@+id/privacy_policy_header"
+                    style="@style/CustomText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="26dp"
                     android:clickable="false"
                     android:focusable="false"
                     android:focusableInTouchMode="false"
-                    android:textStyle="bold"
                     android:text="@string/privacy_policy_agreement"
-                    style="@style/CustomText"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/privacy_policy"
+                    style="@style/CustomText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:clickable="false"
                     android:focusable="false"
                     android:focusableInTouchMode="false"
                     android:text="@string/privacy_policy_explanation"
-                    style="@style/CustomText"
                     android:textSize="18sp" />
 
                 <TextView

@@ -5,5 +5,5 @@ package com.ashomok.eNumbers.keyboard;
  */
 interface OnVisibilityChangedListener {
 
-    void onVisibilityChanged (boolean isVisible);
+    void onVisibilityChanged(boolean isVisible);
 }
