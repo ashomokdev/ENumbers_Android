@@ -22,8 +22,8 @@
         <fragment
             android:id="@+id/titles"
             android:name="com.ashomok.eNumbers.activities.SearchByCodeFragment"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             tools:layout="@layout/start_fragment" />
 

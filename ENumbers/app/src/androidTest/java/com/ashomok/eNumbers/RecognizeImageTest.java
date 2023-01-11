@@ -16,6 +16,7 @@ import com.ashomok.eNumbers.activities.ocr_task.RecognizeImageAsyncTask;
 import com.ashomok.eNumbers.activities.ocr_task.RecognizeImageStandalone;
 import com.ashomok.eNumbers.ocr.OCREngineImpl;
 import com.ashomok.eNumbers.ocr.TessFactory;
+import com.ashomok.eNumbers.tools.LogHelper;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -68,7 +69,7 @@ public class RecognizeImageTest {
         for (String file : files) {
             mActivityRule.getActivity().getAssets();
             String result = ocrEngine.retrieveText(mActivityRule.getActivity(), file);
-            Log.i(TAG, "Result from " + file + result);
+            LogHelper.i(TAG, "Result from " + file + result);
             appendLog("Result from " + file + result);
         }
     }
@@ -113,7 +114,7 @@ public class RecognizeImageTest {
                     }
                     in.close();
                     out.close();
-                    Log.v(TAG, "Copied " + fileName + "to test_imgs");
+                    LogHelper.v(TAG, "Copied " + fileName + "to test_imgs");
                 }
                 if (!(new File(pathToDataFile)).exists()) {
                     throw new AssertionError("Can not copy file.");
@@ -121,7 +122,7 @@ public class RecognizeImageTest {
                 files.add(pathToDataFile);
             }
         } catch (IOException e) {
-            Log.e(TAG, "Was unable to copy files to test_imgs " + e.toString());
+            LogHelper.e(TAG, "Was unable to copy files to test_imgs " + e.toString());
             Assert.fail("Was unable to copy files to test_imgs " + e.toString());
         }
         return files;
@@ -162,7 +163,7 @@ public class RecognizeImageTest {
             for (String s : result) {
                 builder.append(s);
             }
-            Log.d(TAG, " result from " + filePath + ": " + builder.toString());
+            LogHelper.d(TAG, " result from " + filePath + ": " + builder.toString());
             signal.countDown();
         }
     }

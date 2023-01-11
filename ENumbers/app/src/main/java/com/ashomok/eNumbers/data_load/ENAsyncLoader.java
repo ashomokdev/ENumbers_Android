@@ -6,6 +6,8 @@ import android.util.Log;
 
 import androidx.loader.content.AsyncTaskLoader;
 
+import com.ashomok.eNumbers.tools.LogHelper;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +37,7 @@ public class ENAsyncLoader extends AsyncTaskLoader<List<EN>> {
             endValue = bundle.getInt("end_value");
             name = bundle.getString("name");
         }
-        Log.d(TAG, "ENAsyncLoader created.");
+        LogHelper.d(TAG, "ENAsyncLoader created.");
     }
 
     @Override
@@ -48,42 +50,42 @@ public class ENAsyncLoader extends AsyncTaskLoader<List<EN>> {
                 forceLoad();
             }
 
-            Log.d(TAG, "onStartLoading() ");
+            LogHelper.d(TAG, "onStartLoading() ");
         } catch (Exception e) {
-            Log.d(TAG, e.getMessage());
+            LogHelper.d(TAG, e.getMessage());
         }
     }
 
     @Override
     public void deliverResult(final List<EN> data) {
-        Log.d(TAG, "deliverResult(final List<EN> data)");
+        LogHelper.d(TAG, "deliverResult(final List<EN> data)");
         super.deliverResult(data);
     }
 
     @Override
     public List<EN> loadInBackground() {
-        Log.d(TAG, "loadInBackground()");
+        LogHelper.d(TAG, "loadInBackground()");
         try {
             EN_ORM instance = EN_ORM.getInstance(context);
             data = new ArrayList<>();
             if (codes != null) {
-                Log.d(TAG, "getEnumbsByCodeArray request");
+                LogHelper.d(TAG, "getEnumbsByCodeArray request");
                 data = instance.getEnumbsByCodeArray(codes);
             } else if (name != null) {
-                Log.d(TAG, "getEnumbsByName request");
+                LogHelper.d(TAG, "getEnumbsByName request");
                 data = instance.getEnumbsByName(name);
             } else if (startValue > 0 && endValue > 0) {
-                Log.d(TAG, "getEnumbsByCodeRange request");
+                LogHelper.d(TAG, "getEnumbsByCodeRange request");
                 data = instance.getEnumbsByCodeRange(startValue, endValue);
             } else {
-                Log.d(TAG, "getAllEnumbs request");
+                LogHelper.d(TAG, "getAllEnumbs request");
                 data = instance.getAllEnumbs();
             }
-            Log.d(TAG, "data size = " + data.size() + " obtained from DB.");
+            LogHelper.d(TAG, "data size = " + data.size() + " obtained from DB.");
             return data;
 
         } catch (Exception e) {
-            Log.e(this.getClass().getCanonicalName(), e.getMessage() + Log.getStackTraceString(e));
+            LogHelper.e(this.getClass().getCanonicalName(), e.getMessage() + Log.getStackTraceString(e));
         }
         return null;
     }

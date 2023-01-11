@@ -2,8 +2,8 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/subcategories_list_activity_parent"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <include
         android:id="@+id/toolbar"
@@ -15,13 +15,13 @@
     <View
         android:id="@+id/search_bar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="?android:attr/actionBarSize"
         android:layout_below="@+id/toolbar"
         android:background="@color/blue"
         android:gravity="center_horizontal|center_vertical"
         android:orientation="horizontal" />
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar"
@@ -31,14 +31,14 @@
             android:id="@+id/list_container"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginTop="?attr/actionBarSize"
+            android:layout_marginTop="?android:attr/actionBarSize"
             android:layout_weight="1" />
 
         <!-- "Fragment B" -->
         <View
             android:layout_width="20dp"
-            android:layout_height="fill_parent"
-            android:layout_marginTop="?attr/actionBarSize"
+            android:layout_height="match_parent"
+            android:layout_marginTop="?android:attr/actionBarSize"
             android:background="@drawable/fragment_shadow_left" />
 
         <FrameLayout

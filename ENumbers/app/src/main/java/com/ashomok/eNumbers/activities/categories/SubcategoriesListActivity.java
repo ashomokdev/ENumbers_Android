@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.ashomok.eNumbers.R;
 import com.ashomok.eNumbers.ad.AdContainer;
 import com.ashomok.eNumbers.ad.AdMobContainerImpl;
+import com.ashomok.eNumbers.tools.LogHelper;
 
 /**
  * Created by iuliia on 8/8/16.
@@ -66,7 +67,7 @@ public class SubcategoriesListActivity extends AppCompatActivity implements Subc
                 category = getResources().getString(((Row) getIntent().getExtras().getSerializable(Row.TAG)).getTitleResourceID());
                 updateActivityTitle();
             } catch (Exception e) {
-                Log.e(TAG, "Activity title can not be updated.");
+                LogHelper.e(TAG, "Activity title can not be updated.");
             }
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -81,13 +82,13 @@ public class SubcategoriesListActivity extends AppCompatActivity implements Subc
                 bundle.putInt(SubcategoriesListFragment.CHECKED_ROW_POS_ARG, -1);
                 firstFragment.setArguments(bundle);
 
-                Log.d(TAG, "handset device. R.id.details_container not found in layout file");
+                LogHelper.d(TAG, "handset device. R.id.details_container not found in layout file");
             }
 
             transaction.commit();
 
         } else {
-            Log.e(TAG, "R.id.list_container not found in layout file.");
+            LogHelper.e(TAG, "R.id.list_container not found in layout file.");
         }
 
     }

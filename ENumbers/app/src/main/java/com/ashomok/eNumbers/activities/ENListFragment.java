@@ -1,9 +1,13 @@
 package com.ashomok.eNumbers.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -18,7 +22,9 @@ import com.ashomok.eNumbers.data_load.EN;
 import com.ashomok.eNumbers.data_load.ENAsyncLoader;
 import com.ashomok.eNumbers.ocr.OCREngine;
 import com.ashomok.eNumbers.ocr.OCREngineImpl;
+import com.ashomok.eNumbers.tools.LogHelper;
 
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -29,7 +35,7 @@ import java.util.regex.Pattern;
 public abstract class ENListFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<EN>> {
 
     private static final String TAG = ENListFragment.class.getSimpleName();
-    private EditText inputEditText;
+    private EditText editText;
     private ENumberListAdapter scAdapter;
     private ListView listView;
 
@@ -37,14 +43,10 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
     public void onViewCreated(View view, Bundle savedInstanceState) {
         try {
             super.onViewCreated(view, savedInstanceState);
-
-            inputEditText = view.findViewById(R.id.inputE);
-
+            editText = view.findViewById(R.id.inputE);
             listView = view.findViewById(R.id.enumber_list);
             TextView outputWarning = view.findViewById(R.id.warning);
             listView.setEmptyView(outputWarning);
-
-            ImageButton searchBtn = view.findViewById(R.id.ic_go);
 
             // Prepare the loader.  Either re-connect with an existing one, or start a new one.
             getLoaderManager().initLoader(0, null, this);
@@ -52,27 +54,33 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
             scAdapter = new ENumberListAdapter(getActivity(), 0);
             listView.setAdapter(scAdapter);
 
-            searchBtn.setOnClickListener(v -> LoadRequestedData(inputEditText.getText().toString()));
+            editText.setOnEditorActionListener((v, actionId, event) -> {
+                boolean handled = false;
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    loadRequestedData(editText.getText().toString());
+                    handled = true;
+                }
+                return handled;
+            });
 
             ImageButton closeBtn = view.findViewById(R.id.ic_close);
             closeBtn.setOnClickListener(view1 -> {
-                inputEditText.setText("");
+                editText.setText("");
                 loadData();
             });
 
         } catch (Exception e) {
-            Log.e(this.getClass().getCanonicalName(), e.getMessage());
+            LogHelper.e(this.getClass().getCanonicalName(), e.getMessage());
         }
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        inputEditText.clearFocus();
-        Log.d(TAG, "onStart called");
+        editText.clearFocus();
     }
 
-    void LoadRequestedData(String input) {
+    void loadRequestedData(String input) {
         Pattern p = Pattern.compile("[0-9]");
         if (input.equals("") || input.equals(getString(R.string.startChar))) {
             showAllData();
@@ -80,20 +88,20 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
                 p.matcher(String.valueOf(input.charAt(1))).matches()) { //second char is number
             OCREngine parser = new OCREngineImpl();
             Set<String> enumbers = parser.parseResult(input);
-            GetInfoByENumbersArray(enumbers.toArray(new String[enumbers.size()]));
+            getInfoByENumbersArray(enumbers.toArray(new String[enumbers.size()]));
         } else {
             GetInfoByName(input);
         }
     }
 
-    void GetInfoByENumbersArray(String[] enumbers) {
+    void getInfoByENumbersArray(String[] enumbers) {
         Bundle b = new Bundle();
         b.putStringArray("codes_array", enumbers);
         try {
             getLoaderManager().restartLoader(0, b, this);
 
         } catch (Exception e) {
-            Log.e(this.getClass().getCanonicalName(), e.getMessage());
+            LogHelper.e(this.getClass().getCanonicalName(), e.getMessage());
         }
     }
 
@@ -108,7 +116,7 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
             getLoaderManager().restartLoader(0, b, this);
 
         } catch (Exception e) {
-            Log.e(this.getClass().getCanonicalName(), e.getMessage());
+            LogHelper.e(this.getClass().getCanonicalName(), e.getMessage());
         }
     }
 
@@ -119,7 +127,7 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
 
     @Override
     public Loader<List<EN>> onCreateLoader(int i, Bundle bundle) {
-        Log.d(TAG, "onCreateLoader(int i, Bundle bundle)");
+        LogHelper.d(TAG, "onCreateLoader(int i, Bundle bundle)");
         // Prepare the loader
         return new ENAsyncLoader(getActivity(), bundle);
     }
@@ -128,7 +136,7 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
     //use data here
     @Override
     public void onLoadFinished(Loader<List<EN>> loader, List<EN> data) {
-        Log.d(TAG, "onLoadFinished(Loader<List<EN>> loader, List<EN> data)");
+        LogHelper.d(TAG, "onLoadFinished(Loader<List<EN>> loader, List<EN> data)");
         try {
             // Set the new data in the adapter.
             scAdapter.setData(data);
@@ -142,13 +150,13 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
                 startActivity(intent);
             });
         } catch (Exception e) {
-            Log.e(this.getClass().getCanonicalName(), e.getMessage());
+            LogHelper.e(this.getClass().getCanonicalName(), e.getMessage());
         }
     }
 
     @Override
     public void onLoaderReset(Loader<List<EN>> loader) {
-        Log.d(TAG, "onLoaderReset(Loader<List<EN>> loader) ");
+        LogHelper.d(TAG, "onLoaderReset(Loader<List<EN>> loader) ");
         scAdapter.setData(null);
     }
 

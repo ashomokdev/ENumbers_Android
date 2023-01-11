@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.util.Log;
 
+import com.ashomok.eNumbers.tools.LogHelper;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 /**
@@ -57,7 +58,7 @@ class ENumbersSQLiteAssetHelper extends SQLiteAssetHelper {
             c.moveToFirst();
             return c;
         } catch (Exception e) {
-            Log.e(this.getClass().getCanonicalName(), e.getMessage());
+            LogHelper.e(this.getClass().getCanonicalName(), e.getMessage());
         }
         return null;
     }

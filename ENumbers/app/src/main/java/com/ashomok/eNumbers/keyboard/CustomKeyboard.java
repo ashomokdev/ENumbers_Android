@@ -8,53 +8,49 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
-import android.util.Log;
+import android.os.Build;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 import com.ashomok.eNumbers.R;
+import com.ashomok.eNumbers.activities.CustomEditText;
+import com.ashomok.eNumbers.tools.LogHelper;
+
+import java.lang.reflect.Method;
 
 /**
- * Created by iuliia on 9/2/16.
+ * Created by iuliia on 9/4/16.
  */
-class CustomKeyboard extends KeyboardImpl {
+public class CustomKeyboard {
+
     private static final String TAG = CustomKeyboard.class.getSimpleName();
+    private final Context context;
     private KeyboardView keyboardView;
+    private CustomEditText editText;
 
+    public CustomKeyboard(Context context) {
+        this.context = context;
+    }
 
-    @Override
-    public void init(Context context) {
-
-        super.init(context);
-
+    public void init() {
+        editText = ((Activity) context).findViewById(R.id.inputE);
         keyboardView = ((Activity) context).findViewById(R.id.keyboard);
-        Keyboard customKeyboard = new Keyboard(context, R.xml.keyboard_keys);
-        keyboardView.setKeyboard(customKeyboard);
-
-        CustomKeyboardListener numbersListener = new CustomKeyboardListener(editText);
-
-        keyboardView.setOnKeyboardActionListener(numbersListener);
-
+        keyboardView.setKeyboard(new Keyboard(context, R.xml.keyboard_keys));
+        keyboardView.setOnKeyboardActionListener( new CustomKeyboardListener(editText));
         editText.setSelection(editText.getText().length()); //starts type after "E"
-
-        keyboardView.setOnSystemUiVisibilityChangeListener(i -> {
-
-        });
+        editText.setOnEditTextImeBackListener((ctrl, text) -> hide());
     }
 
-    @Override
     public void hide() {
-        Log.d(TAG, "hide");
-        super.hide();
-
+        LogHelper.d(TAG, "hide");
         keyboardView.setVisibility(View.GONE);
-        editText.setSelection(editText.getText().length());
-        onVisibilityChangedListener.onVisibilityChanged(false);
     }
 
-    @Override
     public void show() {
-        Log.d(TAG, "show");
-        super.show();
+        LogHelper.d(TAG, "show");
+        hideDefaultKeyboard();
+        keyboardView.setVisibility(View.VISIBLE);
 
         //for keyboard close when on back pressed
         FragmentManager fragmentManager = ((Activity) context).getFragmentManager();
@@ -64,11 +60,26 @@ class CustomKeyboard extends KeyboardImpl {
             fragmentTransaction.addToBackStack(TAG);
             fragmentTransaction.commit();
         }
+    }
 
-        keyboardView.setVisibility(View.VISIBLE);
-        onVisibilityChangedListener.onVisibilityChanged(true);
-
+    public void hideDefaultKeyboard() {
+        View view = ((Activity) context).getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            //  block default keyboard
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                editText.setShowSoftInputOnFocus(false);
+            } else {
+                try {
+                    final Method method = EditText.class.getMethod(
+                            "setShowSoftInputOnFocus", boolean.class);
+                    method.setAccessible(true);
+                    method.invoke(view, false);
+                } catch (Exception e) {
+                    LogHelper.e(TAG, e.getMessage());
+                }
+            }
+        }
     }
 }
-
-

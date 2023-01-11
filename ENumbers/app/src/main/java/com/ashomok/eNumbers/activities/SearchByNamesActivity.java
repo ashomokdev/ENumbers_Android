@@ -11,12 +11,12 @@ import androidx.appcompat.widget.Toolbar;
 import com.ashomok.eNumbers.R;
 import com.ashomok.eNumbers.ad.AdContainer;
 import com.ashomok.eNumbers.ad.AdMobContainerImpl;
+import com.ashomok.eNumbers.tools.LogHelper;
 
 /**
  * Created by iuliia on 11/12/16.
  */
 
-//todo merge SearchByNamesActivity with its fragment for simplify code
 public class SearchByNamesActivity extends AppCompatActivity {
 
     private static final String TAG = SearchByNamesActivity.class.getSimpleName();
@@ -38,7 +38,7 @@ public class SearchByNamesActivity extends AppCompatActivity {
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             }
         } catch (Exception e) {
-            Log.d(TAG, e.getMessage());
+            LogHelper.d(TAG, e.getMessage());
         }
     }
 

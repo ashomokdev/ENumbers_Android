@@ -9,6 +9,7 @@
 
     <application
         android:name="androidx.multidex.MultiDexApplication"
+        android:theme="@style/AppTheme"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/appName">
@@ -28,8 +29,7 @@
         <activity
             android:name=".activities.MainActivity"
             android:exported="true"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden">
+            android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -42,8 +42,7 @@
         <activity
             android:name=".activities.AboutActivity"
             android:label="@string/about"
-            android:parentActivityName=".activities.MainActivity"
-            android:theme="@style/AppTheme">
+            android:parentActivityName=".activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
@@ -51,8 +50,7 @@
         <activity
             android:name=".activities.SearchByNamesActivity"
             android:label="@string/search_by_names"
-            android:parentActivityName=".activities.MainActivity"
-            android:theme="@style/AppTheme">
+            android:parentActivityName=".activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
@@ -60,8 +58,7 @@
         <activity
             android:name=".activities.categories.CategoriesListActivity"
             android:label="@string/categories"
-            android:parentActivityName=".activities.MainActivity"
-            android:theme="@style/AppTheme">
+            android:parentActivityName=".activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
@@ -69,7 +66,6 @@
         <activity
             android:name=".activities.categories.SubcategoriesListActivity"
             android:parentActivityName=".activities.categories.CategoriesListActivity"
-            android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -78,8 +74,7 @@
         <activity
             android:name=".activities.ENDetailsActivity"
             android:label="@string/details"
-            android:parentActivityName=".activities.MainActivity"
-            android:theme="@style/AppTheme">
+            android:parentActivityName=".activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
@@ -88,8 +83,7 @@
             android:name=".activities.ocr_task.OCRAnimationActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/recognizing"
-            android:parentActivityName=".activities.MainActivity"
-            android:theme="@style/AppTheme">
+            android:parentActivityName=".activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />

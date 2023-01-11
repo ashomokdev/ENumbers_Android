@@ -3,6 +3,8 @@ package com.ashomok.eNumbers.data_load;
 import android.database.Cursor;
 import android.util.Log;
 
+import com.ashomok.eNumbers.tools.LogHelper;
+
 import java.io.Serializable;
 
 /**
@@ -35,7 +37,7 @@ public class EN implements Serializable {
             this.setDangerLevel(cursor.getString(cursor.getColumnIndex(ENumbersSQLiteAssetHelper.COLUMN_NAME_DANGER_LEVEL)));
             this.setBadForChildren(cursor.getString(cursor.getColumnIndex(ENumbersSQLiteAssetHelper.COLUMN_NAME_BAD_FOR_CHILDREN)));
         } catch (Exception e) {
-            Log.e(this.getClass().getCanonicalName(), e.getMessage());
+            LogHelper.e(this.getClass().getCanonicalName(), e.getMessage());
         }
 
     }

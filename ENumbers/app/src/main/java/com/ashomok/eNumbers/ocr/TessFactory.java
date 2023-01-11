@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
 
+import com.ashomok.eNumbers.tools.LogHelper;
 import com.googlecode.tesseract.android.TessBaseAPI;
 
 import java.io.File;
@@ -45,14 +46,14 @@ public class TessFactory {
                     }
                     in.close();
                     out.close();
-                    Log.v(TAG, "Copied " + fileName + "to tessdata");
+                    LogHelper.v(TAG, "Copied " + fileName + "to tessdata");
                 }
                 if (!(new File(pathToDataFile)).exists()) {
-                    Log.e(TAG, fileName + "was not copied to tessdata");
+                    LogHelper.e(TAG, fileName + "was not copied to tessdata");
                 }
             }
         } catch (IOException e) {
-            Log.e(TAG, "Was unable to copy files to tessdata " + e);
+            LogHelper.e(TAG, "Was unable to copy files to tessdata " + e);
         }
     }
 
@@ -61,10 +62,10 @@ public class TessFactory {
             File dir = new File(path);
             if (!dir.exists()) {
                 if (!dir.mkdirs()) {
-                    Log.v(TAG, "ERROR: Creation of directory " + path + " on sdcard failed");
+                    LogHelper.v(TAG, "ERROR: Creation of directory " + path + " on sdcard failed");
                     throw new IOException("Could not create folders");
                 } else {
-                    Log.v(TAG, "Created directory " + path + " on sdcard");
+                    LogHelper.v(TAG, "Created directory " + path + " on sdcard");
                 }
             }
         }

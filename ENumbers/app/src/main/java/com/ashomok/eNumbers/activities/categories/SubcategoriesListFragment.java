@@ -12,6 +12,7 @@ import android.widget.ListView;
 import androidx.fragment.app.Fragment;
 
 import com.ashomok.eNumbers.R;
+import com.ashomok.eNumbers.tools.LogHelper;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -133,7 +134,7 @@ public class SubcategoriesListFragment extends Fragment {
 
                 setCheckedRow(checkedRowPosition);
             } else {
-                Log.e(TAG, "listView == null");
+                LogHelper.e(TAG, "listView == null");
             }
         }
     }

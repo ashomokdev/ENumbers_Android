@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.ashomok.eNumbers.R;
 import com.ashomok.eNumbers.data_load.EN;
+import com.ashomok.eNumbers.tools.LogHelper;
 
 import java.util.List;
 
@@ -82,7 +83,7 @@ class ENumberListAdapter extends ArrayAdapter<EN> {
                     break;
             }
         } catch (Exception e) {
-            Log.e(TAG, e.getMessage());
+            LogHelper.e(TAG, e.getMessage());
         }
         return view;
     }

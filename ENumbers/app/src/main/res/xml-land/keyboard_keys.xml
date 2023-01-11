@@ -39,14 +39,13 @@
 
         <Key
             android:codes="44"
-            android:keyWidth="16.66%p"
             android:keyLabel="," />
         <Key
             android:codes="-5"
-            android:keyWidth="16.66%p"
-            android:keyEdgeFlags="right"
             android:keyIcon="@drawable/ic_backspace_black_24dp" />
-
+        <Key
+            android:codes="6"
+            android:keyEdgeFlags="right"
+            android:keyIcon="@drawable/ic_arrow_forward_24dp" />
     </Row>
-
 </Keyboard>

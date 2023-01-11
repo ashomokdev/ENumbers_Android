@@ -15,6 +15,7 @@ import com.ashomok.eNumbers.activities.rate_app.RateAppAsker;
 import com.ashomok.eNumbers.ad.AdContainer;
 import com.ashomok.eNumbers.ad.AdMobContainerImpl;
 import com.ashomok.eNumbers.data_load.EN;
+import com.ashomok.eNumbers.tools.LogHelper;
 
 /**
  * Created by Iuliia on 14.09.2015.
@@ -141,7 +142,7 @@ public class ENDetailsActivity extends AppCompatActivity {
             }
 
         } catch (Exception e) {
-            Log.e(this.getClass().getCanonicalName(), e.getMessage());
+            LogHelper.e(this.getClass().getCanonicalName(), e.getMessage());
             e.printStackTrace();
         }
     }

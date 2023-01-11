@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.ashomok.eNumbers.R;
 import com.ashomok.eNumbers.activities.ENListKeyboardFragment;
+import com.ashomok.eNumbers.tools.LogHelper;
 
 import java.io.Serializable;
 
@@ -50,7 +51,7 @@ public class SubcategoryFragment extends ENListKeyboardFragment {
             getLoaderManager().restartLoader(0, b, this);
 
         } catch (Exception e) {
-            Log.e(this.getClass().getCanonicalName(), e.getMessage());
+            LogHelper.e(this.getClass().getCanonicalName(), e.getMessage());
         }
     }
 

@@ -9,6 +9,7 @@ import android.media.ExifInterface;
 import android.net.Uri;
 import android.util.Log;
 
+import com.ashomok.eNumbers.tools.LogHelper;
 import com.googlecode.tesseract.android.TessBaseAPI;
 
 import java.io.IOException;
@@ -32,7 +33,7 @@ public class OCREngineImpl extends OCREngine {
             int exifOrientation = exif.getAttributeInt(
                     ExifInterface.TAG_ORIENTATION,
                     ExifInterface.ORIENTATION_NORMAL);
-            Log.v(TAG, "Orient: " + exifOrientation);
+            LogHelper.v(TAG, "Orient: " + exifOrientation);
             int rotate = 0;
             switch (exifOrientation) {
                 case ExifInterface.ORIENTATION_ROTATE_90:
@@ -45,7 +46,7 @@ public class OCREngineImpl extends OCREngine {
                     rotate = 270;
                     break;
             }
-            Log.v(TAG, "Rotation: " + rotate);
+            LogHelper.v(TAG, "Rotation: " + rotate);
             if (rotate != 0) {
                 // Getting width & height of the given image.
                 int w = bitmap.getWidth();
@@ -59,7 +60,7 @@ public class OCREngineImpl extends OCREngine {
             // Convert to ARGB_8888, required by tess
             bitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
         } catch (IOException e) {
-            Log.e(TAG, "Couldn't correct orientation: " + e.toString());
+            LogHelper.e(TAG, "Couldn't correct orientation: " + e.toString());
         }
         TessBaseAPI tess = new TessBaseAPI();
         // Given path must contain subdirectory `tessdata` where are `*.traineddata` language files

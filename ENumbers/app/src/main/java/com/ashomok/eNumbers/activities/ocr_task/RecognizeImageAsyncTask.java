@@ -3,6 +3,8 @@ package com.ashomok.eNumbers.activities.ocr_task;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.ashomok.eNumbers.tools.LogHelper;
+
 
 /**
  * Created by Iuliia on 19.11.2015.
@@ -24,7 +26,7 @@ public abstract class RecognizeImageAsyncTask extends AsyncTask<Void, Integer, S
         for (String aResult : result) {
             resultString.append(", ").append(aResult);
         }
-        Log.d(TAG, resultString.toString());
+        LogHelper.d(TAG, resultString.toString());
         onTaskCompletedListener.onTaskCompleted(result);
     }
 

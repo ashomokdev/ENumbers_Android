@@ -25,6 +25,7 @@ import com.ashomok.eNumbers.menu.ItemClickListener;
 import com.ashomok.eNumbers.menu.Menu;
 import com.ashomok.eNumbers.menu.Row;
 import com.ashomok.eNumbers.menu.RowsAdapter;
+import com.ashomok.eNumbers.tools.LogHelper;
 
 import java.util.List;
 
@@ -110,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Log.d(TAG, "onBackPressed()" + getFragmentManager().getBackStackEntryCount());
+        LogHelper.d(TAG, "onBackPressed()" + getFragmentManager().getBackStackEntryCount());
         if (getFragmentManager().getBackStackEntryCount() > 0) {
             super.onBackPressed();
         } else {

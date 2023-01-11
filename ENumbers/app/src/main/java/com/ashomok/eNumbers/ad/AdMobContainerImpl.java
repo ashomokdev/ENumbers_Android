@@ -2,12 +2,14 @@ package com.ashomok.eNumbers.ad;
 
 import android.app.Activity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.ashomok.eNumbers.R;
 import com.ashomok.eNumbers.Settings;
+import com.ashomok.eNumbers.tools.LogHelper;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
@@ -33,9 +35,10 @@ public class AdMobContainerImpl implements AdContainer {
                 lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
                 adView.setLayoutParams(lp);
             } else if (parent instanceof LinearLayout) {
-                adView.setLayoutParams(
-                        new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 0.0f));
+                LinearLayout.LayoutParams lp =  new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 0.0f);
+                ((LinearLayout) parent).setGravity(Gravity.BOTTOM);
+                adView.setLayoutParams(lp);
             }
 
             adView.setAdSize(AdSize.BANNER);
@@ -45,7 +48,7 @@ public class AdMobContainerImpl implements AdContainer {
             adView.loadAd(adRequest);
             parent.addView(adView);
         } else {
-            Log.e(TAG, "Ads can not been loaded programmaticaly. RelativeLayout and LinearLayout are supported as parent.");
+            LogHelper.e(TAG, "Ads can not been loaded programmaticaly. RelativeLayout and LinearLayout are supported as parent.");
         }
     }
 
@@ -57,7 +60,6 @@ public class AdMobContainerImpl implements AdContainer {
     private void initAd(boolean isAdActive, ViewGroup parentLayout) {
         if (isAdActive) {
             if (context.getResources().getConfiguration().orientation == android.content.res.Configuration.ORIENTATION_PORTRAIT) {
-                //init banner
                 initBottomBanner(parentLayout);
             }
         }

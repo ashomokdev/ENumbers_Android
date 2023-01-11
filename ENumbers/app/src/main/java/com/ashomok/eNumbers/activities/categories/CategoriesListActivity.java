@@ -13,6 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.ashomok.eNumbers.R;
 import com.ashomok.eNumbers.ad.AdContainer;
 import com.ashomok.eNumbers.ad.AdMobContainerImpl;
+import com.ashomok.eNumbers.tools.LogHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +70,7 @@ public class CategoriesListActivity extends AppCompatActivity {
                 startActivity(intent);
             });
         } catch (Exception e) {
-            Log.e(TAG, e.getMessage());
+            LogHelper.e(TAG, e.getMessage());
         }
     }
 

@@ -7,6 +7,7 @@ import android.util.Log;
 import com.ashomok.eNumbers.ocr.OCREngine;
 import com.ashomok.eNumbers.ocr.OCREngineImpl;
 import com.ashomok.eNumbers.ocr.TessFactory;
+import com.ashomok.eNumbers.tools.LogHelper;
 
 import java.io.File;
 import java.util.Set;
@@ -29,7 +30,7 @@ public final class RecognizeImageStandalone extends RecognizeImageAsyncTask {
     protected String[] doInBackground(Void... params) {
         try {
             if (!(new File(img_path)).exists()) {
-                Log.e(TAG, "File was not obtained.");
+                LogHelper.e(TAG, "File was not obtained.");
             }
             TessFactory tessFactory = new TessFactory(context);
             tessFactory.initTessdata();
@@ -41,7 +42,7 @@ public final class RecognizeImageStandalone extends RecognizeImageAsyncTask {
             }
             return new String[0];
         } catch (Exception e) {
-            Log.e(TAG, e.getMessage());
+            LogHelper.e(TAG, e.getMessage());
             return new String[0];
         }
     }

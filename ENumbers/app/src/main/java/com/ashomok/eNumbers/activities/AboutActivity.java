@@ -20,6 +20,7 @@ import com.ashomok.eNumbers.BuildConfig;
 import com.ashomok.eNumbers.R;
 import com.ashomok.eNumbers.Settings;
 import com.ashomok.eNumbers.menu.ItemClickListener;
+import com.ashomok.eNumbers.tools.LogHelper;
 
 /**
  * Created by Iuliia on 30.08.2015.
@@ -94,7 +95,7 @@ public class AboutActivity extends AppCompatActivity {
             privacy_policy_link.setOnClickListener(view -> openPrivacyPolicy());
 
         } catch (Exception e) {
-            Log.e(TAG, e.getMessage());
+            LogHelper.e(TAG, e.getMessage());
             e.printStackTrace();
         }
     }

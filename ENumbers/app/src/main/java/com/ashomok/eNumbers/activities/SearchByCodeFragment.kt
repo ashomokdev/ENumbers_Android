@@ -1,6 +1,5 @@
 package com.ashomok.eNumbers.activities
 
-import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.legacy.app.FragmentCompat
@@ -19,8 +19,6 @@ import com.ashomok.eNumbers.activities.ocr_task.OCRFirstRunDialogFragment
 import com.ashomok.eNumbers.activities.ocr_task.RecognizeImageAsyncTask
 import com.ashomok.eNumbers.activities.ocr_task.RecognizeImageAsyncTask.OnTaskCompletedListener
 import com.ashomok.eNumbers.activities.ocr_task.RecognizeImageStandalone
-import com.ashomok.eNumbers.tools.RequestPermissionsTool
-import com.ashomok.eNumbers.tools.RequestPermissionsToolImpl
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class SearchByCodeFragment : ENListKeyboardFragment(), OnTaskCompletedListener,
@@ -28,7 +26,6 @@ class SearchByCodeFragment : ENListKeyboardFragment(), OnTaskCompletedListener,
     private var img_path: String? = null
     private var recognizeImageAsyncTask: RecognizeImageAsyncTask? = null
     private var context: Activity? = null
-    private var requestTool: RequestPermissionsTool? = null
     private val takePictureActivityResultLauncher =
         registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
             if (isSuccess) {
@@ -50,7 +47,6 @@ class SearchByCodeFragment : ENListKeyboardFragment(), OnTaskCompletedListener,
             val fab = view.findViewById<FloatingActionButton>(R.id.fab)
             fab.setOnClickListener(FabClickHandler())
             context = activity
-            requestTool = RequestPermissionsToolImpl()
         } catch (e: Exception) {
             Log.e(this.javaClass.canonicalName, e.message!!)
         }
@@ -100,8 +96,8 @@ class SearchByCodeFragment : ENListKeyboardFragment(), OnTaskCompletedListener,
     }
 
     override fun onTaskCompleted(result: Array<String>) {
-//        requireActivity().finishActivity(OCRAnimationActivity_REQUEST_CODE)
-        GetInfoByENumbersArray(result)
+        requireActivity().finishActivity(OCRAnimationActivity_REQUEST_CODE)
+        getInfoByENumbersArray(result)
     }
 
     override fun loadData() {

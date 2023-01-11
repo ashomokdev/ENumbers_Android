@@ -35,7 +35,7 @@ public class AdMobContainerImplTest {
                 @Override
                 public void onAdLoaded() {
                     super.onAdLoaded();
-                    Log.i(TAG, "ad loaded");
+                    LogHelper.i(TAG, "ad loaded");
                     Assert.assertNotNull(ad);
                     onView(withId(R.id.ad_banner)).check(matches(isDisplayed()));
                 }
