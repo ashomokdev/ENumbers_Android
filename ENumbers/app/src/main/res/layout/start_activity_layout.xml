@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0" />
 
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/titles"
             android:name="com.ashomok.eNumbers.activities.SearchByCodeFragment"
             android:layout_width="match_parent"

@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
@@ -99,7 +100,6 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
         b.putStringArray("codes_array", enumbers);
         try {
             getLoaderManager().restartLoader(0, b, this);
-
         } catch (Exception e) {
             LogHelper.e(this.getClass().getCanonicalName(), e.getMessage());
         }
@@ -125,6 +125,7 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
     }
 
 
+    @NonNull
     @Override
     public Loader<List<EN>> onCreateLoader(int i, Bundle bundle) {
         LogHelper.d(TAG, "onCreateLoader(int i, Bundle bundle)");
@@ -132,20 +133,15 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
         return new ENAsyncLoader(getActivity(), bundle);
     }
 
-
-    //use data here
     @Override
-    public void onLoadFinished(Loader<List<EN>> loader, List<EN> data) {
+    public void onLoadFinished(@NonNull Loader<List<EN>> loader, List<EN> data) {
         LogHelper.d(TAG, "onLoadFinished(Loader<List<EN>> loader, List<EN> data)");
         try {
-            // Set the new data in the adapter.
             scAdapter.setData(data);
 
             listView.setOnItemClickListener((parent, arg1, position, arg3) -> {
-
                 EN item = (EN) parent.getAdapter().getItem(position);
                 Intent intent = new Intent(getActivity(), ENDetailsActivity.class);
-
                 intent.putExtra(EN.TAG, item);
                 startActivity(intent);
             });

@@ -69,8 +69,8 @@ public class RecognizeImageTest {
         for (String file : files) {
             mActivityRule.getActivity().getAssets();
             String result = ocrEngine.retrieveText(mActivityRule.getActivity(), file);
-            LogHelper.i(TAG, "Result from " + file + result);
-            appendLog("Result from " + file + result);
+            LogHelper.d(TAG, "Result from " + file + result);
+            assertTrue(result.length() > 0);
         }
     }
 
@@ -82,6 +82,7 @@ public class RecognizeImageTest {
             RecognizeImageAsyncTask task = new RecognizeImageStandalone(mActivityRule.getActivity(), path);
             task.setOnTaskCompletedListener(delegate);
             String[] enumbers = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
+            LogHelper.d(TAG, path);
             assertTrue(enumbers.length > 0);
             try {
                 signal.await();
@@ -114,7 +115,7 @@ public class RecognizeImageTest {
                     }
                     in.close();
                     out.close();
-                    LogHelper.v(TAG, "Copied " + fileName + "to test_imgs");
+                    LogHelper.d(TAG, "Copied " + fileName + "to test_imgs");
                 }
                 if (!(new File(pathToDataFile)).exists()) {
                     throw new AssertionError("Can not copy file.");
@@ -122,7 +123,7 @@ public class RecognizeImageTest {
                 files.add(pathToDataFile);
             }
         } catch (IOException e) {
-            LogHelper.e(TAG, "Was unable to copy files to test_imgs " + e.toString());
+            LogHelper.d(TAG, "Was unable to copy files to test_imgs " + e.toString());
             Assert.fail("Was unable to copy files to test_imgs " + e.toString());
         }
         return files;

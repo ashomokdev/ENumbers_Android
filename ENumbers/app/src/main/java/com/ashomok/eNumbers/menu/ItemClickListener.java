@@ -1,17 +1,22 @@
 package com.ashomok.eNumbers.menu;
 
-import static com.ashomok.eNumbers.Settings.appPackageName_PRO;
-
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
+import android.text.Html;
+import android.text.Spanned;
 import android.widget.Toast;
 
 import com.ashomok.eNumbers.R;
+import com.ashomok.eNumbers.Settings;
 import com.ashomok.eNumbers.activities.AboutActivity;
 import com.ashomok.eNumbers.activities.SearchByNamesActivity;
 import com.ashomok.eNumbers.activities.categories.CategoriesListActivity;
+
+import static com.ashomok.eNumbers.Settings.appPackageName;
+import static com.ashomok.eNumbers.Settings.appPackageName_PRO;
 
 /**
  * Created by iuliia on 8/8/16.

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/details_layout_parent"
     android:layout_width="match_parent"
@@ -19,7 +18,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1">
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/layout_margin"
@@ -34,7 +33,7 @@
                 android:gravity="center"
                 android:text="@string/code" />
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            <LinearLayout
                 android:id="@+id/danger_level_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -66,9 +65,9 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="25dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="25dp"
                         android:gravity="center"
                         android:padding="@dimen/flag_margin"
                         android:paddingTop="@dimen/flag_margin"
@@ -223,5 +222,4 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>

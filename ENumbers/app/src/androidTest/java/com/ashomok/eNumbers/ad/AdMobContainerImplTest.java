@@ -11,6 +11,7 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
 import com.ashomok.eNumbers.R;
 import com.ashomok.eNumbers.activities.ENDetailsActivity;
+import com.ashomok.eNumbers.tools.LogHelper;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdView;
 

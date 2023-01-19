@@ -17,11 +17,11 @@
     <string name="unknown">unknown</string>
     <string name="cancel">Cancel</string>
     <string name="exit_dialog_title">Do you want to exit?</string>
-    <string name="recognition">Recognition…</string>
+    <string name="recognition">Recognition… It may takes up to 3 mins.</string>
     <string name="permissions_needs">Permission needs!</string>
     <string name="camera_error">Your device not support this feature</string>
     <string name="alert_dialog_exit">Exit</string>
-    <string name="make_photo_with_ingredients">Make clear photo with Ingredients which contains E numbers:</string>
+    <string name="make_photo_with_ingredients">Make clear photo with Ingredients which contains E numbers. Photo must be correct rotated.</string>
     <string name="ok">OK</string>
     <string name="requirement">Requirement</string>
     <string name="code">code</string>
@@ -110,18 +110,7 @@
     <string name="share_opinion">Please share your opinion</string>
     <string name="later">Later</string>
     <string name="never">Never</string>
-    <string name="facebook_app_id" translatable="false">545799258957389</string>
-    <string name="not_avalible">You disabled this feature</string>
-    <string name="camera_not_found">Camera not found</string>
     <string name="appID" translatable="false">ca-app-pub-5221781428763224~7737821599</string>
-    <string name="allow_permissions">Please allow the permissions, otherwise this feature will not work.</string>
-    <string name="have_you_get">Have you get useful info?</string>
-    <string name="share_message">Hi! This app was useful for me. It helps to eat safe food.
-        You can get full info about ALL chemical additives in the food.
-        You can download it for free here  %1$s Be healthy!
-</string>
-    <string name="share_via">Share via</string>
-    <string name="i_want_to_recommend">I want to recommend you next:</string>
     <string name="details">Details</string>
     <string name="recognizing">Recognizing</string>
     <string name="ads_free_version_header">This is free version with ads</string>
@@ -130,5 +119,6 @@
     <string name="privacy_policy_agreement">Privacy Policy agreement</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="privacy_policy_explanation">Using this app you agreed with our Privacy Policy.</string>
+    <string name="home">Home</string>
 </resources>
 

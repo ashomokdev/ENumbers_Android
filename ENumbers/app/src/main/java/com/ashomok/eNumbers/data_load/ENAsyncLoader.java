@@ -15,20 +15,17 @@ import java.util.List;
  * Created by Iuliia on 14.09.2015.
  */
 public class ENAsyncLoader extends AsyncTaskLoader<List<EN>> {
-
-
     private static final String TAG = ENAsyncLoader.class.getSimpleName();
     private String[] codes;
     private int startValue = -1;
     private int endValue = -1;
     private String name;
 
-    private Context context;
+    private final Context context;
     private List<EN> data;
 
     public ENAsyncLoader(Context context, Bundle bundle) {
         super(context);
-
         this.context = context;
 
         if (bundle != null) {

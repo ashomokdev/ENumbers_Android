@@ -13,10 +13,9 @@ android {
         applicationId "com.ashomok"
         minSdkVersion 19
         targetSdkVersion 33
-        versionCode 15
-        versionName "2.2.5"
+        versionCode 17
+        versionName "2.2.7"
         multiDexEnabled true
-
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
 
@@ -33,28 +32,21 @@ android {
             buildConfigField "boolean", "PAID_VERSION", "true"
         }
     }
+
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    namespace 'com.ashomok.eNumbers'
+
     packagingOptions {
         resources {
             excludes += ['META-INF/ASL2.0', 'META-INF/LICENSE', 'META-INF/license.txt', 'META-INF/NOTICE', 'META-INF/notice.txt']
         }
     }
-    compileOptions {
-        sourceCompatibility = '1.8'
-        targetCompatibility = '1.8'
-    }
-    namespace 'com.ashomok.eNumbers'
-    buildToolsVersion '33.0.0'
-    ndkVersion '23.1.7779620'
-}
-
-repositories {
-    mavenCentral()
 }
 
 dependencies {

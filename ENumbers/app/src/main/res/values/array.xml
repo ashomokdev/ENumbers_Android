@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="bottom_navigation_array">
-        <item>@string/share</item>
-        <item>@string/five_stars</item>
-        <item>@string/adsfree_version</item>
-    </string-array>
-</resources>
