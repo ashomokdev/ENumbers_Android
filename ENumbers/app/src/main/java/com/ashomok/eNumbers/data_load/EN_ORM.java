@@ -110,7 +110,6 @@ public class EN_ORM {
         }
 
         for (EN en : allEnumbs) {
-
             if (inputList.contains(en.getCode()) || inputList.contains(en.getName().toLowerCase())) {
                 result.add(en);
             }

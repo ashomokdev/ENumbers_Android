@@ -41,7 +41,7 @@ public class AdMobContainerImpl implements AdContainer {
                 adView.setLayoutParams(lp);
             }
 
-            adView.setAdSize(AdSize.BANNER);
+            adView.setAdSize(AdSize.SMART_BANNER);
             adView.setAdUnitId(context.getResources().getString(R.string.banner_ad_unit_id));
             adView.setId(R.id.ad_banner);
             AdRequest adRequest = new AdRequest.Builder().build();

@@ -13,8 +13,8 @@ android {
         applicationId "com.ashomok"
         minSdkVersion 19
         targetSdkVersion 33
-        versionCode 17
-        versionName "2.2.7"
+        versionCode 18
+        versionName "2.2.8"
         multiDexEnabled true
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
@@ -52,8 +52,6 @@ android {
 dependencies {
 
     implementation 'cz.adaptech.tesseract4android:tesseract4android:4.3.0'
-
-    implementation 'androidx.browser:browser:1.4.0'
 
     implementation 'com.readystatesoftware.sqliteasset:sqliteassethelper:2.0.1'
     implementation 'androidx.legacy:legacy-support-v13:1.0.0'

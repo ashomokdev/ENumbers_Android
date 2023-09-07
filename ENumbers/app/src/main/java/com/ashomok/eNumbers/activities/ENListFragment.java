@@ -50,7 +50,7 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
             listView.setEmptyView(outputWarning);
 
             // Prepare the loader.  Either re-connect with an existing one, or start a new one.
-            getLoaderManager().initLoader(0, null, this);
+            LoaderManager.getInstance(this).initLoader(0, null, this);
 
             scAdapter = new ENumberListAdapter(getActivity(), 0);
             listView.setAdapter(scAdapter);
@@ -128,8 +128,6 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
     @NonNull
     @Override
     public Loader<List<EN>> onCreateLoader(int i, Bundle bundle) {
-        LogHelper.d(TAG, "onCreateLoader(int i, Bundle bundle)");
-        // Prepare the loader
         return new ENAsyncLoader(getActivity(), bundle);
     }
 
@@ -138,7 +136,6 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
         LogHelper.d(TAG, "onLoadFinished(Loader<List<EN>> loader, List<EN> data)");
         try {
             scAdapter.setData(data);
-
             listView.setOnItemClickListener((parent, arg1, position, arg3) -> {
                 EN item = (EN) parent.getAdapter().getItem(position);
                 Intent intent = new Intent(getActivity(), ENDetailsActivity.class);

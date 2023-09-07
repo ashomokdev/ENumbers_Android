@@ -49,7 +49,6 @@ class ENumbersSQLiteAssetHelper extends SQLiteAssetHelper {
     public Cursor selectAllData() {
         try (SQLiteDatabase db = getReadableDatabase()) {
             SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-
             qb.setTables(sqlTable);
 
             Cursor c = qb.query(db, sqlSelect, null, null,

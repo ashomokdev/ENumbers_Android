@@ -76,23 +76,21 @@ class SearchByCodeFragment : ENListKeyboardFragment(), OnTaskCompletedListener,
         }
     }
 
-    private val takePicture: Runnable = Runnable {
-        ImageUtils.createImageFile(requireActivity())?.also {
-            val imageUri = FileProvider.getUriForFile(
-                requireActivity(),
-                BuildConfig.APPLICATION_ID + ".provider",
-                it
-            )
-            img_path = it.absolutePath
-            takePictureActivityResultLauncher.launch(imageUri)
-        }
-    }
-
     /**
      * to get high resolution image from camera
      */
     private fun startCameraApp() {
-        takePicture.run()
+        Runnable {
+            ImageUtils.createImageFile(requireActivity())?.also {
+                val imageUri = FileProvider.getUriForFile(
+                    requireActivity(),
+                    BuildConfig.APPLICATION_ID + ".provider",
+                    it
+                )
+                img_path = it.absolutePath
+                takePictureActivityResultLauncher.launch(imageUri)
+            }
+        }.run()
     }
 
     override fun onTaskCompleted(result: Array<String>) {
