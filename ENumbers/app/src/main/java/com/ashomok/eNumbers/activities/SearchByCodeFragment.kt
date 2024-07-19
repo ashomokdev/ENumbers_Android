@@ -87,8 +87,12 @@ class SearchByCodeFragment : ENListKeyboardFragment(), OnTaskCompletedListener,
                     BuildConfig.APPLICATION_ID + ".provider",
                     it
                 )
-                img_path = it.absolutePath
-                takePictureActivityResultLauncher.launch(imageUri)
+                try {
+                    img_path = it.absolutePath
+                    takePictureActivityResultLauncher.launch(imageUri)
+                } catch (e: Exception) {
+                    Log.e(TAG, e.message!!)
+                }
             }
         }.run()
     }

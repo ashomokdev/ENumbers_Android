@@ -1,10 +1,11 @@
 package com.ashomok.eNumbers.activities.categories;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.loader.app.LoaderManager;
 
 import com.ashomok.eNumbers.R;
 import com.ashomok.eNumbers.activities.ENListKeyboardFragment;
@@ -23,7 +24,7 @@ public class SubcategoryFragment extends ENListKeyboardFragment {
 
     public void updateContent(Row row) {
         this.row = row;
-        LoadInfoByENumbersRange(row.getStartNumber(), row.getEndNumber());
+        loadInfoByENumbersRange(row.getStartNumber(), row.getEndNumber());
     }
 
     @Override
@@ -41,15 +42,12 @@ public class SubcategoryFragment extends ENListKeyboardFragment {
         }
     }
 
-
-    private void LoadInfoByENumbersRange(int startValue, int endValue) {
+    private void loadInfoByENumbersRange(int startValue, int endValue) {
         Bundle b = new Bundle();
         b.putInt("start_value", startValue);
         b.putInt("end_value", endValue);
         try {
-
-            getLoaderManager().restartLoader(0, b, this);
-
+            LoaderManager.getInstance(this).restartLoader(0, b, this);
         } catch (Exception e) {
             LogHelper.e(this.getClass().getCanonicalName(), e.getMessage());
         }
@@ -98,6 +96,6 @@ public class SubcategoryFragment extends ENListKeyboardFragment {
 
     @Override
     public void showAllData() {
-        LoadInfoByENumbersRange(row.getStartNumber(), row.getEndNumber());
+        loadInfoByENumbersRange(row.getStartNumber(), row.getEndNumber());
     }
 }

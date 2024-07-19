@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
 
-        private ItemClickListener itemClickListener;
+        private final ItemClickListener itemClickListener;
 
 
         DrawerItemClickListener(Context context) {

@@ -99,7 +99,7 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
         Bundle b = new Bundle();
         b.putStringArray("codes_array", enumbers);
         try {
-            getLoaderManager().restartLoader(0, b, this);
+            LoaderManager.getInstance(this).restartLoader(0, b, this);
         } catch (Exception e) {
             LogHelper.e(this.getClass().getCanonicalName(), e.getMessage());
         }
@@ -113,7 +113,7 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
         b.putString("name", name);
         try {
 
-            getLoaderManager().restartLoader(0, b, this);
+            LoaderManager.getInstance(this).restartLoader(0, b, this);
 
         } catch (Exception e) {
             LogHelper.e(this.getClass().getCanonicalName(), e.getMessage());
@@ -121,16 +121,14 @@ public abstract class ENListFragment extends Fragment implements LoaderManager.L
     }
 
     public void showAllData() {
-        getLoaderManager().restartLoader(0, null, this);
+        LoaderManager.getInstance(this).restartLoader(0, null, this);
     }
-
 
     @NonNull
     @Override
     public Loader<List<EN>> onCreateLoader(int i, Bundle bundle) {
         return new ENAsyncLoader(getActivity(), bundle);
     }
-
     @Override
     public void onLoadFinished(@NonNull Loader<List<EN>> loader, List<EN> data) {
         LogHelper.d(TAG, "onLoadFinished(Loader<List<EN>> loader, List<EN> data)");
